@@ -18,7 +18,7 @@ För att få appen att fungera behövde vi:
 
 # Säkerhetshål  
 
-Vi hittade följande 11 säkerhetshål som samtliga kunde åtgärdas med kommandot ```npm audit fix`` :
+Vi hittade följande 11 säkerhetshål som samtliga kunde åtgärdas med kommandot ```npm audit fix``` :
 
 
 ## npm audit report
