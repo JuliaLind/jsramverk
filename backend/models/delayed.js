@@ -38,7 +38,7 @@ const delayed = {
                     headers: { "Content-Type": "text/xml" }
                 }
             ).then(function(response) {
-                return response.json()
+                return response.json();
             }).then(function(result) {
                 return res.json({
                     data: result.RESPONSE.RESULT[0].TrainAnnouncement

@@ -1,4 +1,4 @@
-const fetch = require('node-fetch')
+const fetch = require('node-fetch');
 const database = require('../db/database.js');
 
 const codes = {
@@ -21,7 +21,7 @@ const codes = {
                     headers: { "Content-Type": "text/xml" }
                 }
             ).then(function(response) {
-                return response.json()
+                return response.json();
             }).then(function(result) {
                 return res.json({
                     data: result.RESPONSE.RESULT[0].ReasonCode

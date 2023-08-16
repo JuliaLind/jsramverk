@@ -31,7 +31,7 @@ function renderMainView() {
         } else {
             let marker = L.marker(data.position).bindPopup(data.trainnumber).addTo(map);
 
-            markers[data.trainnumber] = marker
+            markers[data.trainnumber] = marker;
         }
     });
 
