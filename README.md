@@ -13,7 +13,7 @@ För att få appen att fungera behövde vi:
 1. uppdatera i sökvägarna i reset_db.bash filen från db/ till ./ och därefter köra filen med kommandot: bash reset_db.bash
 2. registrera oss på https://api.trafikinfo.trafikverket.se/Account/Register för att få en API nyckel
 3. lägga till en .env fil i roten av "backend" mappen där vi lade till API nyckeln så att den sedan kan hämtas in via process.env
-4. det saknades också en del kolon här och var i filerna som vi lade till, exempelvis i app.js på raderna 1-8, 13, 31, 44
+4. det saknades också en del semikolon här och var i filerna som vi lade till, exempelvis i app.js på raderna 1-8, 13, 31, 44
 
 
 # Säkerhetshål  
