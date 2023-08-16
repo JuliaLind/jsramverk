@@ -1,9 +1,9 @@
 # Diverse instruktioner
 
-För att starta upp appen, stå i "backend" mappen och skriv följande i terminalen: ```node app.js``` .
-Skriv sedan http://localhost:1337 i webbläsaren för att öppna appen eller 
+För att starta upp appen sätt igång backend-delen genom att stå i "backend" mappen och skriv följande i terminalen: ```node app.js``` .
+samt frontend genom att ställa dig i "frontend" mappen och skiva följande i terminalen: ```python3 -m http.server 9000```.
 
-http://localhost:1337/delayed , http://localhost:1337/tickets eller http://localhost:1337/codes för att se underliggande datan som json objekt
+Du kommer då åt frontend applikationen via http://localhost:9000 . Via sidorna http://localhost:1337/delayed , http://localhost:1337/tickets eller http://localhost:1337/codes kan du se underliggande datan som json objekt
 
 
 # Steg vi fick gå igenom för att få applikationen att fungera  
