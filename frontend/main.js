@@ -25,7 +25,7 @@ function renderMainView() {
 
     socket.on("message", (data) => {
         if (markers.hasOwnProperty(data.trainnumber)) {
-            let marker = markers[data.trainnumber]
+            let marker = markers[data.trainnumber];
 
             marker.setLatLng(data.position);
         } else {

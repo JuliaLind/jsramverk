@@ -1,5 +1,4 @@
 require('dotenv').config();
-// console.log(process.env);
 
 const express = require('express');
 const cors = require('cors');
@@ -32,17 +31,17 @@ const io = require("socket.io")(httpServer, {
 const port = 1337;
 
 app.get('/', (req, res) => {
-  res.json({
-      data: 'Hello World!'
-  })
-})
+    res.json({
+        data: 'Hello World!'
+    })
+});
 
 app.use("/delayed", delayed);
 app.use("/tickets", tickets);
 app.use("/codes", codes);
 
 httpServer.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
-})
+    console.log(`Example app listening on port ${port}`);
+});
 
-// fetchTrainPositions(io);
+fetchTrainPositions(io);

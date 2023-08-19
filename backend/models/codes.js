@@ -26,7 +26,7 @@ const codes = {
                 return res.json({
                     data: result.RESPONSE.RESULT[0].ReasonCode
                 });
-            })
+            });
     }
 };
 
