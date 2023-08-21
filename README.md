@@ -10,7 +10,7 @@ Du kommer då åt frontend applikationen via http://localhost:9000 . Via sidorna
 
 För att få appen att fungera behövde vi:  
 
-1. ställa oss i "backend" katalogen och köra "npm install" för att installera alla dependencies i packade.json
+1. ställa oss i "backend" katalogen och köra "npm install" för att installera alla dependencies i package.json
 2. uppdatera i sökvägarna i reset_db.bash filen från db/ till ./ och därefter köra filen med kommandot: bash reset_db.bash för att skapa en tom tickets-tabell i databasen
 3. registrera oss på https://api.trafikinfo.trafikverket.se/Account/Register för att få en API nyckel
 4. lägga till en .env fil i roten av "backend" mappen där vi lade till API nyckeln så att den sedan kan hämtas in via process.env
