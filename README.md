@@ -16,6 +16,7 @@ För att få appen att fungera behövde vi:
 4. lägga till en .env fil i roten av "backend" mappen där vi lade till API nyckeln så att den sedan kan hämtas in via process.env
 5. det saknades också en del semikolon här och var i filerna som vi lade till, exempelvis i app.js på raderna 1-8, 13, 31, 44
 6. "avkommentera" ```// fetchTrainPositions(io);``` längst ner i app.js filen för att hämta in tågpositions-datan relaterad för visning av markers på kartan
+7. ladda ner en favicon, placera den i frontend-mappen och lägg till en ``` link ```-tag i index.html som länkar till den sparade faviconen.
 
 
 # Säkerhetshål  
