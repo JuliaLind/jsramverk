@@ -24,15 +24,15 @@ Vi har valt Vue som vårt frontend-ramverk. Vi valde Vue som ramverk för att vi
 
 När vi skapade frontend-ramverket med ``` npm create vue@latest ``` gjorde vi följande val:  
 
-✔ Project name: … vue-project
-✔ Add TypeScript? … No
-✔ Add JSX Support? … Yes
-✔ Add Vue Router for Single Page Application development? … Yes
-✔ Add Pinia for state management? … Yes
-✔ Add Vitest for Unit Testing? … Yes
-✔ Add an End-to-End Testing Solution? › Playwright
-✔ Add ESLint for code quality? … Yes
-✔ Add Prettier for code formatting? … Yes
+✔ Project name: … vue-project  
+✔ Add TypeScript? … No  
+✔ Add JSX Support? … Yes  
+✔ Add Vue Router for Single Page Application development? … Yes  
+✔ Add Pinia for state management? … Yes  
+✔ Add Vitest for Unit Testing? … Yes  
+✔ Add an End-to-End Testing Solution? › Playwright  
+✔ Add ESLint for code quality? … Yes  
+✔ Add Prettier for code formatting? … Yes  
 
 När vi skulle välja en lösning för testning end-to-end, stod valet mellan Playwright och Cypress. Vi valde Playwright för att verktyget hade näst flest användare, men flest stjärnor på GitHub. Vi drog därmed slutsatsen att en större andel användare är nöjda med Playwright.
 
