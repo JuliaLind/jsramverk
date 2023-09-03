@@ -20,7 +20,7 @@
 
 const mongo = require("mongodb").MongoClient;
 // const config = require("./config.json");
-const collectionName = "stations";
+const collectionName = "tickets";
 
 const database = {
     getDb: async function getDb () {
