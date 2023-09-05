@@ -10,7 +10,6 @@
 
     const item = props.item;
     console.log(item);
-
 </script>
 
 <template>

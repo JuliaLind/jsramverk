@@ -13,7 +13,6 @@ import MapComp from '../components/MapComp.vue'
 </template>
 
 <style>
-
 main {
     height: 100vh;
     width: 100vw;

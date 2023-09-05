@@ -4,7 +4,6 @@ import DelayedItem from './DelayedItem.vue'
 const res = await fetch("http://localhost:1337/delayed")
 const delayed = await res.json()
 const data = await delayed.data
-// console.log(delayed);
 </script>
 
 <template>

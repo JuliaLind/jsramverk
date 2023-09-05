@@ -9,7 +9,6 @@ const props = defineProps({
 function outputDelay(item) {
     let advertised = new Date(item.AdvertisedTimeAtLocation);
     let estimated = new Date(item.EstimatedTimeAtLocation);
-
     const diff = Math.abs(estimated - advertised);
 
     return Math.floor(diff / (1000 * 60)) + " minuter";
@@ -17,8 +16,6 @@ function outputDelay(item) {
 
 const item = props.item;
 const delayTime = outputDelay(item);
-// const itemAsString = `${item.OperationalTrainNumber}::${item.EstimatedTimeAtLocation.substring(0, 10)}`
-
 </script>
 
 <template>
