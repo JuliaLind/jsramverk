@@ -1,8 +1,9 @@
 <script setup>
-import DelayItem from './DelayItem.vue'
+import DelayedItem from './DelayedItem.vue'
 
 const res = await fetch("http://localhost:1337/delayed")
 const delayed = await res.json()
+const data = await delayed.data
 // console.log(delayed);
 </script>
 
@@ -10,7 +11,7 @@ const delayed = await res.json()
   <div class="delayed">
       <h1>Försenade tåg</h1>
       <div id="delayed-trains" class="delayed-trains">
-        <DelayItem v-for="(delay, index) in delayed.data" :item="delay" :key="index"/>
+        <DelayedItem v-for="(item, index) in data" :item="item" :key="index"/>
 
       </div>
   </div>
