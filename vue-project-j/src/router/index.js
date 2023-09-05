@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import MainView from '../views/MainView.vue'
+import TicketView from '../views/TicketView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -9,6 +10,12 @@ const router = createRouter({
       name: 'main',
       component: MainView
     },
+    {
+      path: '/tickets/:item*',
+      name: 'tickets',
+      component: TicketView,
+      props: true,
+    }
     // {
     //   path: '/tickets',
     //   name: 'tickets',
