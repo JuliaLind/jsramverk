@@ -7,6 +7,9 @@ import MapComp from '../components/MapComp.vue'
   <main>
   <suspense>
       <DelayedTable />
+      <template #fallback>
+        <div class="delayed"></div>
+      </template>
   </suspense>
   <MapComp />
   </main>

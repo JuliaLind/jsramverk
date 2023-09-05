@@ -1,24 +1,20 @@
 <script setup>
-    import DelayedTable from '../components/DelayedTable.vue'
-
-  const props = defineProps({
-    item: {
-      type: Array,
-      required: true
-    }
-  })
-
-    const item = props.item;
-    console.log(item);
+    import TicketTable from '../components/TicketTable.vue'
+    import TicketForm from '../components/TicketForm.vue'
 </script>
 
 <template>
-  <main>
-    <suspense>
-      <DelayedTable />
-    </suspense>
-  </main>
+  <suspense>
+    <div class="ticket-container">
+        <TicketForm />
+		<br>
+        <TicketTable />
+    </div>
+  </suspense>
 </template>
 
 <style>
+.ticket-container {
+    padding: 2rem;
+}
 </style>

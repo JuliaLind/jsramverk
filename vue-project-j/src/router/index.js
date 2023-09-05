@@ -11,10 +11,9 @@ const router = createRouter({
       component: MainView
     },
     {
-      path: '/tickets/:item*',
+      path: '/tickets',
       name: 'tickets',
       component: TicketView,
-      props: true,
     }
   ]
 })

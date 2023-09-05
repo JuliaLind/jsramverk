@@ -16,7 +16,8 @@ const data = await delayed.data
   </div>
 </template>
 
-<style scoped>
+<!-- <style scoped> -->
+<style>
 .delayed {
     height: 100vh;
     width: 40vw;
@@ -24,5 +25,4 @@ const data = await delayed.data
     overflow: scroll;
     background-color: white;
 }
-
 </style>
