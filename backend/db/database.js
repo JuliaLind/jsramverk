@@ -24,10 +24,15 @@ const collectionName = "tickets";
 
 const database = {
     getDb: async function getDb () {
-        let dsn = `mongodb://localhost:27017/trains`;
+        // let dsn = `mongodb://localhost:27017/trains`;
+        // if (process.env.NODE_ENV === 'test') {
+        //     dsn = "mongodb://localhost:27017/test";
+        // }
+
+        const dsn = `mongodb+srv://${process.env.ATLAS_USERNAME}:${process.env.ATLAS_PASSWORD}@testcluster.mnw8jji.mongodb.net/?retryWrites=true&w=majority`
 
         if (process.env.NODE_ENV === 'test') {
-            dsn = "mongodb://localhost:27017/test";
+            collectionName = "test";
         }
 
         const client  = await mongo.connect(dsn, {
