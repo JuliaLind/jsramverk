@@ -30,14 +30,14 @@ const delayed = {
                   </QUERY>
             </REQUEST>`;
 
-        const response = fetch(
+        const response = await fetch(
                 "https://api.trafikinfo.trafikverket.se/v2/data.json", {
                     method: "POST",
                     body: query,
                     headers: { "Content-Type": "text/xml" }
                 }
             );
-        const result = response.json();
+        const result = await response.json();
         return res.json({
             data: result.RESPONSE.RESULT[0].TrainAnnouncement
         });
