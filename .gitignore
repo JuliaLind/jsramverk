@@ -1,3 +1,7 @@
 node_modules/
 .env
 *.sqlite
+.vscode/
+vue-project-j/.vscode/
+vue-project-j/.htaccess
+vue-project-j/.gitignore
