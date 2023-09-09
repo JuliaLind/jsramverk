@@ -1,7 +1,7 @@
 <script setup>
 import DelayedItem from './DelayedItem.vue'
 
-const res = await fetch("http://localhost:1337/delayed")
+const res = await fetch("https://jsramverk-editor-julmar2023.azurewebsites.net/delayed")
 const delayed = await res.json()
 const data = await delayed.data
 </script>
