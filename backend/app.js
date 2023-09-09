@@ -25,7 +25,7 @@ const io = require("socket.io")(httpServer, {
     cors: {
         // origin: "http://localhost:9000",
         // origin: "http://localhost:5173",
-        origin: "https://www.student.bth.se/~mafl22/jsramverk",
+        origin: "https://www.student.bth.se",
         methods: ["GET", "POST"]
     }
 });
