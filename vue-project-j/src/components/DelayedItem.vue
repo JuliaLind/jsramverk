@@ -1,13 +1,13 @@
 <script setup>
-import { useTicketStore } from '@/stores/ticket'
+import { useTicketStore } from '@/stores/ticket';
 
-const store = useTicketStore()
+const store = useTicketStore();
 const props = defineProps({
-  item: {
+    item: {
     type: Object,
     required: true
-  }
-})
+    }
+});
 
 function outputDelay(item) {
     let advertised = new Date(item.AdvertisedTimeAtLocation);
@@ -24,21 +24,20 @@ item.delayTime = delayTime;
 </script>
 
 <template>
-  <RouterLink class="delay-item" @click.native="store.setCurrent(item)" to="/tickets">
+<RouterLink class="delay-item" @click.native="store.setCurrent(item)" to="/tickets">
     <div class="train-number"> {{ item.OperationalTrainNumber }}</div>
-      <div class="current-station">
+    <div class="current-station">
         <div>{{ item.LocationSignature }}</div>
         <div>{{ (item.FromLocation ? item.FromLocation[0].LocationName + " -> " : "") }} {{ (item.ToLocation ? item.ToLocation[0].LocationName : "") }}</div>
-      </div>
-      <div class="delay">{{ delayTime }}</div>
+    </div>
+    <div class="delay">{{ delayTime }}</div>
 </RouterLink>
 </template>
 
 <style scoped>
-
 a {
-  color: #000;
-  text-decoration: none;
+    color: #000;
+    text-decoration: none;
 }
 
 .delay-item {
