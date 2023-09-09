@@ -8,7 +8,7 @@ if (item.FromLocation) {
       locationString = `Tåg från ${item.FromLocation[0].LocationName} till ${item.ToLocation[0].LocationName}. Just nu i ${item.LocationSignature}.`;
 }
 
-const res = await fetch("http://localhost:1337/codes");
+const res = await fetch("https://jsramverk-editor-julmar2023.azurewebsites.net/codes");
 const data = await res.json();
 const reasonCodes = await data.data;
 
@@ -25,7 +25,7 @@ async function submitForm() {
         traindate: item.EstimatedTimeAtLocation.substring(0, 10),
     };
 
-    const response = await fetch("http://localhost:1337/tickets", {
+    const response = await fetch("https://jsramverk-editor-julmar2023.azurewebsites.net//tickets", {
           body: JSON.stringify(newTicket),
           headers: {
               'content-type': 'application/json'
