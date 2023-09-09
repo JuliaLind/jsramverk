@@ -6,7 +6,6 @@ const trains = {
 
         try {
             db = await database.openDb(version);
-
         } catch(error) {
             return {
                 status: error.status,

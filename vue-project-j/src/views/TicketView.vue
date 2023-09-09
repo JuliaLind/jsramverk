@@ -4,17 +4,17 @@
 </script>
 
 <template>
-  <suspense>
-    <div class="ticket-container">
-        <TicketForm />
-		<br>
-        <TicketTable />
-    </div>
-  </suspense>
+    <suspense>
+        <div class="ticket-container">
+            <TicketForm />
+        <br>
+            <TicketTable />
+        </div>
+    </suspense>
 </template>
 
 <style>
-.ticket-container {
-    padding: 2rem;
-}
+    .ticket-container {
+        padding: 2rem;
+    }
 </style>
