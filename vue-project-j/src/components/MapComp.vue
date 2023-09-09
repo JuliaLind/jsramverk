@@ -1,5 +1,7 @@
 <script>
-const socket = io("http://localhost:1337")
+const socket = io("https://jsramverk-editor-julmar2023.azurewebsites.net/");
+// const socket = io("http://localhost:1337")
+
 
 export default {
     name: "Map",
