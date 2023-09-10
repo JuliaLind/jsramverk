@@ -10,7 +10,7 @@
     "test:e2e": "playwright test",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
     "format": "prettier --write src/",
-    "deploy": "rsync -av --delete dist/* mafl22@ssh.student.bth.se:www/jsramverk"
+    "deploy": "rsync -av --delete dist/* juli22@ssh.student.bth.se:www/jsramverk"
   },
   "dependencies": {
     "pinia": "^2.1.6",

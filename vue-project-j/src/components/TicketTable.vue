@@ -1,6 +1,6 @@
 <script setup>
 
-const res = await fetch("https://jsramverk-editor-julmar2023.azurewebsites.net/tickets");
+const res = await fetch(`${import.meta.env.VITE_URL}/tickets`);
 
 // const res = await fetch("http://localhost:1337/tickets");
 

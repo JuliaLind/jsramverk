@@ -5,9 +5,10 @@ import DelayedItem from './DelayedItem.vue';
 // const delayed = await res.json();
 // const data = await delayed.data;
 
-const res = await fetch("https://jsramverk-editor-julmar2023.azurewebsites.net/delayed")
-const delayed = await res.json()
-const data = await delayed.data
+const res = await fetch(`${import.meta.env.VITE_URL}/delayed`);
+const delayed = await res.json();
+const data = await delayed.data;
+console.log(import.meta.env.VITE_URL);
 </script>
 
 <template>

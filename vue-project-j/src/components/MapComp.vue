@@ -1,6 +1,6 @@
 <script>
-const socket = io("https://jsramverk-editor-julmar2023.azurewebsites.net/");
-// const socket = io("http://localhost:1337")
+// const socket = io("https://jsramverk-editor-julmar2023.azurewebsites.net/");
+const socket = io(import.meta.env.VITE_URL)
 
 
 export default {
