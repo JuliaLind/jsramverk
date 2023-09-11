@@ -5,8 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start-dev": "cross-env NODE_ENV=development nodemon app.js",
-    "start-prod": "cross-env NODE_ENV=production nodemon app.js"
+    "start-dev": "cross-env URL='http://localhost:5173' nodemon app.js",
+    "start-prod": "cross-env URL='https://www.student.bth.se' nodemon app.js"
   },
   "keywords": [],
   "author": "",

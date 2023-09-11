@@ -23,23 +23,11 @@ app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x
 
 let io = require("socket.io")(httpServer, {
     cors: {
-        // origin: "http://localhost:9000",
-        origin: "http://localhost:5173",
-        // origin: "https://www.student.bth.se",
+        origin: process.env.URL,
         methods: ["GET", "POST"]
     }
 });
 
-if (process.env.NODE_ENV === "production") {
-    io = require("socket.io")(httpServer, {
-        cors: {
-            // origin: "http://localhost:9000",
-            // origin: "http://localhost:5173",
-            origin: "https://www.student.bth.se",
-            methods: ["GET", "POST"]
-        }
-    });
-}
 
 const port = process.env.PORT || 1337;
 
@@ -55,6 +43,7 @@ app.use("/codes", codes);
 
 httpServer.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
+    console.log(process.env);
 });
 
 fetchTrainPositions(io);
