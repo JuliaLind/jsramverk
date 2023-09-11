@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "start-dev": "cross-env NODE_ENV=development nodemon app.js",
+    "start-prod": "cross-env NODE_ENV=production nodemon app.js"
   },
   "keywords": [],
   "author": "",
@@ -23,5 +24,8 @@
     "socket.io": "^4.6.1",
     "sqlite": "^4.2.1",
     "sqlite3": "^5.1.6"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3"
   }
 }
