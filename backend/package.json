@@ -4,9 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "cross-env URL='http://localhost:5173' nodemon app.js",
-    "prod": "cross-env URL='https://www.student.bth.se' nodemon app.js"
+    "test": "nyc --reporter=html --reporter=text --reporter=clover mocha --exit --timeout 10000",
+    "dev": "cross-env URL='http://localhost:5173' nodemon app.js"
   },
   "keywords": [],
   "author": "",
@@ -21,11 +20,13 @@
     "morgan": "^1.10.0",
     "node-fetch": "^2.6.1",
     "nodemon": "^3.0.1",
-    "socket.io": "^4.6.1",
-    "sqlite": "^4.2.1",
-    "sqlite3": "^5.1.6"
+    "socket.io": "^4.6.1"
   },
   "devDependencies": {
-    "cross-env": "^7.0.3"
+    "chai": "^4.3.8",
+    "chai-http": "^4.4.0",
+    "cross-env": "^7.0.3",
+    "mocha": "^10.2.0",
+    "nyc": "^15.1.0"
   }
 }

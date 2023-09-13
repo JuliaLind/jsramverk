@@ -17,4 +17,11 @@ export default defineConfig({
     }
   },
   base: "/~juli22/jsramverk",
+  test: {
+    coverage: {
+        provider: 'istanbul',
+        reporter: ['text', 'json', 'html', 'clover'],
+        include: 'src/components/*.view'
+    }
+  }
 })
