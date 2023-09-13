@@ -35,10 +35,14 @@ const tickets = {
 
         const result = await db.collection.insertOne(doc);
 
-        if (result.ok) {
-            console.log(result.ops);
-            return res.status(201).json({ data: result.ops });
-        }
+        return res.status(201).json({
+            data: result
+        });
+
+        // if (result.ok) {
+        //     console.log(result.ops);
+        //     return res.status(201).json({ data: result.ops });
+        // }
     },
 
     // createTicket: async function createTicket(req, res){

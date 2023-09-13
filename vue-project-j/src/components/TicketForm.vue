@@ -1,5 +1,7 @@
 <script setup>
 import { useTicketStore } from '@/stores/ticket'
+import { defineEmits } from 'vue';
+
 const store = useTicketStore();
 const item = store.getCurrent();
 let locationString = "";
@@ -18,7 +20,11 @@ function onChange(event) {
     item.reasonCode = event.target.value;
 }
 
+const emit = defineEmits();
+
 async function submitForm() {
+    console.log('Form submitted');
+
     const newTicket = {
         code: item.reasonCode,
         trainnumber: item.OperationalTrainNumber,
@@ -26,12 +32,16 @@ async function submitForm() {
     };
 
     const response = await fetch(`${import.meta.env.VITE_URL}/tickets`, {
-          body: JSON.stringify(newTicket),
-          headers: {
-              'content-type': 'application/json'
-          },
-          method: 'POST'
+        body: JSON.stringify(newTicket),
+        headers: {
+            'content-type': 'application/json'
+        },
+        method: 'POST'
       });
+
+    console.log('API Response:', response)
+
+    emit('form-submitted');
 
     // const response = await fetch("http://localhost:1337/tickets", {
     //    body: JSON.stringify(newTicket),

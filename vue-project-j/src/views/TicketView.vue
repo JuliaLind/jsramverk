@@ -1,14 +1,22 @@
 <script setup>
-    import TicketTable from '../components/TicketTable.vue'
-    import TicketForm from '../components/TicketForm.vue'
+    import TicketTable from '../components/TicketTable.vue';
+    import TicketForm from '../components/TicketForm.vue';
+    import { ref } from 'vue';
+
+    const componentKey = ref(0);
+
+    const forceRerender = () => {
+        componentKey.value += 1;
+        console.log(componentKey.value);
+    };
 </script>
 
 <template>
     <suspense>
         <div class="ticket-container">
-            <TicketForm />
+            <TicketForm @form-submitted="forceRerender" />
         <br>
-            <TicketTable />
+            <TicketTable :key="componentKey" />
         </div>
     </suspense>
 </template>
