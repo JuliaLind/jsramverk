@@ -22,7 +22,7 @@ function onChange(event) {
 
 const emit = defineEmits();
 
-function submitForm() {
+async function submitForm() {
     console.log('Form submitted');
 
     const newTicket = {
@@ -31,7 +31,7 @@ function submitForm() {
         traindate: item.EstimatedTimeAtLocation.substring(0, 10),
     };
 
-    const response = fetch(`${import.meta.env.VITE_URL}/tickets`, {
+    const response = await fetch(`${import.meta.env.VITE_URL}/tickets`, {
         body: JSON.stringify(newTicket),
         headers: {
             'content-type': 'application/json'
