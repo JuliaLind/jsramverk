@@ -1,39 +1,15 @@
-// const sqlite3 = require('sqlite3').verbose();
-// const { open } = require('sqlite');
-
-// const database = {
-//     openDb: async function openDb() {
-//         let dbFilename = `./db/trains.sqlite`;
-
-//         if (process.env.NODE_ENV === 'test') {
-//             dbFilename = "./db/test.sqlite";
-//         }
-
-//         return await open({
-//             filename: dbFilename,
-//             driver: sqlite3.Database
-//         });
-//     }
-// };
-
-// module.exports = database;
-
 const mongo = require("mongodb").MongoClient;
-// const config = require("./config.json");
 const collectionName = "tickets";
+let dbName = "trains";
+
+if (process.env.NODE_ENV === 'test') {
+    dbName = "test";
+}
 
 const database = {
     getDb: async function getDb () {
-        // let dsn = `mongodb://localhost:27017/trains`;
-        // if (process.env.NODE_ENV === 'test') {
-        //     dsn = "mongodb://localhost:27017/test";
-        // }
-
-        const dsn = `mongodb+srv://${process.env.ATLAS_USERNAME}:${process.env.ATLAS_PASSWORD}@testcluster.mnw8jji.mongodb.net/?retryWrites=true&w=majority`
-
-        if (process.env.NODE_ENV === 'test') {
-            collectionName = "test";
-        }
+        let dsn = `mongodb+srv://${process.env.ATLAS_USERNAME}:${process.env.ATLAS_PASSWORD}@testcluster.mnw8jji.mongodb.net/${dbName}?retryWrites=true&w=majority`;
+        
 
         const client  = await mongo.connect(dsn, {
             useNewUrlParser: true,
