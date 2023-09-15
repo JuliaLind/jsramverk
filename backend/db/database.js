@@ -8,8 +8,8 @@ if (process.env.NODE_ENV === 'test') {
 
 const database = {
     getDb: async function getDb () {
-        let dsn = `mongodb+srv://${process.env.ATLAS_USERNAME}:${process.env.ATLAS_PASSWORD}@testcluster.mnw8jji.mongodb.net/${dbName}?retryWrites=true&w=majority`;
-        
+        // let dsn = `mongodb+srv://${process.env.ATLAS_USERNAME}:${process.env.ATLAS_PASSWORD}@testcluster.mnw8jji.mongodb.net/${dbName}?retryWrites=true&w=majority`;
+        let dsn = process.env.DSN + dbName;
 
         const client  = await mongo.connect(dsn, {
             useNewUrlParser: true,
