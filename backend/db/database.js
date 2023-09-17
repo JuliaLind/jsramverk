@@ -8,7 +8,7 @@
 const mongo = require("mongodb").MongoClient;
 
 // Database details
-let dbName = "trains";
+let dbName = "trains";;
 
 if (process.env.NODE_ENV === 'test') {
     dbName = "test";
@@ -36,8 +36,6 @@ const database = {
         const query = "retryWrites=true&w=majority";
 
         const dsn = `${scheme}//${user}:${password}@${host}/${dbName}?${query}`;
-
-        // let dsn = `mongodb+srv://${process.env.ATLAS_USERNAME}:${process.env.ATLAS_PASSWORD}@testcluster.mnw8jji.mongodb.net/${dbName}?retryWrites=true&w=majority`;
 
         // Connect to the MongoDB Atlas cluster.
         const client  = await mongo.connect(dsn, {
