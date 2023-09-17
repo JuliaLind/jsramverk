@@ -41,9 +41,11 @@ app.use("/delayed", delayed);
 app.use("/tickets", tickets);
 app.use("/codes", codes);
 
-httpServer.listen(port, () => {
+const server = httpServer.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
-    console.log(process.env);
 });
 
 fetchTrainPositions(io);
+
+// added export to facilitate testing
+module.exports = server;
