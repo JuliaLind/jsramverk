@@ -41,20 +41,6 @@ const delayed = {
         return res.json({
             data: result.RESPONSE.RESULT[0].TrainAnnouncement
         });
-
-            // const response = fetch(
-            //     "https://api.trafikinfo.trafikverket.se/v2/data.json", {
-            //         method: "POST",
-            //         body: query,
-            //         headers: { "Content-Type": "text/xml" }
-            //     }
-            // ).then(function(response) {
-            //     return response.json();
-            // }).then(function(result) {
-            //     return res.json({
-            //         data: result.RESPONSE.RESULT[0].TrainAnnouncement
-            //     });
-            // })
     }
 };
 
