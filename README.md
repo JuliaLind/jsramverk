@@ -1,9 +1,24 @@
 # Diverse instruktioner
 
-För att starta upp appen sätt igång backend-delen genom att stå i "backend" mappen och skriv följande i terminalen: ```node app.js``` .
-samt frontend genom att ställa dig i "frontend" mappen och skiva följande i terminalen: ```python3 -m http.server 9000```.
+Efter att ha klonat report behöver du köra ```npm install``` från roten av frontend respektive backend katalogerna för att installera nödvändiga dependencies. Du behöver även lägga till följande filer:  
 
-Du kommer då åt frontend applikationen via http://localhost:9000 . Via sidorna http://localhost:1337/delayed , http://localhost:1337/tickets eller http://localhost:1337/codes kan du se underliggande datan som json objekt
+1. I backend katalogen lägger du till en ".env" fil du lägger till följande variabler: 
+TRAFIKVERKET_API_KEY (api nyckel som du genererar från trafikverkets webbplats)
+DSN (connection strängen till din databas, du kan använde lokal eller molnbaserad. I din databas behöver du skapa databaserna "trains" respektive "test")
+URL (url till front-end servern, t ex URL="https://www.student.bth.se")
+
+2. I frontend katalogen lägger du till en ".env.development" fil med variabeln VITE_URL som innehåller url till backend servern lokalt (t ex VITE_URL="http://localhost:1337").
+
+3. I frontend katalogen lägger du även till en ".env.production" fil med motsvarande variabel för url till den backend server som ska användas i produktion, t ex VITE_URL="https://jsramverk-marjul2023.azurewebsites.net". Env variabler som används i frontend måste börja på "VITE_".
+
+I package.json filerna i roten av frontend respektive backend hittar du färdiga scripts som kan köras för att starta igång applikationen, testa mm. För att få igång applikationen lokalt behöver du tex först sätta igång backend genom att skriva ```npm run dev``` i terminalen när du står i roten av backend directoryn, och därefter göra motsvarande från roten av frontend directoryn (obs i annan terminal).
+
+Du kommer då åt frontend applikationen via http://localhost:5173 . Via sidorna http://localhost:1337/delayed , http://localhost:1337/tickets eller http://localhost:1337/codes kan du se underliggande datan som json objekt.
+
+När du kör scripter för testning i backend kan du eventuellt behöva komplettera installation av fler dependecies med npx. För testning i backend används Mocka/Chai tillsammans med Istanbul. I frontend används Playwrite för e2e testning och vitest för testning av komponenter, också tillsammans med Istanbul.
+
+
+Länkar till de deployade sidorna kommer också här inom kort.
 
 
 # Steg vi fick gå igenom för att få applikationen att fungera  
