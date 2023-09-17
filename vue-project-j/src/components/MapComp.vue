@@ -1,4 +1,5 @@
 <script>
+import io from 'socket.io-client';
 /**
  * For communicating with backend
  */
