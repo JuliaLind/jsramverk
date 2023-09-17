@@ -5,11 +5,11 @@ Efter att ha klonat report behöver du köra ```npm install``` från roten av fr
 1. I backend katalogen lägger du till en ".env" fil du lägger till följande variabler: 
 TRAFIKVERKET_API_KEY (api nyckel som du genererar från trafikverkets webbplats)
 DSN (connection strängen till din databas, du kan använde lokal eller molnbaserad. I din databas behöver du skapa databaserna "trains" respektive "test")
-URL (url till front-end servern, t ex URL="https://www.student.bth.se")
+URL (url till front-end servern, t ex ```URL="https://www.student.bth.se"```)
 
-2. I frontend katalogen lägger du till en ".env.development" fil med variabeln VITE_URL som innehåller url till backend servern lokalt (t ex VITE_URL="http://localhost:1337").
+2. I frontend katalogen lägger du till en ".env.development" fil med variabeln VITE_URL som innehåller url till backend servern lokalt (t ex ```VITE_URL="http://localhost:1337"```).
 
-3. I frontend katalogen lägger du även till en ".env.production" fil med motsvarande variabel för url till den backend server som ska användas i produktion, t ex VITE_URL="https://jsramverk-marjul2023.azurewebsites.net". Env variabler som används i frontend måste börja på "VITE_".
+3. I frontend katalogen lägger du även till en ".env.production" fil med motsvarande variabel för url till den backend server som ska användas i produktion, t ex ```VITE_URL="https://jsramverk-marjul2023.azurewebsites.net"```. Env variabler som används i frontend måste börja på VITE_".
 
 I package.json filerna i roten av frontend respektive backend hittar du färdiga scripts som kan köras för att starta igång applikationen, testa mm. För att få igång applikationen lokalt behöver du tex först sätta igång backend genom att skriva ```npm run dev``` i terminalen när du står i roten av backend directoryn, och därefter göra motsvarande från roten av frontend directoryn (obs i annan terminal).
 
