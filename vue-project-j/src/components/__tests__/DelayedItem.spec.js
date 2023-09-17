@@ -1,7 +1,13 @@
-import { describe, it, expect, vi } from 'vitest'
-import { mount } from '@vue/test-utils'
+import { vi, describe } from 'vitest';
 import DelayedItem from '../DelayedItem.vue'
-import { RouterLinkStub } from '@vue/test-utils'
+import { mount, RouterLinkStub } from '@vue/test-utils'
+import { createRouter, createWebHistory } from 'vue-router'
+import { routes } from "@/router"
+
+const router = createRouter({
+  history: createWebHistory(),
+  routes: routes,
+})
 
 vi.mock('@/stores/ticket', () => ({
     useTicketStore: () => ({
@@ -10,6 +16,9 @@ vi.mock('@/stores/ticket', () => ({
 }));
 
 describe('DelayedItem', async () => {
+    router.push('/')
+  // After this line, router is ready
+    await router.isReady()
     it('renders properly', () => {
         const wrapper = mount(DelayedItem, { 
             props: { 
@@ -39,9 +48,9 @@ describe('DelayedItem', async () => {
                     TrainOwner: "SJ"
                 } 
             },
-            // stubs: {
-            //     RouterLink: RouterLinkStub
-            // }
+            global: {
+                plugins: [router]
+            },
         })
         expect(wrapper.text()).toContain('442KG ->  Cst31 minuter')
     })
