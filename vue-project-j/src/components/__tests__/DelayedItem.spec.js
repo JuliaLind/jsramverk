@@ -1,6 +1,10 @@
+/**
+ * 
+ */
+
 import { vi, describe } from 'vitest';
 import DelayedItem from '../DelayedItem.vue'
-import { mount, RouterLinkStub } from '@vue/test-utils'
+import { mount} from '@vue/test-utils'
 import { createRouter, createWebHistory } from 'vue-router'
 import { routes } from "@/router"
 
