@@ -64,3 +64,5 @@ let io = require("socket.io")(httpServer, {
 
 // Fetch train positions with socket.io
 fetchTrainPositions(io);
+
+module.exports = httpServer;
