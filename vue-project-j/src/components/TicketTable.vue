@@ -1,9 +1,11 @@
 <script setup>
 import apiModel from '../models/api.js'
+// import { getTickets } from '../models/api.js'
 /**
  * Component representing a list of all previous tickets
  */
 const tickets = await apiModel.getTickets();
+// const tickets = await getTickets();
 
 // let newTicketId = 0;
 // const lastId = result.data[1] ? result.data[1].id : 0;

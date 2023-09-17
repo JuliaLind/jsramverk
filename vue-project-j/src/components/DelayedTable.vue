@@ -3,9 +3,11 @@
  * Table displaying delayed trains 
  */
 import apiModel from '../models/api.js'
+// import { getDelayedTrains } from '../models/api.js'
 import DelayedItem from './DelayedItem.vue';
 
 const data = await apiModel.getDelayedTrains();
+// const data = await getDelayedTrains();
 </script>
 
 <template>

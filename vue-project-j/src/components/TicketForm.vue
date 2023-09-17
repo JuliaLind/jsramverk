@@ -1,6 +1,7 @@
 <script setup>
 import { useTicketStore } from '@/stores/ticket'
 import apiModel from '../models/api.js'
+// import { getCodes, submitNewTicket } from '../models/api.js'
 import { createLocationString } from '../models/utils.js'
 import { RouterLink } from 'vue-router'
 
@@ -26,6 +27,7 @@ const store = useTicketStore();
 const item = store.getCurrent();
 const locationString = createLocationString(item);
 const reasonCodes = await apiModel.getCodes();
+// const reasonCodes = await getCodes();
 
 /**
  * Assigns the first reasoncode in the drop-down
@@ -52,6 +54,7 @@ async function submitForm() {
         traindate: item.EstimatedTimeAtLocation.substring(0, 10),
     };
     await apiModel.submitNewTicket(newTicket);
+    // await submitNewTicket(newTicket);
     /**
      * Sends signal to tickets-component to re-render
      */
