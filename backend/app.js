@@ -14,7 +14,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 
-const fetchTrainPositions = require('./models/trains.js');
+const trains = require('./models/trains.js');
 const delayed = require('./routes/delayed.js');
 const tickets = require('./routes/tickets.js');
 const codes = require('./routes/codes.js');
@@ -63,6 +63,6 @@ let io = require("socket.io")(httpServer, {
 });
 
 // Fetch train positions with socket.io
-fetchTrainPositions(io);
+trains.fetchTrainPositions(io);
 
 module.exports = httpServer;
