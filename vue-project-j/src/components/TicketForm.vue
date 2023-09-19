@@ -1,56 +1,64 @@
 <script setup>
 import { useTicketStore } from '@/stores/ticket'
-import { defineEmits } from 'vue';
+import apiModel from '../models/api.js'
+// import { getCodes, submitNewTicket } from '../models/api.js'
+import { createLocationString } from '../models/utils.js'
+import { RouterLink } from 'vue-router'
 
+/**
+ * Function for sending messages to other components
+ */
+const emit = defineEmits();
 const store = useTicketStore();
+
+/**
+ * @var {Object} item - Object containing data for a delayed train
+ * @example {
+ * ActivityId: "62e8c1b6-18d1-5d01-505d-c63c117da404",
+ * ActivityType: "Avgang",
+ * AdvertisedTimeAtLocation: "2023-09-15T23:47:00.000+02:00",
+ * AdvertisedTrainIdent: "44253",
+ * Canceled: false,
+ * EstimatedTimeAtLocation: "2023-09-16T00:59:36.000+02:00",
+ * LocationSignature: "Era",
+ * OperationalTrainNumber: "44253",
+ * delayTime: "72 minuter" }
+ */
 const item = store.getCurrent();
-let locationString = "";
+const locationString = createLocationString(item);
+const reasonCodes = await apiModel.getCodes();
+// const reasonCodes = await getCodes();
 
-if (item.FromLocation) {
-        locationString = `Tåg från ${item.FromLocation[0].LocationName} till ${item.ToLocation[0].LocationName}. Just nu i ${item.LocationSignature}.`;
-}
-
-const res = await fetch(`${import.meta.env.VITE_URL}/codes`);
-const data = await res.json();
-const reasonCodes = await data.data;
-
+/**
+ * Assigns the first reasoncode in the drop-down
+ * list as a default value for the new ticket
+ */
 item.reasonCode = reasonCodes[0].Code;
 
+/**
+ * Updates the reasoncode when the user selects
+ * a reasoncode from the drop-down list
+ */
 function onChange(event) {
     item.reasonCode = event.target.value;
 }
 
-const emit = defineEmits();
-
+/**
+ * Sends a post request to the backend API for inserting
+ * the form data into the database
+ */
 async function submitForm() {
-    console.log('Form submitted');
-
     const newTicket = {
         code: item.reasonCode,
         trainnumber: item.OperationalTrainNumber,
         traindate: item.EstimatedTimeAtLocation.substring(0, 10),
     };
-
-    const response = await fetch(`${import.meta.env.VITE_URL}/tickets`, {
-        body: JSON.stringify(newTicket),
-        headers: {
-            'content-type': 'application/json'
-        },
-        method: 'POST'
-      });
-
-    console.log('API Response:', response)
-
+    await apiModel.submitNewTicket(newTicket);
+    // await submitNewTicket(newTicket);
+    /**
+     * Sends signal to tickets-component to re-render
+     */
     emit('form-submitted');
-
-    // const response = await fetch("http://localhost:1337/tickets", {
-    //    body: JSON.stringify(newTicket),
-    //    headers: {
-    //        'content-type': 'application/json'
-    //    },
-    //    method: 'POST'
-    // });
-
 }
 </script>
 
@@ -60,7 +68,6 @@ async function submitForm() {
     <h1>Nytt ärende #<span id="new-ticket-id"></span></h1>
     <h3>{{ locationString }}</h3>
     <p><strong>Försenad:</strong> {{ item.delayTime }}</p>
-
     <form id="new-ticket-form" v-on:submit.prevent="submitForm">
         <label>Orsakskod</label><br>
         <select id="reason-code" name="code" @change="onChange">
@@ -73,6 +80,5 @@ async function submitForm() {
 </div>
 </template>
 
-<!-- <style scoped> -->
-<style>
+<style scoped>
 </style>

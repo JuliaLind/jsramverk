@@ -1,4 +1,9 @@
 <script setup>
+/**
+ * View that displays list of delayed
+ * trains and a map with their current
+ * positions
+ */
 import DelayedTable from '../components/DelayedTable.vue'
 import MapComp from '../components/MapComp.vue'
 </script>

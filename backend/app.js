@@ -44,14 +44,12 @@ app.use("/delayed", delayed);
 app.use("/tickets", tickets);
 app.use("/codes", codes);
 
-
 // Create an HTTP server
 const httpServer = require("http").createServer(app);
 
 // Start the HTTP server
-httpServer.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
-    console.log(process.env);
+const server = httpServer.listen(port, () => {
+    console.log(`App listening on port ${port}`);
 });
 
 // Configure socket.io
@@ -65,4 +63,5 @@ let io = require("socket.io")(httpServer, {
 // Fetch train positions with socket.io
 trains.fetchTrainPositions(io);
 
-module.exports = httpServer;
+// added export to facilitate testing
+module.exports = server;

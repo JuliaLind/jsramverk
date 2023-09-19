@@ -3,8 +3,13 @@
     import TicketForm from '../components/TicketForm.vue';
     import { ref } from 'vue';
 
+    /**
+     * key of the TicketTable component
+     * is increased each time the ticket
+     * form is submitted, which leads
+     * to re-rendering of the tickets list
+     */
     const componentKey = ref(0);
-
     const forceRerender = () => {
         componentKey.value += 1;
         console.log(componentKey.value);
