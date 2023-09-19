@@ -1,7 +1,29 @@
+/**
+ * @module delayed
+ * @description Delayed module containing function for
+ * getting delayed trains from the Trafikverket API.
+ */
+
+// Node fetch module for HTTP-requests
 const fetch = require('node-fetch');
 
+/**
+ * @description Delayed object for getting
+ * delayed trains from the Trafikverket API.
+ *
+ * @property {Function} getDelayedTrains - Fetches delayed trains.
+ */
 const delayed = {
+    /**
+     * @description Fetches delayed trains from the Trafikverket API.
+     * @async
+     * @function
+     * @param {Object} req - Express.js request object.
+     * @param {Object} res - Express.js response object.
+     * @returns {Promise<Object>} A JSON response containing delayed trains data.
+     */
     getDelayedTrains: async function getDelayedTrains(req, res) {
+        // XML Query sent to the API
         const query = `<REQUEST>
                   <LOGIN authenticationkey="${process.env.TRAFIKVERKET_API_KEY}" />
                   <QUERY objecttype="TrainAnnouncement" orderby='AdvertisedTimeAtLocation' schemaversion="1.8">
@@ -30,6 +52,7 @@ const delayed = {
                   </QUERY>
             </REQUEST>`;
 
+        // HTTP response
         const response = await fetch(
                 "https://api.trafikinfo.trafikverket.se/v2/data.json", {
                     method: "POST",
@@ -37,7 +60,10 @@ const delayed = {
                     headers: { "Content-Type": "text/xml" }
                 }
             );
+
+        // JSON result data
         const result = await response.json();
+
         return res.json({
             data: result.RESPONSE.RESULT[0].TrainAnnouncement
         });

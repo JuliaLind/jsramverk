@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "nyc --reporter=html --reporter=text --reporter=clover mocha --exit --timeout 10000",
+    "test": "NODE_ENV=test nyc --reporter=html --reporter=text --reporter=clover mocha --config mocha.json --exit",
     "dev": "cross-env URL='http://localhost:5173' nodemon app.js"
   },
   "keywords": [],
@@ -28,6 +28,7 @@
     "chai-http": "^4.4.0",
     "cross-env": "^7.0.3",
     "mocha": "^10.2.0",
-    "nyc": "^15.1.0"
+    "nyc": "^15.1.0",
+    "sinon": "^16.0.0"
   }
 }
