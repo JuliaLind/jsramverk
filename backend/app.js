@@ -42,7 +42,7 @@ app.use("/tickets", tickets);
 app.use("/codes", codes);
 
 const server = httpServer.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
+    console.log(`App listening on port ${port}`);
 });
 
 fetchTrainPositions(io);

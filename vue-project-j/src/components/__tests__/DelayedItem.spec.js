@@ -1,16 +1,12 @@
-/**
- * 
- */
-
-import { vi, describe } from 'vitest';
+import { vi, describe, it } from 'vitest';
 import DelayedItem from '../DelayedItem.vue'
 import { mount} from '@vue/test-utils'
 import { createRouter, createWebHistory } from 'vue-router'
 import { routes } from "@/router"
 
 const router = createRouter({
-  history: createWebHistory(),
-  routes: routes,
+    history: createWebHistory(),
+    routes: routes,
 })
 
 vi.mock('@/stores/ticket', () => ({
@@ -21,7 +17,7 @@ vi.mock('@/stores/ticket', () => ({
 
 describe('DelayedItem', async () => {
     router.push('/')
-  // After this line, router is ready
+    // After this line, router is ready
     await router.isReady()
     it('renders properly', () => {
         const wrapper = mount(DelayedItem, { 
