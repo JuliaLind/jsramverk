@@ -6,6 +6,12 @@ name: Node.js CI
 on:
   push:
     branches: [ "**" ]
+    paths:
+      - 'backend/db/**'
+      - 'backend/models/**'
+      - 'backend/routes/**'
+      - 'backend/test/**'
+      - 'backend/app.js'
   pull_request:
     branches: [ "main" ]
 
