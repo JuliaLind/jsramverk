@@ -23,7 +23,13 @@ jobs:
         node-version: [18.x, 20.x]
         mongodb-version: ['5.0', '6.0']
 
+    env:
+      TRAFIKVERKET_API_KEY: ${{ secrets.TRAFIKVERKET_API_KEY }}
+      DSN: ${{ secrets.DSN }}
+      URL: ${{ secrets.URL }}
+
     steps:
+        
     - uses: actions/checkout@v3
 
     - name: Use Node.js ${{ matrix.node-version }}
