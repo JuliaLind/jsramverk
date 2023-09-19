@@ -1,0 +1,2256 @@
+{
+    "data": [
+        {
+            "ActivityId": "d1afd6e7-673e-d96f-87ff-36510434f870",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:10:00.000+02:00",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T12:28:31.000+02:00",
+            "LocationSignature": "Gk",
+            "OperationalTrainNumber": "42961",
+            "TimeAtLocation": "2023-09-17T20:14:00.000+02:00",
+            "TrainOwner": "BLSRAIL"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac185ca9540c",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:11:00.000+02:00",
+            "AdvertisedTrainIdent": "630",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T12:30:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "No.osl",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "K",
+            "OperationalTrainNumber": "630",
+            "ToLocation": [
+                {
+                    "LocationName": "Cst",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "SJ"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac1778f84afb",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:12:00.000+02:00",
+            "AdvertisedTrainIdent": "1044",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T12:40:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Dk.kh",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Mru",
+            "OperationalTrainNumber": "11044",
+            "ToLocation": [
+                {
+                    "LocationName": "Ck",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "Ö-TÅG"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac1857176a9a",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:14:00.000+02:00",
+            "AdvertisedTrainIdent": "529",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T12:50:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Cst",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "My",
+            "OperationalTrainNumber": "529",
+            "ToLocation": [
+                {
+                    "LocationName": "M",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "SJ"
+        },
+        {
+            "ActivityId": "f9dff35c-a09e-7a33-ae0e-cb4d7f9dd2d3",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:16:00.000+02:00",
+            "AdvertisedTrainIdent": "40721",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T12:40:19.000+02:00",
+            "LocationSignature": "Kgd",
+            "OperationalTrainNumber": "43722"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac1868af756b",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:16:00.000+02:00",
+            "AdvertisedTrainIdent": "7408",
+            "Canceled": true,
+            "EstimatedTimeAtLocation": "2023-09-18T13:17:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Suc",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Ök",
+            "OperationalTrainNumber": "27408",
+            "ToLocation": [
+                {
+                    "LocationName": "Uå",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "VY"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac1899f9dc85",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:18:00.000+02:00",
+            "AdvertisedTrainIdent": "936",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T12:45:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Arb",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Sgs",
+            "OperationalTrainNumber": "936",
+            "ToLocation": [
+                {
+                    "LocationName": "U",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "MÄLAB"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac177bbb1ada",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:19:00.000+02:00",
+            "AdvertisedTrainIdent": "1069",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T12:24:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Ck",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Lu",
+            "OperationalTrainNumber": "11069",
+            "ToLocation": [
+                {
+                    "LocationName": "Dk.kh",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "Ö-TÅG"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac17b8609b46",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:20:00.000+02:00",
+            "AdvertisedTrainIdent": "174",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T12:25:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "G",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Sk",
+            "OperationalTrainNumber": "174",
+            "ToLocation": [
+                {
+                    "LocationName": "Cst",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "SJ"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac17b4fcc412",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:20:00.000+02:00",
+            "AdvertisedTrainIdent": "172",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T12:38:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "G",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Hpbg",
+            "OperationalTrainNumber": "172",
+            "ToLocation": [
+                {
+                    "LocationName": "Cst",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "SJ"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac1778faad2e",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:20:00.000+02:00",
+            "AdvertisedTrainIdent": "1044",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T12:48:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Dk.kh",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Kh",
+            "OperationalTrainNumber": "11044",
+            "ToLocation": [
+                {
+                    "LocationName": "Ck",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "Ö-TÅG"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac1868af756d",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:21:00.000+02:00",
+            "AdvertisedTrainIdent": "7408",
+            "Canceled": true,
+            "EstimatedTimeAtLocation": "2023-09-18T13:27:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Suc",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Ökn",
+            "OperationalTrainNumber": "27408",
+            "ToLocation": [
+                {
+                    "LocationName": "Uå",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "VY"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac18543b5f73",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:22:00.000+02:00",
+            "AdvertisedTrainIdent": "52029",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T12:23:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Söc",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Mö",
+            "OperationalTrainNumber": "22029",
+            "ToLocation": [
+                {
+                    "LocationName": "Gn",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "SLL"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac17ab673f3a",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:22:00.000+02:00",
+            "AdvertisedTrainIdent": "1535",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T12:26:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Hb",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Lu",
+            "OperationalTrainNumber": "1535",
+            "ToLocation": [
+                {
+                    "LocationName": "Y",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "SKANE"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac1894a0a19d",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:22:00.000+02:00",
+            "AdvertisedTrainIdent": "8920",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T12:26:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Cg",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Len",
+            "OperationalTrainNumber": "8920",
+            "ToLocation": [
+                {
+                    "LocationName": "Khn",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "RV"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac179410fec9",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:23:00.000+02:00",
+            "AdvertisedTrainIdent": "12331",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T12:24:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Mr",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Hfa",
+            "OperationalTrainNumber": "12331",
+            "ToLocation": [
+                {
+                    "LocationName": "Nyc",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "SLL"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac17e0c7ed42",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:23:00.000+02:00",
+            "AdvertisedTrainIdent": "2234",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T12:24:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Söc",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Sta",
+            "OperationalTrainNumber": "2234",
+            "ToLocation": [
+                {
+                    "LocationName": "U",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "SLL"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac17e0e22704",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:23:00.000+02:00",
+            "AdvertisedTrainIdent": "2235",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T12:25:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "U",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Upv",
+            "OperationalTrainNumber": "72235",
+            "ToLocation": [
+                {
+                    "LocationName": "Söc",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "SLL"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac17c10781eb",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:23:00.000+02:00",
+            "AdvertisedTrainIdent": "17611",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T12:27:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Jö",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Sy",
+            "OperationalTrainNumber": "17611",
+            "ToLocation": [
+                {
+                    "LocationName": "Vö",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "JLT"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac18575566db",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:23:00.000+02:00",
+            "AdvertisedTrainIdent": "530",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T12:47:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Dk.kh",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Nr",
+            "OperationalTrainNumber": "22530",
+            "ToLocation": [
+                {
+                    "LocationName": "Cst",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "SJ"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac177cae4a81",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:24:00.000+02:00",
+            "AdvertisedTrainIdent": "1077",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T12:30:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Ck",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Cr",
+            "OperationalTrainNumber": "11077",
+            "ToLocation": [
+                {
+                    "LocationName": "Dk.kh",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "Ö-TÅG"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-b52f02afc57d",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:24:00.000+02:00",
+            "AdvertisedTrainIdent": "3940",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T12:35:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "M",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Lp",
+            "OperationalTrainNumber": "13940",
+            "ToLocation": [
+                {
+                    "LocationName": "Cst",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "SNÄLL"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac1850271a3e",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:25:00.000+02:00",
+            "AdvertisedTrainIdent": "432",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T12:50:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "G",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Sk",
+            "OperationalTrainNumber": "432",
+            "ToLocation": [
+                {
+                    "LocationName": "Cst",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "SJ"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac179410fecb",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:27:00.000+02:00",
+            "AdvertisedTrainIdent": "12331",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T12:28:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Mr",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Ssä",
+            "OperationalTrainNumber": "12331",
+            "ToLocation": [
+                {
+                    "LocationName": "Nyc",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "SLL"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac179f606dfa",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:27:00.000+02:00",
+            "AdvertisedTrainIdent": "13242",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T12:29:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "G",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Mkl",
+            "OperationalTrainNumber": "13242",
+            "ToLocation": [
+                {
+                    "LocationName": "Smd",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "VASTTRAF"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac17e0e22706",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:27:00.000+02:00",
+            "AdvertisedTrainIdent": "2235",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T12:29:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "U",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "R",
+            "OperationalTrainNumber": "72235",
+            "ToLocation": [
+                {
+                    "LocationName": "Söc",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "SLL"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac1894a0a19f",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:27:00.000+02:00",
+            "AdvertisedTrainIdent": "8920",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T12:31:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Cg",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Fgå",
+            "OperationalTrainNumber": "8920",
+            "ToLocation": [
+                {
+                    "LocationName": "Khn",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "RV"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac1856e7bb37",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:27:00.000+02:00",
+            "AdvertisedTrainIdent": "527",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T12:32:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Cst",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Av",
+            "OperationalTrainNumber": "527",
+            "ToLocation": [
+                {
+                    "LocationName": "Dk.kh",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "SJ"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac17b4fcc414",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:27:00.000+02:00",
+            "AdvertisedTrainIdent": "172",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T12:47:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "G",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Kla",
+            "OperationalTrainNumber": "172",
+            "ToLocation": [
+                {
+                    "LocationName": "Cst",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "SJ"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac1899fc3ed5",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:27:00.000+02:00",
+            "AdvertisedTrainIdent": "936",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T12:53:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Arb",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Lg",
+            "OperationalTrainNumber": "936",
+            "ToLocation": [
+                {
+                    "LocationName": "U",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "MÄLAB"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac1857c5755f",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:28:00.000+02:00",
+            "AdvertisedTrainIdent": "534",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T12:32:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Dk.kh",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Av",
+            "OperationalTrainNumber": "534",
+            "ToLocation": [
+                {
+                    "LocationName": "Cst",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "SJ"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac184f6ac0fc",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:28:00.000+02:00",
+            "AdvertisedTrainIdent": "42",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T12:35:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Cst",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Då",
+            "OperationalTrainNumber": "51142",
+            "ToLocation": [
+                {
+                    "LocationName": "Mrc",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "SJ"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac18502e41e0",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:30:00.000+02:00",
+            "AdvertisedTrainIdent": "433",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T12:45:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Cst",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Cst",
+            "OperationalTrainNumber": "433",
+            "ToLocation": [
+                {
+                    "LocationName": "G",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "SJ"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac179413614a",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:31:00.000+02:00",
+            "AdvertisedTrainIdent": "12331",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T12:33:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Mr",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Öso",
+            "OperationalTrainNumber": "12331",
+            "ToLocation": [
+                {
+                    "LocationName": "Nyc",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "SLL"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac184fdacf17",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:31:00.000+02:00",
+            "AdvertisedTrainIdent": "430",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T12:45:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "G",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "K",
+            "OperationalTrainNumber": "430",
+            "ToLocation": [
+                {
+                    "LocationName": "Cst",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "SJ"
+        },
+        {
+            "ActivityId": "f4f84094-5096-c81e-ae07-c4bed490d0f6",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:32:00.000+02:00",
+            "AdvertisedTrainIdent": "54911",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T12:34:48.000+02:00",
+            "LocationSignature": "Mdl",
+            "OperationalTrainNumber": "54911"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac17c10781ed",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:32:00.000+02:00",
+            "AdvertisedTrainIdent": "17611",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T12:35:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Jö",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Lh",
+            "OperationalTrainNumber": "17611",
+            "ToLocation": [
+                {
+                    "LocationName": "Vö",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "JLT"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac1868af756f",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:32:00.000+02:00",
+            "AdvertisedTrainIdent": "7408",
+            "Canceled": true,
+            "EstimatedTimeAtLocation": "2023-09-18T13:48:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Suc",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Hum",
+            "OperationalTrainNumber": "27408",
+            "ToLocation": [
+                {
+                    "LocationName": "Uå",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "VY"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac177bb1911c",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:33:00.000+02:00",
+            "AdvertisedTrainIdent": "1069",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T12:36:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Ck",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "M",
+            "OperationalTrainNumber": "1069",
+            "ToLocation": [
+                {
+                    "LocationName": "Dk.kh",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "SKANE"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac1894a0a1a1",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:34:00.000+02:00",
+            "AdvertisedTrainIdent": "8920",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T12:38:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Cg",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Kil",
+            "OperationalTrainNumber": "8920",
+            "ToLocation": [
+                {
+                    "LocationName": "Khn",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "RV"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac184f6ac0fe",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:34:00.000+02:00",
+            "AdvertisedTrainIdent": "42",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T12:41:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Cst",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Gnf",
+            "OperationalTrainNumber": "51142",
+            "ToLocation": [
+                {
+                    "LocationName": "Mrc",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "SJ"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac179f606dfc",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:35:00.000+02:00",
+            "AdvertisedTrainIdent": "13242",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T12:37:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "G",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Dl",
+            "OperationalTrainNumber": "13242",
+            "ToLocation": [
+                {
+                    "LocationName": "Smd",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "VASTTRAF"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac1778faad30",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:35:00.000+02:00",
+            "AdvertisedTrainIdent": "1044",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T13:02:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Dk.kh",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Bhb",
+            "OperationalTrainNumber": "11044",
+            "ToLocation": [
+                {
+                    "LocationName": "Ck",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "Ö-TÅG"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac1856cb1ea4",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:35:00.000+02:00",
+            "AdvertisedTrainIdent": "525",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T13:05:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Cst",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Lu",
+            "OperationalTrainNumber": "525",
+            "ToLocation": [
+                {
+                    "LocationName": "Dk.kh",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "SJ"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac1869008510",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:36:00.000+02:00",
+            "AdvertisedTrainIdent": "7411",
+            "Canceled": true,
+            "EstimatedTimeAtLocation": "2023-09-18T12:37:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Uå",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Uå",
+            "OperationalTrainNumber": "17411",
+            "ToLocation": [
+                {
+                    "LocationName": "Suc",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "VY"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac177bb1911e",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:36:00.000+02:00",
+            "AdvertisedTrainIdent": "1069",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T12:39:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Ck",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Tri",
+            "OperationalTrainNumber": "1069",
+            "ToLocation": [
+                {
+                    "LocationName": "Dk.kh",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "SKANE"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac1899fc3ed7",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:36:00.000+02:00",
+            "AdvertisedTrainIdent": "936",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T13:01:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Arb",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Nkv",
+            "OperationalTrainNumber": "936",
+            "ToLocation": [
+                {
+                    "LocationName": "U",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "MÄLAB"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac17b4fcc416",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:38:00.000+02:00",
+            "AdvertisedTrainIdent": "172",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T12:58:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "G",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Öb",
+            "OperationalTrainNumber": "172",
+            "ToLocation": [
+                {
+                    "LocationName": "Cst",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "SJ"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac1848603dc5",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:39:00.000+02:00",
+            "AdvertisedTrainIdent": "3747",
+            "Canceled": true,
+            "EstimatedTimeAtLocation": "2023-09-18T12:39:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Snu",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Snu",
+            "OperationalTrainNumber": "3747",
+            "ToLocation": [
+                {
+                    "LocationName": "G",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "VASTTRAF"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac1848781555",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:40:00.000+02:00",
+            "AdvertisedTrainIdent": "3750",
+            "Canceled": true,
+            "EstimatedTimeAtLocation": "2023-09-18T12:40:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "G",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "G",
+            "OperationalTrainNumber": "3750",
+            "ToLocation": [
+                {
+                    "LocationName": "Snu",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "VASTTRAF"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac177bb19120",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:41:00.000+02:00",
+            "AdvertisedTrainIdent": "1069",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T12:43:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Ck",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Hie",
+            "OperationalTrainNumber": "1069",
+            "ToLocation": [
+                {
+                    "LocationName": "Dk.kh",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "SKANE"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac179f606dfe",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:41:00.000+02:00",
+            "AdvertisedTrainIdent": "13242",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T12:43:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "G",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Hlv",
+            "OperationalTrainNumber": "13242",
+            "ToLocation": [
+                {
+                    "LocationName": "Smd",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "VASTTRAF"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac186902e79c",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:41:00.000+02:00",
+            "AdvertisedTrainIdent": "7411",
+            "Canceled": true,
+            "EstimatedTimeAtLocation": "2023-09-18T12:47:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Uå",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Uåö",
+            "OperationalTrainNumber": "17411",
+            "ToLocation": [
+                {
+                    "LocationName": "Suc",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "VY"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac184f6ac100",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:42:00.000+02:00",
+            "AdvertisedTrainIdent": "42",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T12:49:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Cst",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "In",
+            "OperationalTrainNumber": "51142",
+            "ToLocation": [
+                {
+                    "LocationName": "Mrc",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "SJ"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac17c10781ef",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:43:00.000+02:00",
+            "AdvertisedTrainIdent": "17611",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T12:46:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Jö",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Mo",
+            "OperationalTrainNumber": "17611",
+            "ToLocation": [
+                {
+                    "LocationName": "Vö",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "JLT"
+        },
+        {
+            "ActivityId": "d2ec5efe-964a-7770-65b6-6f8e911ea5b4",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:43:00.000+02:00",
+            "AdvertisedTrainIdent": "40721",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T12:46:00.000+02:00",
+            "LocationSignature": "Snv",
+            "OperationalTrainNumber": "43722"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac1899fc3ed9",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:44:00.000+02:00",
+            "AdvertisedTrainIdent": "936",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T13:05:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Arb",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Söö",
+            "OperationalTrainNumber": "936",
+            "ToLocation": [
+                {
+                    "LocationName": "U",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "MÄLAB"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac177cae4a83",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:45:00.000+02:00",
+            "AdvertisedTrainIdent": "1077",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T12:51:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Ck",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Hm",
+            "OperationalTrainNumber": "11077",
+            "ToLocation": [
+                {
+                    "LocationName": "Dk.kh",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "Ö-TÅG"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac1778faad32",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:46:00.000+02:00",
+            "AdvertisedTrainIdent": "1044",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T13:13:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Dk.kh",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Rb",
+            "OperationalTrainNumber": "11044",
+            "ToLocation": [
+                {
+                    "LocationName": "Ck",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "Ö-TÅG"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac1868b1d7b3",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:46:00.000+02:00",
+            "AdvertisedTrainIdent": "7408",
+            "Canceled": true,
+            "EstimatedTimeAtLocation": "2023-09-18T14:13:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Suc",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Nog",
+            "OperationalTrainNumber": "27408",
+            "ToLocation": [
+                {
+                    "LocationName": "Uå",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "VY"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac179f606e00",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:47:00.000+02:00",
+            "AdvertisedTrainIdent": "13242",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T12:49:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "G",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Rbh",
+            "OperationalTrainNumber": "13242",
+            "ToLocation": [
+                {
+                    "LocationName": "Smd",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "VASTTRAF"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac1894a0a1a3",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:48:00.000+02:00",
+            "AdvertisedTrainIdent": "8920",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T12:50:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Cg",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Ksc",
+            "OperationalTrainNumber": "8920",
+            "ToLocation": [
+                {
+                    "LocationName": "Khn",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "RV"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-b52f02afc57f",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:48:00.000+02:00",
+            "AdvertisedTrainIdent": "3940",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T12:59:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "M",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Nr",
+            "OperationalTrainNumber": "13940",
+            "ToLocation": [
+                {
+                    "LocationName": "Cst",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "SNÄLL"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac184f6ac102",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:49:00.000+02:00",
+            "AdvertisedTrainIdent": "42",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T12:54:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Cst",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Lsd",
+            "OperationalTrainNumber": "51142",
+            "ToLocation": [
+                {
+                    "LocationName": "Mrc",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "SJ"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac18502e41e1",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:49:00.000+02:00",
+            "AdvertisedTrainIdent": "433",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T13:05:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Cst",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Söö",
+            "OperationalTrainNumber": "433",
+            "ToLocation": [
+                {
+                    "LocationName": "G",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "SJ"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac1856cb1ea6",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:49:00.000+02:00",
+            "AdvertisedTrainIdent": "525",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T13:15:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Cst",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "M",
+            "OperationalTrainNumber": "525",
+            "ToLocation": [
+                {
+                    "LocationName": "Dk.kh",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "SJ"
+        },
+        {
+            "ActivityId": "b710c999-6484-6cc8-19b1-d05485dbebe2",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:51:00.000+02:00",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T13:04:21.000+02:00",
+            "LocationSignature": "Ör",
+            "OperationalTrainNumber": "42025",
+            "TimeAtLocation": "2023-09-18T08:36:00.000+02:00",
+            "TrainOwner": "RRS"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac184e4f0934",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:53:00.000+02:00",
+            "AdvertisedTrainIdent": "3941",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T12:56:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Cst",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Av",
+            "OperationalTrainNumber": "4941",
+            "ToLocation": [
+                {
+                    "LocationName": "M",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "SNÄLL"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac1857176a9c",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:53:00.000+02:00",
+            "AdvertisedTrainIdent": "529",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T13:25:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Cst",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "N",
+            "OperationalTrainNumber": "529",
+            "ToLocation": [
+                {
+                    "LocationName": "M",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "SJ"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac1899fc3edb",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:54:00.000+02:00",
+            "AdvertisedTrainIdent": "936",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T13:15:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Arb",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Flb",
+            "OperationalTrainNumber": "936",
+            "ToLocation": [
+                {
+                    "LocationName": "U",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "MÄLAB"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac186902e79e",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:55:00.000+02:00",
+            "AdvertisedTrainIdent": "7411",
+            "Canceled": true,
+            "EstimatedTimeAtLocation": "2023-09-18T13:12:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Uå",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Höf",
+            "OperationalTrainNumber": "17411",
+            "ToLocation": [
+                {
+                    "LocationName": "Suc",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "VY"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac17b4fcc418",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:57:00.000+02:00",
+            "AdvertisedTrainIdent": "172",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T13:00:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "G",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Ör",
+            "OperationalTrainNumber": "172",
+            "ToLocation": [
+                {
+                    "LocationName": "Cst",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "SJ"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac184f6ac104",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T12:58:00.000+02:00",
+            "AdvertisedTrainIdent": "42",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T13:03:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Cst",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Tlg",
+            "OperationalTrainNumber": "51142",
+            "ToLocation": [
+                {
+                    "LocationName": "Mrc",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "SJ"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac1868b1d7b5",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T13:03:00.000+02:00",
+            "AdvertisedTrainIdent": "7408",
+            "Canceled": true,
+            "EstimatedTimeAtLocation": "2023-09-18T14:31:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Suc",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Höf",
+            "OperationalTrainNumber": "27408",
+            "ToLocation": [
+                {
+                    "LocationName": "Uå",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "VY"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac1856e7bb39",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T13:05:00.000+02:00",
+            "AdvertisedTrainIdent": "527",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T13:14:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Cst",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Hm",
+            "OperationalTrainNumber": "527",
+            "ToLocation": [
+                {
+                    "LocationName": "Dk.kh",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "SJ"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac186902e7a0",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T13:06:00.000+02:00",
+            "AdvertisedTrainIdent": "7411",
+            "Canceled": true,
+            "EstimatedTimeAtLocation": "2023-09-18T13:30:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Uå",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Nog",
+            "OperationalTrainNumber": "17411",
+            "ToLocation": [
+                {
+                    "LocationName": "Suc",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "VY"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac184f6d2353",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T13:07:00.000+02:00",
+            "AdvertisedTrainIdent": "42",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T13:12:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Cst",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Rv",
+            "OperationalTrainNumber": "51142",
+            "ToLocation": [
+                {
+                    "LocationName": "Mrc",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "SJ"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac1778faad34",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T13:07:00.000+02:00",
+            "AdvertisedTrainIdent": "1044",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T13:32:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Dk.kh",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Båa",
+            "OperationalTrainNumber": "11044",
+            "ToLocation": [
+                {
+                    "LocationName": "Ck",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "Ö-TÅG"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac1899fc3edd",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T13:11:00.000+02:00",
+            "AdvertisedTrainIdent": "936",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T13:25:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Arb",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Cst",
+            "OperationalTrainNumber": "936",
+            "ToLocation": [
+                {
+                    "LocationName": "U",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "MÄLAB"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac186902e7a2",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T13:20:00.000+02:00",
+            "AdvertisedTrainIdent": "7411",
+            "Canceled": true,
+            "EstimatedTimeAtLocation": "2023-09-18T13:55:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Uå",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Hum",
+            "OperationalTrainNumber": "17411",
+            "ToLocation": [
+                {
+                    "LocationName": "Suc",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "VY"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac18502e41e3",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T13:26:00.000+02:00",
+            "AdvertisedTrainIdent": "433",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T13:40:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Cst",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "K",
+            "OperationalTrainNumber": "433",
+            "ToLocation": [
+                {
+                    "LocationName": "G",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "SJ"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac185719cc40",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T13:27:00.000+02:00",
+            "AdvertisedTrainIdent": "529",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T13:55:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Cst",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Av",
+            "OperationalTrainNumber": "529",
+            "ToLocation": [
+                {
+                    "LocationName": "M",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "SJ"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac1899fc3edf",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T13:29:00.000+02:00",
+            "AdvertisedTrainIdent": "936",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T13:45:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Arb",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Arnc",
+            "OperationalTrainNumber": "936",
+            "ToLocation": [
+                {
+                    "LocationName": "U",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "MÄLAB"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac1850271a40",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T13:33:00.000+02:00",
+            "AdvertisedTrainIdent": "432",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T13:55:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "G",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "K",
+            "OperationalTrainNumber": "432",
+            "ToLocation": [
+                {
+                    "LocationName": "Cst",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "SJ"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac1856e7bb3b",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T13:35:00.000+02:00",
+            "AdvertisedTrainIdent": "527",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T13:41:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Cst",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Lu",
+            "OperationalTrainNumber": "527",
+            "ToLocation": [
+                {
+                    "LocationName": "Dk.kh",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "SJ"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac186902e7a4",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T13:35:00.000+02:00",
+            "AdvertisedTrainIdent": "7411",
+            "Canceled": true,
+            "EstimatedTimeAtLocation": "2023-09-18T14:16:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Uå",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Ökn",
+            "OperationalTrainNumber": "17411",
+            "ToLocation": [
+                {
+                    "LocationName": "Suc",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "VY"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac1899fc3ee1",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T13:38:00.000+02:00",
+            "AdvertisedTrainIdent": "936",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T13:55:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Arb",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Kn",
+            "OperationalTrainNumber": "936",
+            "ToLocation": [
+                {
+                    "LocationName": "U",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "MÄLAB"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac186902e7a6",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T13:38:00.000+02:00",
+            "AdvertisedTrainIdent": "7411",
+            "Canceled": true,
+            "EstimatedTimeAtLocation": "2023-09-18T14:26:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Uå",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Ök",
+            "OperationalTrainNumber": "17411",
+            "ToLocation": [
+                {
+                    "LocationName": "Suc",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "VY"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac1848840101",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T13:39:00.000+02:00",
+            "AdvertisedTrainIdent": "3751",
+            "Canceled": true,
+            "EstimatedTimeAtLocation": "2023-09-18T13:39:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Snu",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Snu",
+            "OperationalTrainNumber": "3751",
+            "ToLocation": [
+                {
+                    "LocationName": "G",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "VASTTRAF"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac186fd6a2e6",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T13:48:00.000+02:00",
+            "AdvertisedTrainIdent": "7662",
+            "Canceled": true,
+            "EstimatedTimeAtLocation": "2023-09-18T13:55:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Ek",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Ek",
+            "OperationalTrainNumber": "7662",
+            "ToLocation": [
+                {
+                    "LocationName": "N",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "JLT"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac1856e7bb3d",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T13:49:00.000+02:00",
+            "AdvertisedTrainIdent": "527",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T13:53:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Cst",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "M",
+            "OperationalTrainNumber": "527",
+            "ToLocation": [
+                {
+                    "LocationName": "Dk.kh",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "SJ"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac185719cc42",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T14:06:00.000+02:00",
+            "AdvertisedTrainIdent": "529",
+            "Canceled": false,
+            "EstimatedTimeAtLocation": "2023-09-18T14:30:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Cst",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Hm",
+            "OperationalTrainNumber": "529",
+            "ToLocation": [
+                {
+                    "LocationName": "M",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "SJ"
+        },
+        {
+            "ActivityId": "1500adde-f75d-c409-08db-ac1869054a17",
+            "ActivityType": "Avgang",
+            "AdvertisedTimeAtLocation": "2023-09-18T14:19:00.000+02:00",
+            "AdvertisedTrainIdent": "7411",
+            "Canceled": true,
+            "EstimatedTimeAtLocation": "2023-09-18T15:41:00.000+02:00",
+            "FromLocation": [
+                {
+                    "LocationName": "Uå",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "LocationSignature": "Krf",
+            "OperationalTrainNumber": "17411",
+            "ToLocation": [
+                {
+                    "LocationName": "Suc",
+                    "Priority": 1,
+                    "Order": 0
+                }
+            ],
+            "TrainOwner": "VY"
+        }
+    ]
+}

@@ -1,14 +1,13 @@
 <script setup>
+/**
+ * Table displaying delayed trains 
+ */
+import apiModel from '../models/api.js'
+// import { getDelayedTrains } from '../models/api.js'
 import DelayedItem from './DelayedItem.vue';
 
-// const res = await fetch("http://localhost:1337/delayed");
-// const delayed = await res.json();
-// const data = await delayed.data;
-
-const res = await fetch(`${import.meta.env.VITE_URL}/delayed`);
-const delayed = await res.json();
-const data = await delayed.data;
-console.log(import.meta.env.VITE_URL);
+const data = await apiModel.getDelayedTrains();
+// const data = await getDelayedTrains();
 </script>
 
 <template>
@@ -20,7 +19,6 @@ console.log(import.meta.env.VITE_URL);
 </div>
 </template>
 
-<!-- <style scoped> -->
 <style>
 .delayed {
     height: 100vh;
