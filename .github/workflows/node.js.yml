@@ -7,11 +7,7 @@ on:
   push:
     branches: [ "**" ]
     paths:
-      - 'backend/db/**'
-      - 'backend/models/**'
-      - 'backend/routes/**'
-      - 'backend/test/**'
-      - 'backend/app.js'
+      - 'backend/**'
   pull_request:
     branches: [ "main" ]
 
