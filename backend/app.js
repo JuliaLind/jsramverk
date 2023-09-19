@@ -1,3 +1,12 @@
+/**
+ *
+ * This is the main entry point for the backend application.
+ * It sets up the Express.js server, handles routes,
+ * and initializes Socket.io for real-time communication.
+ *
+ */
+
+// Module imports
 require('dotenv').config();
 
 const express = require('express');
@@ -5,14 +14,16 @@ const cors = require('cors');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 
-const fetchTrainPositions = require('./models/trains.js');
+const trains = require('./models/trains.js');
 const delayed = require('./routes/delayed.js');
 const tickets = require('./routes/tickets.js');
 const codes = require('./routes/codes.js');
 
+// Create Express application instance and set up port
 const app = express();
-const httpServer = require("http").createServer(app);
+const port = process.env.PORT || 1337;
 
+// Middleware
 app.use(cors());
 app.options('*', cors());
 
@@ -21,6 +32,29 @@ app.disable('x-powered-by');
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
+// Root url
+app.get('/', (req, res) => {
+    res.json({
+        data: 'Hello World!'
+    })
+});
+
+// Mount routes
+app.use("/delayed", delayed);
+app.use("/tickets", tickets);
+app.use("/codes", codes);
+
+
+// Create an HTTP server
+const httpServer = require("http").createServer(app);
+
+// Start the HTTP server
+httpServer.listen(port, () => {
+    console.log(`Example app listening on port ${port}`);
+    console.log(process.env);
+});
+
+// Configure socket.io
 let io = require("socket.io")(httpServer, {
     cors: {
         origin: process.env.URL,
@@ -28,22 +62,7 @@ let io = require("socket.io")(httpServer, {
     }
 });
 
+// Fetch train positions with socket.io
+trains.fetchTrainPositions(io);
 
-const port = process.env.PORT || 1337;
-
-app.get('/', (req, res) => {
-    res.json({
-        data: 'Hello World!'
-    })
-});
-
-app.use("/delayed", delayed);
-app.use("/tickets", tickets);
-app.use("/codes", codes);
-
-httpServer.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
-    console.log(process.env);
-});
-
-fetchTrainPositions(io);
+module.exports = httpServer;
