@@ -12,37 +12,47 @@ chai.use(require('chai-json'));
 const expect = chai.expect;
 
 const database = require("../db/database.js");
-const collectionName = "trains";
+// const collectionName = "trains";
 
 describe('tickets get and post routes', () => {
-    beforeEach(() => {
-        return new Promise(async (resolve) => {
-            const db = await database.getDb();
+    // beforeEach(() => {
+    //     return new Promise(async (resolve) => {
+    //         const db = await database.getDb();
 
-            db.db.listCollections(
-                { name: collectionName }
-            )
-            .next()
-            .then(async function(info) {
-                await db.collection.drop();
-                // if (info) {
-                //     await db.collection.drop();
-                // }
-                const docs = [
-                    { code: "ANA002", trainnumber: "9123", traindate: "2023-09-18" },
-                    { code: "ANA003", trainnumber: "91234", traindate: "2023-09-18" },
-                ];
-                await db.collection.insertMany(docs);
+    //         db.db.listCollections(
+    //             { name: collectionName }
+    //         )
+    //         .next()
+    //         .then(async function(info) {
+    //             await db.collection.drop();
+    //             // if (info) {
+    //             //     await db.collection.drop();
+    //             // }
+    //             const docs = [
+    //                 { code: "ANA002", trainnumber: "9123", traindate: "2023-09-18" },
+    //                 { code: "ANA003", trainnumber: "91234", traindate: "2023-09-18" },
+    //             ];
+    //             await db.collection.insertMany(docs);
                 
-            })
-            .catch(function(err) {
-                console.error(err);
-            })
-            .finally(async function() {
-                await db.client.close();
-                resolve();
-            });
-        });
+    //         })
+    //         .catch(function(err) {
+    //             console.error(err);
+    //         })
+    //         .finally(async function() {
+    //             await db.client.close();
+    //             resolve();
+    //         });
+    //     });
+    // });
+    beforeEach(async () => {
+        const db = await database.getDb();
+        await db.collection.drop();
+        const docs = [
+            { code: "ANA002", trainnumber: "9123", traindate: "2023-09-18" },
+            { code: "ANA003", trainnumber: "91234", traindate: "2023-09-18" },
+        ];
+        await db.collection.insertMany(docs);
+        await db.client.close();
     });
     it('page should contain json with old tickets', (done) => {
         chai.request(server)
@@ -61,7 +71,6 @@ describe('tickets get and post routes', () => {
         const ticket = {
             code: "ANA999", trainnumber: "99991", traindate: "2023-09-19"
         }
-        let id=null;
         chai.request(server)
             .post("/tickets")
             .send(ticket)
@@ -69,7 +78,6 @@ describe('tickets get and post routes', () => {
                 res.should.have.status(201);
                 res.should.be.json;
                 res.body.data.should.have.property("acknowledged");
-                id = res.body.data.insertedId
                 res.body.data.acknowledged.should.equal(true);
                 res.body.data.insertedId.should.be.a("string");
                 done();
@@ -86,9 +94,16 @@ describe('tickets get and post routes', () => {
             traindate: '2023-09-16'
         };
         const response = await chai.request(server).post('/tickets').send(ticketData);
-
         expect(response).to.have.status(201);
         expect(response.body).to.be.an('object');
         expect(response.body.data.acknowledged).to.equal(true);
+
+        const id = response.body.data.insertedId;
+
+        const response2 = await chai.request(server).get('/tickets')
+        const tickets = await JSON.parse(response2.text).data;
+        const latest = tickets[tickets.length - 1];
+        chai.assert.equal(latest._id, id);
+        chai.assert.equal(latest.code, 'test_code');
     });
 });
