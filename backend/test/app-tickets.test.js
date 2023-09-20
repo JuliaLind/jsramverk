@@ -85,7 +85,6 @@ describe('tickets get and post routes', () => {
             trainnumber: '123456',
             traindate: '2023-09-16'
         };
-
         const response = await chai.request(server).post('/tickets').send(ticketData);
 
         expect(response).to.have.status(201);
