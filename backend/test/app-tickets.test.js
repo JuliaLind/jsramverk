@@ -63,22 +63,6 @@ describe('tickets get and post routes', () => {
                 done();
             });
     });
-    // it('register a new ticket', (done) => {
-    //     const ticket = {
-    //         code: "ANA999", trainnumber: "99991", traindate: "2023-09-19"
-    //     }
-    //     chai.request(server)
-    //         .post("/tickets")
-    //         .send(ticket)
-    //         .end((err, res) => {
-    //             res.should.have.status(201);
-    //             res.should.be.json;
-    //             res.body.data.should.have.property("acknowledged");
-    //             res.body.data.acknowledged.should.equal(true);
-    //             res.body.data.insertedId.should.be.a("string");
-    //             done();
-    //         });
-    // });
     it('should handle /tickets route', async () => {
         const response = await chai.request(server).get('/tickets');
         expect(response).to.have.status(200);
