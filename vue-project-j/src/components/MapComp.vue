@@ -1,15 +1,21 @@
 <script>
-// const socket = io("https://jsramverk-editor-julmar2023.azurewebsites.net/");
+import io from 'socket.io-client';
+/**
+ * For communicating with backend
+ */
 const socket = io(import.meta.env.VITE_URL)
 
-
+/**
+ * Map with markers that display current positions of trains.
+ */
 export default {
     name: "Map",
     data() {
-        return{
-        center: [62.173276, 14.942265]
-        }},
-        methods: {
+        return {
+            center: [62.173276, 14.942265]
+        }
+    },
+    methods: {
         setupLeafletMap() {
             const map = L.map('map').setView(this.center, 5);
 
@@ -20,6 +26,11 @@ export default {
 
             let markers = {};
 
+            /**
+             * When receiving "message" signal from backend,
+             * if the train is not already on the map adds a new marker,
+             * if the train is on the map updates the marker's position
+             */
             socket.on("message", (data) => {
                 if (markers.hasOwnProperty(data.trainnumber)) {
                     let marker = markers[data.trainnumber];

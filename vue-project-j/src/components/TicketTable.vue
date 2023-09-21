@@ -1,11 +1,11 @@
 <script setup>
-
-const res = await fetch(`${import.meta.env.VITE_URL}/tickets`);
-
-// const res = await fetch("http://localhost:1337/tickets");
-
-const data = await res.json();
-const tickets = await data.data;
+/**
+ * Component representing a list of all previous tickets
+ */
+ import apiModel from '../models/api.js'
+// import { getTickets } from '../models/api.js'
+const tickets = await apiModel.getTickets();
+// const tickets = await getTickets();
 
 // let newTicketId = 0;
 // const lastId = result.data[1] ? result.data[1].id : 0;
@@ -19,7 +19,6 @@ const tickets = await data.data;
 </div>
 </template>
 
-<!-- <style scoped> -->
 <style>
 .delayed {
     height: 100vh;

@@ -16,12 +16,12 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
-  base: "/~juli22/jsramverk",
+  // base: "/~juli22/jsramverk",
   test: {
     coverage: {
         provider: 'istanbul',
         reporter: ['text', 'json', 'html', 'clover'],
-        include: 'src/components/*.view'
+        include: 'src/components/*.vue'
     }
   }
 })

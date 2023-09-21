@@ -30,7 +30,6 @@ describe('app.js', () => {
             const response = await chai.request(server).get('/delayed');
             expect(response).to.have.status(200);
         });
-
         it('should handle /tickets route', async () => {
             const response = await chai.request(server).get('/tickets');
             expect(response).to.have.status(200);
