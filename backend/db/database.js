@@ -28,6 +28,7 @@ const database = {
      * @returns {Promise<Object>} An object containing the collection and client references.
      */
     getDb: async function getDb () {
+
         const dsn = process.env.DSN + dbName;
 
         // Connect to the MongoDB Atlas cluster.

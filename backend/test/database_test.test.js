@@ -4,7 +4,6 @@
 
 /* global it describe */
 
-process.env.NODE_ENV = 'test';
 
 const chai = require('chai');
 const expect = chai.expect;
@@ -22,6 +21,7 @@ describe('database Module test', () => {
     describe('getDb', () => {
         it('should connect to the test database and return collection and client references', async () => {
             // Call the getDb function
+
             const { db, collection, client } = await database.getDb();
 
             // Assert that collection and client are valid objects

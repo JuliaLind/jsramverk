@@ -49,6 +49,7 @@ app.use("/codes", codes);
 const httpServer = require("http").createServer(app);
 
 // Start the HTTP server
+
 const server = httpServer.listen(port, () => {
     console.log(`App listening on port ${port}`);
 });
@@ -65,6 +66,8 @@ let io = require("socket.io")(httpServer, {
 trains.fetchTrainPositions(io);
 
 
+
 // export to facilitate testing
 module.exports = server;
+
 
