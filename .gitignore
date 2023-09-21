@@ -7,6 +7,6 @@ node_modules/
 *.vite/
 vue-project-j/.htaccess
 vue-project-j/.gitignore
-.nyc_output
+backend/.nyc_output
 
-coverage/
+backend/coverage/
