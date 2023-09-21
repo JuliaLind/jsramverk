@@ -12,47 +12,43 @@ chai.use(require('chai-json'));
 const expect = chai.expect;
 
 const database = require("../db/database.js");
-// const collectionName = "trains";
+const collectionName = "trains";
 
 describe('tickets get and post routes', () => {
-    // beforeEach(() => {
-    //     return new Promise(async (resolve) => {
-    //         const db = await database.getDb();
-
-    //         db.db.listCollections(
-    //             { name: collectionName }
-    //         )
-    //         .next()
-    //         .then(async function(info) {
-    //             await db.collection.drop();
-    //             // if (info) {
-    //             //     await db.collection.drop();
-    //             // }
-    //             const docs = [
-    //                 { code: "ANA002", trainnumber: "9123", traindate: "2023-09-18" },
-    //                 { code: "ANA003", trainnumber: "91234", traindate: "2023-09-18" },
-    //             ];
-    //             await db.collection.insertMany(docs);
-                
-    //         })
-    //         .catch(function(err) {
-    //             console.error(err);
-    //         })
-    //         .finally(async function() {
-    //             await db.client.close();
-    //             resolve();
-    //         });
-    //     });
+    // beforeEach(async () => {
+    //     const db = await database.getDb();
+    //     await db.collection.drop();
+    //     const docs = [
+    //         { code: "ANA002", trainnumber: "9123", traindate: "2023-09-18" },
+    //         { code: "ANA003", trainnumber: "91234", traindate: "2023-09-18" },
+    //     ];
+    //     await db.collection.insertMany(docs);
+    //     await db.client.close();
     // });
-    beforeEach(async () => {
+    before(async () => {
         const db = await database.getDb();
-        await db.collection.drop();
-        const docs = [
-            { code: "ANA002", trainnumber: "9123", traindate: "2023-09-18" },
-            { code: "ANA003", trainnumber: "91234", traindate: "2023-09-18" },
-        ];
-        await db.collection.insertMany(docs);
-        await db.client.close();
+
+        db.db.listCollections(
+            { name: collectionName }
+        )
+            .next()
+            .then(async function(info) {
+                // if (info) {
+                //     await db.collection.drop();
+                // }
+                await db.collection.drop();
+                const docs = [
+                    { code: "ANA002", trainnumber: "9123", traindate: "2023-09-18" },
+                    { code: "ANA003", trainnumber: "91234", traindate: "2023-09-18" },
+                ];
+                await db.collection.insertMany(docs);
+            })
+            .catch(function(err) {
+                console.error(err);
+            })
+            .finally(async function() {
+                await db.client.close();
+            });
     });
     it('page should contain json with old tickets', (done) => {
         chai.request(server)
@@ -98,10 +94,13 @@ describe('tickets get and post routes', () => {
         expect(response.body).to.be.an('object');
         expect(response.body.data.acknowledged).to.equal(true);
 
-        // const id = await JSON.parse(response.text).data.insertedId;
-        // const response2 = await chai.request(server).get('/tickets')
-        // const tickets = await JSON.parse(response2.text).data;
-        // const latest = tickets.filter(ticket => ticket._id === id)[0];
-        // chai.assert.equal(latest.code, 'test_code');
+        console.log("returned data, res1: ", await JSON.parse(response.text).data);
+        const id = await JSON.parse(response.text).data.insertedId;
+
+        const response2 = await chai.request(server).get('/tickets')
+        console.log("returned data, res2: ", await JSON.parse(response2.text).data);
+        const tickets = await JSON.parse(response2.text).data;
+        const latest = tickets.filter(ticket => ticket._id === id)[0];
+        chai.assert.equal(latest.code, 'test_code');
     });
 });
