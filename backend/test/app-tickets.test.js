@@ -12,7 +12,6 @@ chai.use(require('chai-json'));
 const expect = chai.expect;
 
 const database = require("../db/database.js");
-// const collectionName = "trains";
 
 describe('tickets get and post routes', () => {
     before(async () => {
@@ -68,6 +67,7 @@ describe('tickets get and post routes', () => {
         expect(response).to.have.status(201);
         expect(response.body).to.be.an('object');
         expect(response.body.data.acknowledged).to.equal(true);
+
 
         const id = await JSON.parse(response.text).data.insertedId;
         const response2 = await chai.request(server).get('/tickets')
