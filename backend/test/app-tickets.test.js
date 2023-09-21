@@ -25,7 +25,7 @@ describe('tickets get and post routes', () => {
     //     await db.collection.insertMany(docs);
     //     await db.client.close();
     // });
-    before(async () => {
+    beforeEach(async () => {
         const db = await database.getDb();
 
         db.db.listCollections(
