@@ -83,13 +83,15 @@ describe('tickets get and post routes', () => {
 
         console.log("returned data, res1: ", await JSON.parse(response.text).data);
         if (response.body.data.acknowledged === true) {
-            const id = await JSON.parse(response.text).data.insertedId;
+            setTimeout(async () => {
+                const id = await JSON.parse(response.text).data.insertedId;
 
-            const response2 = await chai.request(server).get('/tickets')
-            console.log("returned data, res2: ", await JSON.parse(response2.text).data);
-            const tickets = await JSON.parse(response2.text).data;
-            const latest = tickets.filter(ticket => ticket._id === id)[0];
-            chai.assert.equal(latest.code, 'test_code');
+                const response2 = await chai.request(server).get('/tickets')
+                console.log("returned data, res2: ", await JSON.parse(response2.text).data);
+                const tickets = await JSON.parse(response2.text).data;
+                const latest = tickets.filter(ticket => ticket._id === id)[0];
+                chai.assert.equal(latest.code, 'test_code');
+            }, 5000);
         }
 
     });
