@@ -33,9 +33,15 @@ describe('tickets get and post routes', () => {
         )
             .next()
             .then(async function(info) {
-                if (info) {
-                    await db.collection.drop();
-                }
+                // if (info) {
+                //     await db.collection.drop();
+                // }
+                await db.collection.drop();
+                const docs = [
+                    { code: "ANA002", trainnumber: "9123", traindate: "2023-09-18" },
+                    { code: "ANA003", trainnumber: "91234", traindate: "2023-09-18" },
+                ];
+                await db.collection.insertMany(docs);
             })
             .catch(function(err) {
                 console.error(err);
@@ -63,7 +69,7 @@ describe('tickets get and post routes', () => {
         }
         chai.request(server)
             .post("/tickets")
-            .send(JSON.stringify(ticket))
+            .send(ticket)
             .end((err, res) => {
                 res.should.have.status(201);
                 res.should.be.json;
