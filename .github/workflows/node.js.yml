@@ -42,7 +42,7 @@ jobs:
     - name: Start MongoDB
       uses: supercharge/mongodb-github-action@1.10.0
       with:
-        node-version: ${{ matrix.mongodb-version }}
+        mongodb-version: ${{ matrix.mongodb-version }}
 
     # - run: npm ci
     - run: npm install
