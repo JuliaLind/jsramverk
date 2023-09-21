@@ -16,7 +16,7 @@ process.env.NODE_ENV = 'test';
 
 // Import the database module
 const database = require('../db/database.js');
-const collectionName = "trains";
+// const collectionName = "trains";
 
 describe('database Module test', () => {
     describe('getDb', () => {
