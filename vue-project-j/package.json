@@ -7,7 +7,7 @@
     "build": "vite build --base=/~juli22/jsramverk",
     "preview": "vite preview",
     "unittest": "vitest",
-    "test:e2e": "nyc playwright test",
+    "e2e": "nyc playwright test",
     "coverage": "vitest run --coverage --root src/",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
     "format": "prettier --write src/",
