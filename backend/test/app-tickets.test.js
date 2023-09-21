@@ -63,22 +63,6 @@ describe('tickets get and post routes', () => {
                 done();
             });
     });
-    it('register a new ticket', (done) => {
-        const ticket = {
-            code: "ANA999", trainnumber: "99991", traindate: "2023-09-19"
-        }
-        chai.request(server)
-            .post("/tickets")
-            .send(ticket)
-            .end((err, res) => {
-                res.should.have.status(201);
-                res.should.be.json;
-                res.body.data.should.have.property("acknowledged");
-                res.body.data.acknowledged.should.equal(true);
-                res.body.data.insertedId.should.be.a("string");
-                done();
-            });
-    });
     it('should handle /tickets route', async () => {
         const response = await chai.request(server).get('/tickets');
         expect(response).to.have.status(200);
@@ -91,8 +75,11 @@ describe('tickets get and post routes', () => {
         };
         const response = await chai.request(server).post('/tickets').send(ticketData);
         expect(response).to.have.status(201);
+        expect(response).to.be.json;
+        expect(response.body.data).to.have.property("acknowledged");
         expect(response.body).to.be.an('object');
         expect(response.body.data.acknowledged).to.equal(true);
+        expect(response.body.data.insertedId).to.be.a("string");
 
         console.log("returned data, res1: ", await JSON.parse(response.text).data);
         const id = await JSON.parse(response.text).data.insertedId;
