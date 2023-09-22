@@ -51,8 +51,14 @@ const httpServer = require("http").createServer(app);
 // Start the HTTP server
 
 const server = httpServer.listen(port, () => {
-    console.log(`App listening on port ${port}`);
+    console.info(`App listening on port ${port}`);
 });
+
+// don't show the log when it is test
+if (process.env.NODE_ENV !== 'test') {
+    // use morgan to log at command line
+    app.use(morgan('combined')); // 'combined' outputs the Apache style LOGs
+}
 
 // Configure socket.io
 let io = require("socket.io")(httpServer, {
