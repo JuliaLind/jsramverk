@@ -1,0 +1,25 @@
+build:
+    tests:
+    override:
+        -   command: "npm run test"
+            coverage:
+                file: "backend/coverage/clover.xml"
+                format: "clover"
+
+filter:
+    excluded_paths: [frontend-old/*, vue-project/*, vue-project-m/*]
+
+checks:
+    # ...
+
+coding_style:
+    # ...
+
+build_failure_conditions:
+    # ...
+
+tools:
+    # ...
+
+credentials:
+    # ...
