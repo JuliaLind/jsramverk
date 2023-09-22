@@ -46,8 +46,8 @@ const trains = {
             }
         } catch (e) {
             console.error(e);
-            return undefined;
         }
+        return undefined;
     },
 
     /**
