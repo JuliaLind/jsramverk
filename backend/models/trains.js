@@ -127,11 +127,11 @@ const trains = {
             const eventSource = new EventSource(sseUrl);
 
             eventSource.onopen = function() {
-                console.log("Connection to server opened.");
+                console.info("Connection to server opened.");
             };
 
             io.on('connection', (socket) => {
-                console.log('a user connected');
+                console.info('a user connected');
 
                 eventSource.onmessage = (e) => this.handleSSEMessage(e, trainPositions, socket);
             });
