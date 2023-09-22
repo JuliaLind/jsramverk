@@ -5,16 +5,16 @@
 /* global it describe */
 
 
-const chai = require('chai');
-const expect = chai.expect;
+// const chai = require('chai');
+// const expect = chai.expect;
 
-process.env.NODE_ENV = 'test';
+// process.env.NODE_ENV = 'test';
 
 // let dotenv = require('dotenv');
 // dotenv.config({ path: '.env.test' });
 
 // Import the database module
-const database = require('../db/database.js');
+// const database = require('../db/database.js');
 // const collectionName = "trains";
 
 // describe('database Module test', () => {
