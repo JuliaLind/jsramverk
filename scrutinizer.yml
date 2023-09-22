@@ -1,5 +1,7 @@
 build:
-    tests:
+  nodes:
+    coverage:
+      tests:
         override:
             -   command: "npm run test"
                 coverage:
