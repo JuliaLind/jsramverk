@@ -45,7 +45,8 @@ const trains = {
                 return trainObject;
             }
         } catch (e) {
-            console.log(e);
+            console.error(e);
+            return undefined;
         }
     },
 
@@ -85,6 +86,7 @@ const trains = {
             return trainObject;
         } catch (error) {
             console.error("Error handling SSE message:", error);
+            return undefined;
         }
     },
 
