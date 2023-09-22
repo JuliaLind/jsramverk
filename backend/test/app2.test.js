@@ -10,9 +10,6 @@ chai.should();
 chai.use(chaiHttp);
 chai.use(require('chai-json'));
 
-const database = require("../db/database.js");
-const collectionName = "trains";
-
 describe('app', () => {
     describe('GET /', () => {
         it('page should contain json with string "Hello world"', (done) => {
