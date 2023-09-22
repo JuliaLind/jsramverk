@@ -17,7 +17,7 @@ describe('app', () => {
                 .get("/")
                 .end((err, res) => {
                     res.should.have.status(200);
-                    res.should.be.json;
+                    res.should.to.be.json;
                     res.body.should.have.property("data");
                     res.body.data.should.be.a("string");
                     res.body.data.should.equal("Hello World!");
@@ -31,7 +31,7 @@ describe('app', () => {
                 .get("/codes")
                 .end((err, res) => {
                     res.should.have.status(200);
-                    res.should.be.json;
+                    res.should.to.be.json;
                     res.body.should.have.property("data");
                     res.body.data.should.be.an("array");
                     res.body.data.should.have.nested.property("[0].Level1Description");
@@ -45,7 +45,7 @@ describe('app', () => {
                 .get("/delayed")
                 .end((err, res) => {
                     res.should.have.status(200);
-                    res.should.be.json;
+                    res.should.to.be.json;
                     res.body.should.have.property("data");
                     res.body.data.should.be.an("array");
                     done();
