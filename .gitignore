@@ -12,7 +12,7 @@ vue-project-m/
 frontend-old/
 
 
-coverage/*
+coverage/
 
 backend/.nyc_output
 
