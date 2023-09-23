@@ -12,7 +12,15 @@ vue-project-m/
 frontend-old/
 
 
-coverage/
+backend/coverage/backend/
+backend/coverage/base.css
+backend/coverage/block-navigation.js
+backend/coverage/favicon.png
+backend/coverage/index.html
+backend/coverage/prettify.css
+backend/coverage/prettify.js
+backend/coverage/sort-arrow-sprite.png
+backend/coverage/sorter.js
 
 backend/.nyc_output
 
