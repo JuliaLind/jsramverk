@@ -45,9 +45,10 @@ const trains = {
                 return trainObject;
             }
         } catch (e) {
-            console.error(e);
+            // console.error(e);
+            e.code = "PARSE_POSITION_ERROR";
+            throw e;
         }
-        return undefined;
     },
 
     /**
@@ -85,8 +86,12 @@ const trains = {
 
             return trainObject;
         } catch (error) {
-            console.error("Error handling SSE message:", error);
-            return undefined;
+            const message = "Error handling SSE message: " + error;
+            // console.error("Error handling SSE message:", error);
+            console.error(message);
+            error.code = "SSE_MESSAGE_ERROR";
+            error.message = message;
+            throw error;
         }
     },
 
@@ -99,6 +104,7 @@ const trains = {
         const error = new Error("EventSource failed");
 
         error.eventSourceError = e;
+        error.code = "EVENTSOURCE_FAILED_ERROR";
         return error;
     },
 
