@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">81.81% </span>
+                <span class="strong">81.25% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>36/44</span>
+                <span class='fraction'>39/48</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">83.33% </span>
+                <span class="strong">82.6% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>35/42</span>
+                <span class='fraction'>38/46</span>
             </div>
         
             
@@ -304,7 +304,13 @@
 <a name='L239'></a><a href='#L239'>239</a>
 <a name='L240'></a><a href='#L240'>240</a>
 <a name='L241'></a><a href='#L241'>241</a>
-<a name='L242'></a><a href='#L242'>242</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L242'></a><a href='#L242'>242</a>
+<a name='L243'></a><a href='#L243'>243</a>
+<a name='L244'></a><a href='#L244'>244</a>
+<a name='L245'></a><a href='#L245'>245</a>
+<a name='L246'></a><a href='#L246'>246</a>
+<a name='L247'></a><a href='#L247'>247</a>
+<a name='L248'></a><a href='#L248'>248</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -322,8 +328,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -351,9 +357,10 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -392,6 +399,10 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -404,6 +415,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -592,9 +604,10 @@ const trains = {
                 return trainObject;
             }
         } catch (e) {
-<span class="cstat-no" title="statement not covered" >            console.error(e);</span>
+            // console.error(e);
+            e.code = "PARSE_POSITION_ERROR";
+            throw e;
         }
-<span class="cstat-no" title="statement not covered" >        return undefined;</span>
     },
 &nbsp;
     /**
@@ -632,8 +645,12 @@ const trains = {
 &nbsp;
             return trainObject;
         } catch (error) {
-<span class="cstat-no" title="statement not covered" >            console.error("Error handling SSE message:", error);</span>
-<span class="cstat-no" title="statement not covered" >            return undefined;</span>
+            const message = <span class="cstat-no" title="statement not covered" >"Error handling SSE message: " + error;</span>
+            // console.error("Error handling SSE message:", error);
+<span class="cstat-no" title="statement not covered" >            console.error(message);</span>
+<span class="cstat-no" title="statement not covered" >            error.code = "SSE_MESSAGE_ERROR";</span>
+<span class="cstat-no" title="statement not covered" >            error.message = message;</span>
+<span class="cstat-no" title="statement not covered" >            throw error;</span>
         }
     },
 &nbsp;
@@ -646,6 +663,7 @@ const trains = {
         const error = new Error("EventSource failed");
 &nbsp;
         error.eventSourceError = e;
+        error.code = "EVENTSOURCE_FAILED_ERROR";
         return error;
     },
 &nbsp;
@@ -793,7 +811,7 @@ module.exports = trains;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-09-22T23:59:53.470Z
+                at 2023-09-23T17:26:13.680Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

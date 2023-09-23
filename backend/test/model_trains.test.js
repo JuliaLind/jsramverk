@@ -50,6 +50,23 @@ describe('Trains Model', () => {
             expect(socket.emit.calledOnce).to.be.true;
             expect(socket.emit.calledWith('message')).to.be.true;
         });
+        it('should throw error', () => {
+            const data = undefined;
+            const trainPositions = {
+                "12345": ""
+            };
+
+            const socket = {
+                emit: sinon.stub(),
+            };
+
+            expect(function () {
+                trainsModel.parsePositionData(data, trainPositions, socket)
+            }).to.throw(SyntaxError);
+
+
+            expect(socket.emit.neverCalledWith('message')).to.be.true;
+        });
     });
 
     describe('fetchSSEUrl', () => {
