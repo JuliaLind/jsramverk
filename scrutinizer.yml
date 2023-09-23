@@ -2,8 +2,8 @@ checks:
     javascript: true
 build:
     tests:
-        override:
+        # override:
             # command: - js-scrutinizer-run
-            coverage:
-                file: backend/coverage/clover.xml
-                format: clover
+        coverage:
+            file: backend/coverage/clover.xml
+            format: clover
