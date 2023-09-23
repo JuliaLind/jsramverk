@@ -11,6 +11,8 @@ vue-project/
 vue-project-m/
 frontend-old/
 
+scrutinizer.yml
+
 
 backend/.nyc_output
 
