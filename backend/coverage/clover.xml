@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1695491785354" clover="3.2.0">
-  <project timestamp="1695491785354" name="All files">
-    <metrics statements="133" coveredstatements="122" conditionals="10" coveredconditionals="6" methods="21" coveredmethods="19" elements="164" coveredelements="147" complexity="0" loc="133" ncloc="133" packages="4" files="9" classes="9"/>
+<coverage generated="1695494282862" clover="3.2.0">
+  <project timestamp="1695494282862" name="All files">
+    <metrics statements="133" coveredstatements="127" conditionals="10" coveredconditionals="6" methods="21" coveredmethods="19" elements="164" coveredelements="152" complexity="0" loc="133" ncloc="133" packages="4" files="9" classes="9"/>
     <package name="backend">
       <metrics statements="29" coveredstatements="28" conditionals="4" coveredconditionals="3" methods="2" coveredmethods="2"/>
       <file name="app.js" path="/home/juli22/dbwebb-kurser/jsramverk-alla/jsramverk/backend/app.js">
@@ -56,7 +56,7 @@
       </file>
     </package>
     <package name="backend.models">
-      <metrics statements="76" coveredstatements="66" conditionals="4" coveredconditionals="2" methods="14" coveredmethods="12"/>
+      <metrics statements="76" coveredstatements="71" conditionals="4" coveredconditionals="2" methods="14" coveredmethods="12"/>
       <file name="codes.js" path="/home/juli22/dbwebb-kurser/jsramverk-alla/jsramverk/backend/models/codes.js">
         <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="8" count="1" type="stmt"/>
@@ -84,25 +84,25 @@
         <line num="28" count="3" type="stmt"/>
         <line num="29" count="3" type="stmt"/>
         <line num="30" count="3" type="stmt"/>
+        <line num="31" count="3" type="stmt"/>
         <line num="32" count="3" type="stmt"/>
         <line num="36" count="0" type="stmt"/>
-        <line num="45" count="3" type="stmt"/>
+        <line num="56" count="2" type="stmt"/>
+        <line num="57" count="2" type="stmt"/>
         <line num="58" count="2" type="stmt"/>
-        <line num="59" count="2" type="stmt"/>
-        <line num="60" count="2" type="stmt"/>
-        <line num="66" count="2" type="stmt"/>
-        <line num="69" count="2" type="stmt"/>
-        <line num="74" count="0" type="stmt"/>
-        <line num="83" count="2" type="stmt"/>
-        <line num="117" count="1" type="stmt"/>
+        <line num="64" count="2" type="stmt"/>
+        <line num="65" count="2" type="stmt"/>
+        <line num="67" count="2" type="stmt"/>
+        <line num="71" count="0" type="stmt"/>
+        <line num="112" count="1" type="stmt"/>
       </file>
       <file name="trains.js" path="/home/juli22/dbwebb-kurser/jsramverk-alla/jsramverk/backend/models/trains.js">
-        <metrics statements="46" coveredstatements="38" conditionals="4" coveredconditionals="2" methods="10" coveredmethods="8"/>
+        <metrics statements="46" coveredstatements="43" conditionals="4" coveredconditionals="2" methods="10" coveredmethods="8"/>
         <line num="7" count="1" type="stmt"/>
         <line num="8" count="1" type="stmt"/>
         <line num="10" count="1" type="stmt"/>
-        <line num="19" count="3" type="stmt"/>
-        <line num="20" count="3" type="stmt"/>
+        <line num="19" count="4" type="stmt"/>
+        <line num="20" count="4" type="stmt"/>
         <line num="21" count="2" type="cond" truecount="1" falsecount="1"/>
         <line num="22" count="2" type="stmt"/>
         <line num="24" count="2" type="stmt"/>
@@ -112,20 +112,20 @@
         <line num="39" count="2" type="stmt"/>
         <line num="43" count="2" type="stmt"/>
         <line num="45" count="2" type="stmt"/>
-        <line num="49" count="1" type="stmt"/>
-        <line num="50" count="1" type="stmt"/>
+        <line num="49" count="2" type="stmt"/>
+        <line num="50" count="2" type="stmt"/>
         <line num="60" count="3" type="stmt"/>
         <line num="66" count="3" type="stmt"/>
         <line num="72" count="3" type="stmt"/>
         <line num="74" count="3" type="stmt"/>
-        <line num="84" count="1" type="stmt"/>
-        <line num="85" count="1" type="stmt"/>
+        <line num="84" count="2" type="stmt"/>
+        <line num="85" count="2" type="stmt"/>
         <line num="87" count="1" type="stmt"/>
-        <line num="89" count="0" type="stmt"/>
-        <line num="91" count="0" type="stmt"/>
-        <line num="92" count="0" type="stmt"/>
-        <line num="93" count="0" type="stmt"/>
-        <line num="94" count="0" type="stmt"/>
+        <line num="89" count="1" type="stmt"/>
+        <line num="91" count="1" type="stmt"/>
+        <line num="92" count="1" type="stmt"/>
+        <line num="93" count="1" type="stmt"/>
+        <line num="94" count="1" type="stmt"/>
         <line num="104" count="1" type="stmt"/>
         <line num="106" count="1" type="stmt"/>
         <line num="107" count="1" type="stmt"/>

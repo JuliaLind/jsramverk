@@ -104,6 +104,25 @@ describe('Trains Model', () => {
             expect(socket.emit.calledOnce).to.be.true;
             expect(socket.emit.calledWith('message')).to.be.true;
         });
+        it('should throw error', () => {
+            const e = {
+                data: undefined,
+            };
+            const trainPositions = {
+                "12345": ""
+            };
+
+            const socket = {
+                emit: sinon.stub(),
+            };
+
+            expect(function () {
+                trainsModel.handleSSEMessage(e, trainPositions, socket);
+            }).to.throw(SyntaxError);
+
+
+            expect(socket.emit.neverCalledWith('message')).to.be.true;
+        });
     });
 
     describe('handleEventSourceError', () => {
