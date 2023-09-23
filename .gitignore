@@ -5,10 +5,15 @@ node_modules/
 *.sqlite
 *.vscode/
 *.vite/
-vue-project-j/.htaccess
-vue-project-j/.gitignore
+frontend/.htaccess
+frontend/.gitignore
+vue-project/
+vue-project-m/
+frontend-old/
+
+
+coverage/
 
 backend/.nyc_output
 
-backend/coverage
 

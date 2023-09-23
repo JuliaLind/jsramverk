@@ -1,12 +1,42 @@
 {
-  "name": "frontend",
-  "version": "1.0.0",
-  "description": "train-app",
-  "main": "main.js",
+  "name": "vue-project",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "python3 -m http.server 9000"
+    "dev": "vite",
+    "build": "vite build --base=/~juli22/jsramverk",
+    "preview": "vite preview",
+    "unittest": "vitest",
+    "e2e": "nyc playwright test",
+    "coverage": "vitest run --coverage --root src/",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
+    "format": "prettier --write src/",
+    "deploy": "rsync -av --delete dist/* juli22@ssh.student.bth.se:www/jsramverk"
   },
-  "author": "",
-  "license": "ISC"
+  "dependencies": {
+    "@pinia/testing": "^0.1.3",
+    "pinia": "^2.1.6",
+    "socket.io-client": "^4.7.2",
+    "vue": "^3.3.4",
+    "vue-router": "^4.2.4"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.37.1",
+    "@rushstack/eslint-patch": "^1.3.2",
+    "@vitejs/plugin-vue": "^4.3.1",
+    "@vitejs/plugin-vue-jsx": "^3.0.2",
+    "@vitest/coverage-istanbul": "^0.34.4",
+    "@vue/eslint-config-prettier": "^8.0.0",
+    "@vue/test-utils": "^2.4.1",
+    "babel-plugin-istanbul": "^6.1.1",
+    "eslint": "^8.46.0",
+    "eslint-plugin-vue": "^9.16.1",
+    "jsdom": "^22.1.0",
+    "msw": "^1.3.1",
+    "nyc": "^15.1.0",
+    "playwright-test-coverage": "^1.2.12",
+    "prettier": "^3.0.0",
+    "vite": "^4.4.9",
+    "vitest": "^0.34.2"
+  }
 }

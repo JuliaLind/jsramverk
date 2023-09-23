@@ -32,6 +32,12 @@ app.disable('x-powered-by');
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
+// don't show the log when it is test
+if (process.env.NODE_ENV !== 'test') {
+    // use morgan to log at command line
+    app.use(morgan('combined')); // 'combined' outputs the Apache style LOGs
+}
+
 // Root url
 app.get('/', (req, res) => {
     res.json({
@@ -51,8 +57,10 @@ const httpServer = require("http").createServer(app);
 // Start the HTTP server
 
 const server = httpServer.listen(port, () => {
-    console.log(`App listening on port ${port}`);
+    console.info(`App listening on port ${port}`);
 });
+
+
 
 // Configure socket.io
 let io = require("socket.io")(httpServer, {

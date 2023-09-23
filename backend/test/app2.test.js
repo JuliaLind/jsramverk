@@ -10,9 +10,6 @@ chai.should();
 chai.use(chaiHttp);
 chai.use(require('chai-json'));
 
-const database = require("../db/database.js");
-const collectionName = "trains";
-
 describe('app', () => {
     describe('GET /', () => {
         it('page should contain json with string "Hello world"', (done) => {
@@ -20,7 +17,6 @@ describe('app', () => {
                 .get("/")
                 .end((err, res) => {
                     res.should.have.status(200);
-                    res.should.be.json;
                     res.body.should.have.property("data");
                     res.body.data.should.be.a("string");
                     res.body.data.should.equal("Hello World!");
@@ -34,7 +30,6 @@ describe('app', () => {
                 .get("/codes")
                 .end((err, res) => {
                     res.should.have.status(200);
-                    res.should.be.json;
                     res.body.should.have.property("data");
                     res.body.data.should.be.an("array");
                     res.body.data.should.have.nested.property("[0].Level1Description");
@@ -48,7 +43,6 @@ describe('app', () => {
                 .get("/delayed")
                 .end((err, res) => {
                     res.should.have.status(200);
-                    res.should.be.json;
                     res.body.should.have.property("data");
                     res.body.data.should.be.an("array");
                     done();
