@@ -18,32 +18,32 @@ const trains = {
     parsePositionData: function parsePositionData(data, trainPositions, socket) {
         try {
             const parsedData = JSON.parse(data);
-            if (parsedData) {
-                const changedPosition = parsedData.RESPONSE.RESULT[0].TrainPosition[0];
+            // if (parsedData) {
+            const changedPosition = parsedData.RESPONSE.RESULT[0].TrainPosition[0];
 
-                const matchCoords = /(\d*\.\d+|\d+),?/g;
+            const matchCoords = /(\d*\.\d+|\d+),?/g;
 
-                const position = changedPosition.Position.WGS84.match(matchCoords).map((t) => parseFloat(t)).reverse();
+            const position = changedPosition.Position.WGS84.match(matchCoords).map((t) => parseFloat(t)).reverse();
 
-                const trainObject = {
-                    trainnumber: changedPosition.Train.AdvertisedTrainNumber,
-                    position: position,
-                    timestamp: changedPosition.TimeStamp,
-                    bearing: changedPosition.Bearing,
-                    status: !changedPosition.Deleted,
-                    speed: changedPosition.Speed,
-                };
+            const trainObject = {
+                trainnumber: changedPosition.Train.AdvertisedTrainNumber,
+                position: position,
+                timestamp: changedPosition.TimeStamp,
+                bearing: changedPosition.Bearing,
+                status: !changedPosition.Deleted,
+                speed: changedPosition.Speed,
+            };
 
-                // Emit train position updates to connected clients
-                if (trainPositions.hasOwnProperty(changedPosition.Train.AdvertisedTrainNumber)) {
-                    socket.emit("message", trainObject);
-                }
-
-                // Update the train positions object
-                trainPositions[changedPosition.Train.AdvertisedTrainNumber] = trainObject;
-
-                return trainObject;
+            // Emit train position updates to connected clients
+            if (trainPositions.hasOwnProperty(changedPosition.Train.AdvertisedTrainNumber)) {
+                socket.emit("message", trainObject);
             }
+
+            // Update the train positions object
+            trainPositions[changedPosition.Train.AdvertisedTrainNumber] = trainObject;
+
+            return trainObject;
+            // }
         } catch (e) {
             // console.error(e);
             e.code = "PARSE_POSITION_ERROR";
