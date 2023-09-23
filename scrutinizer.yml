@@ -3,7 +3,7 @@ build:
     coverage:
       tests:
         override:
-            -   command: "npm run test"
+            -   command: "NODE_ENV=test nyc --reporter=html --reporter=text --reporter=clover mocha --config mocha.json --exit"
                 coverage:
                     file: "backend/coverage/clover.xml"
                     format: "clover"
