@@ -35,7 +35,7 @@ const trains = {
             };
 
             // Emit train position updates to connected clients
-            if (trainPositions.hasOwnProperty(changedPosition.Train.AdvertisedTrainNumber)) {
+            if (changedPosition.Train.AdvertisedTrainNumber in trainPositions) {
                 socket.emit("message", trainObject);
             }
 
@@ -87,6 +87,7 @@ const trains = {
             return trainObject;
         } catch (error) {
             const message = "Error handling SSE message: " + error;
+
             // console.error("Error handling SSE message:", error);
             console.error(message);
             error.code = "SSE_MESSAGE_ERROR";
@@ -143,14 +144,14 @@ const trains = {
             });
 
             eventSource.onerror = function (e) {
-                throw handleEventSourceError(e);
+                throw trains.handleEventSourceError(e);
             };
         } catch (error) {
             console.error(error.message);
             console.error("EventSource error:", error.eventSourceError);
         }
     }
-}
+};
 
 // /**
 //  * Fetches train positions in real-time and sends updates to

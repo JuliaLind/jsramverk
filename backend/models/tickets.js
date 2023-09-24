@@ -28,6 +28,7 @@ const tickets = {
         try {
             const db = await database.getDb();
             const allTickets = await db.collection.find({}).toArray();
+
             await db.client.close();
             return res.json({
                 data: allTickets
@@ -52,7 +53,7 @@ const tickets = {
      * @param {Object} res - Express.js response object.
      * @returns {Promise<Object>} A JSON response containing info on inserted ticket.
      */
-    createTicket: async function createTicket(req, res){
+    createTicket: async function createTicket(req, res) {
         try {
             const db = await database.getDb();
             const doc = {
@@ -60,10 +61,11 @@ const tickets = {
                 trainnumber: req.body.trainnumber,
                 traindate: req.body.traindate
             };
-    
+
             const result = await db.collection.insertOne(doc);
+
             await db.client.close();
-    
+
             return res.status(201).json({
                 data: result
             });
@@ -82,7 +84,7 @@ const tickets = {
 
 
 
-        // Exempel 
+        // Exempel
 
         // let db;
         // try {

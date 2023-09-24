@@ -8,7 +8,7 @@
 const mongo = require("mongodb").MongoClient;
 
 // Database details
-let dbName = "trains";;
+let dbName = "trains";
 
 if (process.env.NODE_ENV === 'test') {
     dbName = "test";
@@ -27,8 +27,7 @@ const database = {
      * @function
      * @returns {Promise<Object>} An object containing the collection and client references.
      */
-    getDb: async function getDb () {
-
+    getDb: async function getDb() {
         const dsn = process.env.DSN + dbName;
 
         // Connect to the MongoDB Atlas cluster.
@@ -42,7 +41,7 @@ const database = {
         const collection = await db.collection(collectionName);
 
         return {
-            db:db,
+            db: db,
             collection: collection,
             client: client,
         };

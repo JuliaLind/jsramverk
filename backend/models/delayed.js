@@ -54,12 +54,12 @@ const delayed = {
 
         // HTTP response
         const response = await fetch(
-                "https://api.trafikinfo.trafikverket.se/v2/data.json", {
-                    method: "POST",
-                    body: query,
-                    headers: { "Content-Type": "text/xml" }
-                }
-            );
+            "https://api.trafikinfo.trafikverket.se/v2/data.json", {
+                method: "POST",
+                body: query,
+                headers: { "Content-Type": "text/xml" }
+            }
+        );
 
         // JSON result data
         const result = await response.json();
