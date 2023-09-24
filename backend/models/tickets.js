@@ -25,10 +25,10 @@ const tickets = {
      * @returns {Promise<Object>} A JSON response containing tickets data.
      */
     getTickets: async function getTickets(req, res) {
-        const db = await database.getDb();
         try {
+            const db = await database.getDb();
             const allTickets = await db.collection.find({}).toArray();
-
+            await db.client.close();
             return res.json({
                 data: allTickets
             });
@@ -41,8 +41,6 @@ const tickets = {
                     detail: e.message
                 }
             });
-        } finally {
-            await db.client.close();
         }
     },
 
@@ -55,8 +53,8 @@ const tickets = {
      * @returns {Promise<Object>} A JSON response containing info on inserted ticket.
      */
     createTicket: async function createTicket(req, res){
-        let db = await database.getDb();
         try {
+            const db = await database.getDb();
             const doc = {
                 code: req.body.code,
                 trainnumber: req.body.trainnumber,
@@ -64,12 +62,11 @@ const tickets = {
             };
     
             const result = await db.collection.insertOne(doc);
+            await db.client.close();
     
-            // if (result.acknowledged === true) {
             return res.status(201).json({
                 data: result
             });
-            // }
         } catch (e) {
             return res.status(500).json({
                 errors: {
@@ -79,8 +76,6 @@ const tickets = {
                     detail: e.message
                 }
             });
-        } finally {
-            await db.client.close();
         }
 
 
