@@ -4,11 +4,12 @@ import apiModel from '../models/api.js'
 // import { getCodes, submitNewTicket } from '../models/api.js'
 import { createLocationString } from '../models/utils.js'
 import { RouterLink } from 'vue-router'
+import { defineEmits } from 'vue';
 
 /**
  * Function for sending messages to other components
  */
-const emit = defineEmits()
+const emit = defineEmits(['form-submitted'])
 const store = useTicketStore()
 
 /**
