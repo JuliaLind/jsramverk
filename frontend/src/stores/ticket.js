@@ -15,5 +15,5 @@ export const useTicketStore = defineStore('ticket', {
         getCurrent() {
             return this.currentItem
         }
-    },
+    }
 })

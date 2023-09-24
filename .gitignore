@@ -23,5 +23,6 @@ backend/coverage/sort-arrow-sprite.png
 backend/coverage/sorter.js
 
 backend/.nyc_output
+frontend/.nyc_output
 
 
