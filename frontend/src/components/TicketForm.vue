@@ -8,8 +8,8 @@ import { RouterLink } from 'vue-router'
 /**
  * Function for sending messages to other components
  */
-const emit = defineEmits();
-const store = useTicketStore();
+const emit = defineEmits()
+const store = useTicketStore()
 
 /**
  * @var {Object} item - Object containing data for a delayed train
@@ -24,23 +24,23 @@ const store = useTicketStore();
  * OperationalTrainNumber: "44253",
  * delayTime: "72 minuter" }
  */
-const item = store.getCurrent();
-const locationString = createLocationString(item);
-const reasonCodes = await apiModel.getCodes();
+const item = store.getCurrent()
+const locationString = createLocationString(item)
+const reasonCodes = await apiModel.getCodes()
 // const reasonCodes = await getCodes();
 
 /**
  * Assigns the first reasoncode in the drop-down
  * list as a default value for the new ticket
  */
-item.reasonCode = reasonCodes[0].Code;
+item.reasonCode = reasonCodes[0].Code
 
 /**
  * Updates the reasoncode when the user selects
  * a reasoncode from the drop-down list
  */
 function onChange(event) {
-    item.reasonCode = event.target.value;
+    item.reasonCode = event.target.value
 }
 
 /**
@@ -51,34 +51,33 @@ async function submitForm() {
     const newTicket = {
         code: item.reasonCode,
         trainnumber: item.OperationalTrainNumber,
-        traindate: item.EstimatedTimeAtLocation.substring(0, 10),
-    };
-    await apiModel.submitNewTicket(newTicket);
+        traindate: item.EstimatedTimeAtLocation.substring(0, 10)
+    }
+    await apiModel.submitNewTicket(newTicket)
     // await submitNewTicket(newTicket);
     /**
      * Sends signal to tickets-component to re-render
      */
-    emit('form-submitted');
+    emit('form-submitted')
 }
 </script>
 
 <template>
-<div class="ticket">
-    <RouterLink to="/">Tillbaka</RouterLink>
-    <h1>Nytt ärende #<span id="new-ticket-id"></span></h1>
-    <h3>{{ locationString }}</h3>
-    <p><strong>Försenad:</strong> {{ item.delayTime }}</p>
-    <form id="new-ticket-form" v-on:submit.prevent="submitForm">
-        <label>Orsakskod</label><br>
-        <select id="reason-code" name="code" @change="onChange">
-            <option v-for="(code, index) in reasonCodes" :key="index" :value="code.Code">
-                {{ code.Code }} - {{ code.Level3Description }}
-            </option>
-        </select><br><br>
-        <input type="submit" value="Skapa nytt ärende" />
-    </form>
-</div>
+    <div class="ticket">
+        <RouterLink to="/">Tillbaka</RouterLink>
+        <h1>Nytt ärende #<span id="new-ticket-id"></span></h1>
+        <h3>{{ locationString }}</h3>
+        <p><strong>Försenad:</strong> {{ item.delayTime }}</p>
+        <form id="new-ticket-form" v-on:submit.prevent="submitForm">
+            <label>Orsakskod</label><br />
+            <select id="reason-code" name="code" @change="onChange">
+                <option v-for="(code, index) in reasonCodes" :key="index" :value="code.Code">
+                    {{ code.Code }} - {{ code.Level3Description }}
+                </option></select
+            ><br /><br />
+            <input type="submit" value="Skapa nytt ärende" />
+        </form>
+    </div>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>

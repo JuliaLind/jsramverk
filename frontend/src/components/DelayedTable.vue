@@ -1,22 +1,22 @@
 <script setup>
 /**
- * Table displaying delayed trains 
+ * Table displaying delayed trains
  */
 import apiModel from '../models/api.js'
 // import { getDelayedTrains } from '../models/api.js'
-import DelayedItem from './DelayedItem.vue';
+import DelayedItem from './DelayedItem.vue'
 
-const data = await apiModel.getDelayedTrains();
+const data = await apiModel.getDelayedTrains()
 // const data = await getDelayedTrains();
 </script>
 
 <template>
-<div class="delayed">
-    <h1>Försenade tåg</h1>
-    <div id="delayed-trains" class="delayed-trains">
-        <DelayedItem v-for="(item, index) in data" :item="item" :key="index"/>
+    <div class="delayed">
+        <h1>Försenade tåg</h1>
+        <div id="delayed-trains" class="delayed-trains">
+            <DelayedItem v-for="(item, index) in data" :item="item" :key="index" />
+        </div>
     </div>
-</div>
 </template>
 
 <style>

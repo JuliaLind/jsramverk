@@ -4,21 +4,21 @@ const api = {
      * @returns {Promise<array>}
      */
     getDelayedTrains: async function getDelayedTrains() {
-        const res = await fetch(`${import.meta.env.VITE_URL}/delayed`);
-        const delayed = await res.json();
-        return delayed.data;
+        const res = await fetch(`${import.meta.env.VITE_URL}/delayed`)
+        const delayed = await res.json()
+        return delayed.data
     },
     /**
      * Return an array with reason code-data
      * @returns {Promise<array>}
      */
     getCodes: async function getCodes() {
-        const res = await fetch(`${import.meta.env.VITE_URL}/codes`);
-        const data = await res.json();
-        return data.data;
+        const res = await fetch(`${import.meta.env.VITE_URL}/codes`)
+        const data = await res.json()
+        return data.data
     },
     /**
-     * 
+     *
      * @param {Object} newTicketObject An object containing reasoncode,
      * trainnumber and traindate
      * @returns {Promise<array>} response - contains
@@ -37,20 +37,20 @@ const api = {
                 'content-type': 'application/json'
             },
             method: 'POST'
-        });
+        })
         // return response;
-        const data = await res.json();
-        return data.data;
+        const data = await res.json()
+        return data.data
     },
     /**
      * @returns {Promise<array>} previous tickets
      */
     getTickets: async function getTickets() {
-        const res = await fetch(`${import.meta.env.VITE_URL}/tickets`);
-        const data = await res.json();
-        return data.data;
+        const res = await fetch(`${import.meta.env.VITE_URL}/tickets`)
+        const data = await res.json()
+        return data.data
     }
-};
+}
 
 export default api
 
@@ -75,7 +75,7 @@ export default api
 // }
 
 // /**
-//  * 
+//  *
 //  * @param {Object} newTicketObject An object containing reasoncode,
 //  * trainnumber and traindate
 //  * @returns {Promise<array>} response - contains
@@ -108,6 +108,5 @@ export default api
 //     const data = await res.json();
 //     return data.data;
 // }
-
 
 // export { getDelayedTrains, getCodes, submitNewTicket, getTickets}

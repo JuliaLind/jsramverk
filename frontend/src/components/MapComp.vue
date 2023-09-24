@@ -1,5 +1,6 @@
 <script>
-import io from 'socket.io-client';
+/* global L */
+import io from 'socket.io-client'
 /**
  * For communicating with backend
  */
@@ -9,7 +10,7 @@ const socket = io(import.meta.env.VITE_URL)
  * Map with markers that display current positions of trains.
  */
 export default {
-    name: "Map",
+    name: 'Map-comp',
     data() {
         return {
             center: [62.173276, 14.942265]
@@ -17,39 +18,39 @@ export default {
     },
     methods: {
         setupLeafletMap() {
-            const map = L.map('map').setView(this.center, 5);
+            const map = L.map('map').setView(this.center, 5)
 
             L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 19,
-                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-            }).addTo(map);
+                attribution:
+                    '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map)
 
-            let markers = {};
+            let markers = {}
 
             /**
              * When receiving "message" signal from backend,
              * if the train is not already on the map adds a new marker,
              * if the train is on the map updates the marker's position
              */
-            socket.on("message", (data) => {
+            socket.on('message', (data) => {
                 if (markers.hasOwnProperty(data.trainnumber)) {
-                    let marker = markers[data.trainnumber];
+                    let marker = markers[data.trainnumber]
 
-                    marker.setLatLng(data.position);
+                    marker.setLatLng(data.position)
                 } else {
-                    let marker = L.marker(data.position).bindPopup(data.trainnumber).addTo(map);
+                    let marker = L.marker(data.position).bindPopup(data.trainnumber).addTo(map)
 
-                    markers[data.trainnumber] = marker;
+                    markers[data.trainnumber] = marker
                 }
-            });
-        },
+            })
+        }
     },
     mounted() {
-        this.setupLeafletMap();
-    },
-};
+        this.setupLeafletMap()
+    }
+}
 </script>
-
 
 <template>
     <div id="map" class="map"></div>

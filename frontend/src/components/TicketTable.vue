@@ -2,9 +2,9 @@
 /**
  * Component representing a list of all previous tickets
  */
- import apiModel from '../models/api.js'
+import apiModel from '../models/api.js'
 // import { getTickets } from '../models/api.js'
-const tickets = await apiModel.getTickets();
+const tickets = await apiModel.getTickets()
 // const tickets = await getTickets();
 
 // let newTicketId = 0;
@@ -13,10 +13,12 @@ const tickets = await apiModel.getTickets();
 </script>
 
 <template>
-<div class="old-tickets" id="old-tickets">
-    <h2>Befintliga ärenden</h2>
-    <div v-for="(ticket, index) in tickets" :key="index">{{ ticket._id }} - {{ ticket.code }} - {{ ticket.trainnumber }} - {{ ticket.traindate }}</div>
-</div>
+    <div class="old-tickets" id="old-tickets">
+        <h2>Befintliga ärenden</h2>
+        <div v-for="(ticket, index) in tickets" :key="index">
+            {{ ticket._id }} - {{ ticket.code }} - {{ ticket.trainnumber }} - {{ ticket.traindate }}
+        </div>
+    </div>
 </template>
 
 <style>
