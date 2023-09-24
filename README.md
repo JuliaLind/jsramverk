@@ -20,6 +20,11 @@ När du kör scripter för testning i backend kan du eventuellt behöva komplett
 
 Länkar till de deployade sidorna kommer också här inom kort.
 
+4. Vi använder GitHub Actions för att automatisera ett antal arbetsflöden vid push och pull requests mot vårt GitHub-repo. Dessa flöden är tänkta att underlätta utvecklingsprocessen för oss samt säkerställa att den kod vi vill merge:a är stabil. Följande flöden för vårt repo:
+
+* Backend: flödet kör linters och tester för backendapplikationen.
+* Frontend-vitest: flödet kör vitest-tester för frontend-applikationen.
+
 
 # Steg vi fick gå igenom för att få applikationen att fungera  
 
