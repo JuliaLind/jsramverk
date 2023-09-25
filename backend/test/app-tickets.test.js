@@ -15,7 +15,7 @@ const database = require("../db/database.js");
 const collectionName = "trains";
 
 describe('tickets get and post routes', () => {
-    beforeEach(async () => {
+    before(async () => {
         const db = await database.getDb();
         await db.collection.deleteMany();
         const docs = [

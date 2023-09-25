@@ -1,10 +1,12 @@
-import { afterEach, vi, describe, it, expect } from 'vitest'
+
+import { vi, describe, it, expect, afterEach } from 'vitest'
 import DelayedTable from '../DelayedTable.vue'
 import { mount, flushPromises } from '@vue/test-utils'
 import { createRouter, createWebHistory } from 'vue-router'
 import { routes } from '@/router'
 import { defineComponent } from 'vue'
 import { delayed } from './mockdata/delayed.js'
+
 
 const router = createRouter({
     history: createWebHistory(),
@@ -25,6 +27,7 @@ vi.mock('../../services/api.service.js', () => {
     }
 })
 
+
 describe('DelayedTable', async () => {
     router.push('/')
     // After this line, router is ready
@@ -33,6 +36,7 @@ describe('DelayedTable', async () => {
     afterEach(() => {
         vi.restoreAllMocks()
     })
+
     it('renders properly', async () => {
         // Create suspense wrapper for the tested component
         const SuspenseWrapperComponent = defineComponent({
@@ -40,8 +44,7 @@ describe('DelayedTable', async () => {
             template: `
             <Suspense>
                 <DelayedTable />
-            </Suspense>
-            `
+            </Suspense> `
         })
 
         const suspenseWrapper = mount(SuspenseWrapperComponent, {
@@ -57,7 +60,6 @@ describe('DelayedTable', async () => {
 
         expect(wrapper.text()).contains('8150')
         expect(wrapper.text()).contains('RvBlgc ->  Mras')
-
         expect(wrapper.text()).contains('KpHpbg ->  Vå')
 
         suspenseWrapper.unmount()
