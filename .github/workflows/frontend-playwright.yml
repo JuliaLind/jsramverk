@@ -11,8 +11,8 @@ jobs:
       image: mcr.microsoft.com/playwright:v1.37.1-jammy
 
     env:
-      TRAFIKVERKET_API_KEY: 2441d9b828c4451587ba46d3b4e8dbd9
-      # DSN: mongodb+srv://marjul2023:dFlB4s5itFubhxIT@testcluster.mnw8jji.mongodb.net/
+      TRAFIKVERKET_API_KEY: ${{ secrets.TRAFIKVERKET_API_KEY }}
+      # DSN: ${{ secrets.DSN }}
 
     strategy:
       matrix:
