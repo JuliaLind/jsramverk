@@ -25,10 +25,12 @@ När du kör scripter för testning i backend kan du eventuellt behöva komplett
 
 5. Vi använder GitHub Actions för att automatisera ett antal arbetsflöden vid push och pull requests mot vårt GitHub-repo. Dessa flöden är tänkta att underlätta utvecklingsprocessen för oss samt säkerställa att den kod vi vill merge:a är stabil. Följande flöden för vårt repo:
 
-* Backend: flödet kör linters och tester för backendapplikationen.
-* Frontend-vitest: flödet kör vitest-tester för frontend-applikationen.
+* Backend: flödet kör linters och tester.
+* Frontend-vitest: flödet kör vitest-tester.
+* Frontend-playwright: flödet kör playwright-tester.
+* Linters: flödet kör repots alla linters.
 
-6. Vi har även implementerat Scrutinizer (för Javascript) i vårt repo för att fånga issues med vår kod som inte testerna eller linters fångar. Scrutinizer är således bra för att hålla koden ren så att den är lätt att underhålla.
+6. Vi har även implementerat Scrutinizer (för Javascript) i vårt repo för att fånga issues med vår kod som inte testerna eller linters fångar. Scrutinizer hjälper oss därmed att hålla vår kod ren så att den är lätt att förstå och lätt att underhålla.
 
 
 # Steg vi fick gå igenom för att få applikationen att fungera  
