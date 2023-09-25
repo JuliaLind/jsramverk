@@ -4,7 +4,7 @@
  */
 import { useTicketStore } from '@/stores/ticket'
 import { RouterLink } from 'vue-router'
-import { outputDelay } from '../models/utils.js'
+import { outputDelay } from '../services/utils.service.js'
 
 const store = useTicketStore()
 const props = defineProps({

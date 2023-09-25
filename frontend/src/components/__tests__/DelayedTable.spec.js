@@ -1,10 +1,12 @@
+
 import { vi, describe, it, expect, afterEach } from 'vitest'
 import DelayedTable from '../DelayedTable.vue'
 import { mount, flushPromises } from '@vue/test-utils'
 import { createRouter, createWebHistory } from 'vue-router'
 import { routes } from '@/router'
-import { defineComponent } from 'vue';
-// import { getDelayedTrains } from '../../models/api.service.js'
+import { defineComponent } from 'vue'
+import { delayed } from './mockdata/delayed.js'
+
 
 const router = createRouter({
     history: createWebHistory(),
@@ -17,67 +19,14 @@ vi.mock('@/stores/ticket', () => ({
     })
 }))
 
+vi.mock('../../services/api.service.js', () => {
+    return {
+        getDelayedTrains: vi.fn(() => {
+            return delayed
+        })
+    }
+})
 
-const delayed = [
-        {
-            ActivityId: '1500adde-f75d-c409-08db-ab49fa36c6b7',
-            ActivityType: 'Avgang',
-            AdvertisedTimeAtLocation: '2023-09-17T23:11:00.000+02:00',
-            AdvertisedTrainIdent: '8150',
-            Canceled: false,
-            stimatedTimeAtLocation: '2023-09-17T23:25:00.000+02:00',
-            FromLocation: [
-                {
-                    LocationName: 'Blgc',
-                    Priority: 1,
-                    Order: 0
-                }
-            ],
-            LocationSignature: 'Rv',
-            OperationalTrainNumber: '8150',
-            ToLocation: [
-                {
-                    LocationName: 'Mras',
-                    Priority: 1,
-                    Order: 0
-                }
-            ],
-            TrainOwner: 'SJ'
-        },
-        {
-            ActivityId: '1500adde-f75d-c409-08db-ab4a02a21263',
-            ActivityType: 'Avgang',
-            AdvertisedTimeAtLocation: '2023-09-17T23:15:00.000+02:00',
-            AdvertisedTrainIdent: '8468',
-            Canceled: false,
-            stimatedTimeAtLocation: '2023-09-17T23:25:00.000+02:00',
-            FromLocation: [
-                {
-                    LocationName: 'U',
-                    Priority: 1,
-                    Order: 0
-                }
-            ],
-            LocationSignature: 'Fvk',
-            OperationalTrainNumber: '8468',
-            ToLocation: [
-                {
-                    LocationName: 'Gä',
-                    Priority: 1,
-                    Order: 0
-                }
-            ],
-            TrainOwner: 'MÄLAB'
-        },
-    ]
-
-    vi.mock('../../models/api.service.js', () => {
-        return {
-            getDelayedTrains: vi.fn(() => {
-                return delayed
-            }),
-        }
-    })
 
 describe('DelayedTable', async () => {
     router.push('/')
@@ -89,37 +38,30 @@ describe('DelayedTable', async () => {
     })
 
     it('renders properly', async () => {
-        // Create suspense wrapper for your component
+        // Create suspense wrapper for the tested component
         const SuspenseWrapperComponent = defineComponent({
             components: { DelayedTable },
             template: `
             <Suspense>
                 <DelayedTable />
-            </Suspense>
-            `,
-        });
+            </Suspense> `
+        })
 
-        const createExchangeViewComponent = () => {
-            const wrapper = mount(SuspenseWrapperComponent, {
-                global: {
-                    plugins: [router]
-                }
-            });
-            
-            return wrapper;
-        };
-
-        const suspenseWrapper = createExchangeViewComponent();
+        const suspenseWrapper = mount(SuspenseWrapperComponent, {
+            global: {
+                plugins: [router]
+            }
+        })
         // Wait suspense promise
-        await flushPromises();
+        await flushPromises()
 
-        // Access your target component
-        const wrapper = suspenseWrapper.findComponent({ name: 'DelayedTable' });
+        // Access the tested component
+        const wrapper = suspenseWrapper.findComponent({ name: 'DelayedTable' })
 
-        // Continue your tests
-        expect(wrapper.text()).contains('8150');
-        expect(wrapper.text()).contains('RvBlgc ->  Mras');
+        expect(wrapper.text()).contains('8150')
+        expect(wrapper.text()).contains('RvBlgc ->  Mras')
+        expect(wrapper.text()).contains('KpHpbg ->  Vå')
 
-        suspenseWrapper.unmount();
+        suspenseWrapper.unmount()
     })
 })
