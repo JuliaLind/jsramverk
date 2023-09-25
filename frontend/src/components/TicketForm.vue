@@ -4,7 +4,7 @@ import { useTicketStore } from '@/stores/ticket'
 import { getCodes, submitNewTicket } from '../models/api.service.js'
 import { createLocationString } from '../models/utils.js'
 import { RouterLink } from 'vue-router'
-import { defineEmits } from 'vue'
+// import { defineEmits } from 'vue'
 
 /**
  * Function for sending messages to other components
