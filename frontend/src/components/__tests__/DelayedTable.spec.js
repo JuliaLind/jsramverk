@@ -1,10 +1,10 @@
-import { vi, describe, it, expect } from 'vitest'
+import { vi, describe, it, expect, afterEach } from 'vitest'
 import DelayedTable from '../DelayedTable.vue'
 import { mount, flushPromises } from '@vue/test-utils'
 import { createRouter, createWebHistory } from 'vue-router'
 import { routes } from '@/router'
 import { defineComponent } from 'vue';
-import { getDelayedTrains } from '../../models/api.service.js'
+// import { getDelayedTrains } from '../../models/api.service.js'
 
 const router = createRouter({
     history: createWebHistory(),
