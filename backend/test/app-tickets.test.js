@@ -15,9 +15,9 @@ const database = require("../db/database.js");
 const collectionName = "trains";
 
 describe('tickets get and post routes', () => {
-    beforeEach(async () => {
+    before(async () => {
         const db = await database.getDb();
-        await db.collection.drop();
+        await db.collection.deleteMany();
         const docs = [
             { code: "ANA002", trainnumber: "9123", traindate: "2023-09-18" },
             { code: "ANA003", trainnumber: "91234", traindate: "2023-09-18" },
