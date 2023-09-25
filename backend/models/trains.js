@@ -88,9 +88,8 @@ const trains = {
         } catch (error) {
             const message = "Error handling SSE message: " + error;
 
-            // console.error("Error handling SSE message:", error);
             console.error(message);
-            error.code = "SSE_MESSAGE_ERROR";
+            // error.code = "SSE_MESSAGE_ERROR";
             error.message = message;
             throw error;
         }
@@ -105,7 +104,7 @@ const trains = {
         const error = new Error("EventSource failed");
 
         error.eventSourceError = e;
-        error.code = "EVENTSOURCE_FAILED_ERROR";
+        // error.code = "EVENTSOURCE_FAILED_ERROR";
         return error;
     },
 
