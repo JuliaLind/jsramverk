@@ -1,11 +1,12 @@
 
 import { vi, describe, it, expect, afterEach } from 'vitest'
-import DelayedTable from '../DelayedTable.vue'
+import TicketForm from '../TicketForm.vue'
 import { mount, flushPromises } from '@vue/test-utils'
 import { createRouter, createWebHistory } from 'vue-router'
 import { routes } from '@/router'
 import { defineComponent } from 'vue'
-import { delayed } from './mockdata/delayed.js'
+import { codes } from './mockdata/codes.js'
+import { currentItem } from './mockdata/current-item.js'
 
 
 const router = createRouter({
@@ -15,22 +16,24 @@ const router = createRouter({
 
 vi.mock('@/stores/ticket', () => ({
     useTicketStore: () => ({
-        currentItem: {}
+        currentItem: currentItem,
+        getCurrent: () => {
+            return currentItem
+        }
     })
 }))
 
 vi.mock('../../services/api.service.js', () => {
     return {
-        getDelayedTrains: vi.fn(() => {
-            return delayed
+        getCodes: vi.fn(() => {
+            return codes
         })
     }
 })
 
 
-describe('DelayedTable', async () => {
-    router.push('/')
-    // After this line, router is ready
+describe('TicketForm', async () => {
+    router.push('/tickets')
     await router.isReady()
 
     afterEach(() => {
@@ -38,12 +41,11 @@ describe('DelayedTable', async () => {
     })
 
     it('renders properly', async () => {
-        // Create suspense wrapper for the tested component
         const SuspenseWrapperComponent = defineComponent({
-            components: { DelayedTable },
+            components: { TicketForm },
             template: `
             <Suspense>
-                <DelayedTable />
+                <TicketForm />
             </Suspense> `
         })
 
@@ -52,18 +54,18 @@ describe('DelayedTable', async () => {
                 plugins: [router]
             }
         })
-        // Wait suspense promise
+
         await flushPromises()
+        const wrapper = suspenseWrapper.findComponent({ name: 'TicketForm' })
 
-        // Access the tested component
-        const wrapper = suspenseWrapper.findComponent({ name: 'DelayedTable' })
+        expect(wrapper.text()).contains('Nytt ärende #')
+        expect(wrapper.text()).contains('Försenad: 10 minuter')
+        expect(wrapper.text()).contains('Orsakskod')
+        expect(wrapper.text()).contains('Bakre tåg')
 
-        expect(wrapper.text()).contains('8150')
-        expect(wrapper.text()).contains('RvBlgc ->  Mras')
-        expect(wrapper.text()).contains('KpHpbg ->  Vå')
 
         suspenseWrapper.unmount()
 
-        // note to self: add test for clicking on a DelayedItem
+        // note to self: add test for clicking on the submitbutton and checking that submitNewTickets function is salled. Also add test for checking codes in options dropdown
     })
 })
