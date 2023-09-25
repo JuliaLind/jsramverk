@@ -18,7 +18,17 @@ Du kommer då åt frontend applikationen via http://localhost:5173 . Via sidorna
 När du kör scripter för testning i backend kan du eventuellt behöva komplettera installation av fler dependecies med npx. För testning i backend används Mocka/Chai tillsammans med Istanbul. I frontend används Playwrite för e2e testning och vitest för testning av komponenter, också tillsammans med Istanbul.
 
 
-Länkar till de deployade sidorna kommer också här inom kort.
+4. Länkar till våra applikationer:
+
+- Frontend-applikationen --> https://www.student.bth.se/~juli22/jsramverk/
+- Backend-applikationen --> https://jsramverk-marjul2023.azurewebsites.net
+
+5. Vi använder GitHub Actions för att automatisera ett antal arbetsflöden vid push och pull requests mot vårt GitHub-repo. Dessa flöden är tänkta att underlätta utvecklingsprocessen för oss samt säkerställa att den kod vi vill merge:a är stabil. Följande flöden för vårt repo:
+
+* Backend: flödet kör linters och tester för backendapplikationen.
+* Frontend-vitest: flödet kör vitest-tester för frontend-applikationen.
+
+6. Vi har även implementerat Scrutinizer (för Javascript) i vårt repo för att fånga issues med vår kod som inte testerna eller linters fångar. Scrutinizer är således bra för att hålla koden ren så att den är lätt att underhålla.
 
 
 # Steg vi fick gå igenom för att få applikationen att fungera  
