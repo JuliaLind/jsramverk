@@ -1,10 +1,8 @@
 <script setup>
 import { useTicketStore } from '@/stores/ticket'
-// import apiModel from '../models/api.js'
-import { getCodes, submitNewTicket } from '../models/api.service.js'
-import { createLocationString } from '../models/utils.js'
+import { getCodes, submitNewTicket } from '../services/api.service.js'
+import { createLocationString } from '../services/utils.service.js'
 import { RouterLink } from 'vue-router'
-import { defineEmits } from 'vue'
 
 /**
  * Function for sending messages to other components
@@ -27,7 +25,6 @@ const store = useTicketStore()
  */
 const item = store.getCurrent()
 const locationString = createLocationString(item)
-// const reasonCodes = await apiModel.getCodes()
 const reasonCodes = await getCodes()
 
 /**
@@ -54,7 +51,7 @@ async function submitForm() {
         trainnumber: item.OperationalTrainNumber,
         traindate: item.EstimatedTimeAtLocation.substring(0, 10)
     }
-    // await apiModel.submitNewTicket(newTicket)
+
     await submitNewTicket(newTicket)
     /**
      * Sends signal to tickets-component to re-render
