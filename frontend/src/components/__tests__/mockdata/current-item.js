@@ -22,5 +22,5 @@ export const currentItem = {
         }
     ],
     TrainOwner: 'MÄLAB',
-    delayTime: "10 minuter"
+    delayTime: '10 minuter'
 }

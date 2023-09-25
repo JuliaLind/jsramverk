@@ -8,8 +8,6 @@ import { codes } from '../../components/__tests__/mockdata/codes.js'
 import { currentItem } from '../../components/__tests__/mockdata/current-item.js'
 import { tickets } from '../../components/__tests__/mockdata/tickets.js'
 
-
-
 const router = createRouter({
     history: createWebHistory(),
     routes: routes
@@ -31,10 +29,9 @@ vi.mock('../../services/api.service.js', () => {
         }),
         getTickets: vi.fn(() => {
             return tickets
-        }),
+        })
     }
 })
-
 
 describe('TicketView', async () => {
     router.push('/tickets')
@@ -55,7 +52,7 @@ describe('TicketView', async () => {
 
         const suspenseWrapper = mount(SuspenseWrapperComponent, {
             global: {
-                plugins: [router],
+                plugins: [router]
             }
         })
 

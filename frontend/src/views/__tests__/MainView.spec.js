@@ -6,7 +6,6 @@ import { routes } from '@/router'
 import { defineComponent } from 'vue'
 import { delayed } from '../../components/__tests__/mockdata/delayed.js'
 
-
 const router = createRouter({
     history: createWebHistory(),
     routes: routes
@@ -25,7 +24,6 @@ vi.mock('../../services/api.service.js', () => {
         })
     }
 })
-
 
 describe('MainView', async () => {
     router.push('/')
@@ -49,7 +47,7 @@ describe('MainView', async () => {
                 plugins: [router],
                 stubs: {
                     MapComp: {
-                      template: '<span />'
+                        template: '<span />'
                     }
                 }
             }

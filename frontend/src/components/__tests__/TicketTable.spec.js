@@ -1,4 +1,3 @@
-
 import { vi, describe, it, expect, afterEach } from 'vitest'
 import TicketTable from '../TicketTable.vue'
 import { mount, flushPromises } from '@vue/test-utils'
@@ -12,7 +11,6 @@ vi.mock('../../services/api.service.js', () => {
         })
     }
 })
-
 
 describe('TicketsTable', async () => {
     afterEach(() => {

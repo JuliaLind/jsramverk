@@ -1,4 +1,3 @@
-
 import { vi, describe, it, expect, afterEach } from 'vitest'
 import TicketForm from '../TicketForm.vue'
 import { mount, flushPromises } from '@vue/test-utils'
@@ -7,7 +6,6 @@ import { routes } from '@/router'
 import { defineComponent } from 'vue'
 import { codes } from './mockdata/codes.js'
 import { currentItem } from './mockdata/current-item.js'
-
 
 const router = createRouter({
     history: createWebHistory(),
@@ -30,7 +28,6 @@ vi.mock('../../services/api.service.js', () => {
         })
     }
 })
-
 
 describe('TicketForm', async () => {
     router.push('/tickets')
@@ -62,7 +59,6 @@ describe('TicketForm', async () => {
         expect(wrapper.text()).contains('Försenad: 10 minuter')
         expect(wrapper.text()).contains('Orsakskod')
         expect(wrapper.text()).contains('Bakre tåg')
-
 
         suspenseWrapper.unmount()
 

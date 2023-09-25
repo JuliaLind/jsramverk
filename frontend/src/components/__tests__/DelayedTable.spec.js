@@ -1,4 +1,3 @@
-
 import { vi, describe, it, expect, afterEach } from 'vitest'
 import DelayedTable from '../DelayedTable.vue'
 import { mount, flushPromises } from '@vue/test-utils'
@@ -6,7 +5,6 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { routes } from '@/router'
 import { defineComponent } from 'vue'
 import { delayed } from './mockdata/delayed.js'
-
 
 const router = createRouter({
     history: createWebHistory(),
@@ -26,7 +24,6 @@ vi.mock('../../services/api.service.js', () => {
         })
     }
 })
-
 
 describe('DelayedTable', async () => {
     router.push('/')
