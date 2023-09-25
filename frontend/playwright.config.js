@@ -113,7 +113,7 @@ export default defineConfig({
         stderr: 'pipe',
     }
   ]
-}
+});
 
 
 // module.exports = config
