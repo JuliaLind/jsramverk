@@ -98,15 +98,20 @@ const config = {
   // outputDir: 'test-results/',
 
   /* Run your local dev server before starting the tests */
-  webServer: {
-    /**
-     * Use the dev server by default for faster feedback loop.
-     * Use the preview server on CI for more realistic testing.
-     */
-    command: process.env.CI ? 'vite preview --port 5173' : 'vite dev',
-    port: 5173,
-    reuseExistingServer: !process.env.CI
-  }
+  webServer: [
+    {
+        command: "npm run dev",
+        port: 5173,
+        reuseExistingServer: true
+    },
+    {
+        command: 'cd ../backend && npm run dev',
+        port: 1337,
+        reuseExistingServer: true,
+        stdout: 'pipe',
+        stderr: 'pipe',
+    }
+  ]
 }
 
 module.exports = config
