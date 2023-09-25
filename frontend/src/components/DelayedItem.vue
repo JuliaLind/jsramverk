@@ -1,18 +1,18 @@
 <script setup>
 /**
- * Component representing one row in the table that displays displays delayed trains 
+ * Component representing one row in the table that displays displays delayed trains
  */
-import { useTicketStore } from '@/stores/ticket';
+import { useTicketStore } from '@/stores/ticket'
 import { RouterLink } from 'vue-router'
 import { outputDelay } from '../models/utils.js'
 
-const store = useTicketStore();
+const store = useTicketStore()
 const props = defineProps({
     item: {
-    type: Object,
-    required: true
+        type: Object,
+        required: true
     }
-});
+})
 
 /**
  * @var {Object} item - Object containing data for a delayed train
@@ -42,22 +42,25 @@ const props = defineProps({
  * TrainOwner: "SJ"
  * }
  */
-const item = props.item;
-const delayTime = outputDelay(item);
+const item = props.item
+const delayTime = outputDelay(item)
 
-item.delayTime = delayTime;
+item.delayTime = delayTime
 </script>
 
 <template>
-<!-- When link to new ticket is clicked the object containing information about the delayed train is stored in the "tickets"-store to be accessed from the TickerForm component -->
-<RouterLink class="delay-item" @click.native="store.setCurrent(item)" to="/tickets">
-    <div class="train-number"> {{ item.OperationalTrainNumber }}</div>
-    <div class="current-station">
-        <div>{{ item.LocationSignature }}</div>
-        <div>{{ (item.FromLocation ? item.FromLocation[0].LocationName + " -> " : "") }} {{ (item.ToLocation ? item.ToLocation[0].LocationName : "") }}</div>
-    </div>
-    <div class="delay">{{ delayTime }}</div>
-</RouterLink>
+    <!-- When link to new ticket is clicked the object containing information about the delayed train is stored in the "tickets"-store to be accessed from the TickerForm component -->
+    <RouterLink class="delay-item" to="/tickets" @click="store.setCurrent(item)">
+        <div class="train-number">{{ item.OperationalTrainNumber }}</div>
+        <div class="current-station">
+            <div>{{ item.LocationSignature }}</div>
+            <div>
+                {{ item.FromLocation ? item.FromLocation[0].LocationName + ' -> ' : '' }}
+                {{ item.ToLocation ? item.ToLocation[0].LocationName : '' }}
+            </div>
+        </div>
+        <div class="delay">{{ delayTime }}</div>
+    </RouterLink>
 </template>
 
 <style scoped>

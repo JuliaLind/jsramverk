@@ -9,15 +9,15 @@ import MapComp from '../components/MapComp.vue'
 </script>
 
 <template>
-<main>
-    <suspense>
-        <DelayedTable />
-        <template #fallback>
-            <div class="delayed"></div>
-        </template>
-    </suspense>
-    <MapComp />
-</main>
+    <main>
+        <suspense>
+            <DelayedTable />
+            <template #fallback>
+                <div class="delayed"></div>
+            </template>
+        </suspense>
+        <MapComp />
+    </main>
 </template>
 
 <style>
