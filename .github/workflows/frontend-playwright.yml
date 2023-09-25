@@ -12,7 +12,7 @@ jobs:
 
     env:
       TRAFIKVERKET_API_KEY: ${{ secrets.TRAFIKVERKET_API_KEY }}
-      # DSN: ${{ secrets.DSN }}
+      DSN: ${{ secrets.DSN }}
 
     strategy:
       matrix:
