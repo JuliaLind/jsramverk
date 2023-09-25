@@ -2,7 +2,9 @@ name: Run Playwright tests
 
 on:
   push:
-    branches: [ 'main' ]
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "**" ]
 
 jobs:
   front-end-tests:
@@ -28,8 +30,8 @@ jobs:
 
     - run: |
         cd frontend
-        npm install
-        npx playwright install --with-deps
+        npm ci
+        npx playwright install-deps
 
     - run: |
         cd backend
@@ -37,4 +39,4 @@ jobs:
 
     - run: |
         cd frontend
-        npm run e2e
+        HOME=/root npm run e2e
