@@ -9,7 +9,7 @@
     "unittest": "vitest",
     "e2e": "nyc playwright test",
     "coverage": "vitest run --coverage --root src/",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path /.gitignore",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path ../.gitignore",
     "format": "prettier --write src/",
     "deploy": "rsync -av --delete dist/* juli22@ssh.student.bth.se:www/jsramverk"
   },
