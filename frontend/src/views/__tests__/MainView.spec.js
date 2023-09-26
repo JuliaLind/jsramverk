@@ -1,10 +1,10 @@
 import { vi, describe, it, expect, afterEach } from 'vitest'
-import DelayedTable from '../DelayedTable.vue'
+import MainView from '../MainView.vue'
 import { mount, flushPromises } from '@vue/test-utils'
 import { createRouter, createWebHistory } from 'vue-router'
 import { routes } from '@/router'
 import { defineComponent } from 'vue'
-import { delayed } from './mockdata/delayed.js'
+import { delayed } from '../../components/__tests__/mockdata/delayed.js'
 
 const router = createRouter({
     history: createWebHistory(),
@@ -25,9 +25,8 @@ vi.mock('../../services/api.service.js', () => {
     }
 })
 
-describe('DelayedTable', async () => {
+describe('MainView', async () => {
     router.push('/')
-    // After this line, router is ready
     await router.isReady()
 
     afterEach(() => {
@@ -35,32 +34,32 @@ describe('DelayedTable', async () => {
     })
 
     it('renders properly', async () => {
-        // Create suspense wrapper for the tested component
         const SuspenseWrapperComponent = defineComponent({
-            components: { DelayedTable },
+            components: { MainView },
             template: `
             <Suspense>
-                <DelayedTable />
+                <MainView />
             </Suspense> `
         })
 
         const suspenseWrapper = mount(SuspenseWrapperComponent, {
             global: {
-                plugins: [router]
+                plugins: [router],
+                stubs: {
+                    MapComp: {
+                        template: '<span />'
+                    }
+                }
             }
         })
-        // Wait suspense promise
-        await flushPromises()
 
-        // Access the tested component
-        const wrapper = suspenseWrapper.findComponent({ name: 'DelayedTable' })
+        await flushPromises()
+        const wrapper = suspenseWrapper.findComponent({ name: 'MainView' })
 
         expect(wrapper.text()).contains('8150')
         expect(wrapper.text()).contains('RvBlgc ->  Mras')
         expect(wrapper.text()).contains('KpHpbg ->  Vå')
 
         suspenseWrapper.unmount()
-
-        // note to self: add test for clicking on a DelayedItem
     })
 })
