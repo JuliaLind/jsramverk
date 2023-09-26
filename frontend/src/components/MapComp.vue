@@ -1,6 +1,6 @@
 <script>
-/* global L */
-/* global io */
+/* global L, io */
+
 /**
  * For communicating with backend
  */
