@@ -16,31 +16,6 @@ const props = defineProps({
 
 /**
  * @var {Object} item - Object containing data for a delayed train
- * @example {
- * ActivityId: "1500adde-f75d-c409-08db-aa83ab51b321"
- * ActivityType: "Avgang",
- * AdvertisedTimeAtLocation: "2023-09-16T18:45:00.000+02:00",
- * AdvertisedTrainIdent: "442",
- * Canceled: false,
- * EstimatedTimeAtLocation: "2023-09-16T19:16:00.000+02:00",
- * FromLocation: [
- *      {
- *          LocationName: "G",
- *          Priority: 1,
- *          Order: 0
- *      }
- * ],
- * LocationSignature: "K",
- * OperationalTrainNumber: "442",
- * ToLocation: [
- *      {
- *          LocationName: "Cst",
- *          Priority: 1,
- *          Order: 0
- *      }
- * ],
- * TrainOwner: "SJ"
- * }
  */
 const item = props.item
 const delayTime = outputDelay(item)

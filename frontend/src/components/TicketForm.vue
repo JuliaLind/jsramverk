@@ -12,16 +12,6 @@ const store = useTicketStore()
 
 /**
  * @var {Object} item - Object containing data for a delayed train
- * @example {
- * ActivityId: "62e8c1b6-18d1-5d01-505d-c63c117da404",
- * ActivityType: "Avgang",
- * AdvertisedTimeAtLocation: "2023-09-15T23:47:00.000+02:00",
- * AdvertisedTrainIdent: "44253",
- * Canceled: false,
- * EstimatedTimeAtLocation: "2023-09-16T00:59:36.000+02:00",
- * LocationSignature: "Era",
- * OperationalTrainNumber: "44253",
- * delayTime: "72 minuter" }
  */
 const item = store.getCurrent()
 const locationString = createLocationString(item)

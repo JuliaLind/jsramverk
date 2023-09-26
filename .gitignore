@@ -6,7 +6,7 @@ node_modules/
 *.vscode/
 *.vite/
 frontend/.htaccess
-frontend/.gitignore
+# frontend/.gitignore
 vue-project/
 vue-project-m/
 frontend-old/

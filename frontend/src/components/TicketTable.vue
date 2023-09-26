@@ -3,7 +3,20 @@
  * Component representing a list of all previous tickets
  */
 import { getTickets } from '../services/api.service.js'
-const tickets = await getTickets()
+import { ref } from 'vue'
+
+const tickets = ref([]);
+
+const updateTickets = async () => {
+    tickets.value = await getTickets();
+}
+
+updateTickets();
+
+defineExpose({
+  tickets,
+  updateTickets
+})
 
 // let newTicketId = 0;
 // const lastId = result.data[1] ? result.data[1].id : 0;
@@ -11,9 +24,9 @@ const tickets = await getTickets()
 </script>
 
 <template>
-    <div class="old-tickets" id="old-tickets">
+    <div class="old-tickets" id="old-tickets" @form-submitted="updateTickets">
         <h2>Befintliga ärenden</h2>
-        <div v-for="(ticket, index) in tickets" :key="index">
+        <div v-for="ticket in tickets" :key="ticket._id">
             {{ ticket._id }} - {{ ticket.code }} - {{ ticket.trainnumber }} - {{ ticket.traindate }}
         </div>
     </div>
