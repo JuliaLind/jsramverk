@@ -12,7 +12,7 @@ chai.use(require('chai-json'));
 const expect = chai.expect;
 
 const database = require("../db/database.js");
-const collectionName = "trains";
+
 
 describe('tickets get and post routes', () => {
     before(async () => {

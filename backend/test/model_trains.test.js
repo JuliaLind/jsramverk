@@ -48,7 +48,7 @@ describe('Trains Model', () => {
             });
 
             expect(socket.emit.calledOnce).to.be.true;
-            expect(socket.emit.calledWith('message')).to.be.true;
+            expect(socket.emit.calledWith('trainpositions')).to.be.true;
         });
         it('should throw error', () => {
             const data = undefined;
@@ -65,7 +65,7 @@ describe('Trains Model', () => {
             }).to.throw(SyntaxError);
 
 
-            expect(socket.emit.neverCalledWith('message')).to.be.true;
+            expect(socket.emit.neverCalledWith('trainpositions')).to.be.true;
         });
     });
 
@@ -102,7 +102,7 @@ describe('Trains Model', () => {
             });
 
             expect(socket.emit.calledOnce).to.be.true;
-            expect(socket.emit.calledWith('message')).to.be.true;
+            expect(socket.emit.calledWith('trainpositions')).to.be.true;
         });
         it('should throw error', () => {
             const e = {
@@ -121,7 +121,7 @@ describe('Trains Model', () => {
             }).to.throw(SyntaxError);
 
 
-            expect(socket.emit.neverCalledWith('message')).to.be.true;
+            expect(socket.emit.neverCalledWith('trainpositions')).to.be.true;
         });
     });
 
