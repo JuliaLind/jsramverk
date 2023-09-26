@@ -36,7 +36,7 @@ const trains = {
 
             // Emit train position updates to connected clients
             if (changedPosition.Train.AdvertisedTrainNumber in trainPositions) {
-                socket.emit("message", trainObject);
+                socket.emit("trainpositions", trainObject);
             }
 
             // Update the train positions object
@@ -45,7 +45,7 @@ const trains = {
             return trainObject;
             // }
         } catch (e) {
-            console.error(e);
+            // console.error(e);
             // e.code = "PARSE_POSITION_ERROR";
             throw e;
         }
