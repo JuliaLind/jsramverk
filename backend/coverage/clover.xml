@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1695570840990" clover="3.2.0">
-  <project timestamp="1695570840990" name="All files">
-    <metrics statements="132" coveredstatements="126" conditionals="8" coveredconditionals="5" methods="21" coveredmethods="19" elements="161" coveredelements="150" complexity="0" loc="132" ncloc="132" packages="4" files="9" classes="9"/>
+<coverage generated="1695728160861" clover="3.2.0">
+  <project timestamp="1695728160861" name="All files">
+    <metrics statements="142" coveredstatements="133" conditionals="12" coveredconditionals="7" methods="23" coveredmethods="21" elements="177" coveredelements="161" complexity="0" loc="142" ncloc="142" packages="4" files="9" classes="9"/>
     <package name="backend">
-      <metrics statements="29" coveredstatements="28" conditionals="4" coveredconditionals="3" methods="2" coveredmethods="2"/>
+      <metrics statements="37" coveredstatements="35" conditionals="8" coveredconditionals="5" methods="4" coveredmethods="4"/>
       <file name="app.js" path="/Users/martin/dbwebb-kurser/jsramverk/jsramverk/backend/app.js">
-        <metrics statements="29" coveredstatements="28" conditionals="4" coveredconditionals="3" methods="2" coveredmethods="2"/>
+        <metrics statements="37" coveredstatements="35" conditionals="8" coveredconditionals="5" methods="4" coveredmethods="4"/>
         <line num="10" count="1" type="stmt"/>
         <line num="12" count="1" type="stmt"/>
         <line num="13" count="1" type="stmt"/>
@@ -29,12 +29,20 @@
         <line num="49" count="1" type="stmt"/>
         <line num="50" count="1" type="stmt"/>
         <line num="51" count="1" type="stmt"/>
+        <line num="54" count="1" type="stmt"/>
         <line num="55" count="1" type="stmt"/>
-        <line num="59" count="1" type="stmt"/>
-        <line num="60" count="1" type="stmt"/>
-        <line num="66" count="1" type="stmt"/>
-        <line num="74" count="1" type="stmt"/>
-        <line num="79" count="1" type="stmt"/>
+        <line num="56" count="1" type="stmt"/>
+        <line num="57" count="1" type="stmt"/>
+        <line num="61" count="1" type="stmt"/>
+        <line num="62" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="63" count="0" type="stmt"/>
+        <line num="66" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="78" count="1" type="stmt"/>
+        <line num="82" count="1" type="stmt"/>
+        <line num="83" count="1" type="stmt"/>
+        <line num="89" count="1" type="stmt"/>
+        <line num="97" count="1" type="stmt"/>
+        <line num="102" count="1" type="stmt"/>
       </file>
     </package>
     <package name="backend.db">
@@ -47,35 +55,39 @@
         <line num="14" count="1" type="stmt"/>
         <line num="17" count="1" type="stmt"/>
         <line num="23" count="1" type="stmt"/>
-        <line num="31" count="8" type="stmt"/>
-        <line num="34" count="8" type="stmt"/>
-        <line num="40" count="8" type="stmt"/>
-        <line num="41" count="8" type="stmt"/>
-        <line num="43" count="8" type="stmt"/>
+        <line num="31" count="6" type="stmt"/>
+        <line num="34" count="6" type="stmt"/>
+        <line num="40" count="6" type="stmt"/>
+        <line num="41" count="6" type="stmt"/>
+        <line num="43" count="6" type="stmt"/>
         <line num="51" count="1" type="stmt"/>
       </file>
     </package>
     <package name="backend.models">
-      <metrics statements="75" coveredstatements="70" conditionals="2" coveredconditionals="1" methods="14" coveredmethods="12"/>
+      <metrics statements="77" coveredstatements="70" conditionals="2" coveredconditionals="1" methods="14" coveredmethods="12"/>
       <file name="codes.js" path="/Users/martin/dbwebb-kurser/jsramverk/jsramverk/backend/models/codes.js">
-        <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <metrics statements="9" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="8" count="1" type="stmt"/>
         <line num="16" count="1" type="stmt"/>
-        <line num="27" count="3" type="stmt"/>
-        <line num="38" count="3" type="stmt"/>
-        <line num="47" count="3" type="stmt"/>
-        <line num="49" count="3" type="stmt"/>
-        <line num="55" count="1" type="stmt"/>
+        <line num="26" count="4" type="stmt"/>
+        <line num="28" count="4" type="stmt"/>
+        <line num="39" count="4" type="stmt"/>
+        <line num="48" count="4" type="stmt"/>
+        <line num="50" count="4" type="stmt"/>
+        <line num="54" count="0" type="stmt"/>
+        <line num="66" count="1" type="stmt"/>
       </file>
       <file name="delayed.js" path="/Users/martin/dbwebb-kurser/jsramverk/jsramverk/backend/models/delayed.js">
-        <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <metrics statements="9" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="8" count="1" type="stmt"/>
         <line num="16" count="1" type="stmt"/>
-        <line num="27" count="3" type="stmt"/>
-        <line num="56" count="3" type="stmt"/>
-        <line num="65" count="3" type="stmt"/>
-        <line num="67" count="3" type="stmt"/>
-        <line num="73" count="1" type="stmt"/>
+        <line num="26" count="3" type="stmt"/>
+        <line num="28" count="3" type="stmt"/>
+        <line num="57" count="3" type="stmt"/>
+        <line num="66" count="3" type="stmt"/>
+        <line num="68" count="3" type="stmt"/>
+        <line num="72" count="0" type="stmt"/>
+        <line num="84" count="1" type="stmt"/>
       </file>
       <file name="tickets.js" path="/Users/martin/dbwebb-kurser/jsramverk/jsramverk/backend/models/tickets.js">
         <metrics statements="16" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
@@ -97,7 +109,7 @@
         <line num="114" count="1" type="stmt"/>
       </file>
       <file name="trains.js" path="/Users/martin/dbwebb-kurser/jsramverk/jsramverk/backend/models/trains.js">
-        <metrics statements="45" coveredstatements="42" conditionals="2" coveredconditionals="1" methods="10" coveredmethods="8"/>
+        <metrics statements="43" coveredstatements="40" conditionals="2" coveredconditionals="1" methods="10" coveredmethods="8"/>
         <line num="7" count="1" type="stmt"/>
         <line num="8" count="1" type="stmt"/>
         <line num="10" count="1" type="stmt"/>
@@ -121,28 +133,26 @@
         <line num="85" count="2" type="stmt"/>
         <line num="87" count="1" type="stmt"/>
         <line num="89" count="1" type="stmt"/>
-        <line num="92" count="1" type="stmt"/>
+        <line num="91" count="1" type="stmt"/>
         <line num="93" count="1" type="stmt"/>
         <line num="94" count="1" type="stmt"/>
-        <line num="95" count="1" type="stmt"/>
-        <line num="105" count="1" type="stmt"/>
-        <line num="107" count="1" type="stmt"/>
+        <line num="104" count="1" type="stmt"/>
+        <line num="106" count="1" type="stmt"/>
         <line num="108" count="1" type="stmt"/>
-        <line num="109" count="1" type="stmt"/>
+        <line num="128" count="2" type="stmt"/>
         <line num="129" count="2" type="stmt"/>
-        <line num="130" count="2" type="stmt"/>
-        <line num="132" count="2" type="stmt"/>
-        <line num="134" count="2" type="stmt"/>
-        <line num="136" count="2" type="stmt"/>
-        <line num="137" count="1" type="stmt"/>
-        <line num="140" count="2" type="stmt"/>
-        <line num="141" count="1" type="stmt"/>
-        <line num="143" count="1" type="stmt"/>
-        <line num="146" count="2" type="stmt"/>
-        <line num="147" count="0" type="stmt"/>
+        <line num="131" count="2" type="stmt"/>
+        <line num="133" count="2" type="stmt"/>
+        <line num="135" count="2" type="stmt"/>
+        <line num="136" count="1" type="stmt"/>
+        <line num="139" count="2" type="stmt"/>
+        <line num="140" count="1" type="stmt"/>
+        <line num="142" count="1" type="stmt"/>
+        <line num="145" count="2" type="stmt"/>
+        <line num="146" count="0" type="stmt"/>
+        <line num="149" count="0" type="stmt"/>
         <line num="150" count="0" type="stmt"/>
-        <line num="151" count="0" type="stmt"/>
-        <line num="248" count="1" type="stmt"/>
+        <line num="247" count="1" type="stmt"/>
       </file>
     </package>
     <package name="backend.routes">
