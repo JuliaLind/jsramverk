@@ -1,6 +1,6 @@
 <script>
 /* global L */
-import io from 'socket.io-client'
+/* global io */
 /**
  * For communicating with backend
  */

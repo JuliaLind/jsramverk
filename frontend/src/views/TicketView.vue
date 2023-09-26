@@ -12,7 +12,6 @@ import { ref } from 'vue'
 const componentKey = ref(0)
 const forceRerender = () => {
     componentKey.value += 1
-    console.log(componentKey.value)
 }
 </script>
 
