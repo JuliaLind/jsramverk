@@ -1,6 +1,6 @@
 <script>
-/* global L, io */
-
+/* global L */
+import io from 'socket.io-client'
 /**
  * For communicating with backend
  */
@@ -33,7 +33,7 @@ export default {
              * if the train is not already on the map adds a new marker,
              * if the train is on the map updates the marker's position
              */
-            socket.on('trainpositions', (data) => {
+            socket.on('message', (data) => {
                 if (Object.prototype.hasOwnProperty.call(markers, data.trainnumber)) {
                     let marker = markers[data.trainnumber]
 
