@@ -24,7 +24,7 @@ defineExpose({
 </script>
 
 <template>
-    <div class="old-tickets" id="old-tickets" @form-submitted="updateTickets">
+    <div class="old-tickets" id="old-tickets">
         <h2>Befintliga ärenden</h2>
         <div v-for="ticket in tickets" :key="ticket._id">
             {{ ticket._id }} - {{ ticket.code }} - {{ ticket.trainnumber }} - {{ ticket.traindate }}
