@@ -53,6 +53,7 @@ app.use("/codes", codes);
 // Middleware for handling 404 errors (Not Found)
 app.use((req, res, next) => {
     const err = new Error("Not Found");
+
     err.status = 404;
     next(err);
 });
@@ -65,11 +66,11 @@ app.use((err, req, res, next) => {
 
     res.status(err.status || 500).json({
         errors: [
-        {
-            status: err.status,
-            title: "Not Found",
-            detail: err.message
-        }
+            {
+                status: err.status,
+                title: "Not Found",
+                detail: err.message
+            }
         ]
     });
 });
