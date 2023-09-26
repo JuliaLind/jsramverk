@@ -50,6 +50,30 @@ app.use("/delayed", delayed);
 app.use("/tickets", tickets);
 app.use("/codes", codes);
 
+// Middleware for handling 404 errors (Not Found)
+app.use((req, res, next) => {
+    const err = new Error("Not Found");
+
+    err.status = 404;
+    next(err);
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+    if (res.headersSent) {
+        return next(err);
+    }
+
+    res.status(err.status || 500).json({
+        errors: [
+            {
+                status: err.status,
+                title: "Not Found",
+                detail: err.message
+            }
+        ]
+    });
+});
 
 // Create an HTTP server
 const httpServer = require("http").createServer(app);

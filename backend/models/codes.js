@@ -23,32 +23,43 @@ const codes = {
      * @returns {Promise<Object>} A JSON response containing reason codes data.
      */
     getCodes: async function getCodes(req, res) {
-        // XML Query sent to the API
-        const query = `<REQUEST>
-                  <LOGIN authenticationkey="${process.env.TRAFIKVERKET_API_KEY}" />
-                  <QUERY objecttype="ReasonCode" schemaversion="1">
-                        <INCLUDE>Code</INCLUDE>
-                        <INCLUDE>Level1Description</INCLUDE>
-                        <INCLUDE>Level2Description</INCLUDE>
-                        <INCLUDE>Level3Description</INCLUDE>
-                  </QUERY>
-            </REQUEST>`;
+        try {
+            // XML Query sent to the API
+            const query = `<REQUEST>
+                    <LOGIN authenticationkey="${process.env.TRAFIKVERKET_API_KEY}" />
+                    <QUERY objecttype="ReasonCode" schemaversion="1">
+                            <INCLUDE>Code</INCLUDE>
+                            <INCLUDE>Level1Description</INCLUDE>
+                            <INCLUDE>Level2Description</INCLUDE>
+                            <INCLUDE>Level3Description</INCLUDE>
+                    </QUERY>
+                </REQUEST>`;
 
-        // HTTP response
-        const response = await fetch(
-            "https://api.trafikinfo.trafikverket.se/v2/data.json", {
-                method: "POST",
-                body: query,
-                headers: { "Content-Type": "text/xml" }
-            }
-        );
+            // HTTP response
+            const response = await fetch(
+                "https://api.trafikinfo.trafikverket.se/v2/data.json", {
+                    method: "POST",
+                    body: query,
+                    headers: { "Content-Type": "text/xml" }
+                }
+            );
 
-        // JSON result data
-        const result = await response.json();
+            // JSON result data
+            const result = await response.json();
 
-        return res.json({
-            data: result.RESPONSE.RESULT[0].ReasonCode
-        });
+            return res.json({
+                data: result.RESPONSE.RESULT[0].ReasonCode
+            });
+        } catch (e) {
+            return res.status(500).json({
+                errors: {
+                    status: 500,
+                    source: "/",
+                    title: "API fetch error",
+                    detail: e.message
+                }
+            });
+        }
     }
 };
 
