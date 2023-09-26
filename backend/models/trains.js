@@ -45,7 +45,7 @@ const trains = {
             return trainObject;
             // }
         } catch (e) {
-            // console.error(e);
+            console.error(e.message);
             // e.code = "PARSE_POSITION_ERROR";
             throw e;
         }
