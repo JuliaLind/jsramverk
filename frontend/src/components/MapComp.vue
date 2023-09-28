@@ -34,7 +34,7 @@ export default {
              * if the train is on the map updates the marker's position
              */
             socket.on('trainpositions', (data) => {
-                if (Object.prototype.hasOwnProperty.call(markers, data.trainnumber)) {
+                if(data.trainnumber in markers) {
                     let marker = markers[data.trainnumber]
 
                     marker.setLatLng(data.position)
