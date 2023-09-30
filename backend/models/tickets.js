@@ -123,19 +123,24 @@ const tickets = {
         //     });
         // }
 
-        const doc = { $set: {
+        const doc = {
+            $set: {
                 code: code,
                 trainnumber: trainnumber,
                 traindate: traindate
-               }
             }
+        };
+        const filter = {
+            _id: new ObjectId(ticketId)
+        };
 
-        const filter = { _id: new ObjectId(ticketId) };
         try {
             const db = await database.getDb();
+
             await db.collection.tickets.updateOne(filter, doc);
 
             const updatedTicket = await db.collection.tickets.findOne(filter);
+
             await db.client.close();
 
             return res.status(201).json({

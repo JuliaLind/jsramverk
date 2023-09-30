@@ -15,6 +15,7 @@ const auth = {
         const saltRounds = 10;
         const email = body.email;
         const password = body.password;
+
         if (!email || !password) {
             return res.status(401).json({
                 errors: {
@@ -67,6 +68,7 @@ const auth = {
     login: async function login(res, body) {
         const email = body.email;
         const password = body.password;
+
         if (!email || !password) {
             return res.status(401).json({
                 errors: {
@@ -79,10 +81,9 @@ const auth = {
         }
         try {
             const db = await database.getDb();
-
             const filter = { email: email };
-
             const user = await db.collection.users.findOne(filter);
+
             await db.client.close();
             if (user) {
                 return auth.comparePasswords(
