@@ -27,7 +27,7 @@ const tickets = {
     getTickets: async function getTickets(req, res) {
         try {
             const db = await database.getDb();
-            const allTickets = await db.collection.find({}).toArray();
+            const allTickets = await db.collection.tickets.find({}).toArray();
 
             await db.client.close();
             return res.json({
@@ -62,7 +62,7 @@ const tickets = {
                 traindate: req.body.traindate
             };
 
-            const result = await db.collection.insertOne(doc);
+            const result = await db.collection.tickets.insertOne(doc);
 
             await db.client.close();
 

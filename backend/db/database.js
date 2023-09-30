@@ -14,7 +14,8 @@ if (process.env.NODE_ENV === 'test') {
     dbName = "test";
 }
 
-const collectionName = "tickets";
+const collection1 = "tickets";
+const collection2 = "users";
 
 /**
  * @description Database management object for connecting to MongoDB.
@@ -38,11 +39,15 @@ const database = {
 
         // Get a reference to the database and specified collection.
         const db = await client.db();
-        const collection = await db.collection(collectionName);
+        const tickets = await db.collection(collection1);
+        const users = await db.collection(collection2);
 
         return {
             db: db,
-            collection: collection,
+            collection: {
+                tickets: tickets,
+                users: users
+            },
             client: client,
         };
     }
