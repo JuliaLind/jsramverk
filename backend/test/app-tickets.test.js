@@ -18,12 +18,16 @@ const payload = {
     email: "test@test.se"
 };
 const jwtToken = jwt.sign(payload, jwtSecret, { expiresIn: '24h' });
+const bcrypt = require('bcryptjs');
+const password = "test";
+const hash = bcrypt.hashSync(password, 10);
 
 
 describe('tickets get and post routes', () => {
     before(async () => {
         const db = await database.getDb();
         await db.collection.tickets.deleteMany();
+        await db.collection.users.deleteMany();
         const docs = [
             { 
                 _id: new ObjectId("000000013b7eef17104f27e5"),
@@ -39,6 +43,14 @@ describe('tickets get and post routes', () => {
             },
         ];
         await db.collection.tickets.insertMany(docs);
+        const user = { 
+            _id: new ObjectId("000000013b7eef17104f27e5"),
+            email: "test@test.com",
+            hash: hash,
+        };
+        await db.collection.users.insertOne(user);
+        const allUsers = await db.collection.users.find({}).toArray();
+        console.log(allUsers);
         // const allTickets = await db.collection.tickets.find({}).toArray();
         // console.log(allTickets);
         await db.client.close();
@@ -166,6 +178,71 @@ describe('tickets get and post routes', () => {
                 chai.assert.equal(latest.code, 'test_code');
             }, 5000);
         }
-
+    });
+    it('login', async () => {
+        const userData = {
+            email: "test@test.com",
+            password: password,
+        };
+        const response = await chai.request(server).post('/login').send(userData);
+        expect(response).to.have.status(200);
+        expect(response.body.data).to.have.property("token");
+        expect(response.body).to.be.an('object');
+        expect(response.body.data.type).to.equal("success");
+        expect(response.body.data.token).to.be.a("string");
+        chai.assert.isAtLeast(response.body.data.token.length, 150)
+    });
+    it('login, missing password', async () => {
+        const userData = {
+            email: "test@test.com",
+            password: null,
+        };
+        const response = await chai.request(server).post('/login').send(userData);
+        expect(response).to.have.status(401);
+    });
+    it('login, wrong email', async () => {
+        const userData = {
+            email: "unregistered@test.com",
+            password: "somepassw",
+        };
+        const response = await chai.request(server).post('/login').send(userData);
+        expect(response).to.have.status(401);
+        expect(response.body.errors.detail).to.equal("User with provided email not found.");
+    });
+    it('register new user', async () => {
+        const another = "another@test.com"
+        const userData = {
+            email: another,
+            password: "test2",
+        };
+        const response = await chai.request(server).post('/register').send(userData);
+        expect(response).to.have.status(201);
+        setTimeout(async () => {
+            const db = await database.getDb();
+            const filter = {
+                email: another
+            }
+            const newUser = await db.collection.tickets.findOne(filter);
+            chai.assert.equal(newUser.email, another);
+            await db.client.close();
+        }, 5000);
+    });
+    it('cannot register duplicate user', async () => {
+        const userData = {
+            email: "test@test.com",
+            password: password,
+        };
+        const response = await chai.request(server).post('/register').send(userData);
+        expect(response).to.have.status(500);
+        expect(response.body.errors.detail).to.contain("duplicate key error collection")
+    });
+    it('cannot register with missing email', async () => {
+        const userData = {
+            email: "oneMore@test.com",
+            password: null,
+        };
+        const response = await chai.request(server).post('/register').send(userData);
+        expect(response).to.have.status(401);
+        expect(response.body.errors.detail).to.equal('Email or password missing in request');
     });
 });

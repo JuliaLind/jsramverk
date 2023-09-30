@@ -39,7 +39,6 @@ const auth = {
 
             try {
                 const db = await database.getDb();
-
                 const doc = {
                     email: email,
                     hash: hash,
@@ -58,7 +57,7 @@ const auth = {
                         status: 500,
                         source: "/register",
                         title: "Database error",
-                        detail: err.message
+                        detail: e.message
                     }
                 });
             }
@@ -126,8 +125,8 @@ const auth = {
             }
 
             if (result) {
-                let payload = { email: user.email };
-                let jwtToken = jwt.sign(payload, jwtSecret, { expiresIn: '24h' });
+                const payload = { email: user.email };
+                const jwtToken = jwt.sign(payload, jwtSecret, { expiresIn: '24h' });
 
                 return res.json({
                     data: {
