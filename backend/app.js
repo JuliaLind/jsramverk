@@ -63,7 +63,7 @@ app.use((req, res, next) => {
     next(err);
 });
 
-Error handling middleware
+// Error handling middleware
 app.use((err, req, res, next) => {
     if (res.headersSent) {
         return next(err);
