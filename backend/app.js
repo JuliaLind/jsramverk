@@ -63,22 +63,22 @@ app.use((req, res, next) => {
     next(err);
 });
 
-// Error handling middleware
-// app.use((err, req, res, next) => {
-//     if (res.headersSent) {
-//         return next(err);
-//     }
+Error handling middleware
+app.use((err, req, res, next) => {
+    if (res.headersSent) {
+        return next(err);
+    }
 
-//     // res.status(err.status || 500).json({
-//     //     errors: [
-//     //         {
-//     //             status: err.status,
-//     //             title: "Not Found",
-//     //             detail: err.message
-//     //         }
-//     //     ]
-//     // });
-// });
+    res.status(err.status || 500).json({
+        errors: [
+            {
+                status: err.status,
+                title: "Not Found",
+                detail: err.message
+            }
+        ]
+    });
+});
 
 // Create an HTTP server
 const httpServer = require("http").createServer(app);
