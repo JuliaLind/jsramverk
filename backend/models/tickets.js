@@ -112,16 +112,16 @@ const tickets = {
         const code = req.body.code;
         const trainnumber = req.body.trainnumber;
         const traindate = req.body.traindate;
-        if (!ticketId || !code || !trainnumber || !traindate) {
-            return res.status(401).json({
-                errors: {
-                    status: 401,
-                    source: "/tickets",
-                    title: "No empty fields allowed",
-                    detail: "No empty fields allowed"
-                }
-            });
-        }
+        // if (!ticketId || !code || !trainnumber || !traindate) {
+        //     return res.status(401).json({
+        //         errors: {
+        //             status: 401,
+        //             source: "/tickets",
+        //             title: "No empty fields allowed",
+        //             detail: "No empty fields allowed"
+        //         }
+        //     });
+        // }
 
         const doc = { $set: {
                 code: code,
