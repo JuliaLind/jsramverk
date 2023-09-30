@@ -26,6 +26,7 @@ jobs:
 
     env:
       TRAFIKVERKET_API_KEY: ${{ secrets.TRAFIKVERKET_API_KEY }}
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
       DSN: ${{ secrets.DSN }}
       URL: ${{ secrets.URL }}
 
