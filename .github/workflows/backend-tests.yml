@@ -28,7 +28,6 @@ jobs:
       TRAFIKVERKET_API_KEY: ${{ secrets.TRAFIKVERKET_API_KEY }}
       DSN: ${{ secrets.DSN }}
       URL: ${{ secrets.URL }}
-      JWT_SECRET: ${{ secrets.JWT_SECRET }}
 
     steps:
         
