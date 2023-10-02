@@ -1,26 +1,27 @@
 import { vi, describe, it, expect, afterEach } from 'vitest'
-import TicketView from '../TicketView.vue'
+import AdminView from '../AdminView.vue'
 import { mount, flushPromises } from '@vue/test-utils'
 import { createRouter, createWebHistory } from 'vue-router'
 import { routes } from '@/router'
 import { defineComponent } from 'vue'
 import { codes } from '../../components/__tests__/mockdata/codes.js'
-import { currentItem } from '../../components/__tests__/mockdata/current-item.js'
+// import { currentItem } from '../../components/__tests__/mockdata/current-item.js'
 import { tickets } from '../../components/__tests__/mockdata/tickets.js'
+
 
 const router = createRouter({
     history: createWebHistory(),
     routes: routes
 })
 
-vi.mock('@/stores/ticket', () => ({
-    useTicketStore: () => ({
-        currentItem: {},
-        getCurrent: () => {
-            return currentItem
-        }
-    })
-}))
+// vi.mock('@/stores/ticket', () => ({
+//     useTicketStore: () => ({
+//         currentItem: {},
+//         getCurrent: () => {
+//             return currentItem
+//         }
+//     })
+// }))
 
 vi.mock('../../services/api.service.js', () => {
     return {
@@ -33,8 +34,8 @@ vi.mock('../../services/api.service.js', () => {
     }
 })
 
-describe('TicketView', async () => {
-    router.push('/tickets')
+describe('AdminView', async () => {
+    router.push('/admin')
     await router.isReady()
 
     afterEach(() => {
@@ -43,10 +44,10 @@ describe('TicketView', async () => {
 
     it('renders properly', async () => {
         const SuspenseWrapperComponent = defineComponent({
-            components: { TicketView },
+            components: { AdminView },
             template: `
             <Suspense>
-                <TicketView />
+                <AdminView />
             </Suspense> `
         })
 
@@ -57,7 +58,7 @@ describe('TicketView', async () => {
         })
 
         await flushPromises()
-        const wrapper = suspenseWrapper.findComponent({ name: 'TicketView' })
+        const wrapper = suspenseWrapper.findComponent({ name: 'AdminView' })
 
         expect(wrapper.text()).contains('Nytt ärende #')
         expect(wrapper.text()).contains('Försenad: 10 minuter')

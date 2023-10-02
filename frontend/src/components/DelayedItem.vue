@@ -2,11 +2,11 @@
 /**
  * Component representing one row in the table that displays displays delayed trains
  */
-import { useTicketStore } from '@/stores/ticket'
-import { RouterLink } from 'vue-router'
+// import { useTicketStore } from '@/stores/ticket'
+// import { RouterLink } from 'vue-router'
 import { outputDelay } from '../services/utils.service.js'
 
-const store = useTicketStore()
+// const store = useTicketStore()
 const props = defineProps({
     item: {
         type: Object,
@@ -25,7 +25,9 @@ item.delayTime = delayTime
 
 <template>
     <!-- When link to new ticket is clicked the object containing information about the delayed train is stored in the "tickets"-store to be accessed from the TickerForm component -->
-    <RouterLink class="delay-item" to="/tickets" @click="store.setCurrent(item)">
+    <!-- <RouterLink class="delay-item" to="/tickets" @click="store.setCurrent(item)"> -->
+    <!-- <div class="delay-item" @click="store.setCurrent(item)"> -->
+    <div class="delay-item">
         <div class="train-number">{{ item.OperationalTrainNumber }}</div>
         <div class="current-station">
             <div>{{ item.LocationSignature }}</div>
@@ -35,7 +37,8 @@ item.delayTime = delayTime
             </div>
         </div>
         <div class="delay">{{ delayTime }}</div>
-    </RouterLink>
+    </div>
+    <!-- </RouterLink> -->
 </template>
 
 <style scoped>

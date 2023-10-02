@@ -9,11 +9,11 @@ const router = createRouter({
     routes: routes
 })
 
-vi.mock('@/stores/ticket', () => ({
-    useTicketStore: () => ({
-        currentItem: {}
-    })
-}))
+// vi.mock('@/stores/ticket', () => ({
+//     useTicketStore: () => ({
+//         currentItem: {}
+//     })
+// }))
 
 describe('DelayedItem', async () => {
     router.push('/')

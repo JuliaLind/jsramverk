@@ -1,36 +1,40 @@
 import { vi, describe, it, expect, afterEach } from 'vitest'
-import TicketForm from '../TicketForm.vue'
+import NewForm from '../NewForm.vue'
 import { mount, flushPromises } from '@vue/test-utils'
 import { createRouter, createWebHistory } from 'vue-router'
 import { routes } from '@/router'
 import { defineComponent } from 'vue'
 import { codes } from './mockdata/codes.js'
-import { currentItem } from './mockdata/current-item.js'
+import { codes } from './mockdata/delayed.js'
+// import { currentItem } from './mockdata/current-item.js'
 
 const router = createRouter({
     history: createWebHistory(),
     routes: routes
 })
 
-vi.mock('@/stores/ticket', () => ({
-    useTicketStore: () => ({
-        currentItem: currentItem,
-        getCurrent: () => {
-            return currentItem
-        }
-    })
-}))
+// vi.mock('@/stores/ticket', () => ({
+//     useTicketStore: () => ({
+//         currentItem: currentItem,
+//         getCurrent: () => {
+//             return currentItem
+//         }
+//     })
+// }))
 
 vi.mock('../../services/api.service.js', () => {
     return {
         getCodes: vi.fn(() => {
             return codes
+        }),
+        getDelayed: vi.fn(() => {
+            return delayed
         })
     }
 })
 
-describe('TicketForm', async () => {
-    router.push('/tickets')
+describe('NewForm', async () => {
+    router.push('/admin')
     await router.isReady()
 
     afterEach(() => {
@@ -39,10 +43,10 @@ describe('TicketForm', async () => {
 
     it('renders properly', async () => {
         const SuspenseWrapperComponent = defineComponent({
-            components: { TicketForm },
+            components: { NewForm },
             template: `
             <Suspense>
-                <TicketForm />
+                <NewForm />
             </Suspense> `
         })
 
@@ -53,7 +57,7 @@ describe('TicketForm', async () => {
         })
 
         await flushPromises()
-        const wrapper = suspenseWrapper.findComponent({ name: 'TicketForm' })
+        const wrapper = suspenseWrapper.findComponent({ name: 'NewForm' })
 
         expect(wrapper.text()).contains('Nytt ärende #')
         expect(wrapper.text()).contains('Försenad: 10 minuter')
