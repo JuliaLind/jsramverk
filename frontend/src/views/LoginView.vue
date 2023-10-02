@@ -2,28 +2,28 @@
 import LoginForm from '../components/LoginForm.vue'
 import RegisterForm from '../components/RegisterForm.vue'
 import { ref } from 'vue'
-const login=ref(true);
-let innerText = ref("Register")
+const login = ref(true)
+let innerText = ref('Register')
 const toggleForm = () => {
     if (login.value == true) {
         login.value = false
-        innerText = "Log in"
+        innerText.value = 'Log in'
     } else {
         login.value = true
-        innerText = "Register"
+        innerText.value = 'Register'
     }
 }
 </script>
 
 <template>
     <suspense>
-    <div>
-        <LoginForm v-if="login" />
-        <RegisterForm v-else />
-        <!-- Make this a button or a link later-->
-        <span class="toggle-link" v-on:click="toggleForm()">{{ innerText }}</span>
-    </div>
-</suspense>
+        <div>
+            <LoginForm v-if="login" />
+            <RegisterForm v-else />
+            <!-- Make this a button or a link later-->
+            <span class="toggle-link" v-on:click="toggleForm()">{{ innerText }}</span>
+        </div>
+    </suspense>
 </template>
 
 <style>

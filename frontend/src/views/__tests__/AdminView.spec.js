@@ -8,7 +8,6 @@ import { codes } from '../../components/__tests__/mockdata/codes.js'
 // import { currentItem } from '../../components/__tests__/mockdata/current-item.js'
 import { tickets } from '../../components/__tests__/mockdata/tickets.js'
 
-
 const router = createRouter({
     history: createWebHistory(),
     routes: routes

@@ -3,8 +3,7 @@ import MainView from '../views/MainView.vue'
 import AdminView from '../views/AdminView.vue'
 import LoginView from '../views/LoginView.vue'
 
-import { useAuthStore } from '@/stores/auth';
-
+import { useAuthStore } from '@/stores/auth'
 
 export const routes = [
     {
@@ -21,7 +20,7 @@ export const routes = [
         path: '/login',
         name: 'login',
         component: LoginView
-    },
+    }
 ]
 
 export const router = createRouter({
@@ -31,15 +30,15 @@ export const router = createRouter({
 
 router.beforeEach(async (to) => {
     // redirect to login page if not logged in and trying to access a restricted page
-    const publicPages = ['/login', '/', '/register'];
-    const authRequired = !publicPages.includes(to.path);
-    const auth = useAuthStore();
+    const publicPages = ['/login', '/', '/register']
+    const authRequired = !publicPages.includes(to.path)
+    const auth = useAuthStore()
 
     if (authRequired && !auth.getToken()) {
-        auth.returnUrl = to.fullPath;
-        return '/login';
+        auth.returnUrl = to.fullPath
+        return '/login'
     }
-});
+})
 
 // export { routes }
 // export default router

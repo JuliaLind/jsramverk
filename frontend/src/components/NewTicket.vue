@@ -14,8 +14,8 @@ const props = defineProps({
     }
 })
 
-const trainnumbers = props.trainnumbers;
-const reasoncodes = props.codes;
+const trainnumbers = props.trainnumbers
+const reasoncodes = props.codes
 /**
  * Assigns the initial values for the form
  * list as a default value for the new ticket
@@ -40,7 +40,7 @@ async function submitForm(code, trainnumber, traindate) {
         trainnumber: trainnumber,
         traindate: traindate
     }
-    console.log("newTicket", newTicket)
+    console.log('newTicket', newTicket)
     await store.submitNewTicket(newTicket)
     /**
      * Sends signal to tickets-component to re-render
@@ -54,7 +54,7 @@ async function submitForm(code, trainnumber, traindate) {
         <form v-on:submit.prevent="submitForm(code, trainnumber, traindate)">
             <select name="trainnumer" v-model="trainnumber">
                 <option v-for="train in trainnumbers" :key="train" :value="train">
-                    {{ train}}
+                    {{ train }}
                 </option>
             </select>
             <select name="code" v-model="code">
@@ -62,7 +62,7 @@ async function submitForm(code, trainnumber, traindate) {
                     {{ code.Code }} - {{ code.Level3Description }}
                 </option>
             </select>
-            <input type="date" name="traindate" v-model="traindate"/>
+            <input type="date" name="traindate" v-model="traindate" />
             <input type="submit" value="Submit" />
         </form>
     </div>

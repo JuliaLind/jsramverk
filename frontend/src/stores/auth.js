@@ -1,33 +1,33 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+// import { ref } from 'vue'
 import axios from 'axios'
-import { router } from '../router/index.js';
+import { router } from '../router/index.js'
 
 export const useAuthStore = defineStore('store', {
-    state: () => ({ token: "" }),
+    state: () => ({ token: '' }),
     actions: {
         async login(username, password) {
             const user = {
                 email: username,
-                password: password,
-            };
-            const result = await axios.post(`${import.meta.env.VITE_URL}/login`, user)
-            if ("errors" in result) {
-                return result.errors.detail;
+                password: password
             }
-            this.token = result.data.data.token;
-            console.log(this.token);
-            console.log(result.data.data.user.name);
-            router.push('/admin');
+            const result = await axios.post(`${import.meta.env.VITE_URL}/login`, user)
+            if ('errors' in result) {
+                return result.errors.detail
+            }
+            this.token = result.data.data.token
+            console.log(this.token)
+            console.log(result.data.data.user.name)
+            router.push('/admin')
 
             //note for later: set toast to "hello 'result.data.ta.user.name'""
-            return "ok";
+            return 'ok'
         },
-         getToken() {
+        getToken() {
             return this.token
         },
         async logout() {
-            this.token = "";
+            this.token = ''
             // note for later - choose to which page we want to redirect
             // after logout. example below (not to be used together with routerlink component)
             // router.push('/login');
@@ -36,22 +36,22 @@ export const useAuthStore = defineStore('store', {
             const user = {
                 name: name,
                 email: username,
-                password: password,
-            };
-    
+                password: password
+            }
+
             const response = await fetch(`${import.meta.env.VITE_URL}/register`, {
                 body: JSON.stringify(user),
                 headers: {
                     'content-type': 'application/json'
                 },
                 method: 'POST'
-            });
-            const result = await response.json();
-    
-            if ("errors" in result.data) {
-                return result.data.errors.status;
+            })
+            const result = await response.json()
+
+            if ('errors' in result.data) {
+                return result.data.errors.status
             }
-            return await this.login(username, password);
+            return await this.login(username, password)
         },
         /**
          * @param resultObject - the returned object from
@@ -67,15 +67,15 @@ export const useAuthStore = defineStore('store', {
          * }
          */
         async isTokenValid(resultObject) {
-            if ("errors" in resultObject) {
-                this.token = ""
+            if ('errors' in resultObject) {
+                this.token = ''
                 // note for later: set toast: "${resultObject.errors.title} ${resultObject.errors.detail}"
-                router.push('/login');
+                router.push('/login')
                 return false
             }
             return true
         },
-    
+
         /**
          *
          * @param {Object} newTicketObject An object containing reasoncode,
@@ -95,16 +95,16 @@ export const useAuthStore = defineStore('store', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',
-                    'x-access-token': this.token,
+                    'x-access-token': this.token
                 }
-            });
-            const result = await response.json();
+            })
+            const result = await response.json()
             if (this.isTokenValid(result)) {
-                return result.data;
+                return result.data
             }
             return undefined //?? not sure what to return, the view should update to display login-form instead of tickets list
         },
-    
+
         /**
          *
          * @param {Object} updatedTicketObject An object containing
@@ -120,16 +120,16 @@ export const useAuthStore = defineStore('store', {
                 method: 'PUT',
                 headers: {
                     'content-type': 'application/json',
-                    'x-access-token': this.token,
+                    'x-access-token': this.token
                 }
-            });
-            const result = await response.json();
+            })
+            const result = await response.json()
             if (this.isTokenValid(result)) {
-                return result.data;
+                return result.data
             }
             return undefined //?? not sure what to return, the view should update to display login-form instead of tickets list
         },
-    
+
         /**
          *
          * @param {string} ticketid - _id of the ticket
@@ -141,7 +141,7 @@ export const useAuthStore = defineStore('store', {
          * }
          */
         async deleteTicket(ticketid) {
-            console.log(ticketid);
+            console.log(ticketid)
             const response = await fetch(`${import.meta.env.VITE_URL}/tickets`, {
                 body: JSON.stringify({
                     _id: ticketid
@@ -149,35 +149,34 @@ export const useAuthStore = defineStore('store', {
                 method: 'DELETE',
                 headers: {
                     'content-type': 'application/json',
-                    'x-access-token': this.token,
+                    'x-access-token': this.token
                 }
-            });
-            const result = await response.json();
-            console.log(result);
+            })
+            const result = await response.json()
+            console.log(result)
             if (this.isTokenValid(result)) {
-                return result.data;
+                return result.data
             }
             return undefined //?? not sure what to return, the view should update to display login-form instead of tickets list
         },
-    
+
         /**
          * @returns {Promise<array>} previous tickets
          */
-        async getTickets () {
+        async getTickets() {
             const response = await fetch(`${import.meta.env.VITE_URL}/tickets`, {
                 method: 'GET',
                 headers: {
                     'content-type': 'application/json',
-                    'x-access-token': this.token,
+                    'x-access-token': this.token
                 }
-            });
-            const result = await response.json();
+            })
+            const result = await response.json()
 
             if (this.isTokenValid(result)) {
-                return result.data;
+                return result.data
             }
             return undefined //?? not sure what to return, the view should update to display login-form instead of tickets list
-            }
+        }
     }
 })
-
