@@ -15,6 +15,7 @@ const auth = {
         const saltRounds = 10;
         const email = body.email;
         const password = body.password;
+        const name = body.name;
 
         if (!email || !password) {
             return res.status(401).json({
@@ -41,6 +42,7 @@ const auth = {
             try {
                 const db = await database.getDb();
                 const doc = {
+                    name: name,
                     email: email,
                     hash: hash,
                 };
@@ -49,7 +51,7 @@ const auth = {
                 await db.client.close();
                 return res.status(201).json({
                     data: {
-                        message: "User successfully registered."
+                        message: `User ${email} successfully registered.`
                     }
                 });
             } catch (e) {
@@ -126,7 +128,10 @@ const auth = {
             }
 
             if (result) {
-                const payload = { email: user.email };
+                const payload = {
+                    email: user.email,
+                    name: user.name
+                };
                 const jwtToken = jwt.sign(payload, jwtSecret, { expiresIn: '24h' });
 
                 return res.json({

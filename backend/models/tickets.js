@@ -28,8 +28,8 @@ const tickets = {
     getTickets: async function getTickets(req, res) {
         try {
             const db = await database.getDb();
-            const allTickets = await db.collection.tickets.find({}).toArray();
-
+            // const allTickets = await db.collection.tickets.find({}).toArray();
+            const allTickets = await db.collection.tickets.find({}).sort({_id:-1}).toArray();
             await db.client.close();
             return res.json({
                 data: allTickets
