@@ -13,6 +13,8 @@ const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const cron = require('node-cron');
+const delayedModel = require('./models/delayed.js');
 
 const trains = require('./models/trains.js');
 const delayed = require('./routes/delayed.js');
@@ -93,6 +95,31 @@ let io = require("socket.io")(httpServer, {
         methods: ["GET", "POST"]
     }
 });
+
+cron.schedule('5 * * * * *', async () => {
+    try {
+        // console.log('Cron: fetching and emitting delayed trains update')
+        // let url = 'http://localhost:1337'
+
+        // if (process.env.URL !== 'http://localhost:5173') {
+        //     url = "https://jsramverk-marjul2023.azurewebsites.net"
+        // }
+
+        const response = await fetch(`http://localhost:1337/delayed`);
+
+        const delayedTrains = await response.json();
+
+        // console.log(delayedTrains.data);
+
+        // console.log("fetched delayed trains")
+
+        io.emit('delayedTrainsUpdate', delayedTrains.data);
+
+        // console.log("event emitted");
+    } catch (error) {
+        console.error('Error in cron job:', error);
+    }
+})
 
 // Fetch train positions with socket.io
 trains.fetchTrainPositions(io);
