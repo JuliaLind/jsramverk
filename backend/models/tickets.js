@@ -7,6 +7,7 @@
 
 // Get database object
 const database = require('../db/database.js');
+const ObjectId = require('mongodb').ObjectId;
 
 /**
  * @description Tickets object for getting
@@ -27,8 +28,8 @@ const tickets = {
     getTickets: async function getTickets(req, res) {
         try {
             const db = await database.getDb();
-            const allTickets = await db.collection.find({}).toArray();
-
+            // const allTickets = await db.collection.tickets.find({}).toArray();
+            const allTickets = await db.collection.tickets.find({}).sort({_id:-1}).toArray();
             await db.client.close();
             return res.json({
                 data: allTickets
@@ -37,7 +38,7 @@ const tickets = {
             return res.status(500).json({
                 errors: {
                     status: 500,
-                    source: "/",
+                    source: "/tickets",
                     title: "Database error",
                     detail: e.message
                 }
@@ -62,7 +63,7 @@ const tickets = {
                 traindate: req.body.traindate
             };
 
-            const result = await db.collection.insertOne(doc);
+            const result = await db.collection.tickets.insertOne(doc);
 
             await db.client.close();
 
@@ -73,42 +74,92 @@ const tickets = {
             return res.status(500).json({
                 errors: {
                     status: 500,
-                    source: "/",
+                    source: "/tickets",
                     title: "Database error",
                     detail: e.message
                 }
             });
         }
+    },
+    deleteTicket: async function deleteTicket(res, req) {
+        try {
+            const db = await database.getDb();
+            const ticketId = req.body._id;
+            const filter = { _id: new ObjectId(ticketId) };
 
+            await db.collection.tickets.deleteOne(filter);
 
+            await db.client.close();
 
-
-
-        // Exempel
-
-        // let db;
-        // try {
-        //     db = await database.getDb();
-
-        //     const filter = { email: email };
-        //     const keyObject = await db.collection.findOne(filter);
-
-        //     if (keyObject) {
-        //         return res.json({ data: keyObject });
-        //     }
-        // } catch (e) {
-        //     return res.status(500).json({
+            return res.status(201).json({
+                data: {
+                    message: `Ticket ${ticketId} has been deleted`
+                }
+            });
+        } catch (e) {
+            return res.status(500).json({
+                errors: {
+                    status: 500,
+                    source: "/tickets",
+                    title: "Database error",
+                    detail: e.message
+                }
+            });
+        }
+    },
+    updateTicket: async function updateTicket(res, req) {
+        const ticketId = req.body._id;
+        const code = req.body.code;
+        const trainnumber = req.body.trainnumber;
+        const traindate = req.body.traindate;
+        // if (!ticketId || !code || !trainnumber || !traindate) {
+        //     return res.status(401).json({
         //         errors: {
-        //             status: 500,
-        //             source: "/",
-        //             title: "Database error",
-        //             detail: e.message
+        //             status: 401,
+        //             source: "/tickets",
+        //             title: "No empty fields allowed",
+        //             detail: "No empty fields allowed"
         //         }
         //     });
-        // } finally {
-        //     await db.client.close();
         // }
-    },
+
+        const doc = {
+            $set: {
+                code: code,
+                trainnumber: trainnumber,
+                traindate: traindate
+            }
+        };
+        const filter = {
+            _id: new ObjectId(ticketId)
+        };
+
+        try {
+            const db = await database.getDb();
+
+            await db.collection.tickets.updateOne(filter, doc);
+
+            const updatedTicket = await db.collection.tickets.findOne(filter);
+
+            await db.client.close();
+
+            return res.status(201).json({
+                data: {
+                    message: `Ticket ${ticketId} has been updated`,
+                    ticket: updatedTicket
+                }
+            });
+        } catch (e) {
+            return res.status(500).json({
+                errors: {
+                    status: 500,
+                    source: "/tickets",
+                    title: "Database error",
+                    detail: e.message
+                }
+            });
+        }
+    }
 };
 
 module.exports = tickets;

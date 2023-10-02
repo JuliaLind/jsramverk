@@ -6,17 +6,26 @@
  */
 import DelayedTable from '../components/DelayedTable.vue'
 import MapComp from '../components/MapComp.vue'
+import { RouterLink } from 'vue-router'
+
+
+
 </script>
 
 <template>
     <main>
+        <RouterLink to="/admin"> Admin </RouterLink>
         <suspense>
-            <DelayedTable />
+            <keep-alive>
+                <DelayedTable />
+            </keep-alive>
             <template #fallback>
                 <div class="delayed"></div>
             </template>
         </suspense>
-        <MapComp />
+        <keep-alive>
+            <MapComp />
+        </keep-alive>
     </main>
 </template>
 

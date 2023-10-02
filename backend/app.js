@@ -20,6 +20,8 @@ const trains = require('./models/trains.js');
 const delayed = require('./routes/delayed.js');
 const tickets = require('./routes/tickets.js');
 const codes = require('./routes/codes.js');
+const register = require("./routes/register.js");
+const login = require("./routes/login.js");
 
 // Create Express application instance and set up port
 const app = express();
@@ -51,6 +53,9 @@ app.get('/', (req, res) => {
 app.use("/delayed", delayed);
 app.use("/tickets", tickets);
 app.use("/codes", codes);
+app.use("/register", register);
+app.use("/login", login);
+
 
 // Middleware for handling 404 errors (Not Found)
 app.use((req, res, next) => {

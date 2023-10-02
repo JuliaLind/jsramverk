@@ -8,7 +8,6 @@ const fetch = require('node-fetch');
 const EventSource = require('eventsource');
 
 const trains = {
-
     /**
     * Parses the position data from the SSE message.
     * @param {Object} data - The data received from the SSE message.
