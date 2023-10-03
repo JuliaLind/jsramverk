@@ -5,7 +5,7 @@
 import { getDelayedTrains } from '../services/api.service.js'
 import DelayedItem from './DelayedItem.vue'
 import { onMounted, ref } from 'vue'
-import { io } from 'socket.io-client';
+import socket from '../services/socket.service.js'
 
 const delayedTrains = ref([])
 
@@ -13,13 +13,9 @@ onMounted(async () => {
     delayedTrains.value = await getDelayedTrains()
 })
 
-const socket = io(import.meta.env.VITE_URL)
-
 socket.on('delayedTrainsUpdate', (updatedTrains) => {
     delayedTrains.value = updatedTrains
 })
-
-// const data = await getDelayedTrains()
 </script>
 
 <template>

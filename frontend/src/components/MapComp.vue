@@ -1,16 +1,11 @@
 <script>
 /* global L */
-import io from 'socket.io-client'
-
+import socket from '../services/socket.service.js'
 /**
  * Delayed trains
  */
 import { getDelayedTrains } from '../services/api.service.js'
 
-/**
- * For communicating with backend
- */
-const socket = io(import.meta.env.VITE_URL)
 
 /**
  * Map with markers that display current positions of trains.
@@ -35,7 +30,6 @@ export default {
             }).addTo(map)
 
             // let markers = {}
-
             /**
              * When receiving "message" signal from backend,
              * if the train is not already on the map adds a new marker,
@@ -71,6 +65,7 @@ export default {
 
         socket.on('delayedTrainsUpdate', (updatedTrains) => {
             this.trainData = updatedTrains
+            
         })
     }
 }
