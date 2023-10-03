@@ -46,7 +46,7 @@ let innerText = 'Edit'
  */
 async function submitForm(code, trainnumber, traindate) {
     const updatedTicket = {
-        _id: current.ticketnumber,
+        _id: current._id,
         code: code,
         trainnumber: trainnumber,
         traindate: traindate
