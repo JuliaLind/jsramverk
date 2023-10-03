@@ -33,10 +33,10 @@ if (!(trainnumber in trainnumbers)) {
     trainnumbers.push(trainnumber)
 }
 
-// /**
-//  * Function for sending messages to other components
-//  */
-// const emit = defineEmits(['form-submitted'])
+/**
+ * Function for sending messages to other components
+ */
+const emit = defineEmits(['form-submitted'])
 const store = useAuthStore()
 let innerText = 'Edit'
 
@@ -55,7 +55,6 @@ async function submitForm(code, trainnumber, traindate) {
     await store.updateTicket(updatedTicket)
     editing.value = false
     innerText = 'Edit'
-    // emit('form-submitted')
 }
 
 const editing = ref(false)
@@ -66,6 +65,9 @@ const toggleEditing = function () {
     } else {
         editing.value = false
         innerText = 'Edit'
+        code = current.code
+        trainnumber = current.trainnumber
+        traindate = current.traindate
     }
 }
 </script>
