@@ -23,9 +23,7 @@ import { RouterLink } from 'vue-router'
                 <div class="delayed"></div>
             </template>
         </suspense>
-        <keep-alive>
-            <MapComp />
-        </keep-alive>
+        <MapComp />
     </main>
 </template>
 

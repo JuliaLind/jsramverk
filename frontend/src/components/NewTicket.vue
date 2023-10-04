@@ -40,7 +40,6 @@ async function submitForm(code, trainnumber, traindate) {
         trainnumber: trainnumber,
         traindate: traindate
     }
-    console.log('newTicket', newTicket)
     await store.submitNewTicket(newTicket)
     /**
      * Sends signal to tickets-component to re-render

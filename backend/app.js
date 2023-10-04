@@ -103,24 +103,9 @@ let io = require("socket.io")(httpServer, {
 
 cron.schedule('5 * * * * *', async () => {
     try {
-        // console.log('Cron: fetching and emitting delayed trains update')
-        // let url = 'http://localhost:1337'
+        const delayedTrains = await delayedModel.getFromTrafikVerket();
 
-        // if (process.env.URL !== 'http://localhost:5173') {
-        //     url = "https://jsramverk-marjul2023.azurewebsites.net"
-        // }
-
-        const response = await fetch(`http://localhost:1337/delayed`);
-
-        const delayedTrains = await response.json();
-
-        // console.log(delayedTrains.data);
-
-        // console.log("fetched delayed trains")
-
-        io.emit('delayedTrainsUpdate', delayedTrains.data);
-
-        // console.log("event emitted");
+        io.emit('delayedTrainsUpdate', delayedTrains);
     } catch (error) {
         console.error('Error in cron job:', error);
     }
@@ -129,9 +114,5 @@ cron.schedule('5 * * * * *', async () => {
 // Fetch train positions with socket.io
 trains.fetchTrainPositions(io);
 
-
-
 // export to facilitate testing
 module.exports = server;
-
-
