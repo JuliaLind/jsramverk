@@ -63,8 +63,8 @@ describe('tickets get and post routes', () => {
                 res.should.have.status(200);
                 res.body.should.have.property("data");
                 res.body.data.should.be.an("array");
-                res.body.data[0]["trainnumber"].should.equal("9123");
-                res.body.data[1]["code"].should.equal("ANA003");
+                res.body.data[1]["trainnumber"].should.equal("9123");
+                res.body.data[0]["code"].should.equal("ANA003");
                 done();
             });
     });
