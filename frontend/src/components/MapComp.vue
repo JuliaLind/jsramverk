@@ -1,6 +1,8 @@
 <script>
 /* global L */
+
 import socket from '../services/socket.service.js'
+
 /**
  * Delayed trains
  */
@@ -21,7 +23,7 @@ export default {
     },
     methods: {
         setupLeafletMap() {
-            const map = L.map('map').setView(this.center, 5)
+            const map = L.map('map', {zoomAnimation:false}).setView(this.center, 5)
 
             L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 19,
@@ -50,7 +52,9 @@ export default {
                         }
                     } else {
                         if (Object.prototype.hasOwnProperty.call(this.markers, data.trainnumber)) {
-                            delete this.markers[data.trainnumber];
+                            let marker = this.markers[data.trainnumber]
+                            map.removeLayer(marker)
+                            delete this.markers[data.trainnumber]
                         }
                     }
                 }

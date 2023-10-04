@@ -5,6 +5,7 @@
 import { getDelayedTrains } from '../services/api.service.js'
 import DelayedItem from './DelayedItem.vue'
 import { onMounted, ref } from 'vue'
+
 import socket from '../services/socket.service.js'
 
 const delayedTrains = ref([])

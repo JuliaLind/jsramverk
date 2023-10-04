@@ -27,7 +27,7 @@ describe('Trains Model', () => {
 
     describe('parsePositionData', () => {
         it('should parse position data correctly', () => {
-            const data = '{"RESPONSE":{"RESULT":[{"TrainPosition":[{"Position":{"WGS84":"12.34,56.78"},"Train":{"AdvertisedTrainNumber":"12345"},"TimeStamp":"2023-09-18T12:34:56Z","Bearing":120.5,"Deleted":false,"Speed":80.2}]}]}}';
+            const data = '{"RESPONSE":{"RESULT":[{"TrainPosition":[{"Position":{"WGS84":"12.34,56.78"},"Train":{"OperationalTrainNumber":"12345"},"TimeStamp":"2023-09-18T12:34:56Z","Bearing":120.5,"Deleted":false,"Speed":80.2}]}]}}';
             const trainPositions = {
                 "12345": ""
             };
@@ -80,7 +80,7 @@ describe('Trains Model', () => {
     describe('handleSSEMessage', () => {
         it('should handle SSE message correctly', () => {
             const e = {
-                data: '{"RESPONSE":{"RESULT":[{"TrainPosition":[{"Position":{"WGS84":"12.34,56.78"},"Train":{"AdvertisedTrainNumber":"12345"},"TimeStamp":"2023-09-18T12:34:56Z","Bearing":120.5,"Deleted":false,"Speed":80.2}]}]}}',
+                data: '{"RESPONSE":{"RESULT":[{"TrainPosition":[{"Position":{"WGS84":"12.34,56.78"},"Train":{"OperationalTrainNumber":"12345"},"TimeStamp":"2023-09-18T12:34:56Z","Bearing":120.5,"Deleted":false,"Speed":80.2}]}]}}',
             };
             const trainPositions = {
                 "12345": ""
