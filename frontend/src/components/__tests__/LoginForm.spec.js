@@ -1,28 +1,18 @@
 import { vi, describe, it, expect, afterEach } from 'vitest'
-import NewTicket from '../NewTicket.vue'
+import LoginForm from '../LoginForm.vue'
 import { mount, flushPromises } from '@vue/test-utils'
 import { createRouter, createWebHistory } from 'vue-router'
 import { routes } from '@/router'
 import { defineComponent } from 'vue'
-import { codes } from './mockdata/codes-small.js'
-import { trainnumbers } from './mockdata/trainnumbers.js'
 
 const router = createRouter({
     history: createWebHistory(),
     routes: routes
 })
-vi.mock('@/stores/auth', () => ({
-    useAuthStore: () => ({
-        token: "imavalidtoken",
-        getToken: () => {
-            return this.token
-        },
-    })
-}))
 
 
-describe('NewTicket', async () => {
-    router.push('/admin')
+describe('LoginForm', async () => {
+    router.push('/login')
     await router.isReady()
 
     afterEach(() => {
@@ -30,24 +20,30 @@ describe('NewTicket', async () => {
     })
 
     it('renders properly', async () => {
+        vi.mock('@/stores/auth', () => ({
+            useAuthStore: () => ({
+                token: "",
+                getToken: vi.fn(() => {
+                    return ""
+                }),
+                register: vi.fn(() => {
+                    return "imavalidtoken"
+                }),
+                login: vi.fn(() => {
+                    return "imavalidtoken"
+                }),
+            })
+        }))
         const SuspenseWrapperComponent = defineComponent({
-            components: { NewTicket },
+            components: { LoginForm },
             template: `
             <Suspense>
-                <NewTicket :codes="codes" :trainnumbers="trainnumbers"/>
-            </Suspense> `,
-            props: {
-                codes: Array,
-                trainnumbers: Array
-            }
+                <LoginForm />
+            </Suspense> `
         })
 
         const suspenseWrapper = mount(SuspenseWrapperComponent,
             {
-                props: {
-                    codes: codes,
-                    trainnumbers: trainnumbers
-                },
                 global: {
                     plugins: [router]
                 }
@@ -56,12 +52,12 @@ describe('NewTicket', async () => {
 
 
         await flushPromises()
-        const wrapper = suspenseWrapper.findComponent({ name: 'NewTicket' })
+        const wrapper = suspenseWrapper.findComponent({ name: 'LoginForm' })
 
 
-        expect(wrapper.text()).contains('ANA002')
-        expect(wrapper.text()).contains('8150')
-        console.log(wrapper.text())
+        expect(wrapper.text()).contains('Logga in')
+        expect(wrapper.text()).contains('E-postaddress')
+        expect(wrapper.text()).contains('Lösenord')
         suspenseWrapper.unmount()
 
         // note to self: add test for clicking on the submitbutton and checking that submitNewTickets function is salled. Also add test for checking codes in options dropdown

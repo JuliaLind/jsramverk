@@ -64,7 +64,7 @@ updateTickets()
             :key="ticket._id"
             :codes="reasoncodes"
             :trainnumbers="trainnumbers"
-            :current="ticket"
+            :ticket="ticket"
             @form-submitted="updateTickets()"
         />
     </div>

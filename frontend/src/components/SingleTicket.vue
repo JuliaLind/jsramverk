@@ -11,23 +11,24 @@ const props = defineProps({
         type: Array,
         required: true
     },
-    current: {
+    ticket: {
         type: Object,
         required: true
     }
 })
 
 const reasoncodes = props.codes
-const current = props.current
+const ticket = props.ticket
 const trainnumbers = props.trainnumbers
 
 /**
  * Assigns the first the default-values
  * for new ticket
  */
-let code = current.code
-let trainnumber = current.trainnumber
-let traindate = current.traindate
+let code = ticket.code
+let trainnumber = ticket.trainnumber
+let traindate = ticket.traindate
+const id = ticket._id
 
 if (!(trainnumber in trainnumbers)) {
     trainnumbers.push(trainnumber)
@@ -46,7 +47,7 @@ let innerText = 'Edit'
  */
 async function submitForm(code, trainnumber, traindate) {
     const updatedTicket = {
-        _id: current._id,
+        _id: id,
         code: code,
         trainnumber: trainnumber,
         traindate: traindate
@@ -65,9 +66,9 @@ const toggleEditing = function () {
     } else {
         editing.value = false
         innerText = 'Edit'
-        code = current.code
-        trainnumber = current.trainnumber
-        traindate = current.traindate
+        code = ticket.code
+        trainnumber = ticket.trainnumber
+        traindate = ticket.traindate
     }
 }
 </script>
@@ -80,7 +81,7 @@ const toggleEditing = function () {
                 $emit('form-submitted')
             "
         >
-            <input type="text" disabled :value="current._id" />
+            <input type="text" disabled :value="id" />
             <select
                 name="trainnumber"
                 v-model="trainnumber"
@@ -106,7 +107,7 @@ const toggleEditing = function () {
             <input v-if="editing" type="submit" value="Save" />
         </form>
         <button v-on:click.self="toggleEditing()">{{ innerText }}</button>
-        <button v-on:click.self="store.deleteTicket(current._id), $emit('form-submitted')">
+        <button v-on:click.self="store.deleteTicket(ticket._id), $emit('form-submitted')">
             Delete
         </button>
     </div>

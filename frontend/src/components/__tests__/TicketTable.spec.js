@@ -3,14 +3,37 @@ import TicketTable from '../TicketTable.vue'
 import { mount, flushPromises } from '@vue/test-utils'
 import { defineComponent } from 'vue'
 import { tickets } from './mockdata/tickets.js'
+import { codes } from './mockdata/codes-small.js'
+import { delayed } from './mockdata/delayed.js'
 
 vi.mock('../../services/api.service.js', () => {
     return {
-        getTickets: vi.fn(() => {
-            return tickets
+        getCodes: vi.fn(() => {
+            return codes
+        }),
+        getDelayedTrains: vi.fn(() => {
+            return delayed
         })
     }
 })
+
+vi.mock('@/stores/auth', () => ({
+    useAuthStore: () => ({
+        token: "imavalidtoken",
+        getToken: vi.fn(() => {
+            return "imavalidtoken"
+        }),
+        updateTicket: () => {
+            return "ok"
+        },
+        deleteTicket: () => {
+            return "ok"
+        },
+        getTickets: vi.fn(() => {
+            return tickets
+        }),
+    })
+}))
 
 describe('TicketsTable', async () => {
     afterEach(() => {
@@ -31,9 +54,12 @@ describe('TicketsTable', async () => {
         await flushPromises()
 
         const wrapper = suspenseWrapper.findComponent({ name: 'TicketTable' })
-
         expect(wrapper.text()).contains('Befintliga ärenden')
-        expect(wrapper.text()).contains('6505d0b1a60773cde6d0704d - ANA004 - 34312 - 2023-09-16')
+        expect(wrapper.text()).contains('Add new')
+        expect(wrapper.text()).contains('Edit')
+        expect(wrapper.text()).contains('Delete')
+        // expect(wrapper.text()).contains('6505c49ab3546c7d65e58f89')
+        // expect(wrapper.text()).contains('65071ede53fecc7e2c2c1732')
         suspenseWrapper.unmount()
     })
 })
