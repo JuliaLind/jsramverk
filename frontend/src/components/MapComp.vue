@@ -1,6 +1,7 @@
 <script>
 /* global L */
 import io from 'socket.io-client'
+import socket from '../services/socket.service.js'
 
 /**
  * Delayed trains
@@ -10,7 +11,7 @@ import { getDelayedTrains } from '../services/api.service.js'
 /**
  * For communicating with backend
  */
-const socket = io(import.meta.env.VITE_URL)
+// const socket = io(import.meta.env.VITE_URL)
 
 /**
  * Map with markers that display current positions of trains.
@@ -26,7 +27,7 @@ export default {
     },
     methods: {
         setupLeafletMap() {
-            const map = L.map('map').setView(this.center, 5)
+            const map = L.map('map', {zoomAnimation:false}).setView(this.center, 5)
 
             L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 19,
@@ -56,7 +57,9 @@ export default {
                         }
                     } else {
                         if (Object.prototype.hasOwnProperty.call(this.markers, data.trainnumber)) {
-                            delete this.markers[data.trainnumber];
+                            let marker = this.markers[data.trainnumber]
+                            map.removeLayer(marker)
+                            delete this.markers[data.trainnumber]
                         }
                     }
                 }
