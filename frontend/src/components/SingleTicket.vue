@@ -1,6 +1,6 @@
 <script setup>
 import { useAuthStore } from '@/stores/auth'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 
 const props = defineProps({
     trainnumbers: {
@@ -19,7 +19,7 @@ const props = defineProps({
 
 const reasoncodes = props.codes
 const ticket = props.ticket
-const trainnumbers = props.trainnumbers
+let trainnumbers = props.trainnumbers
 
 /**
  * Assigns the first the default-values
@@ -29,17 +29,16 @@ let code = ticket.code
 let trainnumber = ticket.trainnumber
 let traindate = ticket.traindate
 const id = ticket._id
+const store = useAuthStore()
+let innerText = 'Edit'
+
 
 if (!(trainnumber in trainnumbers)) {
     trainnumbers.push(trainnumber)
 }
 
-/**
- * Function for sending messages to other components
- */
-const emit = defineEmits(['form-submitted'])
-const store = useAuthStore()
-let innerText = 'Edit'
+
+
 
 /**
  * Sends a post request to the backend API for inserting
@@ -61,6 +60,9 @@ async function submitForm(code, trainnumber, traindate) {
 const editing = ref(false)
 const toggleEditing = function () {
     if (editing.value == false) {
+        if (!(trainnumber in trainnumbers)) {
+            trainnumbers.push(trainnumber)
+        }
         editing.value = true
         innerText = 'Stop Edit'
     } else {

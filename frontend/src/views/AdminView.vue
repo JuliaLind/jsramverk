@@ -12,11 +12,9 @@ const store = useAuthStore()
     <RouterLink to="/" @click="store.logout()"> Logga ut </RouterLink>
     <br />
     <RouterLink to="/"> Tillbaka </RouterLink>
-    <suspense>
         <div class="ticket-container">
             <TicketTable />
         </div>
-    </suspense>
 </template>
 
 <style>

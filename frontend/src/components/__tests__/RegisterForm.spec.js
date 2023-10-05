@@ -1,9 +1,8 @@
 import { vi, describe, it, expect, afterEach } from 'vitest'
 import RegisterForm from '../RegisterForm.vue'
-import { mount, flushPromises } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import { createRouter, createWebHistory } from 'vue-router'
 import { routes } from '@/router'
-import { defineComponent } from 'vue'
 
 const router = createRouter({
     history: createWebHistory(),
@@ -34,15 +33,8 @@ describe('RegisterForm', async () => {
                 }),
             })
         }))
-        const SuspenseWrapperComponent = defineComponent({
-            components: { RegisterForm },
-            template: `
-            <Suspense>
-                <RegisterForm />
-            </Suspense> `
-        })
 
-        const suspenseWrapper = mount(SuspenseWrapperComponent,
+        const wrapper = mount(RegisterForm,
             {
                 global: {
                     plugins: [router]
@@ -50,15 +42,10 @@ describe('RegisterForm', async () => {
             }
         )
 
-
-        await flushPromises()
-        const wrapper = suspenseWrapper.findComponent({ name: 'RegisterForm' })
-
-
         expect(wrapper.text()).contains('Registreringsformulär')
         expect(wrapper.text()).contains('Namn')
         expect(wrapper.text()).contains('E-postaddress')
         expect(wrapper.text()).contains('Lösenord')
-        suspenseWrapper.unmount()
+        wrapper.unmount()
     })
 })

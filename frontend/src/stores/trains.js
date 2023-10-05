@@ -1,15 +1,26 @@
-// import { defineStore } from 'pinia'
-// import { ref } from 'vue'
+import { defineStore } from 'pinia'
+import { ref } from 'vue'
 
 
-// /**
-//  * 
-//  */
-// export const useTrainsStore = defineStore('trains', {
-//     state: () => ({ delayed: ref([]) }),
-//     actions: {
-//         setTrains(trains) {
-//             this.delayed.value = trains
-//         },
-//     }
-// })
+/**
+ * 
+ */
+export const useTrainsStore = defineStore('trains', {
+    state: () => ({
+        //  delayed: ref([]),
+            current: ""
+        }),
+    actions: {
+        // setTrains(trains) {
+        //     this.delayed.value = trains
+        // },
+        setCurrent(trainnr) {
+            if (this.current === "") {
+                this.current = trainnr
+            } else {
+                this.current = ""
+            }
+            console.log(this.current)
+        }
+    }
+})

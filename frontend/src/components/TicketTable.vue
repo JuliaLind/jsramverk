@@ -1,22 +1,13 @@
 <script setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import NewTicket from '../components/NewTicket.vue'
 import SingleTicket from '../components/SingleTicket.vue'
-import { getCodes, getDelayedTrains } from '../services/api.service.js'
+import { getCodes, getTrainNumbers } from '../services/api.service.js'
 const store = useAuthStore()
-const reasoncodes = await getCodes()
-const data = await getDelayedTrains()
-const trainnumbers = [
-    ...new Set(
-        data
-            .map((item) => {
-                return item.OperationalTrainNumber
-            })
-            .sort()
-    )
-]
 
+let reasoncodes
+let data
 const show = ref(false)
 let innerText = ref('Add new')
 const toggleNewForm = () => {
@@ -28,15 +19,21 @@ const toggleNewForm = () => {
         innerText.value = 'Add new'
     }
 }
-
-// Note for later: consider moving tickets constant to auth-pinia
-// store too, it would then be available from parent component too
 const tickets = ref([])
 const updateTickets = async () => {
     tickets.value = await store.getTickets()
 }
+let trainnumbers
+onMounted(async () => {
+    reasoncodes = await getCodes()
+    trainnumbers = await getTrainNumbers()
+    updateTickets()
+})
 
-updateTickets()
+
+// Note for later: consider moving tickets constant to auth-pinia
+// store too, it would then be available from parent component too
+
 </script>
 
 <template>

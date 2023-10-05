@@ -3,7 +3,6 @@ import LoginForm from '../LoginForm.vue'
 import { mount, flushPromises } from '@vue/test-utils'
 import { createRouter, createWebHistory } from 'vue-router'
 import { routes } from '@/router'
-import { defineComponent } from 'vue'
 
 const router = createRouter({
     history: createWebHistory(),
@@ -34,15 +33,8 @@ describe('LoginForm', async () => {
                 }),
             })
         }))
-        const SuspenseWrapperComponent = defineComponent({
-            components: { LoginForm },
-            template: `
-            <Suspense>
-                <LoginForm />
-            </Suspense> `
-        })
 
-        const suspenseWrapper = mount(SuspenseWrapperComponent,
+        const wrapper = mount(LoginForm,
             {
                 global: {
                     plugins: [router]
@@ -50,15 +42,11 @@ describe('LoginForm', async () => {
             }
         )
 
-
         await flushPromises()
-        const wrapper = suspenseWrapper.findComponent({ name: 'LoginForm' })
-
-
         expect(wrapper.text()).contains('Logga in')
         expect(wrapper.text()).contains('E-postaddress')
         expect(wrapper.text()).contains('Lösenord')
-        suspenseWrapper.unmount()
+        wrapper.unmount()
 
         // note to self: add test for clicking on the submitbutton and checking that submitNewTickets function is salled. Also add test for checking codes in options dropdown
     })

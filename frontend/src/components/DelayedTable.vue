@@ -5,8 +5,14 @@
 import { getDelayedTrains } from '../services/api.service.js'
 import DelayedItem from './DelayedItem.vue'
 import { onMounted, ref } from 'vue'
-
 import socket from '../services/socket.service.js'
+
+// const props = defineProps({
+//     current: {
+//         type: String,
+//         required: true
+//     }
+// })
 
 const delayedTrains = ref([])
 
@@ -24,6 +30,7 @@ socket.on('delayedTrainsUpdate', (updatedTrains) => {
         <h1>Försenade tåg</h1>
         <div id="delayed-trains" class="delayed-trains">
             <DelayedItem v-for="item in delayedTrains" :item="item" :key="item.ActivityId" />
+            <!-- <DelayedItem v-if="current === '' || current === item.OperationalTrainNumber" v-for="item in delayedTrains" :item="item" :key="item.ActivityId" /> -->
         </div>
     </div>
 </template>

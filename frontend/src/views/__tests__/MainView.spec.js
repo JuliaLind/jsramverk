@@ -3,7 +3,7 @@ import MainView from '../MainView.vue'
 import { mount, flushPromises } from '@vue/test-utils'
 import { createRouter, createWebHistory } from 'vue-router'
 import { routes } from '@/router'
-import { defineComponent } from 'vue'
+// import { defineComponent } from 'vue'
 import { delayed } from '../../components/__tests__/mockdata/delayed.js'
 
 const router = createRouter({
@@ -11,11 +11,11 @@ const router = createRouter({
     routes: routes
 })
 
-vi.mock('@/stores/ticket', () => ({
-    useTicketStore: () => ({
-        currentItem: {}
-    })
-}))
+// vi.mock('@/stores/ticket', () => ({
+//     useTicketStore: () => ({
+//         currentItem: {}
+//     })
+// }))
 
 vi.mock('../../services/api.service.js', () => {
     return {
@@ -26,6 +26,14 @@ vi.mock('../../services/api.service.js', () => {
 })
 
 describe('MainView', async () => {
+    vi.mock('@/stores/trains', () => ({
+        useTrainsStore: () => ({
+            current: "",
+            setCurrent: () => {
+                // do nothing
+            },
+        })
+    }))
     router.push('/')
     await router.isReady()
 
@@ -33,16 +41,56 @@ describe('MainView', async () => {
         vi.restoreAllMocks()
     })
 
-    it('renders properly', async () => {
-        const SuspenseWrapperComponent = defineComponent({
-            components: { MainView },
-            template: `
-            <Suspense>
-                <MainView />
-            </Suspense> `
-        })
+    // it('renders properly', async () => {
+    //     const SuspenseWrapperComponent = defineComponent({
+    //         components: { MainView },
+    //         template: `
+    //         <Suspense>
+    //             <MainView />
+    //         </Suspense> `
+    //     })
 
-        const suspenseWrapper = mount(SuspenseWrapperComponent, {
+    //     const suspenseWrapper = mount(SuspenseWrapperComponent, {
+    //         global: {
+    //             plugins: [router],
+    //             stubs: {
+    //                 MapComp: {
+    //                     template: '<span />'
+    //                 }
+    //             }
+    //         }
+    //     })
+
+    //     await flushPromises()
+    //     const wrapper = suspenseWrapper.findComponent({ name: 'MainView' })
+
+    //     expect(wrapper.text()).contains('8150')
+    //     expect(wrapper.text()).contains('RvBlgc ->  Mras')
+    //     expect(wrapper.text()).contains('KpHpbg ->  Vå')
+
+    //     suspenseWrapper.unmount()
+    // })
+
+    it('renders properly', async () => {
+        // const SuspenseWrapperComponent = defineComponent({
+        //     components: { MainView },
+        //     template: `
+        //     <Suspense>
+        //         <MainView />
+        //     </Suspense> `
+        // })
+
+        // const suspenseWrapper = mount(SuspenseWrapperComponent, {
+        //     global: {
+        //         plugins: [router],
+        //         stubs: {
+        //             MapComp: {
+        //                 template: '<span />'
+        //             }
+        //         }
+        //     }
+        // })
+        const wrapper = mount(MainView, {
             global: {
                 plugins: [router],
                 stubs: {
@@ -52,14 +100,14 @@ describe('MainView', async () => {
                 }
             }
         })
-
         await flushPromises()
-        const wrapper = suspenseWrapper.findComponent({ name: 'MainView' })
+
 
         expect(wrapper.text()).contains('8150')
         expect(wrapper.text()).contains('RvBlgc ->  Mras')
         expect(wrapper.text()).contains('KpHpbg ->  Vå')
 
-        suspenseWrapper.unmount()
+        wrapper.unmount()
+        // suspenseWrapper.unmount()
     })
 })
