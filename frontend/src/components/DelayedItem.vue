@@ -24,7 +24,7 @@ item.delayTime = delayTime
 </script>
 
 <template>
-    <div class="delay-item" v-on:click="store.setCurrent(item.OperationalTrainNumber)" >
+    <div class="delay-item" v-if="store.current === '' || store.current === item.OperationalTrainNumber" >
         <div class="train-number">{{ item.OperationalTrainNumber }}</div>
         <div class="current-station">
             <div>{{ item.LocationSignature }}</div>

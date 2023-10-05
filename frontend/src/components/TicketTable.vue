@@ -7,7 +7,6 @@ import { getCodes, getTrainNumbers } from '../services/api.service.js'
 const store = useAuthStore()
 
 let reasoncodes
-let data
 const show = ref(false)
 let innerText = ref('Add new')
 const toggleNewForm = () => {

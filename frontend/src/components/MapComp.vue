@@ -3,23 +3,22 @@
 
 import socket from '../services/socket.service.js'
 import { useTrainsStore } from '@/stores/trains'
-/**
- * Delayed trains
- */
 import { getDelayedTrains } from '../services/api.service.js'
-import { onMounted, onBeforeMount } from 'vue';
+import { onMounted } from 'vue';
 
+const emit = defineEmits(['refresh-map'])
 const store = useTrainsStore()
 const center = [62.173276, 14.942265]
 let trainData = []
 let markers = {}
+let map
 
 socket.on('delayedTrainsUpdate', (updatedTrains) => {
     trainData = updatedTrains
 })
 
 function setupLeafletMap() {
-    const map = L.map('map', {zoomAnimation:false}).setView(center, 5)
+    map = L.map('map', {zoomAnimation:false}).setView(center, 5)
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
@@ -42,10 +41,19 @@ function setupLeafletMap() {
                     marker.setLatLng(data.position)
                 } else {
                     let marker = L.marker(data.position).bindPopup(data.trainnumber).on("click", function() {
-                            store.setCurrent(data.trainnumber)
-                            // add send emit to mainview
-                        }).addTo(map)
-
+                        store.setCurrent(data.trainnumber)
+                        emit('refresh-map')
+                    })
+                    // only add new marker to the map if all trains are visible
+                    // second conditionscheck should probably not be needed as the set train
+                    // should obviusly already be on the map. However if the list has been rendered
+                    // before map and user clicks on list it could happen that marker
+                    // has not been added to map yet. Will se what Scrutinizer says
+                    if (store.current === "" || store.current === data.OperationalNumber) {
+                    // console.log("new train incomming, nr:", data.trainnumber)
+                    // if (store.current === "") {
+                        marker.addTo(map)
+                    }
                     markers[data.trainnumber] = marker
                 }
             } else {
@@ -59,6 +67,28 @@ function setupLeafletMap() {
     })
 }
 
+/**
+ * Called from map component whenever a delayed item or a marker
+ * is clicked on. Toggles between showing all or single markers
+ */
+function updateLayers() {
+    for (const trainnr in markers) {
+        const marker = markers[trainnr]
+        if (store.current != "" && trainnr != store.current) {
+            map.removeLayer(marker)
+        } else {
+            map.addLayer(marker)
+        }
+    }
+}
+
+// for the main view to access
+defineExpose({
+    map,
+    markers,
+    updateLayers
+})
+
 onMounted(async () => {
     trainData = await getDelayedTrains()
     setupLeafletMap()
@@ -66,7 +96,7 @@ onMounted(async () => {
 </script>
 
 <template>
-    <div id="map" class="map"></div>
+    <div id="map" class="map" ref="current"></div>
 </template>
 
 <style scoped>
