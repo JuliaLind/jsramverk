@@ -21,8 +21,10 @@ function setupLeafletMap() {
     map = L.map('map', { zoomAnimation: false }).setView(center, 5)
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        // maxZoom: 19,
+        maxZoom: 18,
+        minZoom: 5,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     }).addTo(map)
 
     /**
