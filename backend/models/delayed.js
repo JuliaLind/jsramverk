@@ -54,7 +54,8 @@ const delayed = {
 
         // JSON result data
         const result = await response.json();
-        return result.RESPONSE.RESULT[0].TrainAnnouncement
+
+        return result.RESPONSE.RESULT[0].TrainAnnouncement;
     },
     /**
      * @description Fetches delayed trains from the Trafikverket API.

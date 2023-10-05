@@ -86,12 +86,9 @@ app.use((err, req, res, next) => {
 const httpServer = require("http").createServer(app);
 
 // Start the HTTP server
-
 const server = httpServer.listen(port, () => {
     console.info(`App listening on port ${port}`);
 });
-
-
 
 // Configure socket.io
 let io = require("socket.io")(httpServer, {
@@ -109,7 +106,7 @@ cron.schedule('5 * * * * *', async () => {
     } catch (error) {
         console.error('Error in cron job:', error);
     }
-})
+});
 
 // Fetch train positions with socket.io
 trains.fetchTrainPositions(io);
