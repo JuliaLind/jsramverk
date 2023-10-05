@@ -4,7 +4,7 @@
 import socket from '../services/socket.service.js'
 import { useTrainsStore } from '@/stores/trains'
 import { getDelayedTrains } from '../services/api.service.js'
-import { onMounted } from 'vue';
+import { onMounted } from 'vue'
 
 const emit = defineEmits(['refresh-map'])
 const store = useTrainsStore()
@@ -18,12 +18,11 @@ socket.on('delayedTrainsUpdate', (updatedTrains) => {
 })
 
 function setupLeafletMap() {
-    map = L.map('map', {zoomAnimation:false}).setView(center, 5)
+    map = L.map('map', { zoomAnimation: false }).setView(center, 5)
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
-        attribution:
-            '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map)
 
     /**
@@ -33,25 +32,28 @@ function setupLeafletMap() {
      */
     socket.on('trainpositions', (data) => {
         if (trainData) {
-            if (trainData.some(train => data.trainnumber === train.OperationalTrainNumber)) {
-
+            if (trainData.some((train) => data.trainnumber === train.OperationalTrainNumber)) {
                 if (data.trainnumber in markers) {
                     let marker = markers[data.trainnumber]
 
                     marker.setLatLng(data.position)
                 } else {
-                    let marker = L.marker(data.position).bindPopup(data.trainnumber).on("click", function() {
-                        store.setCurrent(data.trainnumber)
-                        emit('refresh-map')
-                    })
-                    // only add new marker to the map if all trains are visible
-                    // second conditionscheck should probably not be needed as the set train
-                    // should obviusly already be on the map. However if the list has been rendered
-                    // before map and user clicks on list it could happen that marker
-                    // has not been added to map yet. Will se what Scrutinizer says
-                    if (store.current === "" || store.current === data.OperationalNumber) {
+                    let marker = L.marker(data.position)
+                        .bindPopup(data.trainnumber)
+                        .on('click', function () {
+                            store.setCurrent(data.trainnumber)
+                            emit('refresh-map')
+                        })
                     // console.log("new train incomming, nr:", data.trainnumber)
-                    // if (store.current === "") {
+                    /**
+                     * Only add new marker to the map if all trains are set to be visible
+                     */
+                    // Second conditionscheck should probably not be needed as the set train
+                    // should obviously already be on the map. However if the list has been rendered
+                    // before map and user clicks on list it could happen that marker
+                    // has not been added to map yet. Will se what Scrutinizer says about complexity level
+                    if (store.current === '' || store.current === data.OperationalNumber) {
+                        // if (store.current === "") {
                         marker.addTo(map)
                     }
                     markers[data.trainnumber] = marker
@@ -74,7 +76,7 @@ function setupLeafletMap() {
 function updateLayers() {
     for (const trainnr in markers) {
         const marker = markers[trainnr]
-        if (store.current != "" && trainnr != store.current) {
+        if (store.current != '' && trainnr != store.current) {
             map.removeLayer(marker)
         } else {
             map.addLayer(marker)

@@ -1,7 +1,5 @@
 <script setup>
 import { useAuthStore } from '@/stores/auth'
-// import { RouterLink } from 'vue-router'
-// import { defineProps } from 'vue'
 
 const props = defineProps({
     trainnumbers: {
@@ -13,7 +11,6 @@ const props = defineProps({
         required: true
     }
 })
-
 const trainnumbers = props.trainnumbers
 const reasoncodes = props.codes
 /**

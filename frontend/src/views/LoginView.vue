@@ -13,7 +13,6 @@ const toggleForm = () => {
         innerText.value = 'Register'
     }
 }
-
 </script>
 
 <template>

@@ -4,24 +4,20 @@ import { mount } from '@vue/test-utils'
 import { codes } from './mockdata/codes-small.js'
 import { trainnumbers } from './mockdata/trainnumbers.js'
 
-
-
 vi.mock('@/stores/auth', () => ({
     useAuthStore: () => ({
-        token: "imavalidtoken",
+        token: 'imavalidtoken',
         getToken: () => {
             return this.token
         },
         updateTicket: () => {
-            return "ok"
+            return 'ok'
         },
         deleteTicket: () => {
-            return "ok"
+            return 'ok'
         }
     })
 }))
-
-
 
 describe('SingleTicket', async () => {
     // router.push('/admin')
@@ -33,20 +29,18 @@ describe('SingleTicket', async () => {
 
     it('renders properly', async () => {
         const ticket = {
-            _id: "651da2e90e521f4638c82312",
-            code: "ONA127",
-            trainnumber: "10345",
-            traindate: "2023-10-04"
+            _id: '651da2e90e521f4638c82312',
+            code: 'ONA127',
+            trainnumber: '10345',
+            traindate: '2023-10-04'
         }
-        const wrapper = mount(SingleTicket,
-            {
-                props: {
-                    codes: codes,
-                    trainnumbers: trainnumbers,
-                    ticket: ticket
-                },
+        const wrapper = mount(SingleTicket, {
+            props: {
+                codes: codes,
+                trainnumbers: trainnumbers,
+                ticket: ticket
+            }
         })
-
 
         expect(wrapper.text()).contains('ONA127')
         expect(wrapper.text()).contains('10345')

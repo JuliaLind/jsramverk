@@ -13,7 +13,6 @@ const router = createRouter({
     routes: routes
 })
 
-
 vi.mock('../../services/api.service.js', () => {
     return {
         getCodes: vi.fn(() => {
@@ -33,64 +32,22 @@ describe('AdminView', async () => {
         vi.restoreAllMocks()
     })
 
-    // it('renders properly', async () => {
-    //     vi.mock('@/stores/auth', () => ({
-    //         useAuthStore: () => ({
-    //             token: "imavalidtoken",
-    //             getToken: vi.fn(() => {
-    //                 return "imavalidtoken"
-    //             }),
-    //             updateTicket: () => {
-    //                 return "ok"
-    //             },
-    //             deleteTicket: () => {
-    //                 return "ok"
-    //             },
-    //             getTickets: vi.fn(() => {
-    //                 // console.log(tickets);
-    //                 return tickets
-    //             }),
-    //         })
-    //     }))
-    //     const SuspenseWrapperComponent = defineComponent({
-    //         components: { AdminView },
-    //         template: `
-    //         <Suspense>
-    //             <AdminView />
-    //         </Suspense> `
-    //     })
-
-    //     await flushPromises()
-    //     const suspenseWrapper = mount(SuspenseWrapperComponent, {
-    //         global: {
-    //             plugins: [router]
-    //         }
-    //     })
-
-    //     await flushPromises()
-    //     const wrapper = suspenseWrapper.findComponent({ name: 'AdminView' })
-    //     expect(wrapper.text()).contains('Befintliga ärenden')
-    //     // expect(wrapper.text()).contains('6505d0b1a60773cde6d0704d')
-
-    //     suspenseWrapper.unmount()
-    // })
-
     it('renders properly', async () => {
         vi.mock('@/stores/auth', () => ({
             useAuthStore: () => ({
-                token: "imavalidtoken",
+                token: 'imavalidtoken',
                 getToken: vi.fn(() => {
-                    return "imavalidtoken"
+                    return 'imavalidtoken'
                 }),
                 updateTicket: () => {
-                    return "ok"
+                    return 'ok'
                 },
                 deleteTicket: () => {
-                    return "ok"
+                    return 'ok'
                 },
                 getTickets: vi.fn(() => {
                     return tickets
-                }),
+                })
             })
         }))
 

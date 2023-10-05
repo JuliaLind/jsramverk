@@ -3,7 +3,6 @@ import TicketTable from '../components/TicketTable.vue'
 import { RouterLink } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 const store = useAuthStore()
-
 </script>
 
 <template>
@@ -12,9 +11,9 @@ const store = useAuthStore()
     <RouterLink to="/" @click="store.logout()"> Logga ut </RouterLink>
     <br />
     <RouterLink to="/"> Tillbaka </RouterLink>
-        <div class="ticket-container">
-            <TicketTable />
-        </div>
+    <div class="ticket-container">
+        <TicketTable />
+    </div>
 </template>
 
 <style>

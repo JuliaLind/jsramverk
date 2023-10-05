@@ -9,7 +9,6 @@ const router = createRouter({
     routes: routes
 })
 
-
 describe('LoginForm', async () => {
     router.push('/login')
     await router.isReady()
@@ -21,26 +20,24 @@ describe('LoginForm', async () => {
     it('renders properly', async () => {
         vi.mock('@/stores/auth', () => ({
             useAuthStore: () => ({
-                token: "",
+                token: '',
                 getToken: vi.fn(() => {
-                    return ""
+                    return ''
                 }),
                 register: vi.fn(() => {
-                    return "imavalidtoken"
+                    return 'imavalidtoken'
                 }),
                 login: vi.fn(() => {
-                    return "imavalidtoken"
-                }),
+                    return 'imavalidtoken'
+                })
             })
         }))
 
-        const wrapper = mount(LoginForm,
-            {
-                global: {
-                    plugins: [router]
-                }
+        const wrapper = mount(LoginForm, {
+            global: {
+                plugins: [router]
             }
-        )
+        })
 
         await flushPromises()
         expect(wrapper.text()).contains('Logga in')

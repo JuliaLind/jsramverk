@@ -1,24 +1,22 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
-
 
 /**
- * 
+ *
  */
 export const useTrainsStore = defineStore('trains', {
     state: () => ({
         //  delayed: ref([]),
-            current: ""
-        }),
+        current: ''
+    }),
     actions: {
         // setTrains(trains) {
         //     this.delayed.value = trains
         // },
         setCurrent(trainnr) {
-            if (this.current === "") {
+            if (this.current === '') {
                 this.current = trainnr
             } else {
-                this.current = ""
+                this.current = ''
             }
             console.log(this.current)
         }

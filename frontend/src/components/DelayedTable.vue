@@ -9,7 +9,6 @@ import socket from '../services/socket.service.js'
 import { useTrainsStore } from '@/stores/trains'
 
 const store = useTrainsStore()
-
 const delayedTrains = ref([])
 
 onMounted(async () => {
@@ -26,7 +25,12 @@ socket.on('delayedTrainsUpdate', (updatedTrains) => {
         <h1>Försenade tåg</h1>
         <div id="delayed-trains" class="delayed-trains">
             <!-- <DelayedItem v-for="item in delayedTrains" :item="item" :key="item.ActivityId" /> -->
-            <DelayedItem v-for="item in delayedTrains" :item="item" :key="item.ActivityId" v-on:click="store.setCurrent(item.OperationalTrainNumber), $emit('refresh-map')"/>
+            <DelayedItem
+                v-for="item in delayedTrains"
+                :item="item"
+                :key="item.ActivityId"
+                v-on:click="store.setCurrent(item.OperationalTrainNumber), $emit('refresh-map')"
+            />
         </div>
     </div>
 </template>

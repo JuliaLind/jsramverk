@@ -6,14 +6,12 @@ import { outputDelay } from '../services/utils.service.js'
 import { useTrainsStore } from '@/stores/trains'
 
 const store = useTrainsStore()
-
 const props = defineProps({
     item: {
         type: Object,
         required: true
     }
 })
-
 /**
  * @var {Object} item - Object containing data for a delayed train
  */
@@ -24,7 +22,10 @@ item.delayTime = delayTime
 </script>
 
 <template>
-    <div class="delay-item" v-if="store.current === '' || store.current === item.OperationalTrainNumber" >
+    <div
+        class="delay-item"
+        v-if="store.current === '' || store.current === item.OperationalTrainNumber"
+    >
         <div class="train-number">{{ item.OperationalTrainNumber }}</div>
         <div class="current-station">
             <div>{{ item.LocationSignature }}</div>

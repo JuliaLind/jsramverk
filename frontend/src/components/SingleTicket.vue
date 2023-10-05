@@ -1,6 +1,6 @@
 <script setup>
 import { useAuthStore } from '@/stores/auth'
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
 
 const props = defineProps({
     trainnumbers: {
@@ -20,7 +20,6 @@ const props = defineProps({
 const reasoncodes = props.codes
 const ticket = props.ticket
 let trainnumbers = props.trainnumbers
-
 /**
  * Assigns the first the default-values
  * for new ticket
@@ -32,13 +31,9 @@ const id = ticket._id
 const store = useAuthStore()
 let innerText = 'Edit'
 
-
 if (!(trainnumber in trainnumbers)) {
     trainnumbers.push(trainnumber)
 }
-
-
-
 
 /**
  * Sends a post request to the backend API for inserting
@@ -78,10 +73,7 @@ const toggleEditing = function () {
 <template>
     <div class="ticket">
         <form
-            v-on:submit.prevent="
-                submitForm(code, trainnumber, traindate),
-                $emit('form-submitted')
-            "
+            v-on:submit.prevent="submitForm(code, trainnumber, traindate), $emit('form-submitted')"
         >
             <input type="text" disabled :value="id" />
             <select

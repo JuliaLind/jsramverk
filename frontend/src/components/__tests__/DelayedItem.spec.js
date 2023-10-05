@@ -2,15 +2,14 @@ import { vi, describe, it, expect } from 'vitest'
 import DelayedItem from '../DelayedItem.vue'
 import { mount } from '@vue/test-utils'
 
-
 describe('DelayedItem', async () => {
     it('renders properly', () => {
         vi.mock('@/stores/trains', () => ({
             useTrainsStore: () => ({
-                current: "",
+                current: '',
                 setCurrent: () => {
                     // do nothing
-                },
+                }
             })
         }))
         const wrapper = mount(DelayedItem, {
@@ -40,7 +39,7 @@ describe('DelayedItem', async () => {
                     ],
                     TrainOwner: 'SJ'
                 }
-            },
+            }
         })
         expect(wrapper.text()).toContain('442KG ->  Cst31 minuter')
         wrapper.unmount()

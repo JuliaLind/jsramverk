@@ -23,11 +23,13 @@ export const getCodes = async () => {
 export const getTrainNumbers = async () => {
     const res = await axios.get(`${import.meta.env.VITE_URL}/delayed`)
     const trains = res.data.data
-    return  [
-                ...new Set(
-                    trains.map((item) => {
-                            return item.OperationalTrainNumber
-                        }).sort()
-                )
-            ]
+    return [
+        ...new Set(
+            trains
+                .map((item) => {
+                    return item.OperationalTrainNumber
+                })
+                .sort()
+        )
+    ]
 }

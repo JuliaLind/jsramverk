@@ -21,10 +21,10 @@ vi.mock('../../services/api.service.js', () => {
 describe('MainView', async () => {
     vi.mock('@/stores/trains', () => ({
         useTrainsStore: () => ({
-            current: "",
+            current: '',
             setCurrent: () => {
                 // do nothing
-            },
+            }
         })
     }))
     router.push('/')
@@ -47,12 +47,10 @@ describe('MainView', async () => {
         })
         await flushPromises()
 
-
         expect(wrapper.text()).contains('8150')
         expect(wrapper.text()).contains('RvBlgc ->  Mras')
         expect(wrapper.text()).contains('KpHpbg ->  Vå')
 
         wrapper.unmount()
-        // suspenseWrapper.unmount()
     })
 })

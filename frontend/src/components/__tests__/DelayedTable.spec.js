@@ -3,7 +3,6 @@ import DelayedTable from '../DelayedTable.vue'
 import { mount, flushPromises } from '@vue/test-utils'
 import { delayed } from './mockdata/delayed.js'
 
-
 vi.mock('../../services/api.service.js', () => {
     return {
         getDelayedTrains: vi.fn(() => {
@@ -20,13 +19,12 @@ describe('DelayedTable', async () => {
     it('renders properly', async () => {
         vi.mock('@/stores/trains', () => ({
             useTrainsStore: () => ({
-                current: "",
+                current: '',
                 setCurrent: () => {
                     // do nothing
-                },
+                }
             })
         }))
-
 
         const wrapper = mount(DelayedTable)
 

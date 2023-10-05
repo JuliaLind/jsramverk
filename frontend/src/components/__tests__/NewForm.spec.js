@@ -6,13 +6,12 @@ import { trainnumbers } from './mockdata/trainnumbers.js'
 
 vi.mock('@/stores/auth', () => ({
     useAuthStore: () => ({
-        token: "imavalidtoken",
+        token: 'imavalidtoken',
         getToken: () => {
             return this.token
-        },
+        }
     })
 }))
-
 
 describe('NewTicket', async () => {
     afterEach(() => {
@@ -20,14 +19,12 @@ describe('NewTicket', async () => {
     })
 
     it('renders properly', async () => {
-        const wrapper = mount(NewTicket,
-            {
-                props: {
-                    codes: codes,
-                    trainnumbers: trainnumbers
-                },
+        const wrapper = mount(NewTicket, {
+            props: {
+                codes: codes,
+                trainnumbers: trainnumbers
             }
-        )
+        })
 
         expect(wrapper.text()).contains('ANA002')
         expect(wrapper.text()).contains('8150')

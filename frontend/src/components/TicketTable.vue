@@ -4,8 +4,8 @@ import { useAuthStore } from '@/stores/auth'
 import NewTicket from '../components/NewTicket.vue'
 import SingleTicket from '../components/SingleTicket.vue'
 import { getCodes, getTrainNumbers } from '../services/api.service.js'
-const store = useAuthStore()
 
+const store = useAuthStore()
 let reasoncodes
 const show = ref(false)
 let innerText = ref('Add new')
@@ -23,16 +23,15 @@ const updateTickets = async () => {
     tickets.value = await store.getTickets()
 }
 let trainnumbers
+
 onMounted(async () => {
     reasoncodes = await getCodes()
     trainnumbers = await getTrainNumbers()
     updateTickets()
 })
 
-
 // Note for later: consider moving tickets constant to auth-pinia
 // store too, it would then be available from parent component too
-
 </script>
 
 <template>
@@ -49,10 +48,7 @@ onMounted(async () => {
             v-if="show"
             :codes="reasoncodes"
             :trainnumbers="trainnumbers"
-            @form-submitted="
-                updateTickets(),
-                toggleNewForm()
-            "
+            @form-submitted="updateTickets(), toggleNewForm()"
             ref="show"
         />
         <SingleTicket

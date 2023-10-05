@@ -9,7 +9,6 @@ const router = createRouter({
     routes: routes
 })
 
-
 describe('RegisterForm', async () => {
     router.push('/login')
     await router.isReady()
@@ -21,26 +20,24 @@ describe('RegisterForm', async () => {
     it('renders properly', async () => {
         vi.mock('@/stores/auth', () => ({
             useAuthStore: () => ({
-                token: "",
+                token: '',
                 getToken: vi.fn(() => {
-                    return ""
+                    return ''
                 }),
                 register: vi.fn(() => {
-                    return "imavalidtoken"
+                    return 'imavalidtoken'
                 }),
                 login: vi.fn(() => {
-                    return "imavalidtoken"
-                }),
+                    return 'imavalidtoken'
+                })
             })
         }))
 
-        const wrapper = mount(RegisterForm,
-            {
-                global: {
-                    plugins: [router]
-                }
+        const wrapper = mount(RegisterForm, {
+            global: {
+                plugins: [router]
             }
-        )
+        })
 
         expect(wrapper.text()).contains('Registreringsformulär')
         expect(wrapper.text()).contains('Namn')

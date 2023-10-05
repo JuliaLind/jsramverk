@@ -18,19 +18,19 @@ vi.mock('../../services/api.service.js', () => {
 
 vi.mock('@/stores/auth', () => ({
     useAuthStore: () => ({
-        token: "imavalidtoken",
+        token: 'imavalidtoken',
         getToken: vi.fn(() => {
-            return "imavalidtoken"
+            return 'imavalidtoken'
         }),
         updateTicket: () => {
-            return "ok"
+            return 'ok'
         },
         deleteTicket: () => {
-            return "ok"
+            return 'ok'
         },
         getTickets: vi.fn(() => {
             return tickets
-        }),
+        })
     })
 }))
 
@@ -38,7 +38,6 @@ describe('TicketsTable', async () => {
     afterEach(() => {
         vi.restoreAllMocks()
     })
-
 
     it('renders properly', async () => {
         const wrapper = mount(TicketTable)
