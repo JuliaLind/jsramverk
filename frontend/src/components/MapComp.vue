@@ -1,78 +1,68 @@
-<script>
+<script setup>
 /* global L */
 
 import socket from '../services/socket.service.js'
-
+import { useTrainsStore } from '@/stores/trains'
 /**
  * Delayed trains
  */
 import { getDelayedTrains } from '../services/api.service.js'
+import { onMounted, onBeforeMount } from 'vue';
 
+const store = useTrainsStore()
+const center = [62.173276, 14.942265]
+let trainData = []
+let markers = {}
 
-/**
- * Map with markers that display current positions of trains.
- */
-export default {
-    name: 'Map-comp',
-    data() {
-        return {
-            center: [62.173276, 14.942265],
-            trainData: [],
-            markers: {}
-        }
-    },
-    methods: {
-        setupLeafletMap() {
-            const map = L.map('map', {zoomAnimation:false}).setView(this.center, 5)
+socket.on('delayedTrainsUpdate', (updatedTrains) => {
+    trainData = updatedTrains
+})
 
-            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                maxZoom: 19,
-                attribution:
-                    '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-            }).addTo(map)
+function setupLeafletMap() {
+    const map = L.map('map', {zoomAnimation:false}).setView(center, 5)
 
-            // let markers = {}
-            /**
-             * When receiving "message" signal from backend,
-             * if the train is not already on the map adds a new marker,
-             * if the train is on the map updates the marker's position
-             */
-            socket.on('trainpositions', (data) => {
-                if (this.trainData) {
-                    if (this.trainData.some(train => data.trainnumber === train.OperationalTrainNumber)) {
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution:
+            '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map)
 
-                        if (Object.prototype.hasOwnProperty.call(this.markers, data.trainnumber)) {
-                            let marker = this.markers[data.trainnumber]
+    /**
+     * When receiving "message" signal from backend,
+     * if the train is not already on the map adds a new marker,
+     * if the train is on the map updates the marker's position
+     */
+    socket.on('trainpositions', (data) => {
+        if (trainData) {
+            if (trainData.some(train => data.trainnumber === train.OperationalTrainNumber)) {
 
-                            marker.setLatLng(data.position)
-                        } else {
-                            let marker = L.marker(data.position).bindPopup(data.trainnumber).addTo(map)
+                if (data.trainnumber in markers) {
+                    let marker = markers[data.trainnumber]
 
-                            this.markers[data.trainnumber] = marker
-                        }
-                    } else {
-                        if (Object.prototype.hasOwnProperty.call(this.markers, data.trainnumber)) {
-                            let marker = this.markers[data.trainnumber]
-                            map.removeLayer(marker)
-                            delete this.markers[data.trainnumber]
-                        }
-                    }
+                    marker.setLatLng(data.position)
+                } else {
+                    let marker = L.marker(data.position).bindPopup(data.trainnumber).on("click", function() {
+                            store.setCurrent(data.trainnumber)
+                            // add send emit to mainview
+                        }).addTo(map)
+
+                    markers[data.trainnumber] = marker
                 }
-            })
+            } else {
+                if (data.trainnumber in markers) {
+                    let marker = markers[data.trainnumber]
+                    map.removeLayer(marker)
+                    delete markers[data.trainnumber]
+                }
+            }
         }
-    },
-    async beforeMount() {
-        this.trainData = await getDelayedTrains()
-    },
-    mounted() {
-        this.setupLeafletMap()
-
-        socket.on('delayedTrainsUpdate', (updatedTrains) => {
-            this.trainData = updatedTrains
-            
-        })
-    }
+    })
 }
+
+onMounted(async () => {
+    trainData = await getDelayedTrains()
+    setupLeafletMap()
+})
 </script>
 
 <template>
