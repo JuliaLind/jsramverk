@@ -13,14 +13,12 @@ const delayedTrains = ref([])
 
 onMounted(async () => {
     delayedTrains.value = await getDelayedTrains()
-})
-
-socket.on('initial', (reasonCodes) => {
-    console.log(reasonCodes)
+    store.delayed = delayedTrains.value
 })
 
 socket.on('delayedTrainsUpdate', (updatedTrains) => {
     delayedTrains.value = updatedTrains
+    store.delayed = delayedTrains.value
 })
 </script>
 
@@ -28,7 +26,6 @@ socket.on('delayedTrainsUpdate', (updatedTrains) => {
     <div class="delayed">
         <h1>Försenade tåg</h1>
         <div id="delayed-trains" class="delayed-trains">
-            <!-- <DelayedItem v-for="item in delayedTrains" :item="item" :key="item.ActivityId" /> -->
             <DelayedItem
                 v-for="item in delayedTrains"
                 :item="item"
