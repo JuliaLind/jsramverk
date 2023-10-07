@@ -48,6 +48,8 @@ async function submitForm(code, trainnumber, traindate) {
 <template>
     <div class="ticket">
         <form v-on:submit.prevent="submitForm(code, trainnumber, traindate)">
+            <!--just a placeholder for ticketnr field-->
+            <input type="text" readonly />
             <select name="trainnumer" v-model="trainnumber">
                 <option v-for="train in trainnumbers" :key="train" :value="train">
                     {{ train }}
@@ -58,7 +60,7 @@ async function submitForm(code, trainnumber, traindate) {
                     {{ code.Code }} - {{ code.Level3Description }} - {{ code.Level2Description }} - {{ code.Level1Description }}
                 </option>
             </select>
-            <input type="date" disabled name="traindate" v-model="traindate" />
+            <input type="date" readonly name="traindate" v-model="traindate" />
             <input type="submit" value="Submit" />
         </form>
     </div>
