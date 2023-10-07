@@ -55,7 +55,6 @@ onMounted(async () => {
             v-for="ticket in tickets"
             :key="ticket._id"
             :codes="reasoncodes"
-            :trainnumbers="trainnumbers"
             :ticket="ticket"
             @form-submitted="updateTickets()"
         />

@@ -55,10 +55,10 @@ async function submitForm(code, trainnumber, traindate) {
             </select>
             <select name="code" v-model="code">
                 <option v-for="code in reasoncodes" :key="code.Code" :value="code.Code">
-                    {{ code.Code }} - {{ code.Level3Description }}
+                    {{ code.Code }} - {{ code.Level3Description }} - {{ code.Level2Description }} - {{ code.Level1Description }}
                 </option>
             </select>
-            <input type="date" name="traindate" v-model="traindate" />
+            <input type="date" disabled name="traindate" v-model="traindate" />
             <input type="submit" value="Submit" />
         </form>
     </div>

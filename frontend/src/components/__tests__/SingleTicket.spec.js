@@ -37,7 +37,6 @@ describe('SingleTicket', async () => {
         const wrapper = mount(SingleTicket, {
             props: {
                 codes: codes,
-                trainnumbers: trainnumbers,
                 ticket: ticket
             }
         })

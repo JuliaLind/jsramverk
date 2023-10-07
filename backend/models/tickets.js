@@ -110,24 +110,10 @@ const tickets = {
     updateTicket: async function updateTicket(res, req) {
         const ticketId = req.body._id;
         const code = req.body.code;
-        const trainnumber = req.body.trainnumber;
-        const traindate = req.body.traindate;
-        // if (!ticketId || !code || !trainnumber || !traindate) {
-        //     return res.status(401).json({
-        //         errors: {
-        //             status: 401,
-        //             source: "/tickets",
-        //             title: "No empty fields allowed",
-        //             detail: "No empty fields allowed"
-        //         }
-        //     });
-        // }
-
         const doc = {
             $set: {
                 code: code,
-                trainnumber: trainnumber,
-                traindate: traindate
+                updated: new Date().toJSON().slice(0, 10)
             }
         };
         const filter = {

@@ -15,6 +15,10 @@ onMounted(async () => {
     delayedTrains.value = await getDelayedTrains()
 })
 
+socket.on('initial', (reasonCodes) => {
+    console.log(reasonCodes)
+})
+
 socket.on('delayedTrainsUpdate', (updatedTrains) => {
     delayedTrains.value = updatedTrains
 })
