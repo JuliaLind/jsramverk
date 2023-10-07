@@ -15,6 +15,7 @@ const props = defineProps({
 
 const reasoncodes = props.codes
 const ticket = props.ticket
+
 /**
  * Assigns the first the default-values
  * for new ticket
@@ -24,15 +25,14 @@ const id = ticket._id
 const store = useAuthStore()
 let innerText = 'Edit'
 
-
 /**
  * Sends a post request to the backend API for inserting
  * the form data into the database
  */
-async function submitForm(code, trainnumber, traindate) {
+async function submitForm(code) {
     const updatedTicket = {
         _id: id,
-        code: code,
+        code: code
     }
 
     await store.updateTicket(updatedTicket)
@@ -55,14 +55,13 @@ const toggleEditing = function () {
 
 <template>
     <div class="ticket">
-        <form
-            v-on:submit.prevent="submitForm(code, trainnumber, traindate), $emit('form-submitted')"
-        >
+        <form v-on:submit.prevent="submitForm(code), $emit('form-submitted')">
             <input type="text" disabled :value="id" />
             <input type="text" disabled :value="ticket.trainnumber" />
             <select name="code" v-model="code" required="required" :disabled="!editing">
                 <option v-for="code in reasoncodes" :key="code.Code" :value="code.Code">
-                    {{ code.Code }} - {{ code.Level3Description }} - {{ code.Level2Description }} - {{ code.Level1Description }}
+                    {{ code.Code }} - {{ code.Level3Description }} - {{ code.Level2Description }} -
+                    {{ code.Level1Description }}
                 </option>
             </select>
             <input type="date" disabled :value="ticket.traindate" />

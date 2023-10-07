@@ -10,7 +10,7 @@ const store = useTrainsStore()
 onMounted(async () => {
     store.setDelayed(await getDelayedTrains())
     store.setCodes(await getCodes())
-});
+})
 
 socket.on('delayedTrainsUpdate', (updatedTrains) => {
     store.setDelayed(updatedTrains)

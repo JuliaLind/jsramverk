@@ -4,7 +4,7 @@
 import socket from '../services/socket.service.js'
 import { useTrainsStore } from '@/stores/trains'
 import { getDelayedTrains, getInitialPositions } from '../services/api.service.js'
-import { onMounted, ref } from 'vue'
+import { onMounted } from 'vue'
 
 const emit = defineEmits(['refresh-map'])
 const store = useTrainsStore()
@@ -13,7 +13,6 @@ let trainData = []
 let markers = {}
 let map
 let initialPositions
-
 
 socket.on('delayedTrainsUpdate', (updatedTrains) => {
     trainData = updatedTrains
@@ -56,7 +55,7 @@ function setupLeafletMap() {
         // maxZoom: 19,
         maxZoom: 18,
         minZoom: 5,
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map)
 
     for (const position of initialPositions) {

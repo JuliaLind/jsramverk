@@ -13,6 +13,7 @@ const props = defineProps({
 })
 const trainnumbers = props.trainnumbers
 const reasoncodes = props.codes
+
 /**
  * Assigns the initial values for the form
  * list as a default value for the new ticket
@@ -57,7 +58,8 @@ async function submitForm(code, trainnumber, traindate) {
             </select>
             <select name="code" v-model="code">
                 <option v-for="code in reasoncodes" :key="code.Code" :value="code.Code">
-                    {{ code.Code }} - {{ code.Level3Description }} - {{ code.Level2Description }} - {{ code.Level1Description }}
+                    {{ code.Code }} - {{ code.Level3Description }} - {{ code.Level2Description }} -
+                    {{ code.Level1Description }}
                 </option>
             </select>
             <input type="date" readonly name="traindate" v-model="traindate" />

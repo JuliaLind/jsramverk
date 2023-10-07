@@ -21,7 +21,6 @@ vi.mock('@/stores/trains', () => ({
     })
 }))
 
-
 describe('AdminView', async () => {
     router.push('/admin')
     await router.isReady()

@@ -99,7 +99,7 @@ export const useAuthStore = defineStore('store', {
                 }
             })
             const result = await response.json()
-            console.log("new ticket result: ", result)
+            console.log('new ticket result: ', result)
             if (this.isTokenValid(result)) {
                 return result.data
             }
@@ -125,7 +125,7 @@ export const useAuthStore = defineStore('store', {
                 }
             })
             const result = await response.json()
-            console.log("updated ticket result: ", result)
+            console.log('updated ticket result: ', result)
             if (this.isTokenValid(result)) {
                 return result.data
             }
