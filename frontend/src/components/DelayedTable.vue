@@ -13,12 +13,12 @@ const delayedTrains = ref([])
 
 onMounted(async () => {
     delayedTrains.value = await getDelayedTrains()
-    store.delayed = delayedTrains.value
+    // store.delayed = delayedTrains.value
 })
 
 socket.on('delayedTrainsUpdate', (updatedTrains) => {
     delayedTrains.value = updatedTrains
-    store.delayed = delayedTrains.value
+    // store.delayed = delayedTrains.value
 })
 </script>
 
