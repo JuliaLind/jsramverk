@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1696705507676" clover="3.2.0">
-  <project timestamp="1696705507676" name="All files">
-    <metrics statements="271" coveredstatements="247" conditionals="34" coveredconditionals="25" methods="47" coveredmethods="43" elements="352" coveredelements="315" complexity="0" loc="271" ncloc="271" packages="4" files="13" classes="13"/>
+<coverage generated="1696706783823" clover="3.2.0">
+  <project timestamp="1696706783823" name="All files">
+    <metrics statements="271" coveredstatements="244" conditionals="34" coveredconditionals="25" methods="47" coveredmethods="42" elements="352" coveredelements="311" complexity="0" loc="271" ncloc="271" packages="4" files="13" classes="13"/>
     <package name="backend">
-      <metrics statements="50" coveredstatements="47" conditionals="8" coveredconditionals="5" methods="5" coveredmethods="5"/>
+      <metrics statements="50" coveredstatements="44" conditionals="8" coveredconditionals="5" methods="5" coveredmethods="4"/>
       <file name="app.js" path="/home/juli22/dbwebb-kurser/jsramverk-alla/jsramverk/backend/app.js">
-        <metrics statements="50" coveredstatements="47" conditionals="8" coveredconditionals="5" methods="5" coveredmethods="5"/>
+        <metrics statements="50" coveredstatements="44" conditionals="8" coveredconditionals="5" methods="5" coveredmethods="4"/>
         <line num="10" count="1" type="stmt"/>
         <line num="12" count="1" type="stmt"/>
         <line num="13" count="1" type="stmt"/>
@@ -50,9 +50,9 @@
         <line num="91" count="1" type="stmt"/>
         <line num="95" count="1" type="stmt"/>
         <line num="104" count="1" type="stmt"/>
-        <line num="105" count="1" type="stmt"/>
-        <line num="106" count="1" type="stmt"/>
-        <line num="108" count="1" type="stmt"/>
+        <line num="105" count="0" type="stmt"/>
+        <line num="106" count="0" type="stmt"/>
+        <line num="108" count="0" type="stmt"/>
         <line num="110" count="0" type="stmt"/>
         <line num="115" count="1" type="stmt"/>
         <line num="118" count="1" type="stmt"/>
@@ -151,16 +151,16 @@
         <metrics statements="16" coveredstatements="15" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="3"/>
         <line num="8" count="1" type="stmt"/>
         <line num="16" count="1" type="stmt"/>
-        <line num="22" count="4" type="stmt"/>
-        <line num="54" count="4" type="stmt"/>
-        <line num="62" count="4" type="stmt"/>
-        <line num="63" count="4" type="stmt"/>
-        <line num="64" count="4" type="stmt"/>
-        <line num="65" count="4" type="stmt"/>
-        <line num="67" count="4" type="stmt"/>
-        <line num="68" count="53532" type="cond" truecount="2" falsecount="0"/>
-        <line num="69" count="32" type="stmt"/>
-        <line num="73" count="4" type="stmt"/>
+        <line num="22" count="3" type="stmt"/>
+        <line num="54" count="3" type="stmt"/>
+        <line num="62" count="3" type="stmt"/>
+        <line num="63" count="3" type="stmt"/>
+        <line num="64" count="3" type="stmt"/>
+        <line num="65" count="3" type="stmt"/>
+        <line num="67" count="3" type="stmt"/>
+        <line num="68" count="34137" type="cond" truecount="2" falsecount="0"/>
+        <line num="69" count="63" type="stmt"/>
+        <line num="73" count="3" type="stmt"/>
         <line num="84" count="3" type="stmt"/>
         <line num="85" count="3" type="stmt"/>
         <line num="89" count="0" type="stmt"/>

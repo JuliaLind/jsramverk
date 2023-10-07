@@ -49,7 +49,7 @@ const trains = {
             position: this.getCoords(position),
             timestamp: position.TimeStamp,
             bearing: position.Bearing,
-            status: position.Deleted,
+            status: !position.Deleted,
             speed: position.Speed,
         };
     },
