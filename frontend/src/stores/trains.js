@@ -5,13 +5,11 @@ import { defineStore } from 'pinia'
  */
 export const useTrainsStore = defineStore('trains', {
     state: () => ({
-        //  delayed: ref([]),
-        current: ''
+        current: '',
+        delayed: [],
+        codes: []
     }),
     actions: {
-        // setTrains(trains) {
-        //     this.delayed.value = trains
-        // },
         setCurrent(trainnr) {
             if (this.current === '') {
                 this.current = trainnr
@@ -19,6 +17,23 @@ export const useTrainsStore = defineStore('trains', {
                 this.current = ''
             }
             console.log(this.current)
+        },
+        setDelayed(announcements) {
+            this.delayed = announcements
+        },
+        setCodes(codes) {
+            this.codes = codes
+        },
+        getTrainNumbers() {
+            return [
+                ...new Set(
+                    this.delayed
+                        .map((item) => {
+                            return item.OperationalTrainNumber
+                        })
+                        .sort()
+                )
+            ]
         }
     }
 })
