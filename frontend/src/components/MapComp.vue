@@ -3,8 +3,8 @@
 
 import socket from '../services/socket.service.js'
 import { useTrainsStore } from '@/stores/trains'
-import { getDelayedTrains } from '../services/api.service.js'
-import { onMounted } from 'vue'
+import { getDelayedTrains, getInitialPositions } from '../services/api.service.js'
+import { onMounted, ref } from 'vue'
 
 const emit = defineEmits(['refresh-map'])
 const store = useTrainsStore()
@@ -12,10 +12,42 @@ const center = [62.173276, 14.942265]
 let trainData = []
 let markers = {}
 let map
+let initialPositions
+
 
 socket.on('delayedTrainsUpdate', (updatedTrains) => {
     trainData = updatedTrains
 })
+
+function updatePosition(positionObject) {
+    if (trainData.some((train) => positionObject.trainnumber === train.OperationalTrainNumber)) {
+        if (positionObject.trainnumber in markers) {
+            let marker = markers[positionObject.trainnumber]
+
+            marker.setLatLng(positionObject.position)
+        } else {
+            let marker = L.marker(positionObject.position)
+                .bindPopup(positionObject.trainnumber)
+                .on('click', function () {
+                    store.setCurrent(positionObject.trainnumber)
+                    emit('refresh-map')
+                })
+            marker.addTo(map)
+            if (store.current === '' || store.current === positionObject.trainnumber) {
+                // maybe second conditionCheck not really needed
+                // if (store.current === "") {
+                marker.addTo(map)
+            }
+            markers[positionObject.trainnumber] = marker
+        }
+    } else {
+        if (positionObject.trainnumber in markers) {
+            let marker = markers[positionObject.trainnumber]
+            map.removeLayer(marker)
+            delete markers[positionObject.trainnumber]
+        }
+    }
+}
 
 function setupLeafletMap() {
     map = L.map('map', { zoomAnimation: false }).setView(center, 5)
@@ -27,6 +59,9 @@ function setupLeafletMap() {
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     }).addTo(map)
 
+    for (const position of initialPositions) {
+        updatePosition(position)
+    }
     /**
      * When receiving "message" signal from backend,
      * if the train is not already on the map adds a new marker,
@@ -34,39 +69,7 @@ function setupLeafletMap() {
      */
     socket.on('trainpositions', (data) => {
         if (trainData) {
-            if (trainData.some((train) => data.trainnumber === train.OperationalTrainNumber)) {
-                if (data.trainnumber in markers) {
-                    let marker = markers[data.trainnumber]
-
-                    marker.setLatLng(data.position)
-                } else {
-                    let marker = L.marker(data.position)
-                        .bindPopup(data.trainnumber)
-                        .on('click', function () {
-                            store.setCurrent(data.trainnumber)
-                            emit('refresh-map')
-                        })
-                    // console.log("new train incomming, nr:", data.trainnumber)
-                    /**
-                     * Only add new marker to the map if all trains are set to be visible
-                     */
-                    // Second conditionscheck should probably not be needed as the set train
-                    // should obviously already be on the map. However if the list has been rendered
-                    // before map and user clicks on list it could happen that marker
-                    // has not been added to map yet. Will se what Scrutinizer says about complexity level
-                    if (store.current === '' || store.current === data.OperationalNumber) {
-                        // if (store.current === "") {
-                        marker.addTo(map)
-                    }
-                    markers[data.trainnumber] = marker
-                }
-            } else {
-                if (data.trainnumber in markers) {
-                    let marker = markers[data.trainnumber]
-                    map.removeLayer(marker)
-                    delete markers[data.trainnumber]
-                }
-            }
+            updatePosition(data)
         }
     })
 }
@@ -95,6 +98,7 @@ defineExpose({
 
 onMounted(async () => {
     trainData = await getDelayedTrains()
+    initialPositions = await getInitialPositions()
     setupLeafletMap()
 })
 </script>
