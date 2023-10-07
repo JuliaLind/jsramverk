@@ -3,7 +3,6 @@ import AdminView from '../AdminView.vue'
 import { mount, flushPromises } from '@vue/test-utils'
 import { createRouter, createWebHistory } from 'vue-router'
 import { routes } from '@/router'
-// import { defineComponent } from 'vue'
 import { codes } from '../../components/__tests__/mockdata/codes.js'
 import { tickets } from '../../components/__tests__/mockdata/tickets.js'
 import { trainnumbers } from '../../components/__tests__/mockdata/trainnumbers.js'
@@ -13,16 +12,15 @@ const router = createRouter({
     routes: routes
 })
 
-vi.mock('../../services/api.service.js', () => {
-    return {
-        getCodes: vi.fn(() => {
-            return codes
-        }),
+vi.mock('@/stores/trains', () => ({
+    useTrainsStore: () => ({
+        codes: codes,
         getTrainNumbers: vi.fn(() => {
             return trainnumbers
         })
-    }
-})
+    })
+}))
+
 
 describe('AdminView', async () => {
     router.push('/admin')

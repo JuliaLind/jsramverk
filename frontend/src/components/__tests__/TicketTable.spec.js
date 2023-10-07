@@ -5,16 +5,14 @@ import { tickets } from './mockdata/tickets.js'
 import { codes } from './mockdata/codes-small.js'
 import { trainnumbers } from './mockdata/trainnumbers.js'
 
-vi.mock('../../services/api.service.js', () => {
-    return {
-        getCodes: vi.fn(() => {
-            return codes
-        }),
+vi.mock('@/stores/trains', () => ({
+    useTrainsStore: () => ({
+        codes: codes,
         getTrainNumbers: vi.fn(() => {
             return trainnumbers
         })
-    }
-})
+    })
+}))
 
 vi.mock('@/stores/auth', () => ({
     useAuthStore: () => ({
