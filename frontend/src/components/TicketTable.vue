@@ -3,7 +3,10 @@ import { onMounted, ref } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import NewTicket from '../components/NewTicket.vue'
 import SingleTicket from '../components/SingleTicket.vue'
-import { getCodes, getTrainNumbers } from '../services/api.service.js'
+// import { getCodes, getTrainNumbers } from '../services/api.service.js'
+import { useTrainsStore } from '@/stores/trains'
+
+const trainsStore = useTrainsStore()
 
 const store = useAuthStore()
 let reasoncodes
@@ -25,8 +28,8 @@ const updateTickets = async () => {
 let trainnumbers
 
 onMounted(async () => {
-    reasoncodes = await getCodes()
-    trainnumbers = await getTrainNumbers()
+    reasoncodes = trainsStore.codes
+    trainnumbers = trainsStore.getTrainNumbers()
     updateTickets()
 })
 
