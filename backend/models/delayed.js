@@ -15,7 +15,6 @@ const fetch = require('node-fetch');
  */
 const delayed = {
     /**
-     * 
      * @returns {Array} an array with delayed trains filtered to only include those
      * that have positionData
      */
@@ -61,63 +60,18 @@ const delayed = {
         );
 
         const result = await response.json();
-        
-        // return result.RESPONSE.RESULT[0].TrainPosition;
         const delayed = result.RESPONSE.RESULT[1].TrainAnnouncement;
         const positions = result.RESPONSE.RESULT[0].TrainPosition;
+        const delayedWithPositionData = [];
 
-        delayedWithPositionData = [];
         for (const delay of delayed) {
             if (positions.some((position) => position.Train.OperationalTrainNumber === delay.OperationalTrainNumber)) {
-                delayedWithPositionData.push(delay)
+                delayedWithPositionData.push(delay);
             }
         }
 
         return delayedWithPositionData;
     },
-    // getFromTrafikVerket: async function getFromTrafikVerket() {
-    //     const query = `<REQUEST>
-    //         <LOGIN authenticationkey="${process.env.TRAFIKVERKET_API_KEY}" />
-    //         <QUERY objecttype="TrainAnnouncement" orderby='AdvertisedTimeAtLocation' schemaversion="1.8">
-    //                 <FILTER>
-    //                 <AND>
-    //                     <EQ name="ActivityType" value="Avgang" />
-    //                     <GT name="EstimatedTimeAtLocation" value="$now" />
-    //                     <AND>
-    //                         <GT name='AdvertisedTimeAtLocation' value='$dateadd(-00:15:00)' />
-    //                         <LT name='AdvertisedTimeAtLocation'                   value='$dateadd(02:00:00)' />
-    //                     </AND>
-    //                 </AND>
-    //                 </FILTER>
-    //                 <INCLUDE>ActivityId</INCLUDE>
-    //                 <INCLUDE>ActivityType</INCLUDE>
-    //                 <INCLUDE>AdvertisedTimeAtLocation</INCLUDE>
-    //                 <INCLUDE>EstimatedTimeAtLocation</INCLUDE>
-    //                 <INCLUDE>AdvertisedTrainIdent</INCLUDE>
-    //                 <INCLUDE>OperationalTrainNumber</INCLUDE>
-    //                 <INCLUDE>Canceled</INCLUDE>
-    //                 <INCLUDE>FromLocation</INCLUDE>
-    //                 <INCLUDE>ToLocation</INCLUDE>
-    //                 <INCLUDE>LocationSignature</INCLUDE>
-    //                 <INCLUDE>TimeAtLocation</INCLUDE>
-    //                 <INCLUDE>TrainOwner</INCLUDE>
-    //         </QUERY>
-    //     </REQUEST>`;
-
-    //     // HTTP response
-    //     const response = await fetch(
-    //         "https://api.trafikinfo.trafikverket.se/v2/data.json", {
-    //             method: "POST",
-    //             body: query,
-    //             headers: { "Content-Type": "text/xml" }
-    //         }
-    //     );
-
-    //     // JSON result data
-    //     const result = await response.json();
-
-    //     return result.RESPONSE.RESULT[0].TrainAnnouncement;
-    // },
     /**
      * @description Fetches delayed trains from the Trafikverket API.
      * @async

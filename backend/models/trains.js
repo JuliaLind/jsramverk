@@ -23,11 +23,10 @@ const trains = {
                 headers: { "Content-Type": "text/xml" }
             }
         );
-
         const result = await response.json();
         const initialPositions = [];
 
-        for (position of result.RESPONSE.RESULT[0].TrainPosition) {
+        for (const position of result.RESPONSE.RESULT[0].TrainPosition) {
             initialPositions.push(this.transformPositionObject(position));
         }
 
