@@ -111,8 +111,8 @@ describe('tickets get and post routes', () => {
         const ticketData = {
             _id: new ObjectId("000000013b7eef17104f27e5"),
             code: 'update_code',
-            trainnumber: '123456',
-            traindate: '2023-09-16'
+            // trainnumber: '123456',
+            // traindate: '2023-09-16'
         };
         const response = await chai.request(server).put('/tickets').set("x-access-token", jwtToken).send(ticketData);
         expect(response).to.have.status(201);

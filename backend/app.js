@@ -15,13 +15,14 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const cron = require('node-cron');
 const delayedModel = require('./models/delayed.js');
+const trainsModel = require('./models/trains.js');
 
-const trains = require('./models/trains.js');
 const delayed = require('./routes/delayed.js');
 const tickets = require('./routes/tickets.js');
 const codes = require('./routes/codes.js');
 const register = require("./routes/register.js");
 const login = require("./routes/login.js");
+const trains = require("./routes/trains.js");
 
 // Create Express application instance and set up port
 const app = express();
@@ -55,7 +56,7 @@ app.use("/tickets", tickets);
 app.use("/codes", codes);
 app.use("/register", register);
 app.use("/login", login);
-
+app.use("/trains", trains);
 
 // Middleware for handling 404 errors (Not Found)
 app.use((req, res, next) => {
@@ -86,12 +87,9 @@ app.use((err, req, res, next) => {
 const httpServer = require("http").createServer(app);
 
 // Start the HTTP server
-
 const server = httpServer.listen(port, () => {
     console.info(`App listening on port ${port}`);
 });
-
-
 
 // Configure socket.io
 let io = require("socket.io")(httpServer, {
@@ -101,6 +99,8 @@ let io = require("socket.io")(httpServer, {
     }
 });
 
+
+
 cron.schedule('5 * * * * *', async () => {
     try {
         const delayedTrains = await delayedModel.getFromTrafikVerket();
@@ -109,7 +109,7 @@ cron.schedule('5 * * * * *', async () => {
     } catch (error) {
         console.error('Error in cron job:', error);
     }
-})
+});
 
 io.on('connection', (socket) => {
     socket.on('edit-ticket', (data) => {
@@ -118,7 +118,7 @@ io.on('connection', (socket) => {
 });
 
 // Fetch train positions with socket.io
-trains.fetchTrainPositions(io);
+trainsModel.fetchTrainPositions(io);
 
 // export to facilitate testing
 module.exports = server;

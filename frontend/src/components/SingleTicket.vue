@@ -1,44 +1,30 @@
 <script setup>
 import { useAuthStore } from '@/stores/auth'
+
+import { getCodes } from '../services/api.service.js'
 import { ref, onMounted, computed } from 'vue'
 import { socketStore } from '@/stores/socket'
 
 const props = defineProps({
-    trainnumbers: {
-        type: Array,
-        required: true
-    },
-    codes: {
-        type: Array,
-        required: true
-    },
     ticket: {
         type: Object,
         required: true
     }
 })
 
-const reasoncodes = props.codes
+let reasoncodes = ref([])
 const ticket = props.ticket
-const trainnumbers = props.trainnumbers
+
+onMounted(async () => {
+    reasoncodes.value = await getCodes()
+})
 
 /**
  * Assigns the first the default-values
  * for new ticket
  */
 let code = ticket.code
-let trainnumber = ticket.trainnumber
-let traindate = ticket.traindate
 const id = ticket._id
-
-if (!(trainnumber in trainnumbers)) {
-    trainnumbers.push(trainnumber)
-}
-
-/**
- * Function for sending messages to other components
- */
-const emit = defineEmits(['form-submitted'])
 const store = useAuthStore()
 const socket = socketStore()
 let innerText = 'Edit'
@@ -47,18 +33,15 @@ let innerText = 'Edit'
  * Sends a post request to the backend API for inserting
  * the form data into the database
  */
-async function submitForm(code, trainnumber, traindate) {
+async function submitForm(code) {
     const updatedTicket = {
         _id: id,
-        code: code,
-        trainnumber: trainnumber,
-        traindate: traindate
+        code: code
     }
 
     await store.updateTicket(updatedTicket)
     editing.value = false
-    socketEdit.value = false
-    innerText = 'Edit'
+    innerText = 'Ändra'
 }
 
 const editing = ref(false)
@@ -78,15 +61,12 @@ const fromBackend = computed(() => socket.data)
 const toggleEditing = function () {
     if (editing.value == false) {
         editing.value = true
-        socketEdit.value = true
-        innerText = 'Stop Edit'
+        innerText = 'Återgå'
         socket.notifyBackendTicketEdit(sendToBackend)
     } else {
         editing.value = false
-        innerText = 'Edit'
+        innerText = 'Ändra'
         code = ticket.code
-        trainnumber = ticket.trainnumber
-        traindate = ticket.traindate
     }
 }
 
@@ -94,45 +74,61 @@ const toggleEditing = function () {
 
 <template>
     <div class="ticket">
-        <form
-            v-on:submit.prevent="
-                submitForm(code, trainnumber, traindate),
-                $emit('form-submitted')
-            "
-        >
-            <input type="text" disabled :value="id" />
-            <select
-                name="trainnumber"
-                v-model="trainnumber"
-                required="required"
-                :disabled="!editing"
-            >
-                <option v-for="train in trainnumbers" :key="train" :value="train">
-                    {{ train }}
-                </option>
-            </select>
-            <select name="code" v-model="code" required="required" :disabled="!editing">
+        <form v-on:submit.prevent="submitForm(code), $emit('form-submitted')">
+            <input type="text" class="field-1" disabled :value="id" />
+            <input type="text" disabled class="field-2" :value="ticket.trainnumber" />
+            <select name="code" v-model="code" class="field-3" required :disabled="!editing">
                 <option v-for="code in reasoncodes" :key="code.Code" :value="code.Code">
-                    {{ code.Code }} - {{ code.Level3Description }}
+                    {{ code.Code }} - {{ code.Level3Description }} - {{ code.Level2Description }} -
+                    {{ code.Level1Description }}
                 </option>
             </select>
-            <input
-                type="date"
-                name="traindate"
-                required="required"
-                v-model="traindate"
-                :disabled="!editing"
-            />
-            <input v-if="editing" type="submit" value="Save" />
+            <input type="date" class="field-4" disabled :value="ticket.traindate" />
+            <input v-if="editing" class="field-5" type="submit" value="Spara ändringar" />
         </form>
         <button v-on:click.self="toggleEditing()">{{ innerText }}</button>
         <button v-on:click.self="store.deleteTicket(ticket._id), $emit('form-submitted')">
-            Delete
+            Ta bort
         </button>
     </div>
 </template>
 
 <style scoped>
+input,
+select {
+    border-radius: 0;
+}
+
+input:disabled,
+select:disabled {
+    border: 1px solid #333;
+    background: #fff;
+}
+
+select {
+    border: 1px solid #07470e;
+}
+.field-1 {
+    width: 200px;
+}
+
+.field-2 {
+    width: 70px;
+}
+
+.field-3 {
+    width: 300px;
+}
+
+
+.field-4 {
+    width: 100px;
+}
+input,
+select {
+    padding: 0.2em;
+}
+
 .ticket {
     display: flex;
     flex-direction: row;

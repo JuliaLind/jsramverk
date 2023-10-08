@@ -8,6 +8,52 @@ const fetch = require('node-fetch');
 const EventSource = require('eventsource');
 
 const trains = {
+    getInitialPositions: async function getInitialPositions(req, res) {
+        const query = `<REQUEST>
+            <LOGIN authenticationkey="5d9e0b327c674d279771aed90ad87616" />
+            <QUERY namespace="järnväg.trafikinfo" objecttype="TrainPosition" schemaversion="1.0" >
+        </QUERY>
+        </REQUEST>`;
+
+        // HTTP response
+        const response = await fetch(
+            "https://api.trafikinfo.trafikverket.se/v2/data.json", {
+                method: "POST",
+                body: query,
+                headers: { "Content-Type": "text/xml" }
+            }
+        );
+        const result = await response.json();
+        const initialPositions = [];
+
+        for (const position of result.RESPONSE.RESULT[0].TrainPosition) {
+            initialPositions.push(this.transformPositionObject(position));
+        }
+
+        return res.json({
+            data: initialPositions
+        });
+    },
+
+    // picked out from parsePositionData function to reuse in initial data request
+    getCoords: function getCoords(positionDataObject) {
+        const matchCoords = /(\d*\.\d+|\d+),?/g;
+        const position = positionDataObject.Position.WGS84.match(matchCoords).map((t) => parseFloat(t)).reverse();
+
+        return position;
+    },
+
+    transformPositionObject: function transformPositionObject(position) {
+        return {
+            trainnumber: position.Train.OperationalTrainNumber,
+            position: this.getCoords(position),
+            timestamp: position.TimeStamp,
+            bearing: position.Bearing,
+            status: !position.Deleted,
+            speed: position.Speed,
+        };
+    },
+
     /**
     * Parses the position data from the SSE message.
     * @param {Object} data - The data received from the SSE message.
@@ -17,21 +63,8 @@ const trains = {
     parsePositionData: function parsePositionData(data, trainPositions, socket) {
         try {
             const parsedData = JSON.parse(data);
-            // if (parsedData) {
             const changedPosition = parsedData.RESPONSE.RESULT[0].TrainPosition[0];
-
-            const matchCoords = /(\d*\.\d+|\d+),?/g;
-
-            const position = changedPosition.Position.WGS84.match(matchCoords).map((t) => parseFloat(t)).reverse();
-
-            const trainObject = {
-                trainnumber: changedPosition.Train.OperationalTrainNumber,
-                position: position,
-                timestamp: changedPosition.TimeStamp,
-                bearing: changedPosition.Bearing,
-                status: !changedPosition.Deleted,
-                speed: changedPosition.Speed,
-            };
+            const trainObject = this.transformPositionObject(changedPosition);
 
             // Emit train position updates to connected clients
             if (changedPosition.Train.OperationalTrainNumber in trainPositions) {

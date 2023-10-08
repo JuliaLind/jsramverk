@@ -1,76 +1,44 @@
 <script setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import NewTicket from '../components/NewTicket.vue'
 import SingleTicket from '../components/SingleTicket.vue'
-import { getCodes, getDelayedTrains } from '../services/api.service.js'
+
 const store = useAuthStore()
-const reasoncodes = await getCodes()
-const data = await getDelayedTrains()
-const trainnumbers = [
-    ...new Set(
-        data
-            .map((item) => {
-                return item.OperationalTrainNumber
-            })
-            .sort()
-    )
-]
-
-const show = ref(false)
-let innerText = ref('Add new')
-const toggleNewForm = () => {
-    if (show.value == false) {
-        show.value = true
-        innerText.value = 'Hide'
-    } else {
-        show.value = false
-        innerText.value = 'Add new'
-    }
-}
-
-// Note for later: consider moving tickets constant to auth-pinia
-// store too, it would then be available from parent component too
 const tickets = ref([])
 const updateTickets = async () => {
     tickets.value = await store.getTickets()
 }
 
-updateTickets()
+onMounted(async () => {
+    await updateTickets()
+})
+
+// Note for later: consider moving tickets constant to auth-pinia
+// store too, it would then be available from parent component too
 </script>
 
 <template>
     <h2>Befintliga ärenden</h2>
     <div class="old-tickets" id="old-tickets">
         <div class="titles">
-            <span class="title">Ärendenummer</span>
-            <span class="title">Tågnummer</span>
-            <span class="title">Orsakskod</span>
-            <span class="title">Datum</span>
-            <button @click="toggleNewForm()">{{ innerText }}</button>
+            <div class="title field-1">Ärendenummer</div>
+            <div class="title field-2">Tågnr</div>
+            <div class="title field-3">Orsakskod</div>
+            <div class="title field-4">Datum</div>
+            <div class="title field-5">Actions</div>
         </div>
-        <NewTicket
-            v-if="show"
-            :codes="reasoncodes"
-            :trainnumbers="trainnumbers"
-            @form-submitted="
-                updateTickets(),
-                toggleNewForm()
-            "
-            ref="show"
-        />
+        <NewTicket @form-submitted="updateTickets()" />
         <SingleTicket
             v-for="ticket in tickets"
             :key="ticket._id"
-            :codes="reasoncodes"
-            :trainnumbers="trainnumbers"
             :ticket="ticket"
             @form-submitted="updateTickets()"
         />
     </div>
 </template>
 
-<style>
+<style scoped>
 .delayed {
     height: 100vh;
     width: 40vw;
@@ -78,4 +46,67 @@ updateTickets()
     overflow: scroll;
     background-color: white;
 }
+
+
+.titles,
+form {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex-wrap: nowrap;
+}
+
+.title {
+    border: 1px solid #333;
+    background: #fff;
+    padding: 0.2em;
+}
+
+
+.field-1 {
+    min-width: 200px;
+}
+
+.field-2 {
+    min-width: 70px;
+}
+
+.field-3 {
+    min-width: 300px;
+}
+
+
+.field-4 {
+    min-width: 100px;
+}
+
+.field-5 {
+    width: 100%;
+}
+
+
+.old-tickets {
+    width: max-content;
+}
+
+/* .ticket-row,
+.ticket-row form {
+    width: 100%;
+} */
+
+
+
+
+
+
+
+
+
+
+/* .ticket-row,
+.ticket-row form {
+    display: flex;
+    flex-direction: row;
+    width: clamp(400px, 100%, 1000px);
+} */
 </style>

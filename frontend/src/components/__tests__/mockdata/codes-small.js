@@ -22,5 +22,5 @@ export const codes = [
         Level1Description: 'Produktinformation',
         Level2Description: 'Nationell',
         Level3Description: 'Fritext (används ej för tillfället)'
-    },
+    }
 ]

@@ -2,7 +2,6 @@
 import { useAuthStore } from '@/stores/auth'
 
 const store = useAuthStore()
-
 let username = ''
 let password = ''
 let name = ''

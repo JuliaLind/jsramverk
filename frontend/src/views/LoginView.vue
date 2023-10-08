@@ -16,14 +16,12 @@ const toggleForm = () => {
 </script>
 
 <template>
-    <suspense>
-        <div>
-            <LoginForm v-if="login" />
-            <RegisterForm v-else />
-            <!-- Make this a button or a link later-->
-            <span class="toggle-link" v-on:click="toggleForm()">{{ innerText }}</span>
-        </div>
-    </suspense>
+    <div>
+        <LoginForm v-if="login" />
+        <RegisterForm v-else />
+        <!-- Make this a button or a link later-->
+        <span class="toggle-link" v-on:click="toggleForm()">{{ innerText }}</span>
+    </div>
 </template>
 
 <style>
