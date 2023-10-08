@@ -27,7 +27,7 @@ let code = ticket.code
 const id = ticket._id
 const store = useAuthStore()
 const socket = socketStore()
-let innerText = 'Edit'
+let innerText = 'Ändra'
 
 /**
  * Sends a post request to the backend API for inserting
@@ -40,6 +40,9 @@ async function submitForm(code) {
     }
 
     await store.updateTicket(updatedTicket)
+    socket.notifyBackendStopEdit({
+        ticket: id
+    })
     editing.value = false
     innerText = 'Ändra'
 }
@@ -56,7 +59,7 @@ onMounted(() => {
     socket.receiveFromBackendTicketEdit()
 })
 
-const fromBackend = computed(() => socket.data)
+
 
 const toggleEditing = function () {
     if (editing.value == false) {
@@ -67,6 +70,9 @@ const toggleEditing = function () {
         editing.value = false
         innerText = 'Ändra'
         code = ticket.code
+        socket.notifyBackendStopEdit({
+            ticket: id
+        })
     }
 }
 
@@ -86,7 +92,7 @@ const toggleEditing = function () {
             <input type="date" class="field-4" disabled :value="ticket.traindate" />
             <input v-if="editing" class="field-5" type="submit" value="Spara ändringar" />
         </form>
-        <button v-on:click.self="toggleEditing()">{{ innerText }}</button>
+        <button v-on:click.self="toggleEditing()" :disabled="id in socket.data">{{ innerText }}</button>
         <button v-on:click.self="store.deleteTicket(ticket._id), $emit('form-submitted')">
             Ta bort
         </button>
