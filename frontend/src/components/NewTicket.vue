@@ -1,25 +1,23 @@
 <script setup>
 import { useAuthStore } from '@/stores/auth'
+import { onBeforeMount, onMounted, ref } from 'vue'
+import { getCodes, getTrainNumbers } from '../services/api.service.js'
 
-const props = defineProps({
-    trainnumbers: {
-        type: Array,
-        required: true
-    },
-    codes: {
-        type: Array,
-        required: true
-    }
+let trainnumbers = ref([])
+let reasoncodes = ref([])
+let code
+let trainnumber
+
+onMounted(async () => {
+    reasoncodes.value = await getCodes()
+    trainnumbers.value = await getTrainNumbers()
 })
-const trainnumbers = props.trainnumbers
-const reasoncodes = props.codes
 
 /**
  * Assigns the initial values for the form
  * list as a default value for the new ticket
  */
-let code = reasoncodes[0].Code
-let trainnumber = trainnumbers[0]
+
 let traindate = new Date().toJSON().slice(0, 10)
 
 /**
@@ -49,21 +47,20 @@ async function submitForm(code, trainnumber, traindate) {
 <template>
     <div class="ticket">
         <form v-on:submit.prevent="submitForm(code, trainnumber, traindate)">
-            <!--just a placeholder for ticketnr field-->
-            <input type="text" readonly />
-            <select name="trainnumer" v-model="trainnumber">
+            <input type="text" disabled value="Lägg till nytt ärende"/>
+            <select name="trainnumer" required v-model="trainnumber">
                 <option v-for="train in trainnumbers" :key="train" :value="train">
                     {{ train }}
                 </option>
             </select>
-            <select name="code" v-model="code">
+            <select name="code" required v-model="code">
                 <option v-for="code in reasoncodes" :key="code.Code" :value="code.Code">
                     {{ code.Code }} - {{ code.Level3Description }} - {{ code.Level2Description }} -
                     {{ code.Level1Description }}
                 </option>
             </select>
-            <input type="date" readonly name="traindate" v-model="traindate" />
-            <input type="submit" value="Submit" />
+            <input type="date" disabled name="traindate" v-model="traindate" />
+            <input type="submit" value="Skapa" />
         </form>
     </div>
 </template>

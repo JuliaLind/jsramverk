@@ -2,8 +2,12 @@
 import TicketTable from '../components/TicketTable.vue'
 import { RouterLink } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
+import { useTrainsStore } from '@/stores/trains'
 const store = useAuthStore()
+const trainsStore = useTrainsStore()
 </script>
+
+
 
 <template>
     <!-- Note for later: this one does not need to be a router link

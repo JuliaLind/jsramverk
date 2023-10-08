@@ -26,11 +26,13 @@ onMounted(() => {
 
 <template>
     <main>
-        <RouterLink to="/admin"> Admin </RouterLink>
+        <RouterLink to="/admin" @click="store.current=''"> Admin </RouterLink>
         <keep-alive>
             <DelayedTable ref="current" @refresh-map="map.updateLayers()" />
         </keep-alive>
-        <MapComp ref="map" @refresh-map="map.updateLayers()" />
+        <keep-alive>
+            <MapComp ref="map" @refresh-map="map.updateLayers()" />
+        </keep-alive>
     </main>
 </template>
 

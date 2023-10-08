@@ -25,3 +25,16 @@ export const getCodes = async () => {
     const res = await axios.get(`${import.meta.env.VITE_URL}/codes`)
     return res.data.data
 }
+
+export const getTrainNumbers = async () => {
+    const trainnumbers = await getDelayedTrains();
+    return [
+        ...new Set(
+            trainnumbers
+                .map((item) => {
+                    return item.OperationalTrainNumber
+                })
+                .sort()
+        )
+    ]
+}

@@ -3,34 +3,17 @@ import { onMounted, ref } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import NewTicket from '../components/NewTicket.vue'
 import SingleTicket from '../components/SingleTicket.vue'
-// import { getCodes, getTrainNumbers } from '../services/api.service.js'
-import { useTrainsStore } from '@/stores/trains'
-
-const trainsStore = useTrainsStore()
 
 const store = useAuthStore()
-let reasoncodes
-const show = ref(false)
-let innerText = ref('Add new')
-const toggleNewForm = () => {
-    if (show.value == false) {
-        show.value = true
-        innerText.value = 'Hide'
-    } else {
-        show.value = false
-        innerText.value = 'Add new'
-    }
-}
 const tickets = ref([])
 const updateTickets = async () => {
     tickets.value = await store.getTickets()
 }
-let trainnumbers
+
+
 
 onMounted(async () => {
-    reasoncodes = trainsStore.codes
-    trainnumbers = trainsStore.getTrainNumbers()
-    updateTickets()
+    await updateTickets()
 })
 
 // Note for later: consider moving tickets constant to auth-pinia
@@ -45,19 +28,14 @@ onMounted(async () => {
             <span class="title">Tågnummer</span>
             <span class="title">Orsakskod</span>
             <span class="title">Datum</span>
-            <button @click="toggleNewForm()">{{ innerText }}</button>
+            <span class="title">Actions</span>
         </div>
         <NewTicket
-            v-if="show"
-            :codes="reasoncodes"
-            :trainnumbers="trainnumbers"
-            @form-submitted="updateTickets(), toggleNewForm()"
-            ref="show"
+            @form-submitted="updateTickets()"
         />
         <SingleTicket
             v-for="ticket in tickets"
             :key="ticket._id"
-            :codes="reasoncodes"
             :ticket="ticket"
             @form-submitted="updateTickets()"
         />
