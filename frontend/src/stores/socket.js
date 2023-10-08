@@ -4,7 +4,7 @@ import socket from '../services/socket.service.js'
 
 
 export const socketStore = defineStore('socket', {
-    state: () => ({ data: null }),
+    state: () => ({ data: {} }),
     actions: {
         notifyBackendTicketEdit(data) {
             socket.emit('edit-ticket', data)
