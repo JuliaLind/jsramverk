@@ -24,6 +24,18 @@ const register = require("./routes/register.js");
 const login = require("./routes/login.js");
 const trains = require("./routes/trains.js");
 
+const visual = true;
+const { graphqlHTTP } = require('express-graphql');
+const {
+  GraphQLSchema
+} = require("graphql");
+
+const RootQueryType = require("./graphql/root.js");
+
+const schema = new GraphQLSchema({
+    query: RootQueryType
+});
+
 // Create Express application instance and set up port
 const app = express();
 const port = process.env.PORT || 1337;
@@ -49,6 +61,13 @@ app.get('/', (req, res) => {
         data: 'Hello World!'
     });
 });
+
+
+
+app.use('/graphql', graphqlHTTP({
+    schema: schema,
+    graphiql: visual
+}));
 
 // Mount routes
 app.use("/delayed", delayed);
@@ -100,6 +119,9 @@ let io = require("socket.io")(httpServer, {
 });
 
 
+
+// app.listen({ port: port });
+// console.log('Listening to port 4000');
 
 cron.schedule('5 * * * * *', async () => {
     try {

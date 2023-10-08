@@ -15,7 +15,7 @@ const fetch = require('node-fetch');
  */
 const delayed = {
     /**
-     * @returns {Array} an array with delayed trains filtered to only include those
+     * @returns {Promise<array>} an array with delayed trains filtered to only include those
      * that have positionData
      */
     getFromTrafikVerket: async function getFromTrafikVerket() {
