@@ -14,6 +14,30 @@ const fetch = require('node-fetch');
  * @property {Function} getCodes - Fetches reason codes.
  */
 const codes = {
+    getFromTrafikVerket: async function getFromTrafikVerket() {
+        // XML Query sent to the API
+        const query = `<REQUEST>
+        <LOGIN authenticationkey="${process.env.TRAFIKVERKET_API_KEY}" />
+        <QUERY objecttype="ReasonCode" schemaversion="1">
+                <INCLUDE>Code</INCLUDE>
+                <INCLUDE>Level1Description</INCLUDE>
+                <INCLUDE>Level2Description</INCLUDE>
+                <INCLUDE>Level3Description</INCLUDE>
+        </QUERY>
+        </REQUEST>`;
+
+        // HTTP response
+        const response = await fetch(
+            "https://api.trafikinfo.trafikverket.se/v2/data.json", {
+                method: "POST",
+                body: query,
+                headers: { "Content-Type": "text/xml" }
+            }
+        );
+
+        // JSON result data
+        return await response.json();
+    },
     /**
      * @description Fetches reason codes from the Trafikverket API.
      * @async
@@ -24,28 +48,7 @@ const codes = {
      */
     getCodes: async function getCodes(req, res) {
         try {
-            // XML Query sent to the API
-            const query = `<REQUEST>
-                    <LOGIN authenticationkey="${process.env.TRAFIKVERKET_API_KEY}" />
-                    <QUERY objecttype="ReasonCode" schemaversion="1">
-                            <INCLUDE>Code</INCLUDE>
-                            <INCLUDE>Level1Description</INCLUDE>
-                            <INCLUDE>Level2Description</INCLUDE>
-                            <INCLUDE>Level3Description</INCLUDE>
-                    </QUERY>
-                </REQUEST>`;
-
-            // HTTP response
-            const response = await fetch(
-                "https://api.trafikinfo.trafikverket.se/v2/data.json", {
-                    method: "POST",
-                    body: query,
-                    headers: { "Content-Type": "text/xml" }
-                }
-            );
-
-            // JSON result data
-            const result = await response.json();
+            const result = await this.getFromTrafikVerket();
 
             return res.json({
                 data: result.RESPONSE.RESULT[0].ReasonCode
