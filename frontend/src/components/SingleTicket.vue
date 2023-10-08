@@ -57,16 +57,16 @@ const toggleEditing = function () {
 <template>
     <div class="ticket">
         <form v-on:submit.prevent="submitForm(code), $emit('form-submitted')">
-            <input type="text" disabled :value="id" />
-            <input type="text" disabled :value="ticket.trainnumber" />
-            <select name="code" v-model="code" required :disabled="!editing">
+            <input type="text" class="field-1" disabled :value="id" />
+            <input type="text" disabled class="field-2" :value="ticket.trainnumber" />
+            <select name="code" v-model="code" class="field-3" required :disabled="!editing">
                 <option v-for="code in reasoncodes" :key="code.Code" :value="code.Code">
                     {{ code.Code }} - {{ code.Level3Description }} - {{ code.Level2Description }} -
                     {{ code.Level1Description }}
                 </option>
             </select>
-            <input type="date" disabled :value="ticket.traindate" />
-            <input v-if="editing" type="submit" value="Spara ändringar" />
+            <input type="date" class="field-4" disabled :value="ticket.traindate" />
+            <input v-if="editing" class="field-5" type="submit" value="Spara ändringar" />
         </form>
         <button v-on:click.self="toggleEditing()">{{ innerText }}</button>
         <button v-on:click.self="store.deleteTicket(ticket._id), $emit('form-submitted')">
@@ -76,6 +76,41 @@ const toggleEditing = function () {
 </template>
 
 <style scoped>
+input,
+select {
+    border-radius: 0;
+}
+
+input:disabled,
+select:disabled {
+    border: 1px solid #333;
+    background: #fff;
+}
+
+select {
+    border: 1px solid #07470e;
+}
+.field-1 {
+    width: 200px;
+}
+
+.field-2 {
+    width: 70px;
+}
+
+.field-3 {
+    width: 300px;
+}
+
+
+.field-4 {
+    width: 100px;
+}
+input,
+select {
+    padding: 0.2em;
+}
+
 .ticket {
     display: flex;
     flex-direction: row;

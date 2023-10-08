@@ -47,22 +47,59 @@ async function submitForm(code, trainnumber, traindate) {
 <template>
     <div class="ticket">
         <form v-on:submit.prevent="submitForm(code, trainnumber, traindate)">
-            <input type="text" disabled value="Lägg till nytt ärende" />
-            <select name="trainnumer" required v-model="trainnumber">
+            <input type="text" class="field-1" disabled value="Lägg till nytt ärende" />
+            <select name="trainnumer" class="field-2" required v-model="trainnumber">
                 <option v-for="train in trainnumbers" :key="train" :value="train">
                     {{ train }}
                 </option>
             </select>
-            <select name="code" required v-model="code">
+            <select name="code" required class="field-3" v-model="code">
                 <option v-for="code in reasoncodes" :key="code.Code" :value="code.Code">
                     {{ code.Code }} - {{ code.Level3Description }} - {{ code.Level2Description }} -
                     {{ code.Level1Description }}
                 </option>
             </select>
             <input type="date" disabled name="traindate" v-model="traindate" />
-            <input type="submit" value="Skapa" />
+            <input type="submit" class="btn" value="Skapa" />
         </form>
     </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+
+input:disabled,
+select:disabled {
+    border: 1px solid #333;
+    background: #ffffff;
+}
+
+select {
+    border: 1px solid #07470e;
+}
+
+.field-1 {
+    width: 200px;
+}
+
+.field-2 {
+    width: 70px;
+}
+
+.field-3 {
+    width: 300px;
+}
+
+.field-4 {
+    width: 100px;
+}
+
+input,
+select {
+    padding: 0.2em;
+}
+
+.ticket {
+    display: flex;
+    flex-direction: row;
+}
+</style>

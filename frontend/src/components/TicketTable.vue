@@ -22,11 +22,11 @@ onMounted(async () => {
     <h2>Befintliga ärenden</h2>
     <div class="old-tickets" id="old-tickets">
         <div class="titles">
-            <span class="title">Ärendenummer</span>
-            <span class="title">Tågnummer</span>
-            <span class="title">Orsakskod</span>
-            <span class="title">Datum</span>
-            <span class="title">Actions</span>
+            <div class="title field-1">Ärendenummer</div>
+            <div class="title field-2">Tågnr</div>
+            <div class="title field-3">Orsakskod</div>
+            <div class="title field-4">Datum</div>
+            <div class="title field-5">Actions</div>
         </div>
         <NewTicket @form-submitted="updateTickets()" />
         <SingleTicket
@@ -38,7 +38,7 @@ onMounted(async () => {
     </div>
 </template>
 
-<style>
+<style scoped>
 .delayed {
     height: 100vh;
     width: 40vw;
@@ -46,4 +46,67 @@ onMounted(async () => {
     overflow: scroll;
     background-color: white;
 }
+
+
+.titles,
+form {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex-wrap: nowrap;
+}
+
+.title {
+    border: 1px solid #333;
+    background: #fff;
+    padding: 0.2em;
+}
+
+
+.field-1 {
+    min-width: 200px;
+}
+
+.field-2 {
+    min-width: 70px;
+}
+
+.field-3 {
+    min-width: 300px;
+}
+
+
+.field-4 {
+    min-width: 100px;
+}
+
+.field-5 {
+    width: 100%;
+}
+
+
+.old-tickets {
+    width: max-content;
+}
+
+/* .ticket-row,
+.ticket-row form {
+    width: 100%;
+} */
+
+
+
+
+
+
+
+
+
+
+/* .ticket-row,
+.ticket-row form {
+    display: flex;
+    flex-direction: row;
+    width: clamp(400px, 100%, 1000px);
+} */
 </style>
