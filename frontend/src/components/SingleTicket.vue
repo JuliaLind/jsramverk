@@ -1,6 +1,7 @@
 <script setup>
 import { useAuthStore } from '@/stores/auth'
-import { ref } from 'vue'
+import { ref, onMounted, computed } from 'vue'
+import { socketStore } from '@/stores/socket'
 
 const props = defineProps({
     trainnumbers: {
@@ -39,6 +40,7 @@ if (!(trainnumber in trainnumbers)) {
  */
 const emit = defineEmits(['form-submitted'])
 const store = useAuthStore()
+const socket = socketStore()
 let innerText = 'Edit'
 
 /**
@@ -55,14 +57,30 @@ async function submitForm(code, trainnumber, traindate) {
 
     await store.updateTicket(updatedTicket)
     editing.value = false
+    socketEdit.value = false
     innerText = 'Edit'
 }
 
 const editing = ref(false)
+// const socketEdit = ref(false)
+
+const sendToBackend = {
+    ticket: ticket._id,
+    user: store.userId
+}
+
+onMounted(() => {
+    socket.receiveFromBackendTicketEdit()
+})
+
+const fromBackend = computed(() => socket.data)
+
 const toggleEditing = function () {
     if (editing.value == false) {
         editing.value = true
+        socketEdit.value = true
         innerText = 'Stop Edit'
+        socket.notifyBackendTicketEdit(sendToBackend)
     } else {
         editing.value = false
         innerText = 'Edit'
@@ -71,6 +89,7 @@ const toggleEditing = function () {
         traindate = ticket.traindate
     }
 }
+
 </script>
 
 <template>

@@ -111,6 +111,12 @@ cron.schedule('5 * * * * *', async () => {
     }
 })
 
+io.on('connection', (socket) => {
+    socket.on('edit-ticket', (data) => {
+        socket.broadcast.emit('editing-ticket', (data));
+    });
+});
+
 // Fetch train positions with socket.io
 trains.fetchTrainPositions(io);
 

@@ -4,7 +4,10 @@ import axios from 'axios'
 import { router } from '../router/index.js'
 
 export const useAuthStore = defineStore('store', {
-    state: () => ({ token: '' }),
+    state: () => ({ data: {
+        token: '',
+        userEmail: ''
+    } }),
     actions: {
         async login(username, password) {
             const user = {
@@ -16,8 +19,9 @@ export const useAuthStore = defineStore('store', {
                 return result.errors.detail
             }
             this.token = result.data.data.token
+            this.userEmail = result.data.data.user.email
             console.log(this.token)
-            console.log(result.data.data.user.name)
+            console.log(result.data.data.user.email)
             router.push('/admin')
 
             //note for later: set toast to "hello 'result.data.ta.user.name'""
