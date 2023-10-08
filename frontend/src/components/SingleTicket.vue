@@ -1,7 +1,9 @@
 <script setup>
 import { useAuthStore } from '@/stores/auth'
-import { ref, onMounted } from 'vue'
+
 import { getCodes } from '../services/api.service.js'
+import { ref, onMounted, computed } from 'vue'
+import { socketStore } from '@/stores/socket'
 
 const props = defineProps({
     ticket: {
@@ -24,6 +26,7 @@ onMounted(async () => {
 let code = ticket.code
 const id = ticket._id
 const store = useAuthStore()
+const socket = socketStore()
 let innerText = 'Edit'
 
 /**
@@ -42,16 +45,31 @@ async function submitForm(code) {
 }
 
 const editing = ref(false)
+// const socketEdit = ref(false)
+
+const sendToBackend = {
+    ticket: ticket._id,
+    user: store.userId
+}
+
+onMounted(() => {
+    socket.receiveFromBackendTicketEdit()
+})
+
+const fromBackend = computed(() => socket.data)
+
 const toggleEditing = function () {
     if (editing.value == false) {
         editing.value = true
         innerText = 'Återgå'
+        socket.notifyBackendTicketEdit(sendToBackend)
     } else {
         editing.value = false
         innerText = 'Ändra'
         code = ticket.code
     }
 }
+
 </script>
 
 <template>
