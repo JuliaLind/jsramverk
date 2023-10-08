@@ -10,8 +10,6 @@ const updateTickets = async () => {
     tickets.value = await store.getTickets()
 }
 
-
-
 onMounted(async () => {
     await updateTickets()
 })
@@ -30,9 +28,7 @@ onMounted(async () => {
             <span class="title">Datum</span>
             <span class="title">Actions</span>
         </div>
-        <NewTicket
-            @form-submitted="updateTickets()"
-        />
+        <NewTicket @form-submitted="updateTickets()" />
         <SingleTicket
             v-for="ticket in tickets"
             :key="ticket._id"

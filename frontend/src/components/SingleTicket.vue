@@ -14,9 +14,8 @@ let reasoncodes = ref([])
 const ticket = props.ticket
 
 onMounted(async () => {
-    reasoncodes.value = await getCodes();
+    reasoncodes.value = await getCodes()
 })
-
 
 /**
  * Assigns the first the default-values

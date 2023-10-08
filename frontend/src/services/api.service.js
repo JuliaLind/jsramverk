@@ -27,7 +27,7 @@ export const getCodes = async () => {
 }
 
 export const getTrainNumbers = async () => {
-    const trainnumbers = await getDelayedTrains();
+    const trainnumbers = await getDelayedTrains()
     return [
         ...new Set(
             trainnumbers

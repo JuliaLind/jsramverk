@@ -1,6 +1,6 @@
 <script setup>
 import { useAuthStore } from '@/stores/auth'
-import { onBeforeMount, onMounted, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { getCodes, getTrainNumbers } from '../services/api.service.js'
 
 let trainnumbers = ref([])
@@ -47,7 +47,7 @@ async function submitForm(code, trainnumber, traindate) {
 <template>
     <div class="ticket">
         <form v-on:submit.prevent="submitForm(code, trainnumber, traindate)">
-            <input type="text" disabled value="Lägg till nytt ärende"/>
+            <input type="text" disabled value="Lägg till nytt ärende" />
             <select name="trainnumer" required v-model="trainnumber">
                 <option v-for="train in trainnumbers" :key="train" :value="train">
                     {{ train }}

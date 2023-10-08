@@ -5,7 +5,7 @@ import { defineStore } from 'pinia'
  */
 export const useTrainsStore = defineStore('trains', {
     state: () => ({
-        current: '',
+        current: ''
         // delayed: [],
         // codes: []
     }),
@@ -17,7 +17,7 @@ export const useTrainsStore = defineStore('trains', {
                 this.current = ''
             }
             console.log(this.current)
-        },
+        }
         // setDelayed(announcements) {
         //     this.delayed = announcements
         // },
