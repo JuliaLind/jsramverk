@@ -36,6 +36,13 @@ const RootMutationType = require("./graphql/ticket-mutation.js");
 const schema = new GraphQLSchema({
     query: RootQueryType,
     mutation: RootMutationType
+    // possible to add multiple mutation types --> mutation is then new GraphQLObjectType
+    // like this
+    // mutation: new GraphQLObjectType({
+    //     name: 'Mutation',
+    //     fields: () => ({
+    //          firstMutation: FirstMutationType,
+    //          secondMutation: SecondMutationType
 });
 
 // Create Express application instance and set up port
