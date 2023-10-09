@@ -50,66 +50,93 @@ const tickets = {
      * @description Inserts ticket into database.
      * @async
      * @function
-     * @param {Object} req - Express.js request object.
-     * @param {Object} res - Express.js response object.
+     * @param {Object} req - Express.js request object. // ÄNDRA
+     * @param {Object} res - Express.js response object. // ÄNDRA
      * @returns {Promise<Object>} A JSON response containing info on inserted ticket.
      */
-    createTicket: async function createTicket(req, res) {
+    createTicket: async function createTicket(_, args) {
         try {
             const db = await database.getDb();
             const doc = {
-                code: req.body.code,
-                trainnumber: req.body.trainnumber,
-                traindate: req.body.traindate
+                code: args.code,
+                trainnumber: args.trainnumber,
+                traindate: args.traindate
             };
 
             const result = await db.collection.tickets.insertOne(doc);
 
             await db.client.close();
 
-            return res.status(201).json({
-                data: result
-            });
+            return {
+                _id: result.insertedId,
+                code: args.code,
+                trainnumber: args.trainnumber,
+                traindate: args.traindate
+            }
+
+            // return res.status(201).json({
+            //     data: result
+            // });
         } catch (e) {
-            return res.status(500).json({
+            // return res.status(500).json({
+            //     errors: {
+            //         status: 500,
+            //         source: "/tickets",
+            //         title: "Database error",
+            //         detail: e.message
+            //     }
+            // });
+            throw new Error({
                 errors: {
                     status: 500,
-                    source: "/tickets",
+                    source: "/graphql/tickets",
                     title: "Database error",
                     detail: e.message
                 }
-            });
+            })
         }
     },
-    deleteTicket: async function deleteTicket(res, req) {
+    deleteTicket: async function deleteTicket(_, args) {
         try {
             const db = await database.getDb();
-            const ticketId = req.body._id;
+            const ticketId = args._id;
             const filter = { _id: new ObjectId(ticketId) };
 
             await db.collection.tickets.deleteOne(filter);
 
             await db.client.close();
 
-            return res.status(201).json({
-                data: {
-                    message: `Ticket ${ticketId} has been deleted`
-                }
-            });
+            return {
+                _id: ticketId
+            }
+
+            // return res.status(201).json({
+            //     data: {
+            //         message: `Ticket ${ticketId} has been deleted`
+            //     }
+            // });
         } catch (e) {
-            return res.status(500).json({
+            // return res.status(500).json({
+            //     errors: {
+            //         status: 500,
+            //         source: "/tickets",
+            //         title: "Database error",
+            //         detail: e.message
+            //     }
+            // });
+            throw new Error({
                 errors: {
                     status: 500,
-                    source: "/tickets",
+                    source: "/graphql/tickets",
                     title: "Database error",
                     detail: e.message
                 }
-            });
+            })
         }
     },
-    updateTicket: async function updateTicket(res, req) {
-        const ticketId = req.body._id;
-        const code = req.body.code;
+    updateTicket: async function updateTicket(_, args) {
+        const ticketId = args._id;
+        const code = args.code;
         const doc = {
             $set: {
                 code: code,
@@ -129,21 +156,36 @@ const tickets = {
 
             await db.client.close();
 
-            return res.status(201).json({
-                data: {
-                    message: `Ticket ${ticketId} has been updated`,
-                    ticket: updatedTicket
-                }
-            });
+            return {
+                _id: updatedTicket._id,
+                code: updatedTicket.code,
+                trainnumber: updatedTicket.trainnumber,
+                traindate: updatedTicket.traindate
+            }
+
+            // return res.status(201).json({
+            //     data: {
+            //         message: `Ticket ${ticketId} has been updated`,
+            //         ticket: updatedTicket
+            //     }
+            // });
         } catch (e) {
-            return res.status(500).json({
+            throw new Error({
                 errors: {
                     status: 500,
-                    source: "/tickets",
+                    source: "/graphql/tickets",
                     title: "Database error",
                     detail: e.message
                 }
-            });
+            })
+            // return res.status(500).json({
+            //     errors: {
+            //         status: 500,
+            //         source: "/tickets",
+            //         title: "Database error",
+            //         detail: e.message
+            //     }
+            // });
         }
     }
 };
