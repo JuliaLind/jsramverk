@@ -1,12 +1,18 @@
-const delayed = require('../models/delayed');
+const delayed = require('../models/delayed.js');
 const DelayType = require("./delayed.js");
+const codes = require('../models/codes.js');
+const CodeType = require("./code.js");
+const tickets = require('../models/tickets.js');
+const TicketType = require('./ticket.js');
+
 const {
     GraphQLObjectType,
     GraphQLString,
     GraphQLList,
-    GraphQLInt,
-    GraphQLNonNull
+    // GraphQLInt,
+    // GraphQLNonNull
 } = require('graphql');
+const { Code } = require('mongodb');
 
 // const CourseType = require("./course.js");
 // const TeacherType = require("./teacher.js");
@@ -35,6 +41,20 @@ const RootQueryType = new GraphQLObjectType({
             description: 'List of all delayed trains',
             resolve: async function() {
                 return await delayed.getFromTrafikVerket();
+            }
+        },
+        codes: {
+            type: GraphQLList(CodeType),
+            description: 'List of reason codes',
+            resolve: async function() {
+                return await codes.getFromTrafikVerket();
+            }
+        },
+        tickets: {
+            type: GraphQLList(TicketType),
+            description: 'List of tickets',
+            resolve: async function() {
+                return await tickets.getTickets();
             }
         },
 //         teacher: {
@@ -83,4 +103,3 @@ const RootQueryType = new GraphQLObjectType({
 // }
 
 module.exports = RootQueryType;
-
