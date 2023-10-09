@@ -33,14 +33,22 @@ const tickets = {
             await db.client.close();
             return allTickets;
         } catch (e) {
-            return res.status(500).json({
+            throw new Error({
                 errors: {
                     status: 500,
-                    source: "/tickets",
+                    source: "/graphql",
                     title: "Database error",
                     detail: e.message
                 }
-            });
+            })
+            // return res.status(500).json({
+            //     errors: {
+            //         status: 500,
+            //         source: "/tickets",
+            //         title: "Database error",
+            //         detail: e.message
+            //     }
+            // });
         }
     },
 
