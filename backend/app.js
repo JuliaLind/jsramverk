@@ -31,9 +31,11 @@ const {
 } = require("graphql");
 
 const RootQueryType = require("./graphql/root.js");
+const RootMutationType = require("./graphql/ticket-mutation.js");
 
 const schema = new GraphQLSchema({
-    query: RootQueryType
+    query: RootQueryType,
+    mutation: RootMutationType
 });
 
 // Create Express application instance and set up port
