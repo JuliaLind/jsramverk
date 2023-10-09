@@ -14,6 +14,7 @@ export const useAuthStore = defineStore('store', {
                 email: username,
                 password: password
             }
+            console.log(user)
             const result = await axios.post(`${import.meta.env.VITE_URL}/login`, user)
             if ('errors' in result) {
                 return result.errors.detail
