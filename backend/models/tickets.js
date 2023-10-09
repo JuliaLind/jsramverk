@@ -25,15 +25,13 @@ const tickets = {
      * @param {Object} res - Express.js response object.
      * @returns {Promise<Object>} A JSON response containing tickets data.
      */
-    getTickets: async function getTickets(req, res) {
+    getTickets: async function getTickets() {
         try {
             const db = await database.getDb();
             const allTickets = await db.collection.tickets.find({}).sort({ _id: -1 }).toArray();
 
             await db.client.close();
-            return res.json({
-                data: allTickets
-            });
+            return allTickets;
         } catch (e) {
             return res.status(500).json({
                 errors: {
