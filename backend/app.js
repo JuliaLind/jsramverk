@@ -16,6 +16,7 @@ const bodyParser = require('body-parser');
 const cron = require('node-cron');
 const delayedModel = require('./models/delayed.js');
 const trainsModel = require('./models/trains.js');
+// const authModel = require('./models/auth.js');
 
 const delayed = require('./routes/delayed.js');
 const tickets = require('./routes/tickets.js');
@@ -23,8 +24,9 @@ const codes = require('./routes/codes.js');
 const register = require("./routes/register.js");
 const login = require("./routes/login.js");
 const trains = require("./routes/trains.js");
+const jwt = require('jsonwebtoken');
+const jwtSecret = process.env.JWT_SECRET;
 
-const visual = true;
 const { graphqlHTTP } = require('express-graphql');
 const {
     GraphQLSchema
@@ -71,12 +73,85 @@ app.get('/', (req, res) => {
     });
 });
 
+const visual = true;
 
+const loggingMiddleware = (req, res, next) => {
+//   console.log("headers:", req.headers)
+  next()
+}
 
-app.use('/graphql', graphqlHTTP({
+const root = {
+  token: function (args, request) {
+    return request.headers['x-access-token']
+  },
+}
+
+app.use(loggingMiddleware)
+app.use(
+  "/graphql",
+  graphqlHTTP({
     schema: schema,
-    graphiql: visual
-}));
+    // rootValue: root,
+    // context: ({ req }) => {
+    //     return {
+    //         headers: req.headers
+    //     };
+    // },
+    graphiql: visual,
+  })
+)
+
+// const graphqlMiddleware = (req, res, next) => {
+//     const route = new RegExp("^{[ ]*?tickets");
+//     console.log("1");
+//     if (route.test(req.body.query)) {
+//         let token = req.headers['x-access-token'];
+//         console.log("2");
+//         if (token) {
+//             jwt.verify(token, jwtSecret, function(err, decoded) {
+//                 if (err) {
+//                     return res.status(500).json({
+//                         errors: {
+//                             status: 500,
+//                             source: "/login",
+//                             title: "Failed authentication",
+//                             detail: err.message
+//                         }
+//                     });
+//                 }
+//                 console.log("3");
+//                 req.user = {};
+//                 req.user.email = decoded.email;
+
+//                 graphqlHTTP({
+//                     schema: schema,
+//                     context: req,
+//                     graphiql: visual
+//                 })(req, res, next);
+//                 // return true;
+//             });
+//         } else {
+//             return res.status(401).json({
+//                 errors: {
+//                     status: 401,
+//                     // source: req.path,
+//                     source: req.originalUrl,
+//                     title: "No token",
+//                     detail: "No token provided in request headers"
+//                 }
+//             });
+//         }
+//     }
+
+
+// };
+
+// app.use('/graphql', graphqlMiddleware);
+
+// app.use('/graphql', graphqlHTTP({
+//     schema: schema,
+//     graphiql: visual
+// }));
 
 // Mount routes
 app.use("/delayed", delayed);
