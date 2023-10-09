@@ -24,7 +24,7 @@ const RootQueryType = new GraphQLObjectType({
             args: {
                 activityId: { type: GraphQLString }
             },
-            resolve: async function(parent, args) {
+            resolve: async function(_, args) {
                 let delayArray = await delayed.getFromTrafikVerket()
 
                 return delayArray.find(delay => delay.ActivityId === args.ActivityId);
