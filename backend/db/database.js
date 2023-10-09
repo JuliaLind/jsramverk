@@ -9,10 +9,12 @@ const mongo = require("mongodb").MongoClient;
 
 // Database details
 let dbName = "trains";
+process.env.NODE_ENV = "test";
 
 if (process.env.NODE_ENV === 'test') {
     dbName = "test";
 }
+
 
 const collection1 = "tickets";
 const collection2 = "users";
