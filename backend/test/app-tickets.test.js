@@ -55,18 +55,21 @@ describe('tickets get and post routes', () => {
         // console.log(allTickets);
         await db.client.close();
     });
-    it('page should contain json with old tickets', (done) => {
-        chai.request(server)
-            .get("/tickets")
+    it('page should contain json with old tickets', async () => {
+        const query = `{
+            tickets {
+                code
+                trainnumber
+            }
+        }`
+
+        const response = await chai.request(server)
+            .post("/graphql")
             .set("x-access-token", jwtToken)
-            .end((err, res) => {
-                res.should.have.status(200);
-                res.body.should.have.property("data");
-                res.body.data.should.be.an("array");
-                res.body.data[1]["trainnumber"].should.equal("9123");
-                res.body.data[0]["code"].should.equal("ANA003");
-                done();
-            });
+            .set('Content-Type', 'application/json')
+            .send({ query })
+
+        expect(response.res.text).to.include(`{"data":{"tickets":[{"code":"ANA003","trainnumber":"91234"},{"code":"ANA002","trainnumber":"9123"}]}}`)
     });
     it('request missing token', (done) => {
         chai.request(server)
@@ -114,9 +117,26 @@ describe('tickets get and post routes', () => {
             // trainnumber: '123456',
             // traindate: '2023-09-16'
         };
-        const response = await chai.request(server).put('/tickets').set("x-access-token", jwtToken).send(ticketData);
-        expect(response).to.have.status(201);
-        expect(response.body.data.ticket.code).to.equal("update_code");
+        const mutation = `
+            mutation {
+                updateTicket (_id: "${ticketData._id}", code: "${ticketData.code}")
+                {
+                    code
+                    trainnumber
+                }
+            }
+        `
+        // const response = await chai.request(server).put('/tickets').set("x-access-token", jwtToken).send(ticketData);
+        const response = await chai.request(server)
+            .post("/graphql")
+            .set("x-access-token", jwtToken)
+            .set('Content-Type', 'application/json')
+            .send({ query: mutation })
+        
+        console.log(response)
+
+        expect(response).to.have.status(200);
+        expect(response.res.text).to.include('{"data":{"updateTicket":{"code":"update_code","trainnumber":"9123"}}}');
 
         const db = await database.getDb();
         const filter = {
