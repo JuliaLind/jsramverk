@@ -15,18 +15,18 @@ const RootQueryType = new GraphQLObjectType({
     name: 'Query',
     description: 'Root Query',
     fields: () => ({
-        delay: {
-            type: DelayType,
-            description: 'A single delay',
-            args: {
-                activityId: { type: GraphQLString }
-            },
-            resolve: async function(_, args) {
-                let delayArray = await delayed.getFromTrafikVerket();
+        // delay: {
+        //     type: DelayType,
+        //     description: 'A single delay',
+        //     args: {
+        //         activityId: { type: GraphQLString }
+        //     },
+        //     resolve: async function(_, args) {
+        //         let delayArray = await delayed.getFromTrafikVerket();
 
-                return delayArray.find(delay => delay.ActivityId === args.ActivityId);
-            }
-        },
+        //         return delayArray.find(delay => delay.ActivityId === args.ActivityId);
+        //     }
+        // },
         delayed: {
             type: GraphQLList(DelayType),
             description: 'List of all delayed trains',
@@ -44,7 +44,10 @@ const RootQueryType = new GraphQLObjectType({
         tickets: {
             type: GraphQLList(TicketType),
             description: 'List of tickets',
-            resolve: async function() {
+            resolve: async (post, args, context, { rootValue }) => {
+                // console.log("context" + context);
+                // console.log("post" + post);
+                console.log(context);
                 return await tickets.getTickets();
             }
         },
