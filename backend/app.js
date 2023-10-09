@@ -27,7 +27,7 @@ const trains = require("./routes/trains.js");
 const visual = true;
 const { graphqlHTTP } = require('express-graphql');
 const {
-  GraphQLSchema
+    GraphQLSchema
 } = require("graphql");
 
 const RootQueryType = require("./graphql/root.js");

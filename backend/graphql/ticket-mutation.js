@@ -1,11 +1,9 @@
 const {
-  GraphQLObjectType,
-  GraphQLString,
-  GraphQLList,
-  GraphQLID,
-  GraphQLInt,
-  GraphQLNonNull
-} = require('graphql')
+    GraphQLObjectType,
+    GraphQLString,
+    GraphQLID,
+    GraphQLNonNull
+} = require('graphql');
 
 const TicketType = require('./ticket.js');
 const ticketsModel = require('../models/tickets.js');

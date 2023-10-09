@@ -9,6 +9,7 @@ const mongo = require("mongodb").MongoClient;
 
 // Database details
 let dbName = "trains";
+
 process.env.NODE_ENV = "test";
 
 if (process.env.NODE_ENV === 'test') {

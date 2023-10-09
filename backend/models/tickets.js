@@ -40,7 +40,7 @@ const tickets = {
                     title: "Database error",
                     detail: e.message
                 }
-            })
+            });
             // return res.status(500).json({
             //     errors: {
             //         status: 500,
@@ -78,7 +78,7 @@ const tickets = {
                 code: args.code,
                 trainnumber: args.trainnumber,
                 traindate: args.traindate
-            }
+            };
 
             // return res.status(201).json({
             //     data: result
@@ -99,7 +99,7 @@ const tickets = {
                     title: "Database error",
                     detail: e.message
                 }
-            })
+            });
         }
     },
     deleteTicket: async function deleteTicket(_, args) {
@@ -114,7 +114,7 @@ const tickets = {
 
             return {
                 _id: ticketId
-            }
+            };
 
             // return res.status(201).json({
             //     data: {
@@ -137,7 +137,7 @@ const tickets = {
                     title: "Database error",
                     detail: e.message
                 }
-            })
+            });
         }
     },
     updateTicket: async function updateTicket(_, args) {
@@ -167,7 +167,7 @@ const tickets = {
                 code: updatedTicket.code,
                 trainnumber: updatedTicket.trainnumber,
                 traindate: updatedTicket.traindate
-            }
+            };
 
             // return res.status(201).json({
             //     data: {
@@ -183,7 +183,7 @@ const tickets = {
                     title: "Database error",
                     detail: e.message
                 }
-            })
+            });
             // return res.status(500).json({
             //     errors: {
             //         status: 500,
