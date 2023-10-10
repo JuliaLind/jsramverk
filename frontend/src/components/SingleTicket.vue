@@ -34,10 +34,15 @@ let innerText = 'Ändra'
  * the form data into the database
  */
 async function submitForm(code) {
-    const updatedTicket = {
-        _id: id,
-        code: code
+    const updatedTicket = `
+    mutation {
+        updateTicket(_id: "${id}", code: "${code}") {
+            _id
+            code
+            trainnumber
+        }
     }
+    `
 
     await store.updateTicket(updatedTicket)
     socket.notifyBackendStopEdit({
@@ -60,7 +65,13 @@ onMounted(() => {
     socket.listenForTicketUnlock()
 })
 
-
+const deletedTicket = `
+    mutation {
+        deleteTicket(_id: "${id}") {
+            _id
+        }
+    }
+`
 
 const toggleEditing = function () {
     if (editing.value == false) {
@@ -94,7 +105,7 @@ const toggleEditing = function () {
             <input v-if="editing" class="field-5" type="submit" value="Spara ändringar" />
         </form>
         <button v-on:click.self="toggleEditing()" :disabled="id in socket.data">{{ innerText }}</button>
-        <button v-on:click.self="store.deleteTicket(ticket._id), $emit('form-submitted')">
+        <button v-on:click.self="store.deleteTicket(deletedTicket), $emit('form-submitted')">
             Ta bort
         </button>
     </div>
