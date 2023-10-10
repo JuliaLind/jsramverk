@@ -35,13 +35,13 @@ const delayed = {
         }
         return {
             ActivityId: delay.ActivityId,
-            OperationalTrainNumber: delay.OperationalTrainNumber,
-            LocationSignature: delayStation,
-            FromLocation: fromStation,
-            ToLocation: toStation,
             AdvertisedTimeAtLocation: delay.AdvertisedTimeAtLocation,
             EstimatedTimeAtLocation: delay.EstimatedTimeAtLocation,
-            Canceled: delay.Canceled
+            OperationalTrainNumber: delay.OperationalTrainNumber,
+            Canceled: delay.Canceled,
+            FromLocation: fromStation,
+            ToLocation: toStation,
+            LocationSignature: delayStation,
         };
 
     },

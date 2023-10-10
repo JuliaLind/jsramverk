@@ -24,14 +24,13 @@ item.delayTime = delayTime
 <template>
     <div
         class="delay-item"
-        v-if="store.current === '' || store.current === item.OperationalTrainNumber"
+        v-if="store.current === '' || store.current === item.trainnumber"
     >
-        <div class="train-number">{{ item.OperationalTrainNumber }}</div>
+        <div class="train-number">{{ item.trainnumber }}</div>
         <div class="current-station">
             <div>{{ item.LocationSignature }}</div>
             <div>
-                {{ item.FromLocation ? item.FromLocation[0].LocationName + ' -> ' : '' }}
-                {{ item.ToLocation ? item.ToLocation[0].LocationName : '' }}
+                {{ item.FromLocation + ' -> ' + item.ToLocation }}
             </div>
         </div>
         <div class="delay">{{ delayTime }}</div>
