@@ -4,7 +4,7 @@ const {
     GraphQLBoolean,
     GraphQLInt,
     GraphQLList
-} = require('graphql')
+} = require('graphql');
 
 const LocationType = new GraphQLObjectType({
     name: 'Location',
@@ -14,7 +14,7 @@ const LocationType = new GraphQLObjectType({
         Priority: { type: GraphQLInt },
         Order: { type: GraphQLInt }
     })
-})
+});
 
 const DelayType = new GraphQLObjectType({
     name: 'Delay',
@@ -33,6 +33,6 @@ const DelayType = new GraphQLObjectType({
         TimeAtLocation: {type: GraphQLString},
         TrainOwner: {type: GraphQLString}
     })
-})
+});
 
 module.exports = DelayType;

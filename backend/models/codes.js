@@ -35,8 +35,11 @@ const codes = {
             }
         );
 
+        const result = await response.json();
+
         // JSON result data
-        return await response.json();
+        // return await response.json();
+        return result.RESPONSE.RESULT[0].ReasonCode;
     },
     /**
      * @description Fetches reason codes from the Trafikverket API.
@@ -51,7 +54,7 @@ const codes = {
             const result = await this.getFromTrafikVerket();
 
             return res.json({
-                data: result.RESPONSE.RESULT[0].ReasonCode
+                data: result
             });
         } catch (e) {
             return res.status(500).json({

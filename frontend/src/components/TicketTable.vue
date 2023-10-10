@@ -10,8 +10,27 @@ const updateTickets = async () => {
     tickets.value = await store.getTickets()
 }
 
+const query = `{tickets {
+    _id
+    code
+    trainnumber
+    traindate
+  }}`
+
 onMounted(async () => {
-    await updateTickets()
+    // await updateTickets()
+
+    const result = await fetch(`${import.meta.env.VITE_URL}/graphql`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'x-access-token': store.token
+        },
+        body: JSON.stringify({ query: query })
+    })
+    const data = await result.json()
+    console.log('data returned:', data)
 })
 
 // Note for later: consider moving tickets constant to auth-pinia

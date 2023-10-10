@@ -11,33 +11,10 @@ import { useTrainsStore } from '@/stores/trains'
 const store = useTrainsStore()
 const delayedTrains = ref([])
 
-const query = `{delayed {
-    AdvertisedTimeAtLocation
-    EstimatedTimeAtLocation
-    OperationalTrainNumber
-    LocationSignature
-    FromLocation {
-      LocationName
-    }
-    ToLocation {
-      LocationName
-    }
-  }}`
+
 
 onMounted(async () => {
     delayedTrains.value = await getDelayedTrains()
-
-    const result = await fetch(`${import.meta.env.VITE_URL}/graphql`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'x-access-token': "thisisatesttoken"
-        },
-        body: JSON.stringify({ query: query })
-    })
-    const data = await result.json()
-    console.log('data returned:', data)
 })
 
 socket.on('delayedTrainsUpdate', (updatedTrains) => {

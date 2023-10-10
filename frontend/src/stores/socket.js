@@ -22,9 +22,10 @@ export const socketStore = defineStore('socket', {
         receiveFromBackendTicketEditStop() {
             socket.on('stop-editing', (data) => {
                 // this.data = data;
-                if (ticket in this.data) {
-                    delete this.data[data.ticket]
-                }
+                // if (ticket in this.data) {
+                //     delete this.data[data.ticket]
+                // }
+                console.log(data)
 
             });
         }

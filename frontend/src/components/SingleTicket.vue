@@ -2,7 +2,7 @@
 import { useAuthStore } from '@/stores/auth'
 
 import { getCodes } from '../services/api.service.js'
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted } from 'vue'
 import { socketStore } from '@/stores/socket'
 
 const props = defineProps({

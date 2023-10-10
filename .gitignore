@@ -11,7 +11,7 @@ vue-project/
 vue-project-m/
 frontend-old/
 
-backend/coverage/*
+backend/coverage/
 # backend/coverage/backend/
 # backend/coverage/base.css
 # backend/coverage/block-navigation.js
