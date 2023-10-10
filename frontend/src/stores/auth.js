@@ -95,13 +95,14 @@ export const useAuthStore = defineStore('store', {
          * }
          */
         async submitNewTicket(newTicketObject) {
-            const response = await fetch(`${import.meta.env.VITE_URL}/tickets`, {
-                body: JSON.stringify(newTicketObject),
+            const response = await fetch(`${import.meta.env.VITE_URL}/graphql`, {
                 method: 'POST',
                 headers: {
-                    'content-type': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
                     'x-access-token': this.token
-                }
+                },
+                body: JSON.stringify({ query: newTicketObject })
             })
             const result = await response.json()
             console.log('new ticket result: ', result)
@@ -121,13 +122,14 @@ export const useAuthStore = defineStore('store', {
          * }
          */
         async updateTicket(updatedTicketObject) {
-            const response = await fetch(`${import.meta.env.VITE_URL}/tickets`, {
-                body: JSON.stringify(updatedTicketObject),
-                method: 'PUT',
+            const response = await fetch(`${import.meta.env.VITE_URL}/graphql`, {
+                method: 'POST',
                 headers: {
-                    'content-type': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
                     'x-access-token': this.token
-                }
+                },
+                body: JSON.stringify({ query: updatedTicketObject })
             })
             const result = await response.json()
             console.log('updated ticket result: ', result)
@@ -147,17 +149,16 @@ export const useAuthStore = defineStore('store', {
          *    }
          * }
          */
-        async deleteTicket(ticketid) {
-            console.log(ticketid)
-            const response = await fetch(`${import.meta.env.VITE_URL}/tickets`, {
-                body: JSON.stringify({
-                    _id: ticketid
-                }),
-                method: 'DELETE',
+        async deleteTicket(deletedTicketObject) {
+            // console.log(ticketid)
+            const response = await fetch(`${import.meta.env.VITE_URL}/graphql`, {
+                method: 'POST',
                 headers: {
-                    'content-type': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
                     'x-access-token': this.token
-                }
+                },
+                body: JSON.stringify({ query: deletedTicketObject })
             })
             const result = await response.json()
             console.log(result)

@@ -85,6 +85,7 @@ const auth = {
             const db = await database.getDb();
             const filter = { email: email };
             const user = await db.collection.users.findOne(filter);
+
             console.log(user);
 
             await db.client.close();

@@ -4,10 +4,11 @@ const codes = require('../models/codes.js');
 const CodeType = require("./code.js");
 const tickets = require('../models/tickets.js');
 const TicketType = require('./ticket.js');
+const jwt = require('jsonwebtoken');
+const jwtSecret = process.env.JWT_SECRET;
 
 const {
     GraphQLObjectType,
-    GraphQLString,
     GraphQLList
 } = require('graphql');
 
@@ -37,18 +38,38 @@ const RootQueryType = new GraphQLObjectType({
         codes: {
             type: GraphQLList(CodeType),
             description: 'List of reason codes',
-            resolve: async function() {
-                return await codes.getFromTrafikVerket();
+            resolve: async (post, args, context) => {
+                const token = context.headers['x-access-token'];
+
+                if (token) {
+                    try {
+                        jwt.verify(token, jwtSecret);
+                        return await codes.getCodes();
+                    } catch (err) {
+                        throw new Error(`Failed authentication: ${err.message}`);
+                    }
+                } else {
+                    throw new Error('Token not provided');
+                }
             }
         },
         tickets: {
             type: GraphQLList(TicketType),
             description: 'List of tickets',
-            resolve: async (post, args, context, { rootValue }) => {
-                // console.log("context" + context);
-                // console.log("post" + post);
-                // console.log(context);
-                return await tickets.getTickets();
+
+            resolve: async (post, args, context) => {
+                const token = context.headers['x-access-token'];
+
+                if (token) {
+                    try {
+                        jwt.verify(token, jwtSecret);
+                        return await tickets.getTickets();
+                    } catch (err) {
+                        throw new Error(`Failed authentication: ${err.message}`);
+                    }
+                } else {
+                    throw new Error('Token not provided');
+                }
             }
         },
     })
