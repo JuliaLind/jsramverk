@@ -56,6 +56,7 @@ const RootQueryType = new GraphQLObjectType({
         tickets: {
             type: GraphQLList(TicketType),
             description: 'List of tickets',
+
             resolve: async (post, args, context) => {
                 const token = context.headers['x-access-token'];
 
