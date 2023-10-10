@@ -17,16 +17,14 @@ export const socketStore = defineStore('socket', {
             socket.on('editing-ticket', (data) => {
                 // this.data = data;
                 this.data[data.ticket] = data.user
+                console.log(data);
             });
         },
         receiveFromBackendTicketEditStop() {
             socket.on('stop-editing', (data) => {
-                // this.data = data;
-                // if (ticket in this.data) {
-                //     delete this.data[data.ticket]
-                // }
-                console.log(data)
-
+                if (data.ticket in this.data) {
+                    delete this.data[data.ticket]
+                }
             });
         }
     },

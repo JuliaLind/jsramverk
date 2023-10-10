@@ -47,7 +47,7 @@ const RootQueryType = new GraphQLObjectType({
             resolve: async (post, args, context, { rootValue }) => {
                 // console.log("context" + context);
                 // console.log("post" + post);
-                console.log(context);
+                // console.log(context);
                 return await tickets.getTickets();
             }
         },

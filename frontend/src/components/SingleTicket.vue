@@ -57,6 +57,7 @@ const sendToBackend = {
 
 onMounted(() => {
     socket.receiveFromBackendTicketEdit()
+    socket.receiveFromBackendTicketEditStop()
 })
 
 
