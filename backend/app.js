@@ -221,7 +221,11 @@ io.on('connection', (socket) => {
     socket.on('edit-ticket', (data) => {
         socket.broadcast.emit('editing-ticket', (data));
     });
+    socket.on('stop-edit', (data) => {
+        socket.broadcast.emit('stop-editing', (data));
+    });
 });
+
 
 // Fetch train positions with socket.io
 trainsModel.fetchTrainPositions(io);

@@ -171,19 +171,35 @@ export const useAuthStore = defineStore('store', {
          * @returns {Promise<array>} previous tickets
          */
         async getTickets() {
-            const response = await fetch(`${import.meta.env.VITE_URL}/tickets`, {
-                method: 'GET',
+            // const response = await fetch(`${import.meta.env.VITE_URL}/tickets`, {
+            //     method: 'GET',
+            //     headers: {
+            //         'content-type': 'application/json',
+            //         'x-access-token': this.token
+            //     }
+            // })
+            const query = `{tickets {
+                _id
+                code
+                trainnumber
+                traindate
+              }}`
+            const response = await fetch(`${import.meta.env.VITE_URL}/graphql`, {
+                method: 'POST',
                 headers: {
-                    'content-type': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
                     'x-access-token': this.token
-                }
+                },
+                body: JSON.stringify({ query: query })
             })
             const result = await response.json()
-
-            if (this.isTokenValid(result)) {
-                return result.data
-            }
-            return undefined //?? not sure what to return, the view should update to display login-form instead of tickets list
+            console.log(result);
+            return result.data.tickets;
+            // if (this.isTokenValid(result)) {
+            //     return result.data
+            // }
+            // return undefined //?? not sure what to return, the view should update to display login-form instead of tickets list
         }
     }
 })

@@ -56,7 +56,8 @@ const sendToBackend = {
 }
 
 onMounted(() => {
-    socket.receiveFromBackendTicketEdit()
+    socket.listenForTicketLock()
+    socket.listenForTicketUnlock()
 })
 
 
@@ -65,7 +66,7 @@ const toggleEditing = function () {
     if (editing.value == false) {
         editing.value = true
         innerText = 'Återgå'
-        socket.notifyBackendTicketEdit(sendToBackend)
+        socket.notifyBackendEdit(sendToBackend)
     } else {
         editing.value = false
         innerText = 'Ändra'

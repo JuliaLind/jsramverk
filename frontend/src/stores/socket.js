@@ -6,27 +6,25 @@ import socket from '../services/socket.service.js'
 export const socketStore = defineStore('socket', {
     state: () => ({ data: {} }),
     actions: {
-        notifyBackendTicketEdit(data) {
+        notifyBackendEdit(data) {
             socket.emit('edit-ticket', data)
         },
         notifyBackendStopEdit(data) {
             // skicka id
             socket.emit('stop-edit', data)
         },
-        receiveFromBackendTicketEdit() {
-            socket.on('editing-ticket', (data) => {
+        listenForTicketLock() {
+            socket.on('lock-ticket', (data) => {
                 // this.data = data;
                 this.data[data.ticket] = data.user
+                console.log(data);
             });
         },
-        receiveFromBackendTicketEditStop() {
-            socket.on('stop-editing', (data) => {
-                // this.data = data;
-                // if (ticket in this.data) {
-                //     delete this.data[data.ticket]
-                // }
-                console.log(data)
-
+        listenForTicketUnlock() {
+            socket.on('unlock-ticket', (data) => {
+                if (data.ticket in this.data) {
+                    delete this.data[data.ticket]
+                }
             });
         }
     },
