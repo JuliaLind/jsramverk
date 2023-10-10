@@ -14,6 +14,37 @@ const fetch = require('node-fetch');
  * @property {Function} getDelayedTrains - Fetches delayed trains.
  */
 const delayed = {
+    transformDelayObject: function transformDelayObject(delay, stations) {
+        let fromStation = "";
+        let delayStation = "";
+        let toStation = "";
+
+        for (const station of stations) {
+            if (delay.FromLocation && station.LocationSignature === delay.FromLocation[0].LocationName) {
+                fromStation = station.AdvertisedLocationName;
+            }
+            if (station.LocationSignature === delay.LocationSignature) {
+                delayStation = station.AdvertisedLocationName;
+            }
+            if (delay.ToLocation && station.LocationSignature === delay.ToLocation[0].LocationName) {
+                toStation = station.AdvertisedLocationName;
+            }
+            if (fromStation && delayStation && toStation) {
+                break;
+            }
+        }
+        return {
+            ActivityId: delay.ActivityId,
+            OperationalTrainNumber: delay.OperationalTrainNumber,
+            LocationSignature: delayStation,
+            FromLocation: fromStation,
+            ToLocation: toStation,
+            AdvertisedTimeAtLocation: delay.AdvertisedTimeAtLocation,
+            EstimatedTimeAtLocation: delay.EstimatedTimeAtLocation,
+            Canceled: delay.Canceled
+        };
+
+    },
     /**
      * @returns {Promise<array>} an array with delayed trains filtered to only include those
      * that have positionData
@@ -36,18 +67,21 @@ const delayed = {
           </AND>
           </FILTER>
           <INCLUDE>ActivityId</INCLUDE>
-          <INCLUDE>ActivityType</INCLUDE>
           <INCLUDE>AdvertisedTimeAtLocation</INCLUDE>
           <INCLUDE>EstimatedTimeAtLocation</INCLUDE>
-          <INCLUDE>AdvertisedTrainIdent</INCLUDE>
           <INCLUDE>OperationalTrainNumber</INCLUDE>
           <INCLUDE>Canceled</INCLUDE>
           <INCLUDE>FromLocation</INCLUDE>
           <INCLUDE>ToLocation</INCLUDE>
           <INCLUDE>LocationSignature</INCLUDE>
-          <INCLUDE>TimeAtLocation</INCLUDE>
-          <INCLUDE>TrainOwner</INCLUDE>
       </QUERY>
+      <QUERY objecttype="TrainStation" schemaversion="1">
+      <FILTER>
+          <EQ name="Advertised" value="true" />
+            </FILTER>
+            <INCLUDE>LocationSignature</INCLUDE>
+            <INCLUDE>AdvertisedLocationName</INCLUDE>
+        </QUERY>
       </REQUEST>`;
 
         // HTTP response
@@ -63,10 +97,13 @@ const delayed = {
         const delayed = result.RESPONSE.RESULT[1].TrainAnnouncement;
         const positions = result.RESPONSE.RESULT[0].TrainPosition;
         const delayedWithPositionData = [];
+        const stations = result.RESPONSE.RESULT[2].TrainStation;
 
         for (const delay of delayed) {
             if (positions.some((position) => position.Train.OperationalTrainNumber === delay.OperationalTrainNumber)) {
-                delayedWithPositionData.push(delay);
+                const newDelayObject = this.transformDelayObject(delay, stations);
+
+                delayedWithPositionData.push(newDelayObject);
             }
         }
 
