@@ -60,7 +60,7 @@ const tickets = {
      * @param {Object} res - Express.js response object. // ÄNDRA
      * @returns {Promise<Object>} A JSON response containing info on inserted ticket.
      */
-    createTicket: async function createTicket(_, args) {
+    createTicket: async function createTicket(args) {
         try {
             const db = await database.getDb();
             const doc = {
@@ -102,7 +102,7 @@ const tickets = {
             });
         }
     },
-    deleteTicket: async function deleteTicket(_, args) {
+    deleteTicket: async function deleteTicket(args) {
         try {
             const db = await database.getDb();
             const ticketId = args._id;
@@ -140,7 +140,7 @@ const tickets = {
             });
         }
     },
-    updateTicket: async function updateTicket(_, args) {
+    updateTicket: async function updateTicket(args) {
         const ticketId = args._id;
         const code = args.code;
         const doc = {

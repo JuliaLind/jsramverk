@@ -31,11 +31,14 @@ const store = useAuthStore()
  * the form data into the database
  */
 async function submitForm(code, trainnumber, traindate) {
-    const newTicket = {
-        code: code,
-        trainnumber: trainnumber,
-        traindate: traindate
-    }
+    const newTicket = `
+        mutation {
+            createTicket(code: "${code}", trainnumber: "${trainnumber}", traindate: "${traindate}") {
+                _id
+                code
+            }
+        }
+    `
     await store.submitNewTicket(newTicket)
     /**
      * Sends signal to tickets-component to re-render
