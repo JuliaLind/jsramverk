@@ -16,7 +16,6 @@ const bodyParser = require('body-parser');
 const cron = require('node-cron');
 const delayedModel = require('./models/delayed.js');
 const trainsModel = require('./models/trains.js');
-// const authModel = require('./models/auth.js');
 
 const delayed = require('./routes/delayed.js');
 const tickets = require('./routes/tickets.js');
@@ -24,8 +23,6 @@ const codes = require('./routes/codes.js');
 const register = require("./routes/register.js");
 const login = require("./routes/login.js");
 const trains = require("./routes/trains.js");
-const jwt = require('jsonwebtoken');
-const jwtSecret = process.env.JWT_SECRET;
 
 const { graphqlHTTP } = require('express-graphql');
 const {
@@ -75,31 +72,25 @@ app.get('/', (req, res) => {
 
 const visual = true;
 
-const loggingMiddleware = (req, res, next) => {
+// const loggingMiddleware = (req, res, next) => {
 //   console.log("headers:", req.headers)
-  next()
-}
+//   next()
+// };
 
-const root = {
-  token: function (args, request) {
-    return request.headers['x-access-token']
-  },
-}
+// const root = {
+//   token: function (args, request) {
+//     return request.headers['x-access-token']
+//   },
+// }
 
-app.use(loggingMiddleware)
+// app.use(loggingMiddleware)
 app.use(
-  "/graphql",
-  graphqlHTTP({
-    schema: schema,
-    // rootValue: root,
-    // context: ({ req }) => {
-    //     return {
-    //         headers: req.headers
-    //     };
-    // },
-    graphiql: visual,
-  })
-)
+    "/graphql",
+    graphqlHTTP({
+        schema: schema,
+        graphiql: visual,
+    })
+);
 
 // const graphqlMiddleware = (req, res, next) => {
 //     const route = new RegExp("^{[ ]*?tickets");
