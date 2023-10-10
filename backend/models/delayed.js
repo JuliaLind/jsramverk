@@ -63,6 +63,7 @@ const delayed = {
               <AND>
                   <GT name='AdvertisedTimeAtLocation' value='$dateadd(-00:15:00)' />
                   <LT name='AdvertisedTimeAtLocation'                   value='$dateadd(02:00:00)' />
+                  <EXISTS name="FromLocation" value='true' />
               </AND>
           </AND>
           </FILTER>
