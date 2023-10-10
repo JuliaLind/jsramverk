@@ -7,6 +7,8 @@ const {
 
 const TicketType = require('./ticket.js');
 const ticketsModel = require('../models/tickets.js');
+const jwt = require('jsonwebtoken');
+const jwtSecret = process.env.JWT_SECRET;
 
 const RootMutationType = new GraphQLObjectType({
     name: 'TicketMutation',
@@ -20,11 +22,21 @@ const RootMutationType = new GraphQLObjectType({
                 trainnumber: { type: GraphQLNonNull(GraphQLString) },
                 traindate: { type: GraphQLNonNull(GraphQLString) },
             },
-            resolve: async function(_, args) {
-                const data = await ticketsModel.createTicket(_, args);
+            resolve: async (post, args, context) => {
+                const token = context.headers['x-access-token'];
 
-                return data;
-            },
+                console.log(token);
+                if (token) {
+                    try {
+                        jwt.verify(token, jwtSecret);
+                        return await ticketsModel.createTicket(args);
+                    } catch (err) {
+                        throw new Error(`Failed authentication: ${err.message}`);
+                    }
+                } else {
+                    throw new Error('Token not provided');
+                }
+            }
         },
         deleteTicket: {
             type: TicketType,
@@ -32,11 +44,20 @@ const RootMutationType = new GraphQLObjectType({
             args: {
                 _id: { type: GraphQLNonNull(GraphQLID) }
             },
-            resolve: async function(_, args) {
-                const data = await ticketsModel.deleteTicket(_, args);
+            resolve: async (post, args, context) => {
+                const token = context.headers['x-access-token'];
 
-                return data;
-            },
+                if (token) {
+                    try {
+                        jwt.verify(token, jwtSecret);
+                        return await ticketsModel.deleteTicket(args);
+                    } catch (err) {
+                        throw new Error(`Failed authentication: ${err.message}`);
+                    }
+                } else {
+                    throw new Error('Token not provided');
+                }
+            }
         },
         updateTicket: {
             type: TicketType,
@@ -45,11 +66,20 @@ const RootMutationType = new GraphQLObjectType({
                 _id: { type: GraphQLNonNull(GraphQLID) },
                 code: { type: GraphQLNonNull(GraphQLString) }
             },
-            resolve: async function(_, args) {
-                const data = await ticketsModel.updateTicket(_, args);
+            resolve: async (post, args, context) => {
+                const token = context.headers['x-access-token'];
 
-                return data;
-            },
+                if (token) {
+                    try {
+                        jwt.verify(token, jwtSecret);
+                        return await ticketsModel.updateTicket(args);
+                    } catch (err) {
+                        throw new Error(`Failed authentication: ${err.message}`);
+                    }
+                } else {
+                    throw new Error('Token not provided');
+                }
+            }
         },
     }),
 });
