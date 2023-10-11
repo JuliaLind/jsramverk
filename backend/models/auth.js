@@ -10,6 +10,7 @@ const jwt = require('jsonwebtoken');
 const jwtSecret = process.env.JWT_SECRET;
 
 
+
 const auth = {
     register: function register(res, body) {
         const saltRounds = 10;
@@ -156,6 +157,23 @@ const auth = {
             });
         });
     },
+    // this one is used in GraphQL
+    checkGQToken: function(context) {
+        const token = context.headers['x-access-token'];
+
+        if (token) {
+            try {
+                jwt.verify(token, jwtSecret);
+            } catch (err) {
+                throw new Error(`Failed authentication: ${err.message}`);
+            }
+        } else {
+            throw new Error('Token not provided');
+        }
+    },
+    // this one is used in the ticket routes,
+    // so can be removed when we remove the routes
+    // and corresponding tests
     checkToken: function(req, res, next) {
         let token = req.headers['x-access-token'];
 

@@ -1,13 +1,12 @@
 import { defineStore } from 'pinia'
 
 /**
- *
+ * Part of functionality in toggling between
+ * showing all trains or a specific train
  */
 export const useTrainsStore = defineStore('trains', {
     state: () => ({
         current: ''
-        // delayed: [],
-        // codes: []
     }),
     actions: {
         setCurrent(trainnr) {
@@ -18,22 +17,5 @@ export const useTrainsStore = defineStore('trains', {
             }
             console.log(this.current)
         }
-        // setDelayed(announcements) {
-        //     this.delayed = announcements
-        // },
-        // setCodes(codes) {
-        //     this.codes = codes
-        // },
-        // getTrainNumbers() {
-        //     return [
-        //         ...new Set(
-        //             this.delayed
-        //                 .map((item) => {
-        //                     return item.OperationalTrainNumber
-        //                 })
-        //                 .sort()
-        //         )
-        //     ]
-        // }
     }
 })

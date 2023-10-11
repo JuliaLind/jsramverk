@@ -122,7 +122,7 @@ const delayed = {
     getDelayedTrains: async function getDelayedTrains(req, res) {
         try {
             return res.json({
-                data: await this.getFromTrafikVerket()
+                data: await this.getFromTrafikverket()
             });
         } catch (e) {
             return res.status(500).json({

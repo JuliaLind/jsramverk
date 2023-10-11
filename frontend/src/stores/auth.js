@@ -58,14 +58,6 @@ export const useAuthStore = defineStore('store', {
          * @param resultObject - the returned object from
          * backend, to check if token has expired.
          * This function is used in the ticket service
-         * {
-         * "errors": {
-         *    "status": 500,
-         *    "source": "/login",
-         *    "title": "Failed authentication",
-         *    "detail": "jwt expired"
-         * }
-         * }
          */
         async isTokenValid(resultObject) {
             if ('errors' in resultObject) {
@@ -83,12 +75,6 @@ export const useAuthStore = defineStore('store', {
          * trainnumber and traindate
          * @returns {Promise<array>} response - contains
          * the document number for the submitted ticket
-         * @example {
-         *    "data": {
-         *        "acknowledged": true,
-         *        "insertedId": "6504bccfa00196da499d69d1"
-         *    }
-         * }
          */
         async submitNewTicket(newTicketObject) {
             const response = await fetch(`${import.meta.env.VITE_URL}/graphql`, {
@@ -128,7 +114,6 @@ export const useAuthStore = defineStore('store', {
                 body: JSON.stringify({ query: updatedTicketObject })
             })
             const result = await response.json()
-            console.log('updated ticket result: ', result)
             if (this.isTokenValid(result)) {
                 return result.data
             }
@@ -140,10 +125,6 @@ export const useAuthStore = defineStore('store', {
          * @param {string} ticketid - _id of the ticket
          * @returns {Promise<array>} response - contains
          * the document number for the submitted ticket
-         * @example {
-         *    "data": {
-         *    }
-         * }
          */
         async deleteTicket(deletedTicketObject) {
             const response = await fetch(`${import.meta.env.VITE_URL}/graphql`, {
@@ -167,13 +148,6 @@ export const useAuthStore = defineStore('store', {
          * @returns {Promise<array>} previous tickets
          */
         async getTickets() {
-            // const response = await fetch(`${import.meta.env.VITE_URL}/tickets`, {
-            //     method: 'GET',
-            //     headers: {
-            //         'content-type': 'application/json',
-            //         'x-access-token': this.token
-            //     }
-            // })
             const query = `{tickets {
                 _id
                 code
