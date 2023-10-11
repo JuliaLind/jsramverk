@@ -4,8 +4,9 @@ Efter att ha klonat report behöver du köra ```npm install``` från roten av fr
 
 1. I backend katalogen lägger du till en ".env" fil du lägger till följande variabler: 
 TRAFIKVERKET_API_KEY (api nyckel som du genererar från trafikverkets webbplats)
-DSN (connection strängen till din databas, du kan använde lokal eller molnbaserad. I din databas behöver du skapa databaserna "trains" respektive "test")
-URL (url till front-end servern, t ex ```URL="https://www.student.bth.se"```)
+DSN (connection strängen till din databas, du kan använde lokal eller molnbaserad.)
+URL (url till front-end servern, t ex ```URL="https://www.student.bth.se"```).
+I din databas behöver du skapa databaserna "trains" respektive "test". I respektive databas kommer du behöva två collections "tickets" respektive "users". I users collection behöver du lägga till en unique constraint på 'email' fältet. Enklast gör du det via MongoDBCompass appen.
 
 2. I frontend katalogen lägger du till en ".env.development" fil med variabeln VITE_URL som innehåller url till backend servern lokalt (t ex ```VITE_URL="http://localhost:1337"```).
 
