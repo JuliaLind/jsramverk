@@ -37,4 +37,8 @@ function toggleVisibility() {
     </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.material-symbols-outlined {
+    cursor: pointer;
+}
+</style>
