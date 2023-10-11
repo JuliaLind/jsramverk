@@ -80,22 +80,6 @@ select {
     border: 1px solid #07470e;
 }
 
-.field-1 {
-    width: 200px;
-}
-
-.field-2 {
-    width: 70px;
-}
-
-.field-3 {
-    width: 300px;
-}
-
-.field-4 {
-    width: 100px;
-}
-
 input,
 select {
     padding: 0.2em;

@@ -61,7 +61,6 @@ onMounted(async () => {
     background-color: white;
 }
 
-
 .titles,
 form {
     display: flex;
@@ -76,51 +75,8 @@ form {
     padding: 0.2em;
 }
 
-
-.field-1 {
-    min-width: 200px;
-}
-
-.field-2 {
-    min-width: 70px;
-}
-
-.field-3 {
-    min-width: 300px;
-}
-
-
-.field-4 {
-    min-width: 100px;
-}
-
-.field-5 {
-    width: 100%;
-}
-
-
 .old-tickets {
     width: max-content;
 }
 
-/* .ticket-row,
-.ticket-row form {
-    width: 100%;
-} */
-
-
-
-
-
-
-
-
-
-
-/* .ticket-row,
-.ticket-row form {
-    display: flex;
-    flex-direction: row;
-    width: clamp(400px, 100%, 1000px);
-} */
 </style>
