@@ -45,6 +45,18 @@ const delayed = {
         };
 
     },
+
+    filterResult: function filterResult(delayed, stations, positions) {
+        const filteredResult = [];
+        for (const delay of delayed) {
+            if (positions.some((position) => position.Train.OperationalTrainNumber === delay.OperationalTrainNumber)) {
+                const newDelayObject = this.transformDelayObject(delay, stations);
+
+                filteredResult.push(newDelayObject);
+            }
+        }
+        return filteredResult;
+    },
     /**
      * @returns {Promise<array>} an array with delayed trains filtered to only include those
      * that have positionData
@@ -95,20 +107,9 @@ const delayed = {
         );
 
         const result = await response.json();
-        const delayed = result.RESPONSE.RESULT[1].TrainAnnouncement;
-        const positions = result.RESPONSE.RESULT[0].TrainPosition;
-        const delayedWithPositionData = [];
-        const stations = result.RESPONSE.RESULT[2].TrainStation;
+        const filteredResult = this.filterResult(result.RESPONSE.RESULT[1].TrainAnnouncement, result.RESPONSE.RESULT[2].TrainStation, result.RESPONSE.RESULT[0].TrainPosition);
 
-        for (const delay of delayed) {
-            if (positions.some((position) => position.Train.OperationalTrainNumber === delay.OperationalTrainNumber)) {
-                const newDelayObject = this.transformDelayObject(delay, stations);
-
-                delayedWithPositionData.push(newDelayObject);
-            }
-        }
-
-        return delayedWithPositionData;
+        return filteredResult;
     },
     /**
      * @description Fetches delayed trains from the Trafikverket API.
