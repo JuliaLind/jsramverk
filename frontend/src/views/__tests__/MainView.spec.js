@@ -47,9 +47,9 @@ describe('MainView', async () => {
         })
         await flushPromises()
 
-        expect(wrapper.text()).contains('8150')
-        expect(wrapper.text()).contains('RvBlgc ->  Mras')
-        expect(wrapper.text()).contains('KpHpbg ->  Vå')
+        expect(wrapper.html()).contains('8136')
+        expect(wrapper.text()).contains('Borlänge C')
+        expect(wrapper.text()).contains('Kimstad')
 
         wrapper.unmount()
     })

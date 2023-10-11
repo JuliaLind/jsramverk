@@ -28,10 +28,5 @@ export const socketStore = defineStore('socket', {
             });
         }
     },
-    // getters: {
-    //     getDataFromBackend() {
-    //         return this.data
-    //     }
-    // }
 })
 

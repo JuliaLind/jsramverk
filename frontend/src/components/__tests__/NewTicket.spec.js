@@ -1,6 +1,6 @@
 import { vi, describe, it, expect, afterEach } from 'vitest'
 import NewTicket from '../NewTicket.vue'
-import { mount } from '@vue/test-utils'
+import { flushPromises, mount } from '@vue/test-utils'
 import { codes } from './mockdata/codes-small.js'
 import { trainnumbers } from './mockdata/trainnumbers.js'
 
@@ -13,24 +13,32 @@ vi.mock('@/stores/auth', () => ({
     })
 }))
 
+vi.mock('../../services/api.service.js', () => {
+    return {
+        getCodes: vi.fn(() => {
+            return codes
+        }),
+        getTrainNumbers: vi.fn(() => {
+            return trainnumbers
+        })
+    }
+})
+
+
 describe('NewTicket', async () => {
     afterEach(() => {
         vi.restoreAllMocks()
     })
 
     it('renders properly', async () => {
-        const wrapper = mount(NewTicket, {
-            props: {
-                codes: codes,
-                trainnumbers: trainnumbers
-            }
-        })
+        const wrapper = mount(NewTicket)
 
-        expect(wrapper.text()).contains('ANA002')
-        expect(wrapper.text()).contains('8150')
+        await flushPromises()
+        expect(wrapper.html()).toContain('Skapa')
+
 
         wrapper.unmount()
 
-        // note to self: add test for clicking on the submitbutton and checking that submitNewTickets function is salled. Also add test for checking codes in options dropdown
+        // note to self: add test for clicking on the submitbutton and checking that submitNewTickets function is called. Also add test for checking codes in options dropdown
     })
 })

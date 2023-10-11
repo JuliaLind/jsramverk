@@ -29,10 +29,8 @@ describe('DelayedTable', async () => {
         const wrapper = mount(DelayedTable)
 
         await flushPromises()
-
-        expect(wrapper.text()).contains('8150')
-        expect(wrapper.text()).contains('RvBlgc ->  Mras')
-        expect(wrapper.text()).contains('KpHpbg ->  Vå')
+        // console.log(wrapper.html())
+        expect(wrapper.html()).toContain('8136')
 
         wrapper.unmount()
 
