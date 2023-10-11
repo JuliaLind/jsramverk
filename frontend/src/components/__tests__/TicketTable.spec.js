@@ -5,7 +5,6 @@ import { tickets } from './mockdata/tickets.js'
 import { codes } from './mockdata/codes-small.js'
 import { trainnumbers } from './mockdata/trainnumbers.js'
 
-
 vi.mock('@/stores/auth', () => ({
     useAuthStore: () => ({
         token: 'imavalidtoken',
@@ -27,13 +26,13 @@ vi.mock('@/stores/auth', () => ({
 vi.mock('@/stores/socket', () => ({
     socketStore: () => ({
         data: {
-            "6505d0b1a60773cde6d0704d": "user@email.com"
+            '6505d0b1a60773cde6d0704d': 'user@email.com'
         },
         notifyBackendEdit(data) {
-            //do nothing
+            console.log(data)
         },
         notifyBackendStopEdit(data) {
-            //do nothing
+            console.log(data)
         },
         listenForTicketLock() {
             //do nothing

@@ -69,7 +69,6 @@ async function submitForm(code, trainnumber, traindate) {
 </template>
 
 <style scoped>
-
 input:disabled,
 select:disabled {
     border: 1px solid #333;

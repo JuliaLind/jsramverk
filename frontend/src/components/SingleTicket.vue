@@ -87,7 +87,6 @@ const toggleEditing = function () {
         })
     }
 }
-
 </script>
 
 <template>
@@ -104,7 +103,9 @@ const toggleEditing = function () {
             <input type="date" class="field-4" disabled :value="ticket.traindate" />
             <input v-if="editing" class="field-5" type="submit" value="Spara ändringar" />
         </form>
-        <button v-on:click.self="toggleEditing()" :disabled="id in socket.data">{{ innerText }}</button>
+        <button v-on:click.self="toggleEditing()" :disabled="id in socket.data">
+            {{ innerText }}
+        </button>
         <button v-on:click.self="store.deleteTicket(deletedTicket), $emit('form-submitted')">
             Ta bort
         </button>

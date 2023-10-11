@@ -4,8 +4,8 @@ export const currentItem = {
     EstimatedTimeAtLocation: '2023-09-17T23:28:00.000+02:00',
     OperationalTrainNumber: '8483',
     Canceled: false,
-    FromLocation: "Borlänge C",
-    ToLocation: "Morastrand",
+    FromLocation: 'Borlänge C',
+    ToLocation: 'Morastrand',
     LocationSignature: 'Djurås',
     delayTime: '10 minuter'
 }

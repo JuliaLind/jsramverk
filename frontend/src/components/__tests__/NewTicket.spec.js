@@ -24,7 +24,6 @@ vi.mock('../../services/api.service.js', () => {
     }
 })
 
-
 describe('NewTicket', async () => {
     afterEach(() => {
         vi.restoreAllMocks()
@@ -35,7 +34,6 @@ describe('NewTicket', async () => {
 
         await flushPromises()
         expect(wrapper.html()).toContain('Skapa')
-
 
         wrapper.unmount()
 

@@ -3,10 +3,12 @@ import axios from 'axios'
 import { router } from '../router/index.js'
 
 export const useAuthStore = defineStore('store', {
-    state: () => ({ data: {
-        token: '',
-        userEmail: ''
-    } }),
+    state: () => ({
+        data: {
+            token: '',
+            userEmail: ''
+        }
+    }),
     actions: {
         async login(username, password) {
             const user = {
@@ -81,7 +83,7 @@ export const useAuthStore = defineStore('store', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Accept': 'application/json',
+                    Accept: 'application/json',
                     'x-access-token': this.token
                 },
                 body: JSON.stringify({ query: newTicketObject })
@@ -108,7 +110,7 @@ export const useAuthStore = defineStore('store', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Accept': 'application/json',
+                    Accept: 'application/json',
                     'x-access-token': this.token
                 },
                 body: JSON.stringify({ query: updatedTicketObject })
@@ -131,7 +133,7 @@ export const useAuthStore = defineStore('store', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Accept': 'application/json',
+                    Accept: 'application/json',
                     'x-access-token': this.token
                 },
                 body: JSON.stringify({ query: deletedTicketObject })
@@ -158,7 +160,7 @@ export const useAuthStore = defineStore('store', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Accept': 'application/json',
+                    Accept: 'application/json',
                     'x-access-token': this.token
                 },
                 body: JSON.stringify({ query: query })
@@ -166,7 +168,7 @@ export const useAuthStore = defineStore('store', {
             const result = await response.json()
 
             if (this.isTokenValid(result)) {
-                return result.data.tickets;
+                return result.data.tickets
             }
             return undefined //?? not sure what to return, the view should update to display login-form instead of tickets list
         }

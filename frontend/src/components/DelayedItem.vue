@@ -30,18 +30,18 @@ item.delayTime = delayTime
             {{ item.OperationalTrainNumber }}
         </td>
         <td class="current-station">
-        {{ item.LocationSignature }}
+            {{ item.LocationSignature }}
         </td>
         <td class="station">
-        {{ item.FromLocation }}
+            {{ item.FromLocation }}
         </td>
         <td class="station">
-        {{ item.ToLocation }}
+            {{ item.ToLocation }}
         </td>
         <td class="delay">
-            <div class="old-time"> {{ item.AdvertisedTimeAtLocation.substring(12,16) }} </div>
-            <div class="new-time"> {{ item.EstimatedTimeAtLocation.substring(12,16) }} </div>
-            <div> {{ delayTime }} </div>
+            <div class="old-time">{{ item.AdvertisedTimeAtLocation.substring(12, 16) }}</div>
+            <div class="new-time">{{ item.EstimatedTimeAtLocation.substring(12, 16) }}</div>
+            <div>{{ delayTime }}</div>
         </td>
     </tr>
 </template>
@@ -58,7 +58,7 @@ item.delayTime = delayTime
 td,
 td > div {
     font-size: 1rem;
-    white-space: nowrap
+    white-space: nowrap;
 }
 
 a {

@@ -61,5 +61,4 @@ form {
 .old-tickets {
     width: max-content;
 }
-
 </style>

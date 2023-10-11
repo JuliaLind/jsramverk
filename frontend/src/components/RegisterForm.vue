@@ -6,19 +6,18 @@ const store = useAuthStore()
 let username = ''
 let password = ''
 let name = ''
-let innerText = ref("visibility")
-let fieldType = ref("password")
+let innerText = ref('visibility')
+let fieldType = ref('password')
 
 function toggleVisibility() {
-    if (innerText.value === "visibility" && fieldType.value === "password") {
-        innerText.value = "visibility_off"
-        fieldType.value = "text"
+    if (innerText.value === 'visibility' && fieldType.value === 'password') {
+        innerText.value = 'visibility_off'
+        fieldType.value = 'text'
     } else {
-        innerText.value = "visibility"
-        fieldType.value = "password"
+        innerText.value = 'visibility'
+        fieldType.value = 'password'
     }
 }
-
 </script>
 
 <template>
@@ -31,7 +30,15 @@ function toggleVisibility() {
             <label>E-postaddress</label>
             <input type="email" name="username" required="required" v-model="username" /><br />
             <label>Lösenord</label>
-            <input v-bind:type="fieldType" required="required" name="password" v-model="password" /><span class="material-symbols-outlined" @click="toggleVisibility()">{{ innerText }}</span><br />
+            <input
+                v-bind:type="fieldType"
+                required="required"
+                name="password"
+                v-model="password"
+            /><span class="material-symbols-outlined" @click="toggleVisibility()">{{
+                innerText
+            }}</span
+            ><br />
             <input type="submit" value="Submit" />
         </form>
     </div>

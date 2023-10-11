@@ -19,17 +19,19 @@ socket.on('delayedTrainsUpdate', (updatedTrains) => {
 })
 
 function updatePosition(positionObject) {
-    let fromLocation;
-    let toLocation;
+    let fromLocation
+    let toLocation
 
-    if (trainData.some((train) => {
-        if(positionObject.trainnumber === train.OperationalTrainNumber) {
-            fromLocation = train.FromLocation;
-            toLocation = train.ToLocation;
-            return true;
-        }
-        return false
-    })) {
+    if (
+        trainData.some((train) => {
+            if (positionObject.trainnumber === train.OperationalTrainNumber) {
+                fromLocation = train.FromLocation
+                toLocation = train.ToLocation
+                return true
+            }
+            return false
+        })
+    ) {
         if (positionObject.trainnumber in markers) {
             let marker = markers[positionObject.trainnumber]
 
@@ -45,11 +47,11 @@ function updatePosition(positionObject) {
             </div>`
 
             let icon = L.icon({
-            iconUrl:      `../../public/pink_train.png`,
-            iconSize:     [40, 40],
-            iconAnchor:   [12, 12],
-            popupAnchor:  [9, -3]
-        });
+                iconUrl: `../../public/pink_train.png`,
+                iconSize: [40, 40],
+                iconAnchor: [12, 12],
+                popupAnchor: [9, -3]
+            })
             let marker = L.marker(positionObject.position, {
                 icon: icon
             })
@@ -126,7 +128,7 @@ defineExpose({
 onMounted(async () => {
     trainData = await getDelayedTrains()
     initialPositions = await getInitialPositions()
-    console.log("from map", trainData)
+    console.log('from map', trainData)
     setupLeafletMap()
 })
 </script>
@@ -135,7 +137,4 @@ onMounted(async () => {
     <div id="map" class="map" ref="current"></div>
 </template>
 
-<style scoped>
-
-
-</style>
+<style scoped></style>

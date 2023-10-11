@@ -3,7 +3,6 @@
     width: 60vw;
 }
 
-
 .leaflet-popup-content-wrapper {
     height: 80px;
 }
@@ -59,12 +58,12 @@ p {
 
 .yellow-popup .mini-circle {
     /* background-color: #D9B0D6; */
-    background-color: #EC0A92;
+    background-color: #ec0a92;
 }
 
 .yellow-popup .stations::before,
 .yellow-popup .mini-circle {
-    border: 2px solid #EC0A92;
+    border: 2px solid #ec0a92;
 }
 
 .popup-content {

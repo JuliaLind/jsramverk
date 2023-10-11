@@ -17,14 +17,14 @@ export const getDelayedTrains = async () => {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Accept': 'application/json',
+            Accept: 'application/json'
         },
         body: JSON.stringify({ query: query })
     })
 
     const result = await response.json()
-    console.log("from api service", result.data)
-    return result.data.delayed;
+    console.log('from api service', result.data)
+    return result.data.delayed
 }
 
 /**
@@ -40,14 +40,14 @@ export const getInitialPositions = async () => {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Accept': 'application/json',
+            Accept: 'application/json'
         },
         body: JSON.stringify({ query: query })
     })
 
     const result = await response.json()
 
-    return result.data.positions;
+    return result.data.positions
 }
 
 /**
@@ -65,14 +65,14 @@ export const getCodes = async () => {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Accept': 'application/json',
+            Accept: 'application/json'
         },
         body: JSON.stringify({ query: query })
     })
 
     const result = await response.json()
 
-    return result.data.codes;
+    return result.data.codes
 }
 
 export const getTrainNumbers = async () => {
@@ -83,14 +83,14 @@ export const getTrainNumbers = async () => {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Accept': 'application/json',
+            Accept: 'application/json'
         },
         body: JSON.stringify({ query: query })
     })
 
     const result = await response.json()
 
-    const trainnumbers = result.data.delayed;
+    const trainnumbers = result.data.delayed
 
     return [
         ...new Set(

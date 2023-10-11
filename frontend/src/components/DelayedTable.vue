@@ -11,8 +11,6 @@ import { useTrainsStore } from '@/stores/trains'
 const store = useTrainsStore()
 const delayedTrains = ref([])
 
-
-
 onMounted(async () => {
     delayedTrains.value = await getDelayedTrains()
 })

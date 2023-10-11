@@ -7,7 +7,6 @@ import { tickets } from '../../components/__tests__/mockdata/tickets.js'
 import { codes } from '../../components/__tests__/mockdata/codes-small.js'
 import { trainnumbers } from '../../components/__tests__/mockdata/trainnumbers.js'
 
-
 const router = createRouter({
     history: createWebHistory(),
     routes: routes
@@ -27,13 +26,13 @@ vi.mock('../../services/api.service.js', () => {
 vi.mock('@/stores/socket', () => ({
     socketStore: () => ({
         data: {
-            "6505d0b1a60773cde6d0704d": "user@email.com"
+            '6505d0b1a60773cde6d0704d': 'user@email.com'
         },
         notifyBackendEdit(data) {
-            //do nothing
+            console.log(data)
         },
         notifyBackendStopEdit(data) {
-            //do nothing
+            console.log(data)
         },
         listenForTicketLock() {
             //do nothing
@@ -43,8 +42,6 @@ vi.mock('@/stores/socket', () => ({
         }
     })
 }))
-
-
 
 describe('AdminView', async () => {
     router.push('/admin')
