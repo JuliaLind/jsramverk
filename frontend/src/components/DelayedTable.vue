@@ -25,21 +25,29 @@ socket.on('delayedTrainsUpdate', (updatedTrains) => {
 <template>
     <div class="delayed">
         <h1>Försenade tåg</h1>
-        <div id="delayed-trains" class="delayed-trains">
+        <table id="delayed-trains" class="delayed-trains">
+            <tr>
+                <th>Tåg</th>
+                <th>Station</th>
+                <th>Från</th>
+                <th>Mot</th>
+                <th>Försenad</th>
+            </tr>
             <DelayedItem
                 v-for="item in delayedTrains"
                 :item="item"
                 :key="item.ActivityId"
                 v-on:click="store.setCurrent(item.OperationalTrainNumber), $emit('refresh-map')"
             />
-        </div>
+        </table>
     </div>
 </template>
 
 <style>
 .delayed {
     height: 100vh;
-    width: 40vw;
+    /* width: 40vw; */
+    width: fit-content;
     padding: 2rem;
     overflow: scroll;
     background-color: white;

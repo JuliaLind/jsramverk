@@ -22,29 +22,52 @@ item.delayTime = delayTime
 </script>
 
 <template>
-    <div
+    <tr
         class="delay-item"
-        v-if="store.current === '' || store.current === item.trainnumber"
+        v-if="store.current === '' || store.current === item.OperationalTrainNumber"
     >
-        <div class="train-number">{{ item.trainnumber }}</div>
-        <div class="current-station">
-            <div>{{ item.LocationSignature }}</div>
-            <div>
-                {{ item.FromLocation + ' -> ' + item.ToLocation }}
-            </div>
-        </div>
-        <div class="delay">{{ delayTime }}</div>
-    </div>
+        <td class="train-number">
+            {{ item.OperationalTrainNumber }}
+        </td>
+        <td class="current-station">
+        {{ item.LocationSignature }}
+        </td>
+        <td class="station">
+        {{ item.FromLocation }}
+        </td>
+        <td class="station">
+        {{ item.ToLocation }}
+        </td>
+        <td class="delay">
+            <div class="old-time"> {{ item.AdvertisedTimeAtLocation.substring(12,16) }} </div>
+            <div class="new-time"> {{ item.EstimatedTimeAtLocation.substring(12,16) }} </div>
+            <div> {{ delayTime }} </div>
+        </td>
+    </tr>
 </template>
 
 <style scoped>
+.stations {
+    font-size: 1rem;
+}
+
+.old-time {
+    text-decoration: line-through;
+}
+
+td,
+td > div {
+    font-size: 1rem;
+    white-space: nowrap
+}
+
 a {
     color: #000;
     text-decoration: none;
 }
 
 .delay-item {
-    display: flex;
+    /* display: flex; */
     flex-direction: row;
     border-top: 1px solid #ccc;
     padding: 0.2rem 0.8rem;

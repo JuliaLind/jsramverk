@@ -1,0 +1,93 @@
+.map {
+    height: 100vh;
+    width: 60vw;
+}
+
+
+.leaflet-popup-content-wrapper {
+    height: 80px;
+}
+
+.leaflet-popup-content {
+    min-width: 200px;
+    margin: 13px 24px 24px 7px;
+}
+
+p {
+    margin: 0;
+}
+
+.stations,
+.trainnr {
+    color: black;
+    size: 1rem;
+    height: 100%;
+}
+
+.stations {
+    /* font-weight: 500; */
+    font-weight: bold;
+    align-items: center;
+    text-align: left;
+    height: 100%;
+    padding: 0 1rem;
+    position: relative;
+}
+
+.stations::before {
+    content: '';
+    position: absolute;
+    margin-bottom: -1px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    height: 78px;
+    margin-top: -15px;
+}
+
+.mini-circle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-top: -20px;
+    margin-left: -3px;
+    width: 10px;
+    height: 10px;
+    display: block;
+    border-radius: 50%;
+}
+
+.yellow-popup .mini-circle {
+    /* background-color: #D9B0D6; */
+    background-color: #EC0A92;
+}
+
+.yellow-popup .stations::before,
+.yellow-popup .mini-circle {
+    border: 2px solid #EC0A92;
+}
+
+.popup-content {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    height: 60px;
+    min-width: 200px;
+}
+
+.trainnr {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 1.7rem;
+    font-weight: bold;
+    align-items: flex-start;
+    padding-right: 0.5em;
+}
+
+.stations {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+}
