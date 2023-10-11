@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia'
-// import { ref } from 'vue'
 import axios from 'axios'
 import { router } from '../router/index.js'
 
@@ -14,15 +13,12 @@ export const useAuthStore = defineStore('store', {
                 email: username,
                 password: password
             }
-            console.log(user)
             const result = await axios.post(`${import.meta.env.VITE_URL}/login`, user)
             if ('errors' in result) {
                 return result.errors.detail
             }
             this.token = result.data.data.token
             this.userEmail = result.data.data.user.email
-            console.log(this.token)
-            console.log(result.data.data.user.email)
             router.push('/admin')
 
             //note for later: set toast to "hello 'result.data.ta.user.name'""
@@ -150,7 +146,6 @@ export const useAuthStore = defineStore('store', {
          * }
          */
         async deleteTicket(deletedTicketObject) {
-            // console.log(ticketid)
             const response = await fetch(`${import.meta.env.VITE_URL}/graphql`, {
                 method: 'POST',
                 headers: {
@@ -195,12 +190,11 @@ export const useAuthStore = defineStore('store', {
                 body: JSON.stringify({ query: query })
             })
             const result = await response.json()
-            console.log(result);
-            return result.data.tickets;
-            // if (this.isTokenValid(result)) {
-            //     return result.data
-            // }
-            // return undefined //?? not sure what to return, the view should update to display login-form instead of tickets list
+
+            if (this.isTokenValid(result)) {
+                return result.data.tickets;
+            }
+            return undefined //?? not sure what to return, the view should update to display login-form instead of tickets list
         }
     }
 })
