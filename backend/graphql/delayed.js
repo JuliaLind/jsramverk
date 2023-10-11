@@ -2,8 +2,8 @@ const {
     GraphQLObjectType,
     GraphQLString,
     GraphQLBoolean,
-    GraphQLInt,
-    GraphQLList
+    // GraphQLInt,
+    // GraphQLList
 } = require('graphql');
 
 // const LocationType = new GraphQLObjectType({

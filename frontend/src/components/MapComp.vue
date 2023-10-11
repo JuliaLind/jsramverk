@@ -126,6 +126,7 @@ defineExpose({
 onMounted(async () => {
     trainData = await getDelayedTrains()
     initialPositions = await getInitialPositions()
+    console.log("from map", trainData)
     setupLeafletMap()
 })
 </script>

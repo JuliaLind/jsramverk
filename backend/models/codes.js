@@ -14,7 +14,7 @@ const fetch = require('node-fetch');
  * @property {Function} getCodes - Fetches reason codes.
  */
 const codes = {
-    getFromTrafikVerket: async function getFromTrafikVerket() {
+    getFromTrafikverket: async function getFromTrafikverket() {
         // XML Query sent to the API
         const query = `<REQUEST>
         <LOGIN authenticationkey="${process.env.TRAFIKVERKET_API_KEY}" />
@@ -51,7 +51,7 @@ const codes = {
      */
     getCodes: async function getCodes(req, res) {
         try {
-            const result = await this.getFromTrafikVerket();
+            const result = await this.getFromTrafikverket();
 
             return res.json({
                 data: result

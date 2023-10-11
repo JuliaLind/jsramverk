@@ -200,7 +200,7 @@ let io = require("socket.io")(httpServer, {
 
 cron.schedule('5 * * * * *', async () => {
     try {
-        const delayedTrains = await delayedModel.getFromTrafikVerket();
+        const delayedTrains = await delayedModel.getFromTrafikverket();
 
         io.emit('delayedTrainsUpdate', delayedTrains);
     } catch (error) {

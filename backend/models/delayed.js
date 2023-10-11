@@ -61,7 +61,7 @@ const delayed = {
      * @returns {Promise<array>} an array with delayed trains filtered to only include those
      * that have positionData
      */
-    getFromTrafikVerket: async function getFromTrafikVerket() {
+    getFromTrafikverket: async function getFromTrafikverket() {
         const query = `<REQUEST>
         <LOGIN authenticationkey="5d9e0b327c674d279771aed90ad87616" />
         <QUERY namespace="järnväg.trafikinfo" objecttype="TrainPosition" schemaversion="1.0" >
@@ -74,7 +74,7 @@ const delayed = {
               <GT name="EstimatedTimeAtLocation" value="$now" />
               <AND>
                   <GT name='AdvertisedTimeAtLocation' value='$dateadd(-00:15:00)' />
-                  <LT name='AdvertisedTimeAtLocation'                   value='$dateadd(02:00:00)' />
+                  <LT name='AdvertisedTimeAtLocation' value='$dateadd(02:00:00)' />
                   <EXISTS name="FromLocation" value='true' />
               </AND>
           </AND>
