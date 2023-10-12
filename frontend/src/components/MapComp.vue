@@ -5,6 +5,7 @@ import socket from '../services/socket.service.js'
 import { useTrainsStore } from '@/stores/trains'
 import { getDelayedTrains, getInitialPositions } from '../services/api.service.js'
 import { onMounted } from 'vue'
+import blackTrain from '../../public/black_train.png'
 
 const emit = defineEmits(['refresh-map'])
 const store = useTrainsStore()
@@ -13,6 +14,7 @@ let trainData = []
 let markers = {}
 let map
 let initialPositions
+
 
 socket.on('delayedTrainsUpdate', (updatedTrains) => {
     trainData = updatedTrains
@@ -47,7 +49,7 @@ function updatePosition(positionObject) {
             </div>`
 
             let icon = L.icon({
-                iconUrl: `../../public/pink_train.png`,
+                iconUrl: blackTrain,
                 iconSize: [40, 40],
                 iconAnchor: [12, 12],
                 popupAnchor: [9, -3]
@@ -78,13 +80,12 @@ function updatePosition(positionObject) {
 }
 
 function setupLeafletMap() {
-    map = L.map('map', { zoomAnimation: false }).setView(center, 5)
+    map = L.map('map', { zoomAnimation: true }).setView(center, 5)
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         // maxZoom: 19,
         maxZoom: 18,
         minZoom: 5,
-        zoomSnap: 0.1,
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map)
 
