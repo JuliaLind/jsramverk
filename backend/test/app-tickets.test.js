@@ -69,38 +69,74 @@ describe('tickets get and post routes', () => {
             .set('Content-Type', 'application/json')
             .send({ query })
 
-        expect(response.res.text).to.include(`{"data":{"tickets":[{"code":"ANA003","trainnumber":"91234"},{"code":"ANA002","trainnumber":"9123"}]}}`)
+        const pattern = new RegExp('.*"tickets":\\[{"code":"ANA003","trainnumber":"91234"},{"code":"ANA002","trainnumber":"9123"}]');
+
+        const check = pattern.test(response.res.text)
+
+        expect(check).to.equal(true)
     });
-    it('request missing token', (done) => {
-        chai.request(server)
-            .get("/tickets")
-            .end((err, res) => {
-                res.should.have.status(401);
-                res.body.should.have.property("errors");
-                res.body.errors.source.should.equal("/tickets");
-                done();
-            });
+    it('request missing token when getting tickets', async () => {
+        const query = `{
+            tickets {
+                code
+                trainnumber
+            }
+        }`
+
+        const response = await chai.request(server)
+            .post("/graphql")
+            .set('Content-Type', 'application/json')
+            .send({ query })
+
+        // console.log(response);
+
+        const pattern = new RegExp('.*"errors":\\[{"message":"Token not provided"');
+
+        const check = pattern.test(response.res.text)
+
+        expect(check).to.equal(true)
     });
-    it('should not access post route without token', async () => {
-        const ticketData = {
-            code: 'test_code',
-            trainnumber: '123456',
-            traindate: '2023-09-16'
-        };
-        const response = await chai.request(server).post('/tickets').send(ticketData);
-        expect(response).to.have.status(401);
-        expect(response.body.errors.source).to.equal("/tickets");
+    it('should not access createTicket query without token', async () => {
+        const query = `
+        mutation {
+            createTicket(code: "test_code", trainnumber: "123456", traindate: "2023-10-11") {
+                code
+            }
+        }
+        `;
+        const response = await chai.request(server)
+            .post("/graphql")
+            .set('Content-Type', 'application/json')
+            .send({ query })
+
+        const pattern = new RegExp('.*"errors":\\[{"message":"Token not provided"');
+
+        const check = pattern.test(response.res.text)
+
+        expect(check).to.equal(true)
     });
     it('should not access put route without token', async () => {
-        const ticketData = {
-            _id: new ObjectId("000000013b7eef17104f27e5"),
-            code: 'update_code',
-            trainnumber: '123456',
-            traindate: '2023-09-16'
-        };
-        const response = await chai.request(server).put('/tickets').send(ticketData);
-        expect(response).to.have.status(401);
-        expect(response.body.errors.source).to.equal("/tickets");
+        const query = `
+        mutation {
+            updateTicket(_id: "000000013b7eef17104f27e5", code: "update_code") {
+                code
+                trainnumber
+                traindate
+            }
+        }
+        `;
+        const response = await chai.request(server)
+            .post("/graphql")
+            .set('Content-Type', 'application/json')
+            .send({ query })
+
+        // console.log(response);
+
+        const pattern = new RegExp('.*"errors":\\[{"message":"Token not provided"');
+
+        const check = pattern.test(response.res.text)
+
+        expect(check).to.equal(true)
 
         const db = await database.getDb();
         const filter = {
@@ -113,9 +149,7 @@ describe('tickets get and post routes', () => {
     it('Update a ticket', async () => {
         const ticketData = {
             _id: new ObjectId("000000013b7eef17104f27e5"),
-            code: 'update_code',
-            // trainnumber: '123456',
-            // traindate: '2023-09-16'
+            code: 'update_code'
         };
         const mutation = `
             mutation {
@@ -125,8 +159,7 @@ describe('tickets get and post routes', () => {
                     trainnumber
                 }
             }
-        `
-        // const response = await chai.request(server).put('/tickets').set("x-access-token", jwtToken).send(ticketData);
+        `;
         const response = await chai.request(server)
             .post("/graphql")
             .set("x-access-token", jwtToken)
@@ -136,7 +169,12 @@ describe('tickets get and post routes', () => {
         // console.log(response)
 
         expect(response).to.have.status(200);
-        expect(response.res.text).to.include('{"data":{"updateTicket":{"code":"update_code","trainnumber":"9123"}}}');
+        const pattern = new RegExp('.*:\\{"updateTicket":{"code":"update_code","trainnumber":"9123"}}}')
+
+        const check = pattern.test(response.res.text)
+
+        expect(check).to.equal(true)
+        // expect(response.res.text).to.include('{"data":{"updateTicket":{"code":"update_code","trainnumber":"9123"}}}');
 
         const db = await database.getDb();
         const filter = {
@@ -146,15 +184,31 @@ describe('tickets get and post routes', () => {
         chai.assert.equal(updated.code, "update_code");
         await db.client.close();
     });
-    it('should not access delete route without token', async () => {
-        const ticketData = {
-            _id: new ObjectId("000000023b7eef17104f27e6"),
-        };
-        const response = await chai.request(server).delete('/tickets').send(ticketData);
-        expect(response).to.have.status(401);
-        expect(response.body.errors.source).to.equal("/tickets");
+    it('should not access deleteTicket query without token', async () => {
+        const ticketData = `
+        mutation {
+            deleteTicket(_id: "000000023b7eef17104f27e6") {
+                _id
+            }
+        }
+        `;
+        
+        const response = await chai.request(server)
+            .post('/graphql')
+            .set('Content-Type', 'application/json')
+            .send({query : ticketData});
+
+        // console.log(response);
+
+        expect(response).to.have.status(200);
+        const pattern = new RegExp('.*:\\[{"message":"Token not provided"')
+
+        const check = pattern.test(response.res.text)
+
+        expect(check).to.equal(true);
+        expect(response.req.path).to.equal("/graphql");
         const db = await database.getDb();
-        const notDeleted = await db.collection.tickets.findOne(ticketData);
+        const notDeleted = await db.collection.tickets.findOne({_id: new ObjectId("000000023b7eef17104f27e6")});
         chai.assert.equal(notDeleted.trainnumber, 91234);
         await db.client.close();
 
@@ -185,7 +239,11 @@ describe('tickets get and post routes', () => {
         // console.log(response)
 
         expect(response).to.have.status(200);
-        expect(response.res.text).to.include('{"data":{"deleteTicket":{"_id":"000000023b7eef17104f27e6"}}}');
+        const pattern = new RegExp('.*:\\{"deleteTicket":{"_id":"000000023b7eef17104f27e6"}}}')
+
+        const check = pattern.test(response.res.text)
+
+        expect(check).to.equal(true);
 
         const db = await database.getDb();
         const deleted = await db.collection.tickets.findOne(ticketData);
@@ -217,7 +275,7 @@ describe('tickets get and post routes', () => {
             .set('Content-Type', 'application/json')
             .send({ query: mutation })
 
-        // console.log(response.res)
+        // console.log(response.res.text)
 
         const ticketReturnData = await JSON.parse(response.res.text).data.createTicket
 
@@ -226,6 +284,11 @@ describe('tickets get and post routes', () => {
         // console.log(id);
 
         expect(response).to.have.status(200);
+        const pattern = new RegExp('.*"code":"test_code","trainnumber":"123456","traindate":"2023-09-16"}}}');
+
+        const check = pattern.test(response.res.text)
+
+        expect(check).to.equal(true);
         // expect(response.res.text).to.contain(`{"data":{"createTicket":{"code":"test_code","trainnumber":"123456","traindate":"2023-09-16"}}}`);
 
         const db = await database.getDb();
