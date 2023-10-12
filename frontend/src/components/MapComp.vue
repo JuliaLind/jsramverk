@@ -19,14 +19,43 @@ socket.on('delayedTrainsUpdate', (updatedTrains) => {
 })
 
 function updatePosition(positionObject) {
-    if (trainData.some((train) => positionObject.trainnumber === train.OperationalTrainNumber)) {
+    let fromLocation
+    let toLocation
+
+    if (
+        trainData.some((train) => {
+            if (positionObject.trainnumber === train.OperationalTrainNumber) {
+                fromLocation = train.FromLocation
+                toLocation = train.ToLocation
+                return true
+            }
+            return false
+        })
+    ) {
         if (positionObject.trainnumber in markers) {
             let marker = markers[positionObject.trainnumber]
 
             marker.setLatLng(positionObject.position)
         } else {
-            let marker = L.marker(positionObject.position)
-                .bindPopup(positionObject.trainnumber)
+            const popupContent = `<div class="popup-content yellow-popup">
+                <div class="trainnr">${positionObject.trainnumber}</div>
+                <div class="stations">
+                    <span class="mini-circle"></span>
+                <div class="station">Från ${fromLocation}</div>
+                <div class="station">Mot ${toLocation}</div>
+                </div>
+            </div>`
+
+            let icon = L.icon({
+                iconUrl: `../../public/pink_train.png`,
+                iconSize: [40, 40],
+                iconAnchor: [12, 12],
+                popupAnchor: [9, -3]
+            })
+            let marker = L.marker(positionObject.position, {
+                icon: icon
+            })
+                .bindPopup(popupContent)
                 .on('click', function () {
                     store.setCurrent(positionObject.trainnumber)
                     emit('refresh-map')
@@ -55,6 +84,7 @@ function setupLeafletMap() {
         // maxZoom: 19,
         maxZoom: 18,
         minZoom: 5,
+        zoomSnap: 0.1,
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map)
 
@@ -98,6 +128,7 @@ defineExpose({
 onMounted(async () => {
     trainData = await getDelayedTrains()
     initialPositions = await getInitialPositions()
+    console.log('from map', trainData)
     setupLeafletMap()
 })
 </script>
@@ -106,9 +137,4 @@ onMounted(async () => {
     <div id="map" class="map" ref="current"></div>
 </template>
 
-<style scoped>
-.map {
-    height: 100vh;
-    width: 60vw;
-}
-</style>
+<style scoped></style>

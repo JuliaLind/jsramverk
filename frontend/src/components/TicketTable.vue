@@ -10,26 +10,9 @@ const updateTickets = async () => {
     tickets.value = await store.getTickets()
 }
 
-
-
 onMounted(async () => {
     await updateTickets()
-
-    // const result = await fetch(`${import.meta.env.VITE_URL}/graphql`, {
-    //     method: 'POST',
-    //     headers: {
-    //         'Content-Type': 'application/json',
-    //         'Accept': 'application/json',
-    //         'x-access-token': store.token
-    //     },
-    //     body: JSON.stringify({ query: query })
-    // })
-    // const data = await result.json()
-    // console.log('data returned:', data)
 })
-
-// Note for later: consider moving tickets constant to auth-pinia
-// store too, it would then be available from parent component too
 </script>
 
 <template>
@@ -61,7 +44,6 @@ onMounted(async () => {
     background-color: white;
 }
 
-
 .titles,
 form {
     display: flex;
@@ -76,51 +58,7 @@ form {
     padding: 0.2em;
 }
 
-
-.field-1 {
-    min-width: 200px;
-}
-
-.field-2 {
-    min-width: 70px;
-}
-
-.field-3 {
-    min-width: 300px;
-}
-
-
-.field-4 {
-    min-width: 100px;
-}
-
-.field-5 {
-    width: 100%;
-}
-
-
 .old-tickets {
     width: max-content;
 }
-
-/* .ticket-row,
-.ticket-row form {
-    width: 100%;
-} */
-
-
-
-
-
-
-
-
-
-
-/* .ticket-row,
-.ticket-row form {
-    display: flex;
-    flex-direction: row;
-    width: clamp(400px, 100%, 1000px);
-} */
 </style>

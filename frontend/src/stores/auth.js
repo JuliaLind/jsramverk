@@ -1,28 +1,26 @@
 import { defineStore } from 'pinia'
-// import { ref } from 'vue'
 import axios from 'axios'
 import { router } from '../router/index.js'
 
 export const useAuthStore = defineStore('store', {
-    state: () => ({ data: {
-        token: '',
-        userEmail: ''
-    } }),
+    state: () => ({
+        data: {
+            token: '',
+            userEmail: ''
+        }
+    }),
     actions: {
         async login(username, password) {
             const user = {
                 email: username,
                 password: password
             }
-            console.log(user)
             const result = await axios.post(`${import.meta.env.VITE_URL}/login`, user)
             if ('errors' in result) {
                 return result.errors.detail
             }
             this.token = result.data.data.token
             this.userEmail = result.data.data.user.email
-            console.log(this.token)
-            console.log(result.data.data.user.email)
             router.push('/admin')
 
             //note for later: set toast to "hello 'result.data.ta.user.name'""
@@ -62,14 +60,6 @@ export const useAuthStore = defineStore('store', {
          * @param resultObject - the returned object from
          * backend, to check if token has expired.
          * This function is used in the ticket service
-         * {
-         * "errors": {
-         *    "status": 500,
-         *    "source": "/login",
-         *    "title": "Failed authentication",
-         *    "detail": "jwt expired"
-         * }
-         * }
          */
         async isTokenValid(resultObject) {
             if ('errors' in resultObject) {
@@ -87,19 +77,13 @@ export const useAuthStore = defineStore('store', {
          * trainnumber and traindate
          * @returns {Promise<array>} response - contains
          * the document number for the submitted ticket
-         * @example {
-         *    "data": {
-         *        "acknowledged": true,
-         *        "insertedId": "6504bccfa00196da499d69d1"
-         *    }
-         * }
          */
         async submitNewTicket(newTicketObject) {
             const response = await fetch(`${import.meta.env.VITE_URL}/graphql`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Accept': 'application/json',
+                    Accept: 'application/json',
                     'x-access-token': this.token
                 },
                 body: JSON.stringify({ query: newTicketObject })
@@ -126,13 +110,12 @@ export const useAuthStore = defineStore('store', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Accept': 'application/json',
+                    Accept: 'application/json',
                     'x-access-token': this.token
                 },
                 body: JSON.stringify({ query: updatedTicketObject })
             })
             const result = await response.json()
-            console.log('updated ticket result: ', result)
             if (this.isTokenValid(result)) {
                 return result.data
             }
@@ -144,18 +127,13 @@ export const useAuthStore = defineStore('store', {
          * @param {string} ticketid - _id of the ticket
          * @returns {Promise<array>} response - contains
          * the document number for the submitted ticket
-         * @example {
-         *    "data": {
-         *    }
-         * }
          */
         async deleteTicket(deletedTicketObject) {
-            // console.log(ticketid)
             const response = await fetch(`${import.meta.env.VITE_URL}/graphql`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Accept': 'application/json',
+                    Accept: 'application/json',
                     'x-access-token': this.token
                 },
                 body: JSON.stringify({ query: deletedTicketObject })
@@ -172,13 +150,6 @@ export const useAuthStore = defineStore('store', {
          * @returns {Promise<array>} previous tickets
          */
         async getTickets() {
-            // const response = await fetch(`${import.meta.env.VITE_URL}/tickets`, {
-            //     method: 'GET',
-            //     headers: {
-            //         'content-type': 'application/json',
-            //         'x-access-token': this.token
-            //     }
-            // })
             const query = `{tickets {
                 _id
                 code
@@ -189,18 +160,17 @@ export const useAuthStore = defineStore('store', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Accept': 'application/json',
+                    Accept: 'application/json',
                     'x-access-token': this.token
                 },
                 body: JSON.stringify({ query: query })
             })
             const result = await response.json()
-            console.log(result);
-            return result.data.tickets;
-            // if (this.isTokenValid(result)) {
-            //     return result.data
-            // }
-            // return undefined //?? not sure what to return, the view should update to display login-form instead of tickets list
+
+            if (this.isTokenValid(result)) {
+                return result.data.tickets
+            }
+            return undefined //?? not sure what to return, the view should update to display login-form instead of tickets list
         }
     }
 })

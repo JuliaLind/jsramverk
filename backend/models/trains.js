@@ -8,10 +8,12 @@ const fetch = require('node-fetch');
 const EventSource = require('eventsource');
 
 const trains = {
-    getInitialPositions: async function getInitialPositions(req, res) {
+    getFromTrafikverket: async function getFromTrafikverket() {
         const query = `<REQUEST>
-            <LOGIN authenticationkey="5d9e0b327c674d279771aed90ad87616" />
-            <QUERY namespace="järnväg.trafikinfo" objecttype="TrainPosition" schemaversion="1.0" >
+        <LOGIN authenticationkey="${process.env.TRAFIKVERKET_API_KEY}" />
+        <QUERY namespace="järnväg.trafikinfo" objecttype="TrainPosition" schemaversion="1.0" >
+            <INCLUDE>Train.OperationalTrainNumber</INCLUDE>
+            <INCLUDE>Position.WGS84</INCLUDE>
         </QUERY>
         </REQUEST>`;
 
@@ -29,9 +31,11 @@ const trains = {
         for (const position of result.RESPONSE.RESULT[0].TrainPosition) {
             initialPositions.push(this.transformPositionObject(position));
         }
-
+        return initialPositions;
+    },
+    getInitialPositions: async function getInitialPositions(req, res) {
         return res.json({
-            data: initialPositions
+            data: await this.getFromTrafikverket()
         });
     },
 
@@ -47,10 +51,6 @@ const trains = {
         return {
             trainnumber: position.Train.OperationalTrainNumber,
             position: this.getCoords(position),
-            timestamp: position.TimeStamp,
-            bearing: position.Bearing,
-            status: !position.Deleted,
-            speed: position.Speed,
         };
     },
 
@@ -91,7 +91,10 @@ const trains = {
         // XML Query sent to the API
         const query = `<REQUEST>
             <LOGIN authenticationkey="${process.env.TRAFIKVERKET_API_KEY}" />
-            <QUERY sseurl="true" namespace="järnväg.trafikinfo" objecttype="TrainPosition" schemaversion="1.0" limit="1" />
+            <QUERY sseurl="true" namespace="järnväg.trafikinfo" objecttype="TrainPosition" schemaversion="1.0" limit="1">
+                <INCLUDE>Train.OperationalTrainNumber</INCLUDE>
+                <INCLUDE>Position.WGS84</INCLUDE>
+            </QUERY>
             </REQUEST>`;
 
         // POST request to Trafikverket API to obtain SSE URL
@@ -102,6 +105,7 @@ const trains = {
         });
 
         const result = await response.json();
+        console.log(result.RESPONSE.RESULT[0]);
 
         return result.RESPONSE.RESULT[0].INFO.SSEURL;
     },

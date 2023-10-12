@@ -87,7 +87,6 @@ const toggleEditing = function () {
         })
     }
 }
-
 </script>
 
 <template>
@@ -104,7 +103,9 @@ const toggleEditing = function () {
             <input type="date" class="field-4" disabled :value="ticket.traindate" />
             <input v-if="editing" class="field-5" type="submit" value="Spara ändringar" />
         </form>
-        <button v-on:click.self="toggleEditing()" :disabled="id in socket.data">{{ innerText }}</button>
+        <button v-on:click.self="toggleEditing()" :disabled="id in socket.data">
+            {{ innerText }}
+        </button>
         <button v-on:click.self="store.deleteTicket(deletedTicket), $emit('form-submitted')">
             Ta bort
         </button>
@@ -126,22 +127,7 @@ select:disabled {
 select {
     border: 1px solid #07470e;
 }
-.field-1 {
-    width: 200px;
-}
 
-.field-2 {
-    width: 70px;
-}
-
-.field-3 {
-    width: 300px;
-}
-
-
-.field-4 {
-    width: 100px;
-}
 input,
 select {
     padding: 0.2em;

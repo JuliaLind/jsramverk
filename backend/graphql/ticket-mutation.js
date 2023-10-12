@@ -4,11 +4,9 @@ const {
     GraphQLID,
     GraphQLNonNull
 } = require('graphql');
-
+const auth = require('../models/auth.js');
 const TicketType = require('./ticket.js');
 const ticketsModel = require('../models/tickets.js');
-const jwt = require('jsonwebtoken');
-const jwtSecret = process.env.JWT_SECRET;
 
 const RootMutationType = new GraphQLObjectType({
     name: 'TicketMutation',
@@ -23,19 +21,8 @@ const RootMutationType = new GraphQLObjectType({
                 traindate: { type: GraphQLNonNull(GraphQLString) },
             },
             resolve: async (post, args, context) => {
-                const token = context.headers['x-access-token'];
-
-                console.log(token);
-                if (token) {
-                    try {
-                        jwt.verify(token, jwtSecret);
-                        return await ticketsModel.createTicket(args);
-                    } catch (err) {
-                        throw new Error(`Failed authentication: ${err.message}`);
-                    }
-                } else {
-                    throw new Error('Token not provided');
-                }
+                auth.checkGQToken(context);
+                return await ticketsModel.createTicket(args);
             }
         },
         deleteTicket: {
@@ -45,18 +32,8 @@ const RootMutationType = new GraphQLObjectType({
                 _id: { type: GraphQLNonNull(GraphQLID) }
             },
             resolve: async (post, args, context) => {
-                const token = context.headers['x-access-token'];
-
-                if (token) {
-                    try {
-                        jwt.verify(token, jwtSecret);
-                        return await ticketsModel.deleteTicket(args);
-                    } catch (err) {
-                        throw new Error(`Failed authentication: ${err.message}`);
-                    }
-                } else {
-                    throw new Error('Token not provided');
-                }
+                auth.checkGQToken(context);
+                return await ticketsModel.deleteTicket(args);
             }
         },
         updateTicket: {
@@ -67,18 +44,8 @@ const RootMutationType = new GraphQLObjectType({
                 code: { type: GraphQLNonNull(GraphQLString) }
             },
             resolve: async (post, args, context) => {
-                const token = context.headers['x-access-token'];
-
-                if (token) {
-                    try {
-                        jwt.verify(token, jwtSecret);
-                        return await ticketsModel.updateTicket(args);
-                    } catch (err) {
-                        throw new Error(`Failed authentication: ${err.message}`);
-                    }
-                } else {
-                    throw new Error('Token not provided');
-                }
+                auth.checkGQToken(context);
+                return await ticketsModel.updateTicket(args);
             }
         },
     }),

@@ -1,11 +1,30 @@
-import axios from 'axios'
 /**
  * Returns an array with information about delayed trains
  * @returns {Promise<array>}
  */
 export const getDelayedTrains = async () => {
-    const res = await axios.get(`${import.meta.env.VITE_URL}/delayed`)
-    return res.data.data
+    const query = `{delayed {
+        ActivityId
+        AdvertisedTimeAtLocation
+        EstimatedTimeAtLocation
+        OperationalTrainNumber
+        Canceled
+        FromLocation
+        ToLocation
+        LocationSignature
+      }}`
+    const response = await fetch(`${import.meta.env.VITE_URL}/graphql`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json'
+        },
+        body: JSON.stringify({ query: query })
+    })
+
+    const result = await response.json()
+    console.log('from api service', result.data)
+    return result.data.delayed
 }
 
 /**
@@ -13,8 +32,22 @@ export const getDelayedTrains = async () => {
  * @returns {Promise<array>}
  */
 export const getInitialPositions = async () => {
-    const res = await axios.get(`${import.meta.env.VITE_URL}/trains`)
-    return res.data.data
+    const query = `{positions {
+        trainnumber
+        position
+      }}`
+    const response = await fetch(`${import.meta.env.VITE_URL}/graphql`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json'
+        },
+        body: JSON.stringify({ query: query })
+    })
+
+    const result = await response.json()
+
+    return result.data.positions
 }
 
 /**
@@ -22,12 +55,43 @@ export const getInitialPositions = async () => {
  * @returns {Promise<array>}
  */
 export const getCodes = async () => {
-    const res = await axios.get(`${import.meta.env.VITE_URL}/codes`)
-    return res.data.data
+    const query = `{codes {
+        Code
+        Level1Description
+        Level2Description
+        Level3Description
+      }}`
+    const response = await fetch(`${import.meta.env.VITE_URL}/graphql`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json'
+        },
+        body: JSON.stringify({ query: query })
+    })
+
+    const result = await response.json()
+
+    return result.data.codes
 }
 
 export const getTrainNumbers = async () => {
-    const trainnumbers = await getDelayedTrains()
+    const query = `{delayed {
+        OperationalTrainNumber
+      }}`
+    const response = await fetch(`${import.meta.env.VITE_URL}/graphql`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json'
+        },
+        body: JSON.stringify({ query: query })
+    })
+
+    const result = await response.json()
+
+    const trainnumbers = result.data.delayed
+
     return [
         ...new Set(
             trainnumbers

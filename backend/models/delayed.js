@@ -14,11 +14,54 @@ const fetch = require('node-fetch');
  * @property {Function} getDelayedTrains - Fetches delayed trains.
  */
 const delayed = {
+    transformDelayObject: function transformDelayObject(delay, stations) {
+        let fromStation = "";
+        let delayStation = "";
+        let toStation = "";
+
+        for (const station of stations) {
+            if (delay.FromLocation && station.LocationSignature === delay.FromLocation[0].LocationName) {
+                fromStation = station.AdvertisedLocationName;
+            }
+            if (station.LocationSignature === delay.LocationSignature) {
+                delayStation = station.AdvertisedLocationName;
+            }
+            if (delay.ToLocation && station.LocationSignature === delay.ToLocation[0].LocationName) {
+                toStation = station.AdvertisedLocationName;
+            }
+            if (fromStation && delayStation && toStation) {
+                break;
+            }
+        }
+        return {
+            ActivityId: delay.ActivityId,
+            AdvertisedTimeAtLocation: delay.AdvertisedTimeAtLocation,
+            EstimatedTimeAtLocation: delay.EstimatedTimeAtLocation,
+            OperationalTrainNumber: delay.OperationalTrainNumber,
+            Canceled: delay.Canceled,
+            FromLocation: fromStation,
+            ToLocation: toStation,
+            LocationSignature: delayStation,
+        };
+
+    },
+
+    filterResult: function filterResult(delayed, stations, positions) {
+        const filteredResult = [];
+        for (const delay of delayed) {
+            if (positions.some((position) => position.Train.OperationalTrainNumber === delay.OperationalTrainNumber)) {
+                const newDelayObject = this.transformDelayObject(delay, stations);
+
+                filteredResult.push(newDelayObject);
+            }
+        }
+        return filteredResult;
+    },
     /**
      * @returns {Promise<array>} an array with delayed trains filtered to only include those
      * that have positionData
      */
-    getFromTrafikVerket: async function getFromTrafikVerket() {
+    getFromTrafikverket: async function getFromTrafikverket() {
         const query = `<REQUEST>
         <LOGIN authenticationkey="5d9e0b327c674d279771aed90ad87616" />
         <QUERY namespace="järnväg.trafikinfo" objecttype="TrainPosition" schemaversion="1.0" >
@@ -31,23 +74,27 @@ const delayed = {
               <GT name="EstimatedTimeAtLocation" value="$now" />
               <AND>
                   <GT name='AdvertisedTimeAtLocation' value='$dateadd(-00:15:00)' />
-                  <LT name='AdvertisedTimeAtLocation'                   value='$dateadd(02:00:00)' />
+                  <LT name='AdvertisedTimeAtLocation' value='$dateadd(02:00:00)' />
+                  <EXISTS name="FromLocation" value='true' />
               </AND>
           </AND>
           </FILTER>
           <INCLUDE>ActivityId</INCLUDE>
-          <INCLUDE>ActivityType</INCLUDE>
           <INCLUDE>AdvertisedTimeAtLocation</INCLUDE>
           <INCLUDE>EstimatedTimeAtLocation</INCLUDE>
-          <INCLUDE>AdvertisedTrainIdent</INCLUDE>
           <INCLUDE>OperationalTrainNumber</INCLUDE>
           <INCLUDE>Canceled</INCLUDE>
           <INCLUDE>FromLocation</INCLUDE>
           <INCLUDE>ToLocation</INCLUDE>
           <INCLUDE>LocationSignature</INCLUDE>
-          <INCLUDE>TimeAtLocation</INCLUDE>
-          <INCLUDE>TrainOwner</INCLUDE>
       </QUERY>
+      <QUERY objecttype="TrainStation" schemaversion="1">
+      <FILTER>
+          <EQ name="Advertised" value="true" />
+            </FILTER>
+            <INCLUDE>LocationSignature</INCLUDE>
+            <INCLUDE>AdvertisedLocationName</INCLUDE>
+        </QUERY>
       </REQUEST>`;
 
         // HTTP response
@@ -60,17 +107,9 @@ const delayed = {
         );
 
         const result = await response.json();
-        const delayed = result.RESPONSE.RESULT[1].TrainAnnouncement;
-        const positions = result.RESPONSE.RESULT[0].TrainPosition;
-        const delayedWithPositionData = [];
+        const filteredResult = this.filterResult(result.RESPONSE.RESULT[1].TrainAnnouncement, result.RESPONSE.RESULT[2].TrainStation, result.RESPONSE.RESULT[0].TrainPosition);
 
-        for (const delay of delayed) {
-            if (positions.some((position) => position.Train.OperationalTrainNumber === delay.OperationalTrainNumber)) {
-                delayedWithPositionData.push(delay);
-            }
-        }
-
-        return delayedWithPositionData;
+        return filteredResult;
     },
     /**
      * @description Fetches delayed trains from the Trafikverket API.
@@ -83,7 +122,7 @@ const delayed = {
     getDelayedTrains: async function getDelayedTrains(req, res) {
         try {
             return res.json({
-                data: await this.getFromTrafikVerket()
+                data: await this.getFromTrafikverket()
             });
         } catch (e) {
             return res.status(500).json({

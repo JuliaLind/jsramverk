@@ -41,10 +41,10 @@ describe('Trains Model', () => {
             expect(trainObject).to.deep.equal({
                 trainnumber: '12345',
                 position: [56.78, 12.34],
-                timestamp: '2023-09-18T12:34:56Z',
-                bearing: 120.5,
-                status: true,
-                speed: 80.2,
+                // timestamp: '2023-09-18T12:34:56Z',
+                // bearing: 120.5,
+                // status: true,
+                // speed: 80.2,
             });
 
             expect(socket.emit.calledOnce).to.be.true;
@@ -95,10 +95,10 @@ describe('Trains Model', () => {
             expect(trainObject).to.deep.equal({
                 trainnumber: '12345',
                 position: [56.78, 12.34],
-                timestamp: '2023-09-18T12:34:56Z',
-                bearing: 120.5,
-                status: true,
-                speed: 80.2,
+                // timestamp: '2023-09-18T12:34:56Z',
+                // bearing: 120.5,
+                // status: true,
+                // speed: 80.2,
             });
 
             expect(socket.emit.calledOnce).to.be.true;
