@@ -43,11 +43,11 @@ const delayed = {
             ToLocation: toStation,
             LocationSignature: delayStation,
         };
-
     },
 
     filterResult: function filterResult(delayed, stations, positions) {
         const filteredResult = [];
+
         for (const delay of delayed) {
             if (positions.some((position) => position.Train.OperationalTrainNumber === delay.OperationalTrainNumber)) {
                 const newDelayObject = this.transformDelayObject(delay, stations);
