@@ -15,7 +15,6 @@ let markers = {}
 let map
 let initialPositions
 
-
 socket.on('delayedTrainsUpdate', (updatedTrains) => {
     trainData = updatedTrains
 })

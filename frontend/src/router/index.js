@@ -20,7 +20,7 @@ export const routes = [
         path: '/login',
         name: 'login',
         component: LoginView
-    },
+    }
 ]
 
 export const router = createRouter({
