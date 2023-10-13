@@ -16,49 +16,31 @@ onMounted(async () => {
 </script>
 
 <template>
-    <h2>Befintliga ärenden</h2>
-    <div class="old-tickets" id="old-tickets">
-        <div class="titles">
-            <div class="title field-1">Ärendenummer</div>
-            <div class="title field-2">Tågnr</div>
-            <div class="title field-3">Orsakskod</div>
-            <div class="title field-4">Datum</div>
-            <div class="title field-5">Actions</div>
+    <div class="wrapper-container">
+        <div class="container">
+            <div class="h1">
+                <h2>Befintliga ärenden</h2>
+            </div>
+            <div class="old-tickets mt-3" id="old-tickets">
+                <NewTicket @form-submitted="updateTickets()" />
+                <SingleTicket
+                    v-for="ticket in tickets"
+                    :key="ticket._id"
+                    :ticket="ticket"
+                    @form-submitted="updateTickets()"
+                />
+            </div>
         </div>
-        <NewTicket @form-submitted="updateTickets()" />
-        <SingleTicket
-            v-for="ticket in tickets"
-            :key="ticket._id"
-            :ticket="ticket"
-            @form-submitted="updateTickets()"
-        />
     </div>
 </template>
 
 <style scoped>
-.delayed {
-    height: 100vh;
-    width: 40vw;
-    padding: 2rem;
-    overflow: scroll;
-    background-color: white;
-}
-
-.titles,
-form {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    flex-wrap: nowrap;
-}
-
-.title {
-    border: 1px solid #333;
-    background: #fff;
-    padding: 0.2em;
-}
 
 .old-tickets {
-    width: max-content;
+    gap: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
+
 </style>
