@@ -47,9 +47,9 @@ function updatePosition(positionObject) {
             </div>`
 
             let icon = L.icon({
-                iconUrl: `../../public/pink_train.png`,
-                iconSize: [40, 40],
-                iconAnchor: [12, 12],
+                iconUrl: 'grey_train.jpg',
+                iconSize: [45, 45],
+                iconAnchor: [22, 22],
                 popupAnchor: [9, -3]
             })
             let marker = L.marker(positionObject.position, {
@@ -134,7 +134,25 @@ onMounted(async () => {
 </script>
 
 <template>
-    <div id="map" class="map" ref="current"></div>
+    <div class="map-container">
+        <div id="map" class="map" ref="current"></div>
+    </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.map-container {
+    padding: 7rem 0 0 0;
+}
+
+.map {
+    border-radius: 20px;
+}
+
+.leaflet-container {
+    margin-left: 1rem;
+    height: 75vh;
+    min-width: 20vw;
+    width: 50vw;
+}
+
+</style>
