@@ -1,10 +1,22 @@
 <script setup>
 import { RouterLink } from 'vue-router';
+// import { useAuthStore } from '@/stores/auth'
+import { useTrainsStore } from '@/stores/trains'
+import { ref, onMounted } from 'vue';
+const store = useTrainsStore()
+let current = ref('')
+function switchCurrent() {
+    current.value = store.current
+}
+
+onMounted(() => {
+    switchCurrent()
+})
 </script>
 
 <template>
 <!--Navbar-->
-<header id="header">
+<div id="header">
     <nav id="nav">
         <ul>
             <li>
@@ -15,7 +27,7 @@ import { RouterLink } from 'vue-router';
             </li>
         </ul>
     </nav>
-</header>
+</div>
 <!-- End Header -->
 </template>
 
@@ -33,19 +45,10 @@ import { RouterLink } from 'vue-router';
     font-size: 1.25em;
 }
 
-#header h1 {
-    color: #484848;
-    font-weight: 400;
-    float:left;
-    margin-left: 2em;
-    line-height: 4.5em;
-    height: inherit;
-}
-
 #header nav{
     float: right;
-    margin-right:2em;
-    line-height: 4.5em;
+    margin-right: 2em;
+    margin-top: 1.5em;
 }
 #header nav ul li {
     display: inline-block;

@@ -23,11 +23,12 @@
 <style scoped>
 /*10.Footer*/
 #footer {
-    padding:  4em 0 2em 0;
+    padding:  4em 0 5em 0;
     color: #aaa;
     background: #f6f6f6;
     text-align: center;
     margin-top: 2rem;
+    width: 100%;
 }
 #footer a {
     color:#aaa;
