@@ -10,6 +10,14 @@ const router = createRouter({
 })
 
 describe('AdminView', async () => {
+    vi.mock('@/stores/trains', () => ({
+        useTrainsStore: () => ({
+            current: '',
+            setCurrent: () => {
+                // do nothing
+            }
+        })
+    }))
     router.push('/login')
     await router.isReady()
 
@@ -40,7 +48,7 @@ describe('AdminView', async () => {
         })
         await flushPromises()
         expect(wrapper.text()).contains('Logga in')
-        expect(wrapper.text()).contains('Register')
+        expect(wrapper.text()).contains('Till registrering')
 
         wrapper.unmount()
     })

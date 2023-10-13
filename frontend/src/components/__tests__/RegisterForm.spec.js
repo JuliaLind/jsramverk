@@ -39,9 +39,9 @@ describe('RegisterForm', async () => {
             }
         })
 
-        expect(wrapper.text()).contains('Registreringsformulär')
+        expect(wrapper.text()).contains('Registrering')
         expect(wrapper.text()).contains('Namn')
-        expect(wrapper.text()).contains('E-postaddress')
+        expect(wrapper.text()).contains('E-postadress')
         expect(wrapper.text()).contains('Lösenord')
         wrapper.unmount()
     })
