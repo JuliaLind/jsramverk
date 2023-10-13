@@ -7,7 +7,9 @@
 import { onMounted } from 'vue'
 import DelayedTable from '../components/DelayedTable.vue'
 import MapComp from '../components/MapComp.vue'
-import { RouterLink } from 'vue-router'
+import Header from '../components/Header.vue'
+import Footer from '../components/Footer.vue'
+// import { RouterLink } from 'vue-router'
 import { useTrainsStore } from '@/stores/trains'
 import { ref } from 'vue'
 
@@ -26,13 +28,20 @@ onMounted(() => {
 
 <template>
     <main>
-        <RouterLink to="/admin" @click="store.current = ''"> Admin </RouterLink>
-        <keep-alive>
-            <DelayedTable ref="current" @refresh-map="map.updateLayers()" />
-        </keep-alive>
-        <keep-alive>
-            <MapComp ref="map" @refresh-map="map.updateLayers()" />
-        </keep-alive>
+        <div class="main-nav">
+            <Header></Header>
+        </div>
+        <div class="main-content">
+            <keep-alive>
+                <DelayedTable ref="current" @refresh-map="map.updateLayers()" />
+            </keep-alive>
+            <keep-alive>
+                <MapComp ref="map" @refresh-map="map.updateLayers()" />
+            </keep-alive>
+        </div>
+        <div class="main-footer">
+            <Footer></Footer>
+        </div>
     </main>
 </template>
 
@@ -41,5 +50,12 @@ main {
     height: 100vh;
     width: 100vw;
     display: flex;
+    flex-direction: column;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 </style>
