@@ -4,5 +4,5 @@ import { test, expect } from 'playwright-test-coverage';
 // https://playwright.dev/docs/intro
 test('visits the app root url', async ({ page }) => {
   await page.goto('/');
-  await expect(page.locator('div.delayed > h1')).toHaveText('Försenade tåg');
+  await expect(page.locator('div.delayed-header > h1')).toHaveText('Försenade tåg');
 })
