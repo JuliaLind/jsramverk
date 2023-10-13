@@ -1,8 +1,8 @@
 <script setup>
 import LoginForm from '../components/LoginForm.vue'
 import RegisterForm from '../components/RegisterForm.vue'
-import Header from '../components/Header.vue';
-import Footer from '../components/Footer.vue';
+import HeaderComp from '../components/HeaderComp.vue';
+import FooterComp from '../components/FooterComp.vue';
 import { ref } from 'vue'
 const login = ref(true)
 let innerText = ref('Till registrering')
@@ -19,7 +19,7 @@ const toggleForm = () => {
 
 <template>
     <div class="main-nav">
-        <Header></Header>
+        <HeaderComp></HeaderComp>
     </div>
     <div class="container">
         <LoginForm v-if="login" />
@@ -30,7 +30,7 @@ const toggleForm = () => {
         </div>
     </div>
     <div class="footer fixed-bottom">
-        <Footer></Footer>
+        <FooterComp></FooterComp>
     </div>
 </template>
 
