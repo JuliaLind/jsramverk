@@ -4,32 +4,32 @@
  * trains and a map with their current
  * positions
  */
-import { onMounted } from 'vue'
+// import { onMounted } from 'vue'
 import DelayedTable from '../components/DelayedTable.vue'
 import MapComp from '../components/MapComp.vue'
-import Header from '../components/Header.vue'
-import Footer from '../components/Footer.vue'
+import HeaderComp from '../components/HeaderComp.vue'
+import FooterComp from '../components/FooterComp.vue'
 // import { RouterLink } from 'vue-router'
-import { useTrainsStore } from '@/stores/trains'
-import { ref } from 'vue'
+// import { useTrainsStore } from '@/stores/trains'
+// import { ref } from 'vue'
 
-const store = useTrainsStore()
-let current = ref('')
-const map = ref(null)
+// const store = useTrainsStore()
+// let current = ref('')
+// const map = ref(null)
 
-function switchCurrent() {
-    current.value = store.current
-}
+// function switchCurrent() {
+//     current.value = store.current
+// }
 
-onMounted(() => {
-    switchCurrent()
-})
+// onMounted(() => {
+//     switchCurrent()
+// })
 </script>
 
 <template>
     <main>
         <div class="main-nav">
-            <Header></Header>
+            <HeaderComp></HeaderComp>
         </div>
         <div class="main-content">
             <keep-alive>
@@ -40,7 +40,7 @@ onMounted(() => {
             </keep-alive>
         </div>
         <div class="main-footer">
-            <Footer></Footer>
+            <FooterComp></FooterComp>
         </div>
     </main>
 </template>
