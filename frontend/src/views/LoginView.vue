@@ -1,26 +1,36 @@
 <script setup>
 import LoginForm from '../components/LoginForm.vue'
 import RegisterForm from '../components/RegisterForm.vue'
+import Header from '../components/Header.vue';
+import Footer from '../components/Footer.vue';
 import { ref } from 'vue'
 const login = ref(true)
-let innerText = ref('Register')
+let innerText = ref('Till registrering')
 const toggleForm = () => {
     if (login.value == true) {
         login.value = false
-        innerText.value = 'Log in'
+        innerText.value = 'Till inloggning'
     } else {
         login.value = true
-        innerText.value = 'Register'
+        innerText.value = 'Till registrering'
     }
 }
 </script>
 
 <template>
-    <div>
+    <div class="main-nav">
+        <Header></Header>
+    </div>
+    <div class="container">
         <LoginForm v-if="login" />
         <RegisterForm v-else />
         <!-- Make this a button or a link later-->
-        <span class="toggle-link" v-on:click="toggleForm()">{{ innerText }}</span>
+        <div class="button-container">
+            <button class="toggle-link btn btn-secondary mt-3" v-on:click="toggleForm()">{{ innerText }} </button>
+        </div>
+    </div>
+    <div class="footer fixed-bottom">
+        <Footer></Footer>
     </div>
 </template>
 
@@ -35,5 +45,8 @@ const toggleForm = () => {
 }
 .ticket-container {
     padding: 2rem;
+}
+.button-container {
+    text-align: center;
 }
 </style>
