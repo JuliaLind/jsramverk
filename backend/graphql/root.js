@@ -7,9 +7,6 @@ const CodeType = require("./code.js");
 const tickets = require('../models/tickets.js');
 const TicketType = require('./ticket.js');
 const PositionType = require("./positions.js");
-const jwt = require('jsonwebtoken');
-const jwtSecret = process.env.JWT_SECRET;
-
 
 const {
     GraphQLObjectType,
