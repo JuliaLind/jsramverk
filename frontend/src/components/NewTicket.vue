@@ -5,8 +5,8 @@ import { getCodes, getTrainNumbers } from '../services/api.service.js'
 
 let trainnumbers = ref([])
 let reasoncodes = ref([])
-let code
-let trainnumber
+let code = ''
+let trainnumber = ''
 
 onMounted(async () => {
     reasoncodes.value = await getCodes()
@@ -87,11 +87,13 @@ async function submitForm(code, trainnumber, traindate) {
         <form v-on:submit.prevent="submitForm(code, trainnumber, traindate)">
             <input type="text" class="field-1" disabled value="Lägg till nytt ärende" />
             <select name="trainnumer" class="field-2" required v-model="trainnumber">
+                <option :hidden="true" disabled :value="''">Välj tågnummer</option>
                 <option v-for="train in trainnumbers" :key="train" :value="train">
                     {{ train }}
                 </option>
             </select>
             <select name="code" required class="field-3" v-model="code">
+                <option disabled hidden :value="''">Välj orsakskod</option>
                 <option v-for="code in reasoncodes" :key="code.Code" :value="code.Code">
                     {{ code.Code }} - {{ code.Level3Description }} - {{ code.Level2Description }} -
                     {{ code.Level1Description }}
