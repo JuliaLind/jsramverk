@@ -61,26 +61,26 @@ const trains = {
     * @param {Object} socket - The WebSocket connection.
     */
     parsePositionData: function parsePositionData(data, trainPositions, socket) {
-        try {
-            const parsedData = JSON.parse(data);
-            const changedPosition = parsedData.RESPONSE.RESULT[0].TrainPosition[0];
-            const trainObject = this.transformPositionObject(changedPosition);
+        // try {
+        const parsedData = JSON.parse(data);
+        const changedPosition = parsedData.RESPONSE.RESULT[0].TrainPosition[0];
+        const trainObject = this.transformPositionObject(changedPosition);
 
-            // Emit train position updates to connected clients
-            if (changedPosition.Train.OperationalTrainNumber in trainPositions) {
-                socket.emit("trainpositions", trainObject);
-            }
-
-            // Update the train positions object
-            trainPositions[changedPosition.Train.OperationalTrainNumber] = trainObject;
-
-            return trainObject;
-            // }
-        } catch (e) {
-            console.error(e.message);
-            // e.code = "PARSE_POSITION_ERROR";
-            throw e;
+        // Emit train position updates to connected clients
+        if (changedPosition.Train.OperationalTrainNumber in trainPositions) {
+            socket.emit("trainpositions", trainObject);
         }
+
+        // Update the train positions object
+        trainPositions[changedPosition.Train.OperationalTrainNumber] = trainObject;
+
+        return trainObject;
+            // }
+        // } catch (e) {
+        //     console.error(e.message);
+        //     // e.code = "PARSE_POSITION_ERROR";
+        //     throw e;
+        // }
     },
 
     /**
@@ -118,18 +118,18 @@ const trains = {
     * @param {Object} socket - The WebSocket connection.
     */
     handleSSEMessage: function handleSSEMessage(event, trainPositions, socket) {
-        try {
-            const trainObject = this.parsePositionData(event.data, trainPositions, socket);
+        // try {
+        const trainObject = this.parsePositionData(event.data, trainPositions, socket);
 
-            return trainObject;
-        } catch (error) {
-            const message = "Error handling SSE message: " + error;
+        return trainObject;
+        // } catch (error) {
+        //     const message = "Error handling SSE message: " + error;
 
-            console.error(message);
-            // error.code = "SSE_MESSAGE_ERROR";
-            error.message = message;
-            throw error;
-        }
+        //     console.error(message);
+        //     // error.code = "SSE_MESSAGE_ERROR";
+        //     error.message = message;
+        //     throw error;
+        // }
     },
 
     /**
