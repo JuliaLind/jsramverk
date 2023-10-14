@@ -26,7 +26,7 @@ describe('app.js', () => {
     });
 
     describe('Routes', () => {
-        it('should handle /delayed route', async () => {
+        it('should handle delayed query route', async () => {
 
             const query = `
                 {
@@ -41,12 +41,12 @@ describe('app.js', () => {
                         LocationSignature
                     }
                 }
-            `
-            // const response = await chai.request(server).put('/tickets').set("x-access-token", jwtToken).send(ticketData);
+            `;
+
             const response = await chai.request(server)
                 .post("/graphql")
                 .set('Content-Type', 'application/json')
-                .send({ query: query })
+                .send({ query: query });
         
             expect(response).to.have.status(200);
 
@@ -73,8 +73,7 @@ describe('app.js', () => {
             expect(check).to.equal(true);
         });
 
-        it('should handle /codes route', async () => {
-
+        it('should handle codes query route', async () => {
             const query = `
                 {
                     codes
@@ -82,12 +81,12 @@ describe('app.js', () => {
                         Code
                     }
                 }
-            `
-            // const response = await chai.request(server).put('/tickets').set("x-access-token", jwtToken).send(ticketData);
+            `;
+
             const response = await chai.request(server)
                 .post("/graphql")
                 .set('Content-Type', 'application/json')
-                .send({ query: query })
+                .send({ query: query });
         
             expect(response).to.have.status(200);
 
@@ -99,18 +98,5 @@ describe('app.js', () => {
 
             expect(check).to.equal(true);
         });
-
-        // it('should handle /not-found route', async () => {
-        //     const response = await chai.request(server).get('/blabla');
-        //     expect(response).to.have.status(404);
-        // it('should handle error when visiting non existing route', (done) => {
-        //     chai.request(server)
-        //         .get("/blabla")
-        //         .end((err, res) => {
-        //             res.should.have.status(404);
-        //             res.body.should.have.property("errors");
-        //             done();
-        //         });
-        // });
     });
 });

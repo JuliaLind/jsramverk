@@ -50,9 +50,8 @@ describe('tickets get and post routes', () => {
         };
         await db.collection.users.insertOne(user);
         const allUsers = await db.collection.users.find({}).toArray();
+
         console.log(allUsers);
-        // const allTickets = await db.collection.tickets.find({}).toArray();
-        // console.log(allTickets);
         await db.client.close();
     });
     it('page should contain json with old tickets', async () => {
@@ -174,12 +173,11 @@ describe('tickets get and post routes', () => {
         const check = pattern.test(response.res.text);
 
         expect(check).to.equal(true);
-        // expect(response.res.text).to.include('{"data":{"updateTicket":{"code":"update_code","trainnumber":"9123"}}}');
 
         const db = await database.getDb();
         const filter = {
             _id: new ObjectId("000000013b7eef17104f27e5")
-        }
+        };
         const updated = await db.collection.tickets.findOne(filter);
         chai.assert.equal(updated.code, "update_code");
         await db.client.close();
@@ -217,9 +215,6 @@ describe('tickets get and post routes', () => {
         const ticketData = {
             _id: new ObjectId("000000023b7eef17104f27e6"),
         };
-        // const response = await chai.request(server).delete('/tickets').set("x-access-token", jwtToken).send(ticketData);
-        // expect(response).to.have.status(201);
-        // expect(response.body.data.message).to.equal("Ticket 000000023b7eef17104f27e6 has been deleted");
 
         const mutation = `
             mutation {
@@ -228,8 +223,8 @@ describe('tickets get and post routes', () => {
                     _id
                 }
             }
-        `
-        // const response = await chai.request(server).put('/tickets').set("x-access-token", jwtToken).send(ticketData);
+        `;
+
         const response = await chai.request(server)
             .post("/graphql")
             .set("x-access-token", jwtToken)
@@ -257,6 +252,7 @@ describe('tickets get and post routes', () => {
             trainnumber: '123456',
             traindate: '2023-09-16'
         };
+
         const mutation = `
             mutation {
                 createTicket (code: "${ticketData.code}", trainnumber: "${ticketData.trainnumber}", traindate: "${ticketData.traindate}")
@@ -267,8 +263,8 @@ describe('tickets get and post routes', () => {
                     traindate
                 }
             }
-        `
-        // const response = await chai.request(server).put('/tickets').set("x-access-token", jwtToken).send(ticketData);
+        `;
+
         const response = await chai.request(server)
             .post("/graphql")
             .set("x-access-token", jwtToken)
@@ -289,7 +285,6 @@ describe('tickets get and post routes', () => {
         const check = pattern.test(response.res.text)
 
         expect(check).to.equal(true);
-        // expect(response.res.text).to.contain(`{"data":{"createTicket":{"code":"test_code","trainnumber":"123456","traindate":"2023-09-16"}}}`);
 
         const db = await database.getDb();
         const latest = await db.collection.tickets.findOne({
@@ -298,27 +293,6 @@ describe('tickets get and post routes', () => {
 
         await db.client.close();
         chai.assert.equal(latest.code, 'test_code');
-
-        // const response = await chai.request(server).post('/tickets').set("x-access-token", jwtToken).send(ticketData);
-        // expect(response).to.have.status(201);
-        // expect(response.body.data).to.have.property("acknowledged");
-        // expect(response.body).to.be.an('object');
-        // expect(response.body.data.acknowledged).to.equal(true);
-        // expect(response.body.data.insertedId).to.be.a("string");
-
-        // if (response.body.data.acknowledged === true) {
-        //     setTimeout(async () => {
-        //         const id = await JSON.parse(response.text).data.insertedId;
-        //         const db = await database.getDb();
-        //         const latest = await db.collection.tickets.findOne({
-        //             _id: new ObjectId(id)
-        //         });
-
-        //         chai.assert.equal(notDeleted.trainnumber, 91234);
-        //         await db.client.close();
-        //         chai.assert.equal(latest.code, 'test_code');
-        //     }, 5000);
-        // }
     });
     it('login', async () => {
         const userData = {
