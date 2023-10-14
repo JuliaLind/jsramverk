@@ -63,4 +63,32 @@ onMounted(() => {
 #header nav ul li a:hover {
     color: #2d2c2c;
 }
+
+/* For laptop and smaller */
+@media (max-width: 1600px) {
+    #header {
+        height: unset;
+        display: flex;
+        padding: 0.5em;
+    }
+
+    #header nav {
+        margin-top: unset;
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+    }
+
+    #header nav ul {
+        margin-bottom: unset;
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+    }
+
+    #header nav ul li {
+        border-radius: unset;
+    }
+
+}
 </style>

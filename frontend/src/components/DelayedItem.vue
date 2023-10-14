@@ -83,14 +83,26 @@ a {
     font-size: 1.7rem;
     font-weight: bold;
     padding: 1.2rem 1.5rem;
-    width: 30%;
+    /* width: 30%; */
 }
-
+/* 
 .current-station {
     width: 30%;
-}
+} */
 
 .delay {
     padding: 1.2rem 1.5rem;
+}
+
+@media (max-width: 1600px) {
+    .delay {
+        width: 100%;
+    }
+
+    td,
+    td > div {
+    font-size: 1rem;
+    white-space: normal;
+}
 }
 </style>

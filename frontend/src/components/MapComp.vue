@@ -155,4 +155,21 @@ onMounted(async () => {
     width: 50vw;
 }
 
+@media (max-width: 1600px) {
+    .map-container,
+    .map,
+    .leaflet-container {
+        height: 100%;
+        width: 45vw;
+    }
+
+    .map-container {
+        padding: 0;
+    }
+
+    .map {
+        border-radius: 0;
+    }
+}
+
 </style>

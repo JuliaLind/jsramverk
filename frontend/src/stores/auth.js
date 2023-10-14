@@ -6,6 +6,7 @@ export const useAuthStore = defineStore('store', {
     state: () => ({
         data: {
             token: '',
+            // token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5zZSIsIm5hbWUiOiJUZXN0IFRlc3Rzc29uIiwiaWF0IjoxNjk3Mjg3NTE0LCJleHAiOjE2OTczNzM5MTR9.yYgOudcaNESBi4GIlN6-ptPT6KHt1Rc5D9K_p6gzpvU",
             userEmail: ''
         }
     }),
@@ -21,6 +22,7 @@ export const useAuthStore = defineStore('store', {
             }
             this.token = result.data.data.token
             this.userEmail = result.data.data.user.email
+            console.log(this.token);
             router.push('/admin')
 
             //note for later: set toast to "hello 'result.data.ta.user.name'""

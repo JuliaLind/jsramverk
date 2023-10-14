@@ -20,9 +20,7 @@ onMounted(async () => {
 
 let traindate = new Date().toJSON().slice(0, 10)
 
-/**
- * Function for sending messages to other components
- */
+
 const emit = defineEmits(['form-submitted'])
 const store = useAuthStore()
 
@@ -48,7 +46,7 @@ async function submitForm(code, trainnumber, traindate) {
 </script>
 
 <template>
-    <div class="col-md-3">
+    <div class="col-md-3 new-ticket">
         <div class="card shadow-sm">
             <div class="card-header h5 bg-primary text-light">Lägg till ärende</div>
             <div class="card-body">
@@ -60,6 +58,7 @@ async function submitForm(code, trainnumber, traindate) {
                     <div class="form-group mb-3">
                         <label class="mb-1">Tågnummer</label>
                         <select name="trainnumber" class="form-control" required v-model="trainnumber">
+                            <option :hidden="true" disabled :value="''">Välj tågnummer</option>
                             <option v-for="train in trainnumbers" :key="train" :value="train">
                                 {{ train }}
                             </option>
@@ -68,9 +67,9 @@ async function submitForm(code, trainnumber, traindate) {
                     <div class="form-group mb-3">
                         <label class="mb-1">Orsakskod</label>
                         <select name="code" required class="form-control" v-model="code">
+                            <option disabled hidden :value="''">Välj orsakskod</option>
                             <option v-for="code in reasoncodes" :key="code.Code" :value="code.Code">
-                                {{ code.Code }} - {{ code.Level3Description }} - {{ code.Level2Description }} -
-                                {{ code.Level1Description }}
+                                {{ code.Code }} - {{ code.Level3Description }}
                             </option>
                         </select>
                     </div>
@@ -83,32 +82,18 @@ async function submitForm(code, trainnumber, traindate) {
             </div>
         </div>
     </div>
-    <!--<div class="ticket">
-        <form v-on:submit.prevent="submitForm(code, trainnumber, traindate)">
-            <input type="text" class="field-1" disabled value="Lägg till nytt ärende" />
-            <select name="trainnumer" class="field-2" required v-model="trainnumber">
-                <option :hidden="true" disabled :value="''">Välj tågnummer</option>
-                <option v-for="train in trainnumbers" :key="train" :value="train">
-                    {{ train }}
-                </option>
-            </select>
-            <select name="code" required class="field-3" v-model="code">
-                <option disabled hidden :value="''">Välj orsakskod</option>
-                <option v-for="code in reasoncodes" :key="code.Code" :value="code.Code">
-                    {{ code.Code }} - {{ code.Level3Description }} - {{ code.Level2Description }} -
-                    {{ code.Level1Description }}
-                </option>
-            </select>
-            <input type="date" disabled name="traindate" v-model="traindate" />
-            <input type="submit" class="btn" value="Skapa" />
-        </form>
-    </div>-->
 </template>
 
 <style scoped>
 input:disabled,
 select:disabled {
     background: #f8f8f8;
+}
+
+.new-ticket {
+    flex-direction: row;
+    position: sticky;
+    top: 0;
 }
 
 </style>

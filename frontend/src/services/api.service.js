@@ -57,8 +57,6 @@ export const getInitialPositions = async () => {
 export const getCodes = async () => {
     const query = `{codes {
         Code
-        Level1Description
-        Level2Description
         Level3Description
       }}`
     const response = await fetch(`${import.meta.env.VITE_URL}/graphql`, {

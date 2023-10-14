@@ -16,20 +16,41 @@ onMounted(async () => {
 </script>
 
 <template>
+    <!-- <div class="wrapper-container"> -->
     <div class="wrapper-container">
+        <NewTicket @form-submitted="updateTickets()" />
         <div class="container">
-            <div class="h1">
+            <!-- <div class="h1">
                 <h2>Befintliga ärenden</h2>
-            </div>
-            <div class="old-tickets mt-3" id="old-tickets">
-                <NewTicket @form-submitted="updateTickets()" />
+            </div> -->
+            <!-- <div class="old-tickets mt-3" id="old-tickets">
                 <SingleTicket
                     v-for="ticket in tickets"
                     :key="ticket._id"
                     :ticket="ticket"
                     @form-submitted="updateTickets()"
                 />
-            </div>
+            </div> -->
+    <table class="old-tickets" id="old-tickets">
+        <thead>
+        <tr><th class="title" colspan="5">
+            Befintliga ärenden
+        </th></tr>
+        <tr class="titles">
+            <th>Ärendenummer</th>
+            <th>Tågnr</th>
+            <th>Orsakskod</th>
+            <th>Datum</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <SingleTicket
+            v-for="ticket in tickets"
+            :key="ticket._id"
+            :ticket="ticket"
+            @form-submitted="updateTickets()"
+        />
+    </table>
         </div>
     </div>
 </template>
@@ -37,10 +58,45 @@ onMounted(async () => {
 <style scoped>
 
 .old-tickets {
-    gap: 20px;
+    width: clamp(400px, 100%, 1200px);
+    table-layout: auto;
+}
+
+th.title {
+    padding: 0.5em;
+}
+
+
+.title,
+.titles {
+    background-color: #0d6efd;
+    color: #fff;
+    font-weight: 400;
+    font-family: sans-serif;
+    border-radius: 5px 5px 0 0;
+    text-align: center;
+}
+
+.titles {
+    border-top: 1px solid #ccc;
+}
+
+.titles th {
+    padding: 0.5em;
+    font-size: 1.25rem;
+    font-weight: 400;
+    font-family: sans-serif;
+}
+.container {
+    width: 100%;
+}
+
+.wrapper-container {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    justify-content: space-around;
+    position: relative;
 }
+
 
 </style>
