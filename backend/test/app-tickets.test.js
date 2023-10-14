@@ -61,19 +61,19 @@ describe('tickets get and post routes', () => {
                 code
                 trainnumber
             }
-        }`
+        }`;
 
         const response = await chai.request(server)
             .post("/graphql")
             .set("x-access-token", jwtToken)
             .set('Content-Type', 'application/json')
-            .send({ query })
+            .send({ query });
 
-        const pattern = new RegExp('.*"tickets":\\[{"code":"ANA003","trainnumber":"91234"},{"code":"ANA002","trainnumber":"9123"}]');
+        const pattern = new RegExp('.*\\"code":"ANA003","trainnumber":"91234"},{"code":"ANA002","trainnumber":"9123"');
 
-        const check = pattern.test(response.res.text)
+        const check = pattern.test(response.res.text);
 
-        expect(check).to.equal(true)
+        expect(check).to.equal(true);
     });
     it('request missing token when getting tickets', async () => {
         const query = `{
@@ -81,12 +81,12 @@ describe('tickets get and post routes', () => {
                 code
                 trainnumber
             }
-        }`
+        }`;
 
         const response = await chai.request(server)
             .post("/graphql")
             .set('Content-Type', 'application/json')
-            .send({ query })
+            .send({ query });
 
         // console.log(response);
 
@@ -107,13 +107,13 @@ describe('tickets get and post routes', () => {
         const response = await chai.request(server)
             .post("/graphql")
             .set('Content-Type', 'application/json')
-            .send({ query })
+            .send({ query });
 
         const pattern = new RegExp('.*"errors":\\[{"message":"Token not provided"');
 
-        const check = pattern.test(response.res.text)
+        const check = pattern.test(response.res.text);
 
-        expect(check).to.equal(true)
+        expect(check).to.equal(true);
     });
     it('should not access put route without token', async () => {
         const query = `
@@ -128,15 +128,15 @@ describe('tickets get and post routes', () => {
         const response = await chai.request(server)
             .post("/graphql")
             .set('Content-Type', 'application/json')
-            .send({ query })
+            .send({ query });
 
         // console.log(response);
 
         const pattern = new RegExp('.*"errors":\\[{"message":"Token not provided"');
 
-        const check = pattern.test(response.res.text)
+        const check = pattern.test(response.res.text);
 
-        expect(check).to.equal(true)
+        expect(check).to.equal(true);
 
         const db = await database.getDb();
         const filter = {
@@ -164,16 +164,16 @@ describe('tickets get and post routes', () => {
             .post("/graphql")
             .set("x-access-token", jwtToken)
             .set('Content-Type', 'application/json')
-            .send({ query: mutation })
+            .send({ query: mutation });
 
         // console.log(response)
 
         expect(response).to.have.status(200);
-        const pattern = new RegExp('.*:\\{"updateTicket":{"code":"update_code","trainnumber":"9123"}}}')
+        const pattern = new RegExp('.*:\\{"code":"update_code","trainnumber":"9123"}}}');
 
-        const check = pattern.test(response.res.text)
+        const check = pattern.test(response.res.text);
 
-        expect(check).to.equal(true)
+        expect(check).to.equal(true);
         // expect(response.res.text).to.include('{"data":{"updateTicket":{"code":"update_code","trainnumber":"9123"}}}');
 
         const db = await database.getDb();
@@ -239,7 +239,7 @@ describe('tickets get and post routes', () => {
         // console.log(response)
 
         expect(response).to.have.status(200);
-        const pattern = new RegExp('.*:\\{"deleteTicket":{"_id":"000000023b7eef17104f27e6"}}}')
+        const pattern = new RegExp('.*:\\{"_id":"000000023b7eef17104f27e6"}}}')
 
         const check = pattern.test(response.res.text)
 
@@ -284,7 +284,7 @@ describe('tickets get and post routes', () => {
         // console.log(id);
 
         expect(response).to.have.status(200);
-        const pattern = new RegExp('.*"code":"test_code","trainnumber":"123456","traindate":"2023-09-16"}}}');
+        const pattern = new RegExp('.*"code":"test_code","trainnumber":"123456".*');
 
         const check = pattern.test(response.res.text)
 

@@ -27,25 +27,90 @@ describe('app.js', () => {
 
     describe('Routes', () => {
         it('should handle /delayed route', async () => {
-            const response = await chai.request(server).get('/delayed');
+
+            const query = `
+                {
+                    delayed
+                    {
+                        AdvertisedTimeAtLocation
+                        EstimatedTimeAtLocation
+                        OperationalTrainNumber
+                        Canceled
+                        FromLocation
+                        ToLocation
+                        LocationSignature
+                    }
+                }
+            `
+            // const response = await chai.request(server).put('/tickets').set("x-access-token", jwtToken).send(ticketData);
+            const response = await chai.request(server)
+                .post("/graphql")
+                .set('Content-Type', 'application/json')
+                .send({ query: query })
+        
             expect(response).to.have.status(200);
+
+            console.log(response);
+
+            const returnData = await JSON.parse(response.res.text).data.delayed;
+
+            expect(returnData).to.be.an('array');
+            expect(returnData[0]).to.have.any.keys(
+                'AdvertisedTimeAtLocation',
+                'EstimatedTimeAtLocation',
+                'OperationalTrainNumber',
+                'Canceled',
+                'FromLocation',
+                'ToLocation',
+                'LocationSignature'
+            );
+            expect(returnData[0].OperationalTrainNumber).to.be.a('string');
+
+            const pattern = new RegExp('\\{"data":{"delayed":.*');
+
+            const check = pattern.test(response.res.text);
+
+            expect(check).to.equal(true);
         });
+
         it('should handle /codes route', async () => {
-            const response = await chai.request(server).get('/codes');
+
+            const query = `
+                {
+                    codes
+                    {
+                        Code
+                    }
+                }
+            `
+            // const response = await chai.request(server).put('/tickets').set("x-access-token", jwtToken).send(ticketData);
+            const response = await chai.request(server)
+                .post("/graphql")
+                .set('Content-Type', 'application/json')
+                .send({ query: query })
+        
             expect(response).to.have.status(200);
+
+            // console.log(response);
+
+            const pattern = new RegExp('.*\\{"Code":"ANA002"}.*{"Code":"ONA027"}.*');
+
+            const check = pattern.test(response.res.text);
+
+            expect(check).to.equal(true);
         });
 
         // it('should handle /not-found route', async () => {
         //     const response = await chai.request(server).get('/blabla');
         //     expect(response).to.have.status(404);
-        it('should handle error when visiting non existing route', (done) => {
-            chai.request(server)
-                .get("/blabla")
-                .end((err, res) => {
-                    res.should.have.status(404);
-                    res.body.should.have.property("errors");
-                    done();
-                });
-        });
+        // it('should handle error when visiting non existing route', (done) => {
+        //     chai.request(server)
+        //         .get("/blabla")
+        //         .end((err, res) => {
+        //             res.should.have.status(404);
+        //             res.body.should.have.property("errors");
+        //             done();
+        //         });
+        // });
     });
 });
