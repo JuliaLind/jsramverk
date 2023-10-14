@@ -106,6 +106,8 @@ const trains = {
 
         const result = await response.json();
 
+        // console.log(result.RESPONSE.RESULT[0]);
+
         return result.RESPONSE.RESULT[0].INFO.SSEURL;
     },
 

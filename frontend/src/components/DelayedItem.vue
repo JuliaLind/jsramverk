@@ -76,16 +76,21 @@ a {
 }
 
 .delay-item:nth-of-type(2n) {
-    background-color: #eee;
+    background-color: #f6f6f6;
 }
 
 .train-number {
-    font-size: 2rem;
+    font-size: 1.7rem;
     font-weight: bold;
+    padding: 1.2rem 1.5rem;
     width: 30%;
 }
 
 .current-station {
     width: 30%;
+}
+
+.delay {
+    padding: 1.2rem 1.5rem;
 }
 </style>

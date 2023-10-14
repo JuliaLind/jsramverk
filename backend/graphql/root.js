@@ -8,7 +8,6 @@ const tickets = require('../models/tickets.js');
 const TicketType = require('./ticket.js');
 const PositionType = require("./positions.js");
 
-
 const {
     GraphQLObjectType,
     GraphQLList

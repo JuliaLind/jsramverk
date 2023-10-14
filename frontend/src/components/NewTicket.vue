@@ -48,7 +48,42 @@ async function submitForm(code, trainnumber, traindate) {
 </script>
 
 <template>
-    <div class="ticket">
+    <div class="col-md-3">
+        <div class="card shadow-sm">
+            <div class="card-header h5 bg-primary text-light">Lägg till ärende</div>
+            <div class="card-body">
+                <form v-on:submit.prevent="submitForm(code, trainnumber, traindate)">
+                    <div class="form-group mb-3">
+                        <label class="mb-1">Ärendenummer</label>
+                        <input type="text" class="form-control" disabled value="Tilldelas automatiskt" />
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="mb-1">Tågnummer</label>
+                        <select name="trainnumber" class="form-control" required v-model="trainnumber">
+                            <option v-for="train in trainnumbers" :key="train" :value="train">
+                                {{ train }}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="mb-1">Orsakskod</label>
+                        <select name="code" required class="form-control" v-model="code">
+                            <option v-for="code in reasoncodes" :key="code.Code" :value="code.Code">
+                                {{ code.Code }} - {{ code.Level3Description }} - {{ code.Level2Description }} -
+                                {{ code.Level1Description }}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="mb-1">Datum</label>
+                        <input type="date" disabled name="traindate" class="form-control" v-model="traindate" />
+                    </div>
+                    <input type="submit" class="btn btn-success" value="Skapa" />
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--<div class="ticket">
         <form v-on:submit.prevent="submitForm(code, trainnumber, traindate)">
             <input type="text" class="field-1" disabled value="Lägg till nytt ärende" />
             <select name="trainnumer" class="field-2" required v-model="trainnumber">
@@ -67,27 +102,13 @@ async function submitForm(code, trainnumber, traindate) {
             <input type="date" disabled name="traindate" v-model="traindate" />
             <input type="submit" class="btn" value="Skapa" />
         </form>
-    </div>
+    </div>-->
 </template>
 
 <style scoped>
 input:disabled,
 select:disabled {
-    border: 1px solid #333;
-    background: #ffffff;
+    background: #f8f8f8;
 }
 
-select {
-    border: 1px solid #07470e;
-}
-
-input,
-select {
-    padding: 0.2em;
-}
-
-.ticket {
-    display: flex;
-    flex-direction: row;
-}
 </style>

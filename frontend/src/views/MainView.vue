@@ -4,35 +4,44 @@
  * trains and a map with their current
  * positions
  */
-import { onMounted } from 'vue'
+// import { onMounted } from 'vue'
 import DelayedTable from '../components/DelayedTable.vue'
 import MapComp from '../components/MapComp.vue'
-import { RouterLink } from 'vue-router'
-import { useTrainsStore } from '@/stores/trains'
-import { ref } from 'vue'
+import HeaderComp from '../components/HeaderComp.vue'
+import FooterComp from '../components/FooterComp.vue'
+// import { RouterLink } from 'vue-router'
+// import { useTrainsStore } from '@/stores/trains'
+// import { ref } from 'vue'
 
-const store = useTrainsStore()
-let current = ref('')
-const map = ref(null)
+// const store = useTrainsStore()
+// let current = ref('')
+// const map = ref(null)
 
-function switchCurrent() {
-    current.value = store.current
-}
+// function switchCurrent() {
+//     current.value = store.current
+// }
 
-onMounted(() => {
-    switchCurrent()
-})
+// onMounted(() => {
+//     switchCurrent()
+// })
 </script>
 
 <template>
     <main>
-        <RouterLink to="/admin" @click="store.current = ''"> Admin </RouterLink>
-        <keep-alive>
-            <DelayedTable ref="current" @refresh-map="map.updateLayers()" />
-        </keep-alive>
-        <keep-alive>
-            <MapComp ref="map" @refresh-map="map.updateLayers()" />
-        </keep-alive>
+        <div class="main-nav">
+            <HeaderComp></HeaderComp>
+        </div>
+        <div class="main-content">
+            <keep-alive>
+                <DelayedTable ref="current" @refresh-map="map.updateLayers()" />
+            </keep-alive>
+            <keep-alive>
+                <MapComp ref="map" @refresh-map="map.updateLayers()" />
+            </keep-alive>
+        </div>
+        <div class="main-footer">
+            <FooterComp></FooterComp>
+        </div>
     </main>
 </template>
 
@@ -41,5 +50,12 @@ main {
     height: 100vh;
     width: 100vw;
     display: flex;
+    flex-direction: column;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 </style>

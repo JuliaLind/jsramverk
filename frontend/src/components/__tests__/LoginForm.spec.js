@@ -41,7 +41,7 @@ describe('LoginForm', async () => {
 
         await flushPromises()
         expect(wrapper.text()).contains('Logga in')
-        expect(wrapper.text()).contains('E-postaddress')
+        expect(wrapper.text()).contains('E-postadress')
         expect(wrapper.text()).contains('Lösenord')
         wrapper.unmount()
 

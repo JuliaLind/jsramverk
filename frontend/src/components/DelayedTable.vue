@@ -21,33 +21,51 @@ socket.on('delayedTrainsUpdate', (updatedTrains) => {
 </script>
 
 <template>
-    <div class="delayed">
-        <h1>Försenade tåg</h1>
-        <table id="delayed-trains" class="delayed-trains">
-            <tr>
-                <th>Tåg</th>
-                <th>Station</th>
-                <th>Från</th>
-                <th>Mot</th>
-                <th>Försenad</th>
-            </tr>
-            <DelayedItem
-                v-for="item in delayedTrains"
-                :item="item"
-                :key="item.ActivityId"
-                v-on:click="store.setCurrent(item.OperationalTrainNumber), $emit('refresh-map')"
-            />
-        </table>
+    <div class="delayed-container">
+        <div class="delayed-header">
+            <h1>Försenade tåg</h1>
+        </div>
+        <div class="delayed">
+            <table id="delayed-trains" class="delayed-trains">
+                <tr>
+                    <th id="th"><h3>Tåg</h3></th>
+                    <th><h3>Station</h3></th>
+                    <th><h3>Från</h3></th>
+                    <th><h3>Mot</h3></th>
+                    <th><h3>Försenad</h3></th>
+                </tr>
+                <DelayedItem
+                    v-for="item in delayedTrains"
+                    :item="item"
+                    :key="item.ActivityId"
+                    v-on:click="store.setCurrent(item.OperationalTrainNumber), $emit('refresh-map')"
+                />
+            </table>
+        </div>
     </div>
 </template>
 
 <style>
 .delayed {
-    height: 100vh;
+    height: 75vh;
     /* width: 40vw; */
-    width: fit-content;
+    width: 100%;
     padding: 2rem;
     overflow: scroll;
     background-color: white;
+    margin-top: 2rem;
+}
+
+th {
+    font-size: 25px;
+}
+
+#th {
+    padding-left: 1.5rem;
+}
+
+.delayed-header {
+    text-align: center;
+    margin-top: 2rem;
 }
 </style>
