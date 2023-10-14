@@ -27,7 +27,7 @@ socket.on('delayedTrainsUpdate', (updatedTrains) => {
         </div>
         <div class="delayed">
             <table id="delayed-trains" class="delayed-trains">
-                <tr>
+                <tr class="title-group">
                     <th id="th"><h3>Tåg</h3></th>
                     <th><h3>Station</h3></th>
                     <th><h3>Från</h3></th>
@@ -67,5 +67,27 @@ th {
 .delayed-header {
     text-align: center;
     margin-top: 2rem;
+}
+
+@media (max-width: 1600px) {
+    .delayed-container {
+        width: 100%;
+        position: relative;
+    }
+
+    .delayed {
+        padding: 1rem;
+    }
+
+    .delayed-trains {
+        width: clamp(400px, 100%, 1000px);
+        table-layout: fixed;
+    }
+
+    .title-group {
+        position: sticky;
+        top: -1rem;
+        background-color: #fff;
+    }
 }
 </style>

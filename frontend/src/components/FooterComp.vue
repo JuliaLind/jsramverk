@@ -55,4 +55,19 @@ ul.icons li {
     margin-left: 1.5em;
     padding-left: 1.5em;
 }
+
+@media (max-width: 1600px) {
+    #footer {
+        margin-top: unset;
+        padding: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #footer .copyright {
+        margin: unset;
+    }
+}
+
 </style>

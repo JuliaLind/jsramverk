@@ -36,7 +36,7 @@ let innerText = 'Ändra'
 async function submitForm(code) {
     const updatedTicket = `
     mutation {
-        updateTicket(_id: "${id}", code: "${code}") {
+        updateTicket(_id: "${ticket._id}", code: "${code}") {
             _id
             code
             trainnumber
@@ -73,15 +73,19 @@ const deletedTicket = `
     }
 `
 
+let currentClass = "unset";
+
 const toggleEditing = function () {
     if (editing.value == false) {
         editing.value = true
         innerText = 'Återgå'
         socket.notifyBackendEdit(sendToBackend)
+        currentClass=""
     } else {
         editing.value = false
         innerText = 'Ändra'
         code = ticket.code
+        currentClass="unset"
         socket.notifyBackendStopEdit({
             ticket: id
         })
@@ -90,7 +94,7 @@ const toggleEditing = function () {
 </script>
 
 <template>
-    <div class="col-md-3">
+    <!-- <div class="col-md-3">
         <div class="card shadow-sm">
             <div class="card-header h5">Enskilt ärende</div>
             <div class="card-body">
@@ -130,13 +134,63 @@ const toggleEditing = function () {
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
+
+    <tr class="ticket">
+    <td>
+        {{ id }}
+    </td>
+    <td>
+        {{ ticket.trainnumber }}
+    </td>
+    <td>
+        <select name="code" :class="{ 'unset': !editing}" v-model="code" required :disabled="!editing">
+            <option v-for="code in reasoncodes" :key="code.Code" :value="code.Code">
+                        {{ code.Code }} - {{ code.Level3Description }}
+            </option>
+        </select>
+    </td>
+    <td>
+        {{ ticket.traindate }}
+    </td>
+    <td>
+        <input v-if="editing" class="btn btn-success" type="submit" value="Spara" @click="submitForm(code), $emit('form-submitted')" />
+        <button class="btn btn-dark" v-on:click.self="toggleEditing()" :disabled="id in socket.data">
+            {{ innerText }}
+        </button>
+        <button class="btn btn-danger delete" v-on:click.self="store.deleteTicket(deletedTicket), $emit('form-submitted')">
+            Ta bort
+        </button>
+    </td>
+    </tr>
 </template>
 
 <style scoped>
-input:disabled,
-select:disabled {
-    background: #f8f8f8;
+
+
+select {
+    padding: 0.5em;
+}
+.unset {
+    all: unset;
+}
+
+tr {
+    border-top: 1px solid #ccc;
+}
+
+tr:nth-of-type(2n) {
+    background-color: #f6f6f6;
+}
+
+
+td {
+    padding: 0.5em;
+}
+
+select,
+select.unset {
+    max-width: 200px;
 }
 
 .crud-buttons {
@@ -144,5 +198,4 @@ select:disabled {
     flex-direction: row;
     gap: 20px;
 }
-
 </style>
