@@ -51,7 +51,7 @@ describe('tickets get and post routes', () => {
         await db.collection.users.insertOne(user);
         const allUsers = await db.collection.users.find({}).toArray();
 
-        console.log(allUsers);
+        // console.log(allUsers);
         await db.client.close();
     });
     it('page should contain json with old tickets', async () => {

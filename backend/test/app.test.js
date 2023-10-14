@@ -50,7 +50,7 @@ describe('app.js', () => {
         
             expect(response).to.have.status(200);
 
-            console.log(response);
+            // console.log(response);
 
             const returnData = await JSON.parse(response.res.text).data.delayed;
 
