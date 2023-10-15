@@ -16,21 +16,9 @@ onMounted(async () => {
 </script>
 
 <template>
-    <!-- <div class="wrapper-container"> -->
     <div class="wrapper-container">
         <NewTicket @form-submitted="updateTickets()" />
         <div class="container">
-            <!-- <div class="h1">
-                <h2>Befintliga ärenden</h2>
-            </div> -->
-            <!-- <div class="old-tickets mt-3" id="old-tickets">
-                <SingleTicket
-                    v-for="ticket in tickets"
-                    :key="ticket._id"
-                    :ticket="ticket"
-                    @form-submitted="updateTickets()"
-                />
-            </div> -->
     <table class="old-tickets" id="old-tickets">
         <thead>
         <tr><th class="title" colspan="5">

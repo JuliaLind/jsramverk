@@ -99,7 +99,7 @@ export const useAuthStore = defineStore('store', {
             if (this.isTokenValid(result)) {
                 return result.data
             }
-            return undefined //?? not sure what to return, the view should update to display login-form instead of tickets list
+            return undefined
         },
 
         /**
@@ -125,7 +125,7 @@ export const useAuthStore = defineStore('store', {
             if (this.isTokenValid(result)) {
                 return result.data
             }
-            return undefined //?? not sure what to return, the view should update to display login-form instead of tickets list
+            return undefined
         },
 
         /**
@@ -149,7 +149,7 @@ export const useAuthStore = defineStore('store', {
             if (this.isTokenValid(result)) {
                 return result.data
             }
-            return undefined //?? not sure what to return, the view should update to display login-form instead of tickets list
+            return undefined
         },
 
         /**
@@ -176,7 +176,7 @@ export const useAuthStore = defineStore('store', {
             if (this.isTokenValid(result)) {
                 return result.data.tickets
             }
-            return undefined //?? not sure what to return, the view should update to display login-form instead of tickets list
+            return undefined
         }
     }
 })
