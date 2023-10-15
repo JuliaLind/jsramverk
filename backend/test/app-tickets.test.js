@@ -21,7 +21,8 @@ const jwtToken = jwt.sign(payload, jwtSecret, { expiresIn: '24h' });
 const bcrypt = require('bcryptjs');
 const password = "test";
 const hash = bcrypt.hashSync(password, 10);
-
+const sinon = require('sinon');
+const { comparePasswords } = require('../models/auth.js');
 
 describe('tickets get and post routes', () => {
     before(async () => {
@@ -324,6 +325,50 @@ describe('tickets get and post routes', () => {
         expect(response).to.have.status(401);
         expect(response.body.errors.detail).to.equal("User with provided email not found.");
     });
+    it('login, wrong password', async () => {
+        const userData = {
+            email: "test@test.com",
+            password: "incorrect",
+        };
+
+        const response = await chai.request(server).post('/login').send(userData);
+
+        expect(response).to.have.status(401);
+    });
+    it('login, bcrypt error', async () => {
+        const userData = {
+            email: "test@test.com",
+            password: "incorrect",
+        };
+
+        const bcryptStub = sinon.stub(bcrypt, 'compare').callsArgWith(2, new Error('Bcrypt error'));
+
+        const response = await chai.request(server).post('/login').send(userData);
+
+        expect(response).to.have.status(500);
+
+        bcryptStub.restore();
+    });
+    it('should handle database error', (done) => {
+        const reqBody = {
+            email: 'test@example.com',
+            password: 'password123'
+        };
+
+        // Stub the database.getDb function to force an error
+        const databaseStub = sinon.stub(database, 'getDb').throws(new Error('Database error'));
+
+        chai.request(server)
+            .post('/login')
+            .send(reqBody)
+            .end((err, res) => {
+                expect(res).to.have.status(500);
+                expect(res.body.errors.title).to.equal('Database error');
+                expect(res.body.errors.detail).to.equal('Database error');
+                databaseStub.restore();  // Restore the original database.getDb function
+                done();
+            });
+    });
     it('register new user', async () => {
         const another = "another@test.com"
         const userData = {
@@ -350,6 +395,27 @@ describe('tickets get and post routes', () => {
         const response = await chai.request(server).post('/register').send(userData);
         expect(response).to.have.status(500);
         expect(response.body.errors.detail).to.contain("duplicate key error collection")
+    });
+    it('should handle bcrypt error', (done) => {
+        const reqBody = {
+            email: 'test@example.com',
+            password: 'password123',
+            name: 'Test User'
+        };
+
+        // Stub bcrypt.hash to force an error
+        const bcryptStub = sinon.stub(bcrypt, 'hash').callsArgWith(2, new Error('Bcrypt error'));
+
+        chai.request(server)
+            .post('/register')
+            .send(reqBody)
+            .end((err, res) => {
+                expect(res).to.have.status(500);
+                expect(res.body.errors.title).to.equal('bcrypt error');
+                expect(res.body.errors.detail).to.equal('bcrypt error');
+                bcryptStub.restore();  // Restore the original bcrypt.hash function
+                done();
+            });
     });
     it('cannot register with missing email', async () => {
         const userData = {
