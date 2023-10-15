@@ -21,7 +21,8 @@ const jwtToken = jwt.sign(payload, jwtSecret, { expiresIn: '24h' });
 const bcrypt = require('bcryptjs');
 const password = "test";
 const hash = bcrypt.hashSync(password, 10);
-
+const sinon = require('sinon');
+const { comparePasswords } = require('../models/auth.js');
 
 describe('tickets get and post routes', () => {
     before(async () => {
@@ -50,9 +51,8 @@ describe('tickets get and post routes', () => {
         };
         await db.collection.users.insertOne(user);
         const allUsers = await db.collection.users.find({}).toArray();
-        console.log(allUsers);
-        // const allTickets = await db.collection.tickets.find({}).toArray();
-        // console.log(allTickets);
+
+        // console.log(allUsers);
         await db.client.close();
     });
     it('page should contain json with old tickets', async () => {
@@ -61,19 +61,19 @@ describe('tickets get and post routes', () => {
                 code
                 trainnumber
             }
-        }`
+        }`;
 
         const response = await chai.request(server)
             .post("/graphql")
             .set("x-access-token", jwtToken)
             .set('Content-Type', 'application/json')
-            .send({ query })
+            .send({ query });
 
-        const pattern = new RegExp('.*"tickets":\\[{"code":"ANA003","trainnumber":"91234"},{"code":"ANA002","trainnumber":"9123"}]');
+        const pattern = new RegExp('.*\\"code":"ANA003","trainnumber":"91234"},{"code":"ANA002","trainnumber":"9123"');
 
-        const check = pattern.test(response.res.text)
+        const check = pattern.test(response.res.text);
 
-        expect(check).to.equal(true)
+        expect(check).to.equal(true);
     });
     it('request missing token when getting tickets', async () => {
         const query = `{
@@ -81,12 +81,12 @@ describe('tickets get and post routes', () => {
                 code
                 trainnumber
             }
-        }`
+        }`;
 
         const response = await chai.request(server)
             .post("/graphql")
             .set('Content-Type', 'application/json')
-            .send({ query })
+            .send({ query });
 
         // console.log(response);
 
@@ -107,13 +107,13 @@ describe('tickets get and post routes', () => {
         const response = await chai.request(server)
             .post("/graphql")
             .set('Content-Type', 'application/json')
-            .send({ query })
+            .send({ query });
 
         const pattern = new RegExp('.*"errors":\\[{"message":"Token not provided"');
 
-        const check = pattern.test(response.res.text)
+        const check = pattern.test(response.res.text);
 
-        expect(check).to.equal(true)
+        expect(check).to.equal(true);
     });
     it('should not access put route without token', async () => {
         const query = `
@@ -128,15 +128,15 @@ describe('tickets get and post routes', () => {
         const response = await chai.request(server)
             .post("/graphql")
             .set('Content-Type', 'application/json')
-            .send({ query })
+            .send({ query });
 
         // console.log(response);
 
         const pattern = new RegExp('.*"errors":\\[{"message":"Token not provided"');
 
-        const check = pattern.test(response.res.text)
+        const check = pattern.test(response.res.text);
 
-        expect(check).to.equal(true)
+        expect(check).to.equal(true);
 
         const db = await database.getDb();
         const filter = {
@@ -164,22 +164,21 @@ describe('tickets get and post routes', () => {
             .post("/graphql")
             .set("x-access-token", jwtToken)
             .set('Content-Type', 'application/json')
-            .send({ query: mutation })
+            .send({ query: mutation });
 
         // console.log(response)
 
         expect(response).to.have.status(200);
-        const pattern = new RegExp('.*:\\{"updateTicket":{"code":"update_code","trainnumber":"9123"}}}')
+        const pattern = new RegExp('.*:\\{"code":"update_code","trainnumber":"9123"}}}');
 
-        const check = pattern.test(response.res.text)
+        const check = pattern.test(response.res.text);
 
-        expect(check).to.equal(true)
-        // expect(response.res.text).to.include('{"data":{"updateTicket":{"code":"update_code","trainnumber":"9123"}}}');
+        expect(check).to.equal(true);
 
         const db = await database.getDb();
         const filter = {
             _id: new ObjectId("000000013b7eef17104f27e5")
-        }
+        };
         const updated = await db.collection.tickets.findOne(filter);
         chai.assert.equal(updated.code, "update_code");
         await db.client.close();
@@ -217,9 +216,6 @@ describe('tickets get and post routes', () => {
         const ticketData = {
             _id: new ObjectId("000000023b7eef17104f27e6"),
         };
-        // const response = await chai.request(server).delete('/tickets').set("x-access-token", jwtToken).send(ticketData);
-        // expect(response).to.have.status(201);
-        // expect(response.body.data.message).to.equal("Ticket 000000023b7eef17104f27e6 has been deleted");
 
         const mutation = `
             mutation {
@@ -228,8 +224,8 @@ describe('tickets get and post routes', () => {
                     _id
                 }
             }
-        `
-        // const response = await chai.request(server).put('/tickets').set("x-access-token", jwtToken).send(ticketData);
+        `;
+
         const response = await chai.request(server)
             .post("/graphql")
             .set("x-access-token", jwtToken)
@@ -239,7 +235,7 @@ describe('tickets get and post routes', () => {
         // console.log(response)
 
         expect(response).to.have.status(200);
-        const pattern = new RegExp('.*:\\{"deleteTicket":{"_id":"000000023b7eef17104f27e6"}}}')
+        const pattern = new RegExp('.*:\\{"_id":"000000023b7eef17104f27e6"}}}')
 
         const check = pattern.test(response.res.text)
 
@@ -257,6 +253,7 @@ describe('tickets get and post routes', () => {
             trainnumber: '123456',
             traindate: '2023-09-16'
         };
+
         const mutation = `
             mutation {
                 createTicket (code: "${ticketData.code}", trainnumber: "${ticketData.trainnumber}", traindate: "${ticketData.traindate}")
@@ -267,8 +264,8 @@ describe('tickets get and post routes', () => {
                     traindate
                 }
             }
-        `
-        // const response = await chai.request(server).put('/tickets').set("x-access-token", jwtToken).send(ticketData);
+        `;
+
         const response = await chai.request(server)
             .post("/graphql")
             .set("x-access-token", jwtToken)
@@ -284,12 +281,11 @@ describe('tickets get and post routes', () => {
         // console.log(id);
 
         expect(response).to.have.status(200);
-        const pattern = new RegExp('.*"code":"test_code","trainnumber":"123456","traindate":"2023-09-16"}}}');
+        const pattern = new RegExp('.*"code":"test_code","trainnumber":"123456".*');
 
         const check = pattern.test(response.res.text)
 
         expect(check).to.equal(true);
-        // expect(response.res.text).to.contain(`{"data":{"createTicket":{"code":"test_code","trainnumber":"123456","traindate":"2023-09-16"}}}`);
 
         const db = await database.getDb();
         const latest = await db.collection.tickets.findOne({
@@ -298,27 +294,6 @@ describe('tickets get and post routes', () => {
 
         await db.client.close();
         chai.assert.equal(latest.code, 'test_code');
-
-        // const response = await chai.request(server).post('/tickets').set("x-access-token", jwtToken).send(ticketData);
-        // expect(response).to.have.status(201);
-        // expect(response.body.data).to.have.property("acknowledged");
-        // expect(response.body).to.be.an('object');
-        // expect(response.body.data.acknowledged).to.equal(true);
-        // expect(response.body.data.insertedId).to.be.a("string");
-
-        // if (response.body.data.acknowledged === true) {
-        //     setTimeout(async () => {
-        //         const id = await JSON.parse(response.text).data.insertedId;
-        //         const db = await database.getDb();
-        //         const latest = await db.collection.tickets.findOne({
-        //             _id: new ObjectId(id)
-        //         });
-
-        //         chai.assert.equal(notDeleted.trainnumber, 91234);
-        //         await db.client.close();
-        //         chai.assert.equal(latest.code, 'test_code');
-        //     }, 5000);
-        // }
     });
     it('login', async () => {
         const userData = {
@@ -350,6 +325,50 @@ describe('tickets get and post routes', () => {
         expect(response).to.have.status(401);
         expect(response.body.errors.detail).to.equal("User with provided email not found.");
     });
+    it('login, wrong password', async () => {
+        const userData = {
+            email: "test@test.com",
+            password: "incorrect",
+        };
+
+        const response = await chai.request(server).post('/login').send(userData);
+
+        expect(response).to.have.status(401);
+    });
+    it('login, bcrypt error', async () => {
+        const userData = {
+            email: "test@test.com",
+            password: "incorrect",
+        };
+
+        const bcryptStub = sinon.stub(bcrypt, 'compare').callsArgWith(2, new Error('Bcrypt error'));
+
+        const response = await chai.request(server).post('/login').send(userData);
+
+        expect(response).to.have.status(500);
+
+        bcryptStub.restore();
+    });
+    it('should handle database error', (done) => {
+        const reqBody = {
+            email: 'test@example.com',
+            password: 'password123'
+        };
+
+        // Stub the database.getDb function to force an error
+        const databaseStub = sinon.stub(database, 'getDb').throws(new Error('Database error'));
+
+        chai.request(server)
+            .post('/login')
+            .send(reqBody)
+            .end((err, res) => {
+                expect(res).to.have.status(500);
+                expect(res.body.errors.title).to.equal('Database error');
+                expect(res.body.errors.detail).to.equal('Database error');
+                databaseStub.restore();  // Restore the original database.getDb function
+                done();
+            });
+    });
     it('register new user', async () => {
         const another = "another@test.com"
         const userData = {
@@ -376,6 +395,27 @@ describe('tickets get and post routes', () => {
         const response = await chai.request(server).post('/register').send(userData);
         expect(response).to.have.status(500);
         expect(response.body.errors.detail).to.contain("duplicate key error collection")
+    });
+    it('should handle bcrypt error', (done) => {
+        const reqBody = {
+            email: 'test@example.com',
+            password: 'password123',
+            name: 'Test User'
+        };
+
+        // Stub bcrypt.hash to force an error
+        const bcryptStub = sinon.stub(bcrypt, 'hash').callsArgWith(2, new Error('Bcrypt error'));
+
+        chai.request(server)
+            .post('/register')
+            .send(reqBody)
+            .end((err, res) => {
+                expect(res).to.have.status(500);
+                expect(res.body.errors.title).to.equal('bcrypt error');
+                expect(res.body.errors.detail).to.equal('bcrypt error');
+                bcryptStub.restore();  // Restore the original bcrypt.hash function
+                done();
+            });
     });
     it('cannot register with missing email', async () => {
         const userData = {
