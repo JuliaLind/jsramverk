@@ -29,7 +29,6 @@ describe('DelayedTable', async () => {
         const wrapper = mount(DelayedTable)
 
         await flushPromises()
-        // console.log(wrapper.html())
         expect(wrapper.html()).toContain('8136')
 
         wrapper.unmount()

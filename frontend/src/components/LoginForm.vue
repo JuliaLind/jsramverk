@@ -1,12 +1,10 @@
 <script setup>
 import { useAuthStore } from '@/stores/auth'
-// import { RouterLink } from 'vue-router'
 import { ref } from 'vue'
 
 const store = useAuthStore()
 let username = ''
 let password = ''
-
 let innerText = ref('visibility')
 let fieldType = ref('password')
 

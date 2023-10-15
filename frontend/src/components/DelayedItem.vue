@@ -67,7 +67,6 @@ a {
 }
 
 .delay-item {
-    /* display: flex; */
     flex-direction: row;
     border-top: 1px solid #ccc;
     padding: 0.2rem 0.8rem;
@@ -83,12 +82,7 @@ a {
     font-size: 1.7rem;
     font-weight: bold;
     padding: 1.2rem 1.5rem;
-    /* width: 30%; */
 }
-/* 
-.current-station {
-    width: 30%;
-} */
 
 .delay {
     padding: 1.2rem 1.5rem;

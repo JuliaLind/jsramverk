@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia'
-// import { ref } from 'vue'
 import socket from '../services/socket.service.js'
 
 export const socketStore = defineStore('socket', {
@@ -9,12 +8,10 @@ export const socketStore = defineStore('socket', {
             socket.emit('edit-ticket', data)
         },
         notifyBackendStopEdit(data) {
-            // skicka id
             socket.emit('stop-edit', data)
         },
         listenForTicketLock() {
             socket.on('lock-ticket', (data) => {
-                // this.data = data;
                 this.data[data.ticket] = data.user
                 console.log(data)
             })

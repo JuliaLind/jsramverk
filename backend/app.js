@@ -72,18 +72,6 @@ app.get('/', (req, res) => {
 
 const visual = true;
 
-// const loggingMiddleware = (req, res, next) => {
-//   console.log("headers:", req.headers)
-//   next()
-// };
-
-// const root = {
-//   token: function (args, request) {
-//     return request.headers['x-access-token']
-//   },
-// }
-
-// app.use(loggingMiddleware)
 app.use(
     "/graphql",
     graphqlHTTP({
@@ -91,58 +79,6 @@ app.use(
         graphiql: visual,
     })
 );
-
-// const graphqlMiddleware = (req, res, next) => {
-//     const route = new RegExp("^{[ ]*?tickets");
-//     console.log("1");
-//     if (route.test(req.body.query)) {
-//         let token = req.headers['x-access-token'];
-//         console.log("2");
-//         if (token) {
-//             jwt.verify(token, jwtSecret, function(err, decoded) {
-//                 if (err) {
-//                     return res.status(500).json({
-//                         errors: {
-//                             status: 500,
-//                             source: "/login",
-//                             title: "Failed authentication",
-//                             detail: err.message
-//                         }
-//                     });
-//                 }
-//                 console.log("3");
-//                 req.user = {};
-//                 req.user.email = decoded.email;
-
-//                 graphqlHTTP({
-//                     schema: schema,
-//                     context: req,
-//                     graphiql: visual
-//                 })(req, res, next);
-//                 // return true;
-//             });
-//         } else {
-//             return res.status(401).json({
-//                 errors: {
-//                     status: 401,
-//                     // source: req.path,
-//                     source: req.originalUrl,
-//                     title: "No token",
-//                     detail: "No token provided in request headers"
-//                 }
-//             });
-//         }
-//     }
-
-
-// };
-
-// app.use('/graphql', graphqlMiddleware);
-
-// app.use('/graphql', graphqlHTTP({
-//     schema: schema,
-//     graphiql: visual
-// }));
 
 // Mount routes
 app.use("/delayed", delayed);
@@ -193,11 +129,6 @@ let io = require("socket.io")(httpServer, {
     }
 });
 
-
-
-// app.listen({ port: port });
-// console.log('Listening to port 4000');
-
 cron.schedule('5 * * * * *', async () => {
     try {
         const delayedTrains = await delayedModel.getFromTrafikverket();
@@ -214,9 +145,6 @@ io.on('connection', (socket) => {
     });
     socket.on('stop-edit', (data) => {
         socket.broadcast.emit('unlock-ticket', (data));
-    });
-    socket.on('stop-edit', (data) => {
-        socket.broadcast.emit('stop-editing', (data));
     });
 });
 
