@@ -177,7 +177,7 @@ describe('Trains Model', () => {
         });
     });
 
-    describe('getFromTrafikverket', () => {
+    describe('getInitialPositions', () => {
         it('should fetch and return positions from trafikverket', async () => {
             //Mock res and req objects
             const req = {};
