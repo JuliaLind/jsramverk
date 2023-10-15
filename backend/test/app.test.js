@@ -6,6 +6,7 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const expect = chai.expect;
 const server = require('../app.js');
+const sinon = require('sinon');
 
 chai.use(chaiHttp);
 
@@ -122,6 +123,22 @@ describe('app.js', () => {
             const check = pattern.test(response.res.text);
 
             expect(check).to.equal(true);
+        });
+    });
+
+    describe('Error handling middleware', () => {
+        it('should handle 404 error', async () => {
+            const response = await chai.request(server).get('/blabla');
+            expect(response.status).to.equal(404);
+            expect(response.body).to.deep.equal({
+                errors: [
+                    {
+                        status: 404,
+                        title: 'Not Found',
+                        detail: 'Not Found'
+                    }
+                ]
+            });
         });
     });
 });
