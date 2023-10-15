@@ -3,7 +3,7 @@ import { test, expect } from 'playwright-test-coverage';
 // See here how to get started:
 // https://playwright.dev/docs/intro
 test('redirects to login page when no token', async ({ page }) => {
-  await page.goto('/admin');
+  await page.goto('#/admin');
   await expect(page.locator('div.card-header')).toHaveText('Logga in');
 })
 

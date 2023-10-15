@@ -21,7 +21,7 @@ const store = useAuthStore()
             <TicketTable />
         </div>
     </div>
-    <div class="navbar navbar-fixed-bottom">
+    <div class="footer fixed-bottom">
         <FooterComp></FooterComp>
     </div>
 
