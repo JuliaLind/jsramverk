@@ -5,7 +5,6 @@ import socket from '../services/socket.service.js'
 import { useTrainsStore } from '@/stores/trains'
 import { getDelayedTrains, getInitialPositions } from '../services/api.service.js'
 import { onMounted } from 'vue'
-import blackTrain from '../../public/black_train.png'
 
 const emit = defineEmits(['refresh-map'])
 const store = useTrainsStore()
