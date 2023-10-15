@@ -90,10 +90,15 @@ select:disabled {
     background: #f8f8f8;
 }
 
-.new-ticket {
-    flex-direction: row;
+.card {
     position: sticky;
-    top: 0;
+    top: 4rem;
 }
+
+.new-ticket {
+    position: sticky;
+    top: 3rem;
+}
+
 
 </style>

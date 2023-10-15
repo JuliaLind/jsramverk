@@ -37,4 +37,8 @@ const store = useAuthStore()
     padding: 0;
 }
 
+.container {
+    padding-bottom: 5rem;
+}
+
 </style>

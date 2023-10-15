@@ -69,25 +69,24 @@ th {
     margin-top: 2rem;
 }
 
-@media (max-width: 1600px) {
-    .delayed-container {
-        width: 100%;
-        position: relative;
-    }
 
-    .delayed {
-        padding: 1rem;
-    }
+.delayed-container {
+    width: 100%;
+    position: relative;
+}
 
-    .delayed-trains {
-        width: clamp(400px, 100%, 1000px);
-        table-layout: fixed;
-    }
+.delayed {
+    padding: 1rem;
+}
 
-    .title-group {
-        position: sticky;
-        top: -1rem;
-        background-color: #fff;
-    }
+.delayed-trains {
+    width: clamp(400px, 100%, 1000px);
+    table-layout: fixed;
+}
+
+.title-group {
+    position: sticky;
+    top: -1rem;
+    background-color: #fff;
 }
 </style>

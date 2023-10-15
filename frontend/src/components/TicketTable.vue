@@ -54,6 +54,11 @@ th.title {
     padding: 0.5em;
 }
 
+thead {
+    position: sticky;
+    top: 0;
+}
+
 
 .title,
 .titles {
