@@ -98,5 +98,30 @@ describe('app.js', () => {
 
             expect(check).to.equal(true);
         });
+
+        it('should handle positions query route', async () => {
+            const query = `
+                {
+                    positions
+                    {
+                        position
+                        trainnumber
+                    }
+                }
+            `;
+
+            const response = await chai.request(server)
+                .post("/graphql")
+                .set('Content-Type', 'application/json')
+                .send({ query: query });
+        
+            expect(response).to.have.status(200);
+
+            const pattern = new RegExp('.*\\{"position":.*"trainnumber".*');
+
+            const check = pattern.test(response.res.text);
+
+            expect(check).to.equal(true);
+        });
     });
 });
