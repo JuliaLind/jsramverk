@@ -215,9 +215,6 @@ io.on('connection', (socket) => {
     socket.on('stop-edit', (data) => {
         socket.broadcast.emit('unlock-ticket', (data));
     });
-    socket.on('stop-edit', (data) => {
-        socket.broadcast.emit('stop-editing', (data));
-    });
 });
 
 
