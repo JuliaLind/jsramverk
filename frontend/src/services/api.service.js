@@ -23,7 +23,7 @@ export const getDelayedTrains = async () => {
     })
 
     const result = await response.json()
-    console.log('from api service', result.data)
+
     return result.data.delayed
 }
 

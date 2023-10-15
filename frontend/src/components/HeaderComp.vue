@@ -1,10 +1,11 @@
 <script setup>
 import { RouterLink } from 'vue-router';
-// import { useAuthStore } from '@/stores/auth'
 import { useTrainsStore } from '@/stores/trains'
 import { ref, onMounted } from 'vue';
+
 const store = useTrainsStore()
 let current = ref('')
+
 function switchCurrent() {
     current.value = store.current
 }

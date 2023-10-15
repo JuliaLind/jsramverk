@@ -62,8 +62,6 @@ function updatePosition(positionObject) {
                 })
             marker.addTo(map)
             if (store.current === '' || store.current === positionObject.trainnumber) {
-                // maybe second conditionCheck not really needed
-                // if (store.current === "") {
                 marker.addTo(map)
             }
             markers[positionObject.trainnumber] = marker
@@ -71,6 +69,7 @@ function updatePosition(positionObject) {
     } else {
         if (positionObject.trainnumber in markers) {
             let marker = markers[positionObject.trainnumber]
+
             map.removeLayer(marker)
             delete markers[positionObject.trainnumber]
         }
@@ -109,6 +108,7 @@ function setupLeafletMap() {
 function updateLayers() {
     for (const trainnr in markers) {
         const marker = markers[trainnr]
+
         if (store.current != '' && trainnr != store.current) {
             map.removeLayer(marker)
         } else {
@@ -127,7 +127,6 @@ defineExpose({
 onMounted(async () => {
     trainData = await getDelayedTrains()
     initialPositions = await getInitialPositions()
-    console.log('from map', trainData)
     setupLeafletMap()
 })
 </script>
