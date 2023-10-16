@@ -28,7 +28,7 @@ function toggleVisibility() {
                     <div class="card">
                         <div class="card-header h5">Registrering</div>
                         <div class="card-body">
-                            <form v-on:submit.prevent="store.login(username, password)">
+                            <form v-on:submit.prevent="store.register(username, password, name)">
                                 <div class="form-group">
                                     <label for="name" class="mb-2">Namn</label>
                                     <input
