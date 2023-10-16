@@ -1,4 +1,4 @@
-import { loader } from "./loader.service.js"
+import { loader } from './loader.service.js'
 
 /**
  * Returns an array with information about delayed trains

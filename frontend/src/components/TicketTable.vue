@@ -38,11 +38,7 @@ socket.on('refresh-tickets', (data) => {
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <SingleTicket
-                    v-for="ticket in tickets"
-                    :key="ticket._id"
-                    :ticket="ticket"
-                />
+                <SingleTicket v-for="ticket in tickets" :key="ticket._id" :ticket="ticket" />
             </table>
         </div>
     </div>

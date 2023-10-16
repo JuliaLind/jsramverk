@@ -45,9 +45,7 @@ const toggleForm = () => {
 .toggle-link:hover {
     color: blue;
 }
-.ticket-container {
-    padding: 2rem;
-}
+
 .button-container {
     text-align: center;
 }

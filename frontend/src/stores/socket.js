@@ -21,6 +21,6 @@ export const socketStore = defineStore('socket', {
                     delete this.data[data.ticket]
                 }
             })
-        },
+        }
     }
 })
