@@ -141,22 +141,6 @@ cron.schedule('5 * * * * *', async () => {
     }
 });
 
-// io.on('connection', (socket) => {
-//     socket.on('edit-ticket', (data) => {
-//         socket.broadcast.emit('lock-ticket', (data));
-//     });
-//     socket.on('stop-edit', (data) => {
-//         socket.broadcast.emit('unlock-ticket', (data));
-//     });
-//     socket.on('updated', (data) => {
-//         socket.broadcast.emit('updated', (data));
-//     });
-//     socket.on('refresh-tickets', () => {
-//         socket.emit('refresh-tickets');
-//         socket.broadcast.emit('refresh-tickets');
-//     });
-// });
-
 async function checkTokens() {
     const clients = await io.in('tickets').fetchSockets();
 
@@ -177,9 +161,6 @@ io.on('connection', (socket) => {
         socket.token = token;
         if (authModel.verifyToken(socket.token)) {
             socket.join("tickets");
-
-            // below is for manual testing
-            // io.to(socket.id).emit("logged-you-in");
         } else {
             io.to(socket.id).emit("unauthorized");
         }
