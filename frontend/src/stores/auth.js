@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { router } from '../router/index.js'
+import socketservice from '../services/socket.service.js'
 
 export const useAuthStore = defineStore('store', {
     state: () => ({
@@ -97,6 +98,7 @@ export const useAuthStore = defineStore('store', {
             const result = await response.json()
 
             if (this.isTokenValid(result)) {
+                socketservice.emit('refresh-tickets')
                 return result.data
             }
             return undefined
@@ -123,6 +125,7 @@ export const useAuthStore = defineStore('store', {
             })
             const result = await response.json()
             if (this.isTokenValid(result)) {
+                socketservice.emit('refresh-tickets')
                 return result.data
             }
             return undefined
@@ -145,8 +148,8 @@ export const useAuthStore = defineStore('store', {
                 body: JSON.stringify({ query: deletedTicketObject })
             })
             const result = await response.json()
-
             if (this.isTokenValid(result)) {
+                socketservice.emit('refresh-tickets')
                 return result.data
             }
             return undefined

@@ -4,6 +4,8 @@ import { getCodes } from '../services/api.service.js'
 import { ref, onMounted } from 'vue'
 import { socketStore } from '@/stores/socket'
 
+
+
 const props = defineProps({
     ticket: {
         type: Object,
@@ -44,7 +46,7 @@ async function submitForm(code) {
     `
 
     await store.updateTicket(updatedTicket)
-    socket.notifyBackendStopEdit({
+    socket.notifyUpdate({
         ticket: id
     })
     editing.value = false
@@ -60,6 +62,7 @@ const sendToBackend = {
 onMounted(() => {
     socket.listenForTicketLock()
     socket.listenForTicketUnlock()
+    socket.listenForTicketUpdate()
 })
 
 const deletedTicket = `
@@ -106,11 +109,13 @@ const toggleEditing = function () {
         {{ ticket.traindate }}
     </td>
     <td>
-        <input v-if="editing" class="btn btn-success" type="submit" value="Spara" @click="submitForm(code), $emit('form-submitted')" />
+        <!-- <input v-if="editing" class="btn btn-success" type="submit" value="Spara" @click="submitForm(code), $emit('form-submitted')" /> -->
+        <input v-if="editing" class="btn btn-success" type="submit" value="Spara" @click="submitForm(code)" />
         <button class="btn btn-dark" v-on:click.self="toggleEditing()" :disabled="id in socket.data">
             {{ innerText }}
         </button>
-        <button class="btn btn-danger delete" v-on:click.self="store.deleteTicket(deletedTicket), $emit('form-submitted')">
+        <!-- <button class="btn btn-danger delete" v-on:click.self="store.deleteTicket(deletedTicket), $emit('form-submitted')"> -->
+        <button class="btn btn-danger delete" v-on:click.self="store.deleteTicket(deletedTicket)" :disabled="id in socket.data">
             Ta bort
         </button>
     </td>

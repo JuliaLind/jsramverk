@@ -1,3 +1,5 @@
+// import { trainnumbers } from "../components/__tests__/mockdata/trainnumbers.js"
+
 /**
  * Returns an array with information about delayed trains
  * @returns {Promise<array>}
@@ -99,4 +101,7 @@ export const getTrainNumbers = async () => {
                 .sort()
         )
     ]
+
+    // return trainnumbers
+
 }

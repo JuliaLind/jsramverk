@@ -22,6 +22,24 @@ export const socketStore = defineStore('socket', {
                     delete this.data[data.ticket]
                 }
             })
+        },
+        listenForTicketUpdate() {
+            socket.on('updated', (data) => {
+                if (data.ticket in this.data) {
+                    delete this.data[data.ticket]
+                }
+            })
+        },
+        notifyUpdate(data) {
+            socket.emit('updated', data)
+        },
+        listenForRefresh() {
+            socket.on("refresh-tickets", () => {
+                this.counter += 1
+            })
+            socket.on("unlock-ticket", () => {
+                this.counter += 1
+            })
         }
     }
 })

@@ -146,6 +146,13 @@ io.on('connection', (socket) => {
     socket.on('stop-edit', (data) => {
         socket.broadcast.emit('unlock-ticket', (data));
     });
+    socket.on('updated', (data) => {
+        socket.broadcast.emit('updated', (data));
+    });
+    socket.on('refresh-tickets', () => {
+        socket.emit('refresh-tickets');
+        socket.broadcast.emit('refresh-tickets');
+    });
 });
 
 

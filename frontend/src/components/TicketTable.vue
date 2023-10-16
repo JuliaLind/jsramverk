@@ -4,11 +4,13 @@ import { useAuthStore } from '@/stores/auth'
 import NewTicket from '../components/NewTicket.vue'
 import SingleTicket from '../components/SingleTicket.vue'
 
+
 const store = useAuthStore()
 const tickets = ref([])
 const updateTickets = async () => {
     tickets.value = await store.getTickets()
 }
+
 
 onMounted(async () => {
     await updateTickets()
@@ -17,7 +19,8 @@ onMounted(async () => {
 
 <template>
     <div class="wrapper-container">
-        <NewTicket @form-submitted="updateTickets()" />
+        <!-- <NewTicket @form-submitted="updateTickets()" /> -->
+        <NewTicket />
         <div class="container">
     <table class="old-tickets" id="old-tickets">
         <thead>
@@ -32,11 +35,16 @@ onMounted(async () => {
             <th>Actions</th>
         </tr>
         </thead>
-        <SingleTicket
+        <!-- <SingleTicket
             v-for="ticket in tickets"
             :key="ticket._id"
             :ticket="ticket"
             @form-submitted="updateTickets()"
+        /> -->
+        <SingleTicket
+            v-for="ticket in tickets"
+            :key="ticket._id"
+            :ticket="ticket"
         />
     </table>
         </div>
