@@ -1,16 +1,23 @@
 <script setup>
 import { useAuthStore } from '@/stores/auth'
 import { onMounted, ref } from 'vue'
-import { getCodes, getTrainNumbers } from '../services/api.service.js'
+import { getTrainNumbers, extractTrainNumbers } from '../services/api.service.js'
+import socket from '../services/socket.service.js'
 
 let trainnumbers = ref([])
 let reasoncodes = ref([])
 let code = ''
 let trainnumber = ''
+const store = useAuthStore()
 
 onMounted(async () => {
-    reasoncodes.value = await getCodes()
+    // reasoncodes.value = await getCodes()
+    reasoncodes.value = store.reasonCodes
     trainnumbers.value = await getTrainNumbers()
+})
+
+socket.on('delayedTrainsUpdate', (updatedTrains) => {
+    trainnumbers.value = extractTrainNumbers(updatedTrains)
 })
 
 /**
@@ -19,7 +26,6 @@ onMounted(async () => {
  */
 
 let traindate = new Date().toJSON().slice(0, 10)
-const store = useAuthStore()
 
 /**
  * Sends a post request to the backend API for inserting

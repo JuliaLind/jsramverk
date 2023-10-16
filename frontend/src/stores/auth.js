@@ -3,12 +3,14 @@ import { router } from '../router/index.js'
 import socket from '../services/socket.service.js'
 import { customAlert, toast } from '../services/alert.service.js'
 import { loader } from '../services/loader.service.js'
+import { getCodes } from '../services/api.service.js'
 
 export const useAuthStore = defineStore('store', {
     state: () => ({
         data: {
             token: '',
-            userEmail: ''
+            userEmail: '',
+            reasoncodes: []
         }
     }),
     actions: {
@@ -37,6 +39,7 @@ export const useAuthStore = defineStore('store', {
             this.token = result.data.token
             this.userEmail = result.data.user.email
             this.listenForExpired()
+            this.reasonCodes = await getCodes()
             router.push('/admin')
             socket.emit('logged-in', this.token)
             // below is for manual testing

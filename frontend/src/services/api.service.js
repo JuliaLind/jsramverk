@@ -76,6 +76,18 @@ export const getCodes = async () => {
     return result.data.codes
 }
 
+export const extractTrainNumbers = (delayed) => {
+    return [
+        ...new Set(
+            delayed
+                .map((item) => {
+                    return item.OperationalTrainNumber
+                })
+                .sort()
+        )
+    ]
+}
+
 export const getTrainNumbers = async () => {
     const query = `{delayed {
         OperationalTrainNumber
@@ -91,17 +103,18 @@ export const getTrainNumbers = async () => {
 
     const result = await response.json()
 
-    const trainnumbers = result.data.delayed
+    const delayed = result.data.delayed
 
-    return [
-        ...new Set(
-            trainnumbers
-                .map((item) => {
-                    return item.OperationalTrainNumber
-                })
-                .sort()
-        )
-    ]
+    return extractTrainNumbers(delayed)
+    // return [
+    //     ...new Set(
+    //         trainnumbers
+    //             .map((item) => {
+    //                 return item.OperationalTrainNumber
+    //             })
+    //             .sort()
+    //     )
+    // ]
 
     // return trainnumbers
 }

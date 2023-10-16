@@ -1,6 +1,5 @@
 <script setup>
 import { useAuthStore } from '@/stores/auth'
-import { getCodes } from '../services/api.service.js'
 import { ref, onMounted } from 'vue'
 import { socketStore } from '@/stores/socket'
 import socketService from '../services/socket.service.js'
@@ -11,12 +10,14 @@ const props = defineProps({
         required: true
     }
 })
+const store = useAuthStore()
 
 let reasoncodes = ref([])
 const ticket = props.ticket
 
 onMounted(async () => {
-    reasoncodes.value = await getCodes()
+    // reasoncodes.value = await getCodes()
+    reasoncodes.value = store.reasonCodes
 })
 
 /**
@@ -25,7 +26,7 @@ onMounted(async () => {
  */
 let code = ref(ticket.code)
 const id = ticket._id
-const store = useAuthStore()
+
 const socket = socketStore()
 let innerText = 'Ändra'
 
