@@ -172,6 +172,7 @@ const auth = {
         }
     },
 
+
     /**
      * For verifying users in io connection
      * @param {string} token - JWT token
