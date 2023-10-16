@@ -2,14 +2,15 @@
     position: fixed;
     /* top: 1.3rem; */
     top: 10%;
-    right: 0;
     transform: translateY(-100%);
     opacity: 0;
     transition: transform 500ms;
-    width: 100%;
+    width: clamp(400px, 100%, 800px);
     padding: 0.5rem;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     font-weight: 300;
+    pointer-events: all;
+    left: 50%;
 }
 
 .my-toast.my-visible {
@@ -22,12 +23,13 @@
     border-radius: 10px;
     text-align: center;
     position: relative;
-    width: clamp(400px, 100%, 600px);
-    margin-left: auto;
-    margin-right: auto;
-    padding: 1.8rem;
+    width: clamp(400px, 100%, 800px);
 
-    background: rgba(255, 255, 255, 0.51);
+    padding: 3rem;
+
+
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.9);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(14.4px);
     -webkit-backdrop-filter: blur(14.4px);
@@ -37,26 +39,27 @@
     position: absolute;
     top: 50%;
     left: 53%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -53%);
 }
 
 .my-toast-message::before {
     content: '';
-    background-color: #ec0a92;
-    height: 12px;
-    width: 12px;
+    background-color: #198754;
+    height: 16px;
+    width: 16px;
     border-radius: 50%;
     position: absolute;
-    left: -1.2rem;
+    left: -3rem;
     top: 50%;
     transform: translateY(-50%);
 }
 
 .my-toast-body::after {
     content: '';
-    border: 1.5px solid #d9b0d6;
+    /* border: 2px solid #ec0a92; */
+    border: 2px solid #ffc107;
     border-radius: 5px;
-    width: 2rem;
+    width: 3rem;
     position: absolute;
     bottom: 0.2rem;
     left: 50%;
