@@ -42,7 +42,6 @@ socket.on('refresh-tickets', (data) => {
                     v-for="ticket in tickets"
                     :key="ticket._id"
                     :ticket="ticket"
-                    @form-submitted="updateTickets()"
                 />
             </table>
         </div>

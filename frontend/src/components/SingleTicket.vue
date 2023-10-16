@@ -44,11 +44,6 @@ async function submitForm(code) {
     }
     `
     await store.updateTicket(updatedTicket)
-    // const updatedData = await store.updateTicket(updatedTicket)
-    // code = updatedData.code;
-    // socket.notifyUpdate({
-    //     ticket: id
-    // })
     editing.value = false
     innerText = 'Ändra'
 }
@@ -134,9 +129,14 @@ const toggleEditing = function () {
             >
                 {{ innerText }}
             </button>
-            <button
+            <!-- <button
                 class="btn btn-danger delete"
                 v-on:click.self="store.deleteTicket(deletedTicket), $emit('form-submitted')"
+                :disabled="id in socket.data"
+            > -->
+            <button
+                class="btn btn-danger delete"
+                v-on:click.self="store.deleteTicket(deletedTicket)"
                 :disabled="id in socket.data"
             >
                 Ta bort

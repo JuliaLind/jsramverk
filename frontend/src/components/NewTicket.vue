@@ -19,8 +19,6 @@ onMounted(async () => {
  */
 
 let traindate = new Date().toJSON().slice(0, 10)
-
-const emit = defineEmits(['form-submitted'])
 const store = useAuthStore()
 
 /**
@@ -37,10 +35,6 @@ async function submitForm(code, trainnumber, traindate) {
         }
     `
     await store.submitNewTicket(newTicket)
-    /**
-     * Sends signal to tickets-component to re-render
-     */
-    emit('form-submitted')
 }
 </script>
 

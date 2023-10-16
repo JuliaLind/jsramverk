@@ -1,23 +1,12 @@
 <script setup>
 import TicketTable from '../components/TicketTable.vue'
-// import { onMounted, ref } from 'vue'
 import HeaderComp from '../components/HeaderComp.vue'
 import FooterComp from '../components/FooterComp.vue'
 import { RouterLink } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
-// import socket from '../services/socket.service.js'
+
 const store = useAuthStore()
 
-// const counter = ref(0)
-
-// onMounted(() => {
-//     socket.on("refresh-tickets", () => {
-//     counter.value += 1
-// })
-// socket.on("updated", () => {
-//     counter.value += 1
-// })
-// })
 </script>
 
 <template>
@@ -29,7 +18,6 @@ const store = useAuthStore()
     </div>
     <div class="container">
         <div class="ticket-container">
-            <!-- <TicketTable :key="counter" /> -->
             <TicketTable />
         </div>
     </div>

@@ -31,17 +31,28 @@ export const useAuthStore = defineStore('store', {
             }
             this.token = result.data.token
             this.userEmail = result.data.user.email
+            this.listenForExpired()
             router.push('/admin')
             socket.emit('logged-in', this.token)
             // socket.emit('logged-in', "iamabadtoken")
+            // socket.on('logged-you-in', () => {
+            //     console.log("yeeeey logged in")
+            // })
             return 'ok'
         },
         getToken() {
             return this.token
         },
-        async logout() {
+        logout() {
             this.token = ''
             socket.emit('logged-out', this.token)
+        },
+        listenForExpired() {
+            socket.on('unauthorized', () => {
+                this.token = ''
+                router.push('/login')
+                window.alert("Your token expired, please login again")
+            })
         },
         async register(username, password, name) {
             const user = {

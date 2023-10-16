@@ -161,10 +161,11 @@ async function checkTokens() {
     const clients = await io.in('tickets').fetchSockets();
 
     for (const client of clients) {
+        console.log("the client", client);
         if (!authModel.verifyToken(client.token)) {
-            client.local.emit("unauthorized");
+            io.to(client.id).emit("unauthorized");
             client.leave("tickets");
-            console.log("logged out", client.token);
+            console.log("logged out", client.id);
             client.token = "";
         }
     }
@@ -178,8 +179,9 @@ io.on('connection', (socket) => {
         if (authModel.verifyToken(socket.token)) {
             socket.join("tickets");
             console.log("joined tickets", socket.token);
+            // io.to(socket.id).emit("logged-you-in");
         } else {
-            socket.local.emit("unauthorized");
+            io.to(socket.id).emit("unauthorized");
             console.log("bad token");
         }
     });
@@ -191,8 +193,10 @@ io.on('connection', (socket) => {
 
     socket.on('edit-ticket', async (data) => {
         await checkTokens();
-        socket.broadcast.emit('lock-ticket', (data));
+        socket.to("tickets").emit('lock-ticket', (data));
     });
+
+    // so that a use with expired token gets the last unlock, or should we restrict this one too?
     socket.on('stop-edit', (data) => {
         socket.broadcast.emit('unlock-ticket', (data));
     });
@@ -208,6 +212,7 @@ io.on('connection', (socket) => {
         let data = await ticketsModel.getTickets();
 
         socket.to("tickets").emit('refresh-tickets', data);
+        io.to(socket.id).emit('refresh-tickets', data);
     });
 });
 
