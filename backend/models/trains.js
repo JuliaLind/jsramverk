@@ -182,7 +182,6 @@ const trains = {
             console.error(e.message);
             console.error("EventSource error:", e.eventSourceError);
         };
-
     }
     // try {
     //     const sseUrl = await this.fetchSSEUrl();

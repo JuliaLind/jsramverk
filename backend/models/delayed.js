@@ -26,20 +26,11 @@ const delayed = {
         let toStation = "";
 
         for (const station of stations) {
-            // if (delay.FromLocation && station.LocationSignature === delay.FromLocation[0].LocationName) {
-            //     fromStation = station.AdvertisedLocationName;
-            // }
-            // if (station.LocationSignature === delay.LocationSignature) {
-            //     delayStation = station.AdvertisedLocationName;
-            // }
-            // if (delay.ToLocation && station.LocationSignature === delay.ToLocation[0].LocationName) {
-            //     toStation = station.AdvertisedLocationName;
-            // }
             if (delay.FromLocation) {
-                fromStation = this.getStationName(station, delay.FromLocation[0].LocationName, fromStation)
+                fromStation = this.getStationName(station, delay.FromLocation[0].LocationName, fromStation);
             }
             if (delay.ToLocation) {
-                toStation = this.getStationName(station, delay.ToLocation[0].LocationName, toStation)
+                toStation = this.getStationName(station, delay.ToLocation[0].LocationName, toStation);
             }
             delayStation = this.getStationName(station, delay.LocationSignature, delayStation);
             if (fromStation && delayStation && toStation) {
