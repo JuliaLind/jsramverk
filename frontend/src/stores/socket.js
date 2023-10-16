@@ -22,12 +22,5 @@ export const socketStore = defineStore('socket', {
                 }
             })
         },
-        listenForTicketUpdate() {
-            socket.on('updated', (data) => {
-                if (data.ticket in this.data) {
-                    delete this.data[data.ticket]
-                }
-            })
-        }
     }
 })

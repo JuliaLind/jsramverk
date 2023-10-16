@@ -62,7 +62,6 @@ const sendToBackend = {
 onMounted(() => {
     socket.listenForTicketLock()
     socket.listenForTicketUnlock()
-    socket.listenForTicketUpdate()
 })
 
 socketService.on('refresh-ticket', (data) => {
