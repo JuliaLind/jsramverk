@@ -165,7 +165,6 @@ async function checkTokens() {
         if (!authModel.verifyToken(client.token)) {
             io.to(client.id).emit("unauthorized");
             client.leave("tickets");
-            console.log("logged out", client.id);
             client.token = "";
         }
     }
@@ -178,13 +177,11 @@ io.on('connection', (socket) => {
         socket.token = token;
         if (authModel.verifyToken(socket.token)) {
             socket.join("tickets");
-            console.log("joined tickets", socket.token);
 
             // below is for manual testing
             // io.to(socket.id).emit("logged-you-in");
         } else {
             io.to(socket.id).emit("unauthorized");
-            console.log("bad token");
         }
     });
 

@@ -125,16 +125,16 @@ describe('Trains Model', () => {
         });
     });
 
-    describe('handleEventSourceError', () => {
-        it('should handle EventSource error correctly', () => {
-            const error = new Error('EventSource failed');
+    // describe('handleEventSourceError', () => {
+    //     it('should handle EventSource error correctly', () => {
+    //         const error = new Error('EventSource failed');
 
-            const result = trainsModel.handleEventSourceError(error);
+    //         const result = trainsModel.handleEventSourceError(error);
 
-            expect(result).to.be.an('error');
-            expect(result.message).to.equal('EventSource failed');
-        });
-    });
+    //         expect(result).to.be.an('error');
+    //         expect(result.message).to.equal('EventSource failed');
+    //     });
+    // });
 
     describe('fetchTrainPositions', () => {
         it('should fetch train positions and set up event handling', async () => {
@@ -174,32 +174,33 @@ describe('Trains Model', () => {
                 console.log(err);
                 expect(err).to.equal(error);
             }
+            fetchSSEUrlStub.restore();
         });
     });
 
-    describe('getInitialPositions', () => {
-        it('should fetch and return positions from trafikverket', async () => {
-            //Mock res and req objects
-            const req = {};
-            const res = {
-                json: sinon.stub()
-            };
+    // describe('getInitialPositions', () => {
+    //     it('should fetch and return positions from trafikverket', async () => {
+    //         //Mock res and req objects
+    //         const req = {};
+    //         const res = {
+    //             json: sinon.stub()
+    //         };
 
-            // Call the getInitialPositions function
-            await trainsModel.getInitialPositions(req, res);
+    //         // Call the getInitialPositions function
+    //         await trainsModel.getInitialPositions(req, res);
 
-            // Assert that the json method was called
-            expect(res.json.calledOnce).to.be.true;
+    //         // Assert that the json method was called
+    //         expect(res.json.calledOnce).to.be.true;
 
-            // Assert that data is valid object
-            const data = res.json.args[0][0].data;
+    //         // Assert that data is valid object
+    //         const data = res.json.args[0][0].data;
 
-            expect(data).to.be.an('array');
-            expect(data[0]).to.be.an('object');
-            expect(data[0]).to.have.any.keys(
-                "position",
-                "trainnumber"
-            );
-        });
-    });
+    //         expect(data).to.be.an('array');
+    //         expect(data[0]).to.be.an('object');
+    //         expect(data[0]).to.have.any.keys(
+    //             "position",
+    //             "trainnumber"
+    //         );
+    //     });
+    // });
 });

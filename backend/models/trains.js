@@ -33,11 +33,11 @@ const trains = {
         }
         return initialPositions;
     },
-    getInitialPositions: async function getInitialPositions(req, res) {
-        return res.json({
-            data: await this.getFromTrafikverket()
-        });
-    },
+    // getInitialPositions: async function getInitialPositions(req, res) {
+    //     return res.json({
+    //         data: await this.getFromTrafikverket()
+    //     });
+    // },
 
     // picked out from parsePositionData function to reuse in initial data request
     getCoords: function getCoords(positionDataObject) {
@@ -132,18 +132,18 @@ const trains = {
         // }
     },
 
-    /**
-    * Handles errors from the EventSource.
-    * @param {Object} e - The error event from the EventSource.
-    * @returns {Error} An error object representing the EventSource error.
-    */
-    handleEventSourceError: function handleEventSourceError(e) {
-        const error = new Error("EventSource failed");
+    // /**
+    // * Handles errors from the EventSource.
+    // * @param {Object} e - The error event from the EventSource.
+    // * @returns {Error} An error object representing the EventSource error.
+    // */
+    // handleEventSourceError: function handleEventSourceError(e) {
+    //     const error = new Error("EventSource failed");
 
-        error.eventSourceError = e;
-        // error.code = "EVENTSOURCE_FAILED_ERROR";
-        return error;
-    },
+    //     error.eventSourceError = e;
+    //     // error.code = "EVENTSOURCE_FAILED_ERROR";
+    //     return error;
+    // },
 
     /**
     * Fetches train positions in real-time and sends updates to
@@ -162,31 +162,52 @@ const trains = {
     * @returns {void} No return value but function sends updates to connected clients.
     */
     fetchTrainPositions: async function fetchTrainPositions(io) {
-        try {
-            const sseUrl = await this.fetchSSEUrl();
+        const sseUrl = await this.fetchSSEUrl();
 
-            const trainPositions = {};
+        const trainPositions = {};
 
-            const eventSource = new EventSource(sseUrl);
+        const eventSource = new EventSource(sseUrl);
 
-            eventSource.onopen = function() {
-                console.info("Connection to server opened.");
-            };
+        eventSource.onopen = function() {
+            console.info("Connection to server opened.");
+        };
 
-            io.on('connection', (socket) => {
-                console.info('a user connected');
+        io.on('connection', (socket) => {
+            console.info('a user connected');
 
-                eventSource.onmessage = (e) => this.handleSSEMessage(e, trainPositions, socket);
-            });
+            eventSource.onmessage = (e) => this.handleSSEMessage(e, trainPositions, socket);
+        });
 
-            eventSource.onerror = function (e) {
-                throw trains.handleEventSourceError(e);
-            };
-        } catch (error) {
-            console.error(error.message);
-            console.error("EventSource error:", error.eventSourceError);
-        }
+        eventSource.onerror = function (e) {
+            console.error(e.message);
+            console.error("EventSource error:", e.eventSourceError);
+        };
+
     }
+    // try {
+    //     const sseUrl = await this.fetchSSEUrl();
+
+    //     const trainPositions = {};
+
+    //     const eventSource = new EventSource(sseUrl);
+
+    //     eventSource.onopen = function() {
+    //         console.info("Connection to server opened.");
+    //     };
+
+    //     io.on('connection', (socket) => {
+    //         console.info('a user connected');
+
+    //         eventSource.onmessage = (e) => this.handleSSEMessage(e, trainPositions, socket);
+    //     });
+
+    //     eventSource.onerror = function (e) {
+    //         throw trains.handleEventSourceError(e);
+    //     };
+    // } catch (error) {
+    //     console.error(error.message);
+    //     console.error("EventSource error:", error.eventSourceError);
+    // }
 };
 
 module.exports = trains;
