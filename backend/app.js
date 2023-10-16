@@ -17,12 +17,12 @@ const cron = require('node-cron');
 const delayedModel = require('./models/delayed.js');
 const trainsModel = require('./models/trains.js');
 
-const delayed = require('./routes/delayed.js');
-const tickets = require('./routes/tickets.js');
-const codes = require('./routes/codes.js');
+// const delayed = require('./routes/delayed.js');
+// const tickets = require('./routes/tickets.js');
+// const codes = require('./routes/codes.js');
 const register = require("./routes/register.js");
 const login = require("./routes/login.js");
-const trains = require("./routes/trains.js");
+// const trains = require("./routes/trains.js");
 
 const { graphqlHTTP } = require('express-graphql');
 const {
@@ -81,12 +81,12 @@ app.use(
 );
 
 // Mount routes
-app.use("/delayed", delayed);
-app.use("/tickets", tickets);
-app.use("/codes", codes);
+// app.use("/delayed", delayed);
+// app.use("/tickets", tickets);
+// app.use("/codes", codes);
 app.use("/register", register);
 app.use("/login", login);
-app.use("/trains", trains);
+// app.use("/trains", trains);
 
 // Middleware for handling 404 errors (Not Found)
 app.use((req, res, next) => {
