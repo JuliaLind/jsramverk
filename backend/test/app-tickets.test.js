@@ -22,7 +22,8 @@ const bcrypt = require('bcryptjs');
 const password = "test";
 const hash = bcrypt.hashSync(password, 10);
 const sinon = require('sinon');
-const { comparePasswords } = require('../models/auth.js');
+// const { comparePasswords } = require('../models/auth.js');
+const { checkGQToken } = require('../models/auth.js');
 
 describe('tickets get and post routes', () => {
     before(async () => {
@@ -355,7 +356,6 @@ describe('tickets get and post routes', () => {
             password: 'password123'
         };
 
-        // Stub the database.getDb function to force an error
         const databaseStub = sinon.stub(database, 'getDb').throws(new Error('Database error'));
 
         chai.request(server)
@@ -365,9 +365,22 @@ describe('tickets get and post routes', () => {
                 expect(res).to.have.status(500);
                 expect(res.body.errors.title).to.equal('Database error');
                 expect(res.body.errors.detail).to.equal('Database error');
-                databaseStub.restore();  // Restore the original database.getDb function
+                databaseStub.restore();
                 done();
             });
+    });
+    it('should throw error when jwt can\'t verify', () => {
+        const context = {
+            headers: {
+                'x-access-token': 'incorrect-token'
+            }
+        };
+
+        try {
+            checkGQToken(context);
+        } catch (e) {
+            expect(e.message).to.include('Failed authentication');
+        };
     });
     it('register new user', async () => {
         const another = "another@test.com"
@@ -403,7 +416,6 @@ describe('tickets get and post routes', () => {
             name: 'Test User'
         };
 
-        // Stub bcrypt.hash to force an error
         const bcryptStub = sinon.stub(bcrypt, 'hash').callsArgWith(2, new Error('Bcrypt error'));
 
         chai.request(server)
@@ -413,7 +425,7 @@ describe('tickets get and post routes', () => {
                 expect(res).to.have.status(500);
                 expect(res.body.errors.title).to.equal('bcrypt error');
                 expect(res.body.errors.detail).to.equal('bcrypt error');
-                bcryptStub.restore();  // Restore the original bcrypt.hash function
+                bcryptStub.restore();
                 done();
             });
     });
