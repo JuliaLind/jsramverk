@@ -1,10 +1,11 @@
-// import { trainnumbers } from "../components/__tests__/mockdata/trainnumbers.js"
+import { loader } from "./loader.service.js"
 
 /**
  * Returns an array with information about delayed trains
  * @returns {Promise<array>}
  */
 export const getDelayedTrains = async () => {
+    loader.show()
     const query = `{delayed {
         ActivityId
         AdvertisedTimeAtLocation
@@ -25,7 +26,7 @@ export const getDelayedTrains = async () => {
     })
 
     const result = await response.json()
-
+    loader.hide()
     return result.data.delayed
 }
 
