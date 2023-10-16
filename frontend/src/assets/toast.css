@@ -25,7 +25,8 @@
     position: relative;
     width: clamp(400px, 100%, 800px);
 
-    padding: 3rem;
+    padding: 1.5rem;
+    /* padding: 3rem; */
 
 
     transform: translateX(-50%);
@@ -35,14 +36,14 @@
     -webkit-backdrop-filter: blur(14.4px);
 }
 
-.my-toast-message {
+/* .my-toast-message {
     position: absolute;
     top: 50%;
     left: 53%;
     transform: translate(-50%, -53%);
-}
+} */
 
-.my-toast-message::before {
+/* .my-toast-message::before {
     content: '';
     background-color: #198754;
     height: 16px;
@@ -52,16 +53,23 @@
     left: -3rem;
     top: 50%;
     transform: translateY(-50%);
-}
+} */
 
 .my-toast-body::after {
     content: '';
-    /* border: 2px solid #ec0a92; */
-    border: 2px solid #ffc107;
+    border: 2px solid #ec0a92;
+    /* border: 2px solid #ffc107; */
     border-radius: 5px;
     width: 3rem;
     position: absolute;
     bottom: 0.2rem;
     left: 50%;
     transform: translateX(-50%);
+}
+
+@media (max-width: 1600px) {
+    .my-toast {
+        font-size: 1.25rem;
+    }
+
 }
