@@ -51,7 +51,6 @@ const tickets = {
             // });
         }
     },
-
     /**
      * @description Inserts ticket into database.
      * @async

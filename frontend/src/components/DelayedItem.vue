@@ -95,8 +95,8 @@ a {
 
     td,
     td > div {
-    font-size: 1rem;
-    white-space: normal;
-}
+        font-size: 1rem;
+        white-space: normal;
+    }
 }
 </style>

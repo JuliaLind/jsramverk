@@ -13,7 +13,6 @@ export const socketStore = defineStore('socket', {
         listenForTicketLock() {
             socket.on('lock-ticket', (data) => {
                 this.data[data.ticket] = data.user
-                console.log(data)
             })
         },
         listenForTicketUnlock() {

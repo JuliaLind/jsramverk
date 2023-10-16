@@ -1,0 +1,77 @@
+.my-alert {
+    z-index: 999;
+    width: 100vw;
+    height: 100vh;
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    transition: background-color 0.75s;
+}
+
+.my-alert-body {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+}
+
+.my-alert-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 3rem;
+    text-align: center;
+    gap: 1px;
+    z-index: 99999;
+}
+
+.my-alert-msg {
+    padding: 0.75rem;
+    grid-column: 1 / span 1;
+    grid-row: 1 / span 1;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+
+    background: rgba(255, 255, 255, 0.51);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(14.4px);
+    -webkit-backdrop-filter: blur(14.4px);
+    z-index: 99999;
+}
+
+.my-alert-btn {
+    padding: 0.5rem;
+    grid-column: 1 / span 1;
+    grid-row: 2 / span 1;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+    cursor: pointer;
+
+    background: rgba(255, 255, 255, 0.51);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(14.4px);
+    -webkit-backdrop-filter: blur(14.4px);
+    z-index: 99999;
+    pointer-events: all;
+}
+
+.my-alert-msg,
+.my-alert-btn {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.my-alert.my-visible {
+    z-index: 9999;
+}
+
+.my-alert.my-visible .my-alert-body {
+    z-index: 99999;
+}
+
+.my-darken {
+    background-color: rgba(156, 155, 155, 0.418) !important;
+}

@@ -171,9 +171,28 @@ const auth = {
             throw new Error('Token not provided');
         }
     },
-    // this one is used in the ticket routes,
-    // so can be removed when we remove the routes
-    // and corresponding tests
+
+
+    /**
+     * For verifying users in io connection
+     * @param {string} token - JWT token
+     * @returns {bool}
+     */
+    verifyToken: function(token) {
+        if (token) {
+            try {
+                jwt.verify(token, jwtSecret);
+                return true;
+            } catch (err) {
+                return false;
+            }
+        }
+
+        return true;
+    },
+    // // this one is used in the ticket routes,
+    // // so can be removed when we remove the routes
+    // // and corresponding tests
     // checkToken: function(req, res, next) {
     //     let token = req.headers['x-access-token'];
 

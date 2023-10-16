@@ -30,7 +30,13 @@ function toggleVisibility() {
                             <form v-on:submit.prevent="store.login(username, password)">
                                 <div class="form-group mb-3">
                                     <label class="mb-2" for="userName">E-postadress</label>
-                                    <input class="form-control" type="email" name="username" required="required" v-model="username" />
+                                    <input
+                                        class="form-control"
+                                        type="email"
+                                        name="username"
+                                        required="required"
+                                        v-model="username"
+                                    />
                                 </div>
                                 <div class="form-group mb-3">
                                     <label class="mb-2" for="password">Lösenord</label>
@@ -42,13 +48,20 @@ function toggleVisibility() {
                                             name="password"
                                             v-model="password"
                                         />
-                                        <span class="material-symbols-outlined" @click="toggleVisibility()">
+                                        <span
+                                            class="material-symbols-outlined"
+                                            @click="toggleVisibility()"
+                                        >
                                             {{ innerText }}
                                         </span>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="submit" value="Logga in" class="btn btn-dark mt-3" />
+                                    <input
+                                        type="submit"
+                                        value="Logga in"
+                                        class="btn btn-dark mt-3"
+                                    />
                                 </div>
                             </form>
                         </div>
@@ -62,7 +75,7 @@ function toggleVisibility() {
 <style scoped>
 .material-symbols-outlined {
     cursor: pointer;
-    padding-left: 0.7rem
+    padding-left: 0.7rem;
 }
 
 .password-container {

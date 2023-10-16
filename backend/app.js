@@ -16,6 +16,8 @@ const bodyParser = require('body-parser');
 const cron = require('node-cron');
 const delayedModel = require('./models/delayed.js');
 const trainsModel = require('./models/trains.js');
+const authModel = require('./models/auth.js');
+const ticketsModel = require('./models/tickets.js');
 
 // const delayed = require('./routes/delayed.js');
 // const tickets = require('./routes/tickets.js');
@@ -139,14 +141,83 @@ cron.schedule('5 * * * * *', async () => {
     }
 });
 
+// io.on('connection', (socket) => {
+//     socket.on('edit-ticket', (data) => {
+//         socket.broadcast.emit('lock-ticket', (data));
+//     });
+//     socket.on('stop-edit', (data) => {
+//         socket.broadcast.emit('unlock-ticket', (data));
+//     });
+//     socket.on('updated', (data) => {
+//         socket.broadcast.emit('updated', (data));
+//     });
+//     socket.on('refresh-tickets', () => {
+//         socket.emit('refresh-tickets');
+//         socket.broadcast.emit('refresh-tickets');
+//     });
+// });
+
+async function checkTokens() {
+    const clients = await io.in('tickets').fetchSockets();
+
+    for (const client of clients) {
+        console.log("the client", client);
+        if (!authModel.verifyToken(client.token)) {
+            io.to(client.id).emit("unauthorized");
+            client.leave("tickets");
+            console.log("logged out", client.id);
+            client.token = "";
+        }
+    }
+}
+
+
 io.on('connection', (socket) => {
-    socket.on('edit-ticket', (data) => {
-        socket.broadcast.emit('lock-ticket', (data));
+    socket.token = "";
+    socket.on('logged-in', (token) => {
+        socket.token = token;
+        if (authModel.verifyToken(socket.token)) {
+            socket.join("tickets");
+            console.log("joined tickets", socket.token);
+
+            // below is for manual testing
+            // io.to(socket.id).emit("logged-you-in");
+        } else {
+            io.to(socket.id).emit("unauthorized");
+            console.log("bad token");
+        }
     });
+
+    socket.on("logged-out", () => {
+        socket.leave("tickets");
+        socket.token = "";
+    });
+
+    socket.on('edit-ticket', async (data) => {
+        await checkTokens();
+        socket.to("tickets").emit('lock-ticket', (data));
+    });
+
+    // so that a use with expired token gets the last unlock, or should we restrict this one too?
     socket.on('stop-edit', (data) => {
         socket.broadcast.emit('unlock-ticket', (data));
     });
+    socket.on('updated', async (data) => {
+        await checkTokens();
+        socket.to("tickets").emit('refresh-ticket', data);
+        socket.broadcast.emit('unlock-ticket', ({
+            ticket: data._id
+        }));
+    });
+    socket.on('refresh-tickets', async () => {
+        await checkTokens();
+        let data = await ticketsModel.getTickets();
+
+        socket.to("tickets").emit('refresh-tickets', data);
+        io.to(socket.id).emit('refresh-tickets', data);
+    });
 });
+
 
 
 // Fetch train positions with socket.io

@@ -1,16 +1,23 @@
 <script setup>
 import { useAuthStore } from '@/stores/auth'
 import { onMounted, ref } from 'vue'
-import { getCodes, getTrainNumbers } from '../services/api.service.js'
+import { getTrainNumbers, extractTrainNumbers } from '../services/api.service.js'
+import socket from '../services/socket.service.js'
 
 let trainnumbers = ref([])
 let reasoncodes = ref([])
 let code = ''
 let trainnumber = ''
+const store = useAuthStore()
 
 onMounted(async () => {
-    reasoncodes.value = await getCodes()
+    // reasoncodes.value = await getCodes()
+    reasoncodes.value = store.reasonCodes
     trainnumbers.value = await getTrainNumbers()
+})
+
+socket.on('delayedTrainsUpdate', (updatedTrains) => {
+    trainnumbers.value = extractTrainNumbers(updatedTrains)
 })
 
 /**
@@ -19,10 +26,6 @@ onMounted(async () => {
  */
 
 let traindate = new Date().toJSON().slice(0, 10)
-
-
-const emit = defineEmits(['form-submitted'])
-const store = useAuthStore()
 
 /**
  * Sends a post request to the backend API for inserting
@@ -38,10 +41,6 @@ async function submitForm(code, trainnumber, traindate) {
         }
     `
     await store.submitNewTicket(newTicket)
-    /**
-     * Sends signal to tickets-component to re-render
-     */
-    emit('form-submitted')
 }
 </script>
 
@@ -53,11 +52,21 @@ async function submitForm(code, trainnumber, traindate) {
                 <form v-on:submit.prevent="submitForm(code, trainnumber, traindate)">
                     <div class="form-group mb-3">
                         <label class="mb-1">Ärendenummer</label>
-                        <input type="text" class="form-control" disabled value="Tilldelas automatiskt" />
+                        <input
+                            type="text"
+                            class="form-control"
+                            disabled
+                            value="Tilldelas automatiskt"
+                        />
                     </div>
                     <div class="form-group mb-3">
                         <label class="mb-1">Tågnummer</label>
-                        <select name="trainnumber" class="form-control" required v-model="trainnumber">
+                        <select
+                            name="trainnumber"
+                            class="form-control"
+                            required
+                            v-model="trainnumber"
+                        >
                             <option :hidden="true" disabled :value="''">Välj tågnummer</option>
                             <option v-for="train in trainnumbers" :key="train" :value="train">
                                 {{ train }}
@@ -75,7 +84,13 @@ async function submitForm(code, trainnumber, traindate) {
                     </div>
                     <div class="form-group mb-3">
                         <label class="mb-1">Datum</label>
-                        <input type="date" disabled name="traindate" class="form-control" v-model="traindate" />
+                        <input
+                            type="date"
+                            disabled
+                            name="traindate"
+                            class="form-control"
+                            v-model="traindate"
+                        />
                     </div>
                     <input type="submit" class="btn btn-success" value="Skapa" />
                 </form>
@@ -90,10 +105,13 @@ select:disabled {
     background: #f8f8f8;
 }
 
-.new-ticket {
-    flex-direction: row;
+.card {
     position: sticky;
-    top: 0;
+    top: 4rem;
 }
 
+.new-ticket {
+    position: sticky;
+    top: 3rem;
+}
 </style>

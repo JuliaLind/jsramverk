@@ -80,8 +80,7 @@ function setupLeafletMap() {
     map = L.map('map', { zoomAnimation: true }).setView(center, 5)
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        // maxZoom: 19,
-        maxZoom: 18,
+        maxZoom: 19,
         minZoom: 5,
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map)
@@ -138,7 +137,7 @@ onMounted(async () => {
 </template>
 
 <style scoped>
-.map-container {
+/* .map-container {
     padding: 7rem 0 0 0;
 }
 
@@ -146,13 +145,31 @@ onMounted(async () => {
     border-radius: 20px;
 }
 
+.leaflet-container { */
+/* margin-left: 1rem; */
+/* height: 75vh; */
+/* min-width: 20vw;
+    width: 50vw; */
+/* } */
+
+.map-container,
 .leaflet-container {
-    margin-left: 1rem;
-    height: 75vh;
-    min-width: 20vw;
-    width: 50vw;
+    height: 100%;
+    /* width: 45vw; */
 }
 
+map {
+    /* width: 100%; */
+    height: 100%;
+}
+
+.map-container {
+    padding: 0;
+}
+
+.map {
+    border-radius: 0;
+}
 @media (max-width: 1600px) {
     .map-container,
     .map,
@@ -160,14 +177,5 @@ onMounted(async () => {
         height: 100%;
         width: 45vw;
     }
-
-    .map-container {
-        padding: 0;
-    }
-
-    .map {
-        border-radius: 0;
-    }
 }
-
 </style>

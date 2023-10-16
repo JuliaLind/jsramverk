@@ -58,4 +58,14 @@ main {
     flex-direction: row;
     justify-content: center;
 }
+
+@media (max-width: 1200px) {
+    main {
+        min-height: 100vh;
+    }
+    .main-content {
+        flex-direction: column;
+        flex-wrap: wrap-reverse;
+    }
+}
 </style>

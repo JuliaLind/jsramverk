@@ -51,6 +51,7 @@ const delayed = {
         for (const delay of delayed) {
             if (positions.some((position) => position.Train.OperationalTrainNumber === delay.OperationalTrainNumber)) {
                 const newDelayObject = this.transformDelayObject(delay, stations);
+
                 if (newDelayObject.FromLocation && newDelayObject.ToLocation && newDelayObject.LocationSignature) {
                     filteredResult.push(newDelayObject);
                 }
