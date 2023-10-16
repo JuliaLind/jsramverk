@@ -9,21 +9,7 @@ import DelayedTable from '../components/DelayedTable.vue'
 import MapComp from '../components/MapComp.vue'
 import HeaderComp from '../components/HeaderComp.vue'
 import FooterComp from '../components/FooterComp.vue'
-// import { RouterLink } from 'vue-router'
-// import { useTrainsStore } from '@/stores/trains'
-// import { ref } from 'vue'
 
-// const store = useTrainsStore()
-// let current = ref('')
-// const map = ref(null)
-
-// function switchCurrent() {
-//     current.value = store.current
-// }
-
-// onMounted(() => {
-//     switchCurrent()
-// })
 </script>
 
 <template>
