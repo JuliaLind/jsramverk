@@ -3,8 +3,7 @@ import { useAuthStore } from '@/stores/auth'
 import { getCodes } from '../services/api.service.js'
 import { ref, onMounted } from 'vue'
 import { socketStore } from '@/stores/socket'
-
-
+import socketService from '../services/socket.service.js'
 
 const props = defineProps({
     ticket: {
@@ -24,7 +23,7 @@ onMounted(async () => {
  * Assigns the first the default-values
  * for new ticket
  */
-let code = ticket.code
+let code = ref(ticket.code)
 const id = ticket._id
 const store = useAuthStore()
 const socket = socketStore()
@@ -44,11 +43,12 @@ async function submitForm(code) {
         }
     }
     `
-
     await store.updateTicket(updatedTicket)
-    socket.notifyUpdate({
-        ticket: id
-    })
+    // const updatedData = await store.updateTicket(updatedTicket)
+    // code = updatedData.code;
+    // socket.notifyUpdate({
+    //     ticket: id
+    // })
     editing.value = false
     innerText = 'Ändra'
 }
@@ -65,6 +65,13 @@ onMounted(() => {
     socket.listenForTicketUpdate()
 })
 
+socketService.on('refresh-ticket', (data) => {
+    console.log('got refreshed data in SingleTicket', data)
+    if (data._id === id) {
+        code.value = data.code
+    }
+})
+
 const deletedTicket = `
     mutation {
         deleteTicket(_id: "${id}") {
@@ -72,7 +79,6 @@ const deletedTicket = `
         }
     }
 `
-
 
 const toggleEditing = function () {
     if (editing.value == false) {
@@ -82,7 +88,7 @@ const toggleEditing = function () {
     } else {
         editing.value = false
         innerText = 'Ändra'
-        code = ticket.code
+        code.value = ticket.code
         socket.notifyBackendStopEdit({
             ticket: id
         })
@@ -92,39 +98,55 @@ const toggleEditing = function () {
 
 <template>
     <tr class="ticket">
-    <td>
-        {{ id }}
-    </td>
-    <td>
-        {{ ticket.trainnumber }}
-    </td>
-    <td>
-        <select name="code" :class="{ 'unset': !editing}" v-model="code" required :disabled="!editing">
-            <option v-for="code in reasoncodes" :key="code.Code" :value="code.Code">
-                        {{ code.Code }} - {{ code.Level3Description }}
-            </option>
-        </select>
-    </td>
-    <td>
-        {{ ticket.traindate }}
-    </td>
-    <td>
-        <!-- <input v-if="editing" class="btn btn-success" type="submit" value="Spara" @click="submitForm(code), $emit('form-submitted')" /> -->
-        <input v-if="editing" class="btn btn-success" type="submit" value="Spara" @click="submitForm(code)" />
-        <button class="btn btn-dark" v-on:click.self="toggleEditing()" :disabled="id in socket.data">
-            {{ innerText }}
-        </button>
-        <!-- <button class="btn btn-danger delete" v-on:click.self="store.deleteTicket(deletedTicket), $emit('form-submitted')"> -->
-        <button class="btn btn-danger delete" v-on:click.self="store.deleteTicket(deletedTicket)" :disabled="id in socket.data">
-            Ta bort
-        </button>
-    </td>
+        <td>
+            {{ id }}
+        </td>
+        <td>
+            {{ ticket.trainnumber }}
+        </td>
+        <td>
+            <select
+                name="code"
+                :class="{ unset: !editing }"
+                v-model="code"
+                required
+                :disabled="!editing"
+            >
+                <option v-for="code in reasoncodes" :key="code.Code" :value="code.Code">
+                    {{ code.Code }} - {{ code.Level3Description }}
+                </option>
+            </select>
+        </td>
+        <td>
+            {{ ticket.traindate }}
+        </td>
+        <td>
+            <input
+                v-if="editing"
+                class="btn btn-success"
+                type="submit"
+                value="Spara"
+                @click="submitForm(code)"
+            />
+            <button
+                class="btn btn-dark"
+                v-on:click.self="toggleEditing()"
+                :disabled="id in socket.data"
+            >
+                {{ innerText }}
+            </button>
+            <button
+                class="btn btn-danger delete"
+                v-on:click.self="store.deleteTicket(deletedTicket), $emit('form-submitted')"
+                :disabled="id in socket.data"
+            >
+                Ta bort
+            </button>
+        </td>
     </tr>
 </template>
 
 <style scoped>
-
-
 select {
     padding: 0.5em;
 }
@@ -139,7 +161,6 @@ tr {
 tr:nth-of-type(2n) {
     background-color: #f6f6f6;
 }
-
 
 td {
     padding: 0.5em;

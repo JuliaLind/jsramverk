@@ -43,14 +43,14 @@ vi.mock('@/stores/socket', () => ({
     })
 }))
 
-    vi.mock('@/stores/trains', () => ({
-        useTrainsStore: () => ({
-            current: '',
-            setCurrent: () => {
-                // do nothing
-            }
-        })
-    }))
+vi.mock('@/stores/trains', () => ({
+    useTrainsStore: () => ({
+        current: '',
+        setCurrent: () => {
+            // do nothing
+        }
+    })
+}))
 
 describe('AdminView', async () => {
     router.push('/admin')

@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { router } from '../router/index.js'
-import socketservice from '../services/socket.service.js'
+import socket from '../services/socket.service.js'
 
 export const useAuthStore = defineStore('store', {
     state: () => ({
@@ -23,7 +23,7 @@ export const useAuthStore = defineStore('store', {
                 },
                 body: JSON.stringify(user)
             })
-        
+
             const result = await response.json()
             if ('errors' in result) {
                 window.alert(result.errors.detail)
@@ -32,7 +32,8 @@ export const useAuthStore = defineStore('store', {
             this.token = result.data.token
             this.userEmail = result.data.user.email
             router.push('/admin')
-
+            socket.emit('logged-in', this.token)
+            // socket.emit('logged-in', "iamabadtoken")
             return 'ok'
         },
         getToken() {
@@ -40,6 +41,7 @@ export const useAuthStore = defineStore('store', {
         },
         async logout() {
             this.token = ''
+            socket.emit('logged-out', this.token)
         },
         async register(username, password, name) {
             const user = {
@@ -98,7 +100,7 @@ export const useAuthStore = defineStore('store', {
             const result = await response.json()
 
             if (this.isTokenValid(result)) {
-                socketservice.emit('refresh-tickets')
+                socket.emit('refresh-tickets')
                 return result.data
             }
             return undefined
@@ -125,7 +127,7 @@ export const useAuthStore = defineStore('store', {
             })
             const result = await response.json()
             if (this.isTokenValid(result)) {
-                socketservice.emit('refresh-tickets')
+                socket.emit('updated', result.data.updateTicket)
                 return result.data
             }
             return undefined
@@ -149,7 +151,7 @@ export const useAuthStore = defineStore('store', {
             })
             const result = await response.json()
             if (this.isTokenValid(result)) {
-                socketservice.emit('refresh-tickets')
+                socket.emit('refresh-tickets')
                 return result.data
             }
             return undefined

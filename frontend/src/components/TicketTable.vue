@@ -3,7 +3,7 @@ import { onMounted, ref } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import NewTicket from '../components/NewTicket.vue'
 import SingleTicket from '../components/SingleTicket.vue'
-
+import socket from '../services/socket.service.js'
 
 const store = useAuthStore()
 const tickets = ref([])
@@ -11,48 +11,45 @@ const updateTickets = async () => {
     tickets.value = await store.getTickets()
 }
 
-
 onMounted(async () => {
     await updateTickets()
+})
+
+socket.on('refresh-tickets', (data) => {
+    tickets.value = data
+    console.log('got data', data)
 })
 </script>
 
 <template>
     <div class="wrapper-container">
-        <!-- <NewTicket @form-submitted="updateTickets()" /> -->
-        <NewTicket />
+        <NewTicket @form-submitted="updateTickets()" />
         <div class="container">
-    <table class="old-tickets" id="old-tickets">
-        <thead>
-        <tr><th class="title" colspan="5">
-            Befintliga ärenden
-        </th></tr>
-        <tr class="titles">
-            <th>Ärendenummer</th>
-            <th>Tågnr</th>
-            <th>Orsakskod</th>
-            <th>Datum</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <!-- <SingleTicket
-            v-for="ticket in tickets"
-            :key="ticket._id"
-            :ticket="ticket"
-            @form-submitted="updateTickets()"
-        /> -->
-        <SingleTicket
-            v-for="ticket in tickets"
-            :key="ticket._id"
-            :ticket="ticket"
-        />
-    </table>
+            <table class="old-tickets" id="old-tickets">
+                <thead>
+                    <tr>
+                        <th class="title" colspan="5">Befintliga ärenden</th>
+                    </tr>
+                    <tr class="titles">
+                        <th>Ärendenummer</th>
+                        <th>Tågnr</th>
+                        <th>Orsakskod</th>
+                        <th>Datum</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <SingleTicket
+                    v-for="ticket in tickets"
+                    :key="ticket._id"
+                    :ticket="ticket"
+                    @form-submitted="updateTickets()"
+                />
+            </table>
         </div>
     </div>
 </template>
 
 <style scoped>
-
 .old-tickets {
     width: clamp(400px, 100%, 1200px);
     table-layout: auto;
@@ -66,7 +63,6 @@ thead {
     position: sticky;
     top: 0;
 }
-
 
 .title,
 .titles {
@@ -98,6 +94,4 @@ thead {
     justify-content: space-around;
     position: relative;
 }
-
-
 </style>

@@ -1,8 +1,8 @@
 <script setup>
 import LoginForm from '../components/LoginForm.vue'
 import RegisterForm from '../components/RegisterForm.vue'
-import HeaderComp from '../components/HeaderComp.vue';
-import FooterComp from '../components/FooterComp.vue';
+import HeaderComp from '../components/HeaderComp.vue'
+import FooterComp from '../components/FooterComp.vue'
 import { ref } from 'vue'
 const login = ref(true)
 let innerText = ref('Till registrering')
@@ -26,7 +26,9 @@ const toggleForm = () => {
         <RegisterForm v-else />
         <!-- Make this a button or a link later-->
         <div class="button-container">
-            <button class="toggle-link btn btn-secondary mt-3" v-on:click="toggleForm()">{{ innerText }} </button>
+            <button class="toggle-link btn btn-secondary mt-3" v-on:click="toggleForm()">
+                {{ innerText }}
+            </button>
         </div>
     </div>
     <div class="footer fixed-bottom">

@@ -1,9 +1,7 @@
-<script setup>
-
-</script>
+<script setup></script>
 
 <template>
-<!-- Footer -->
+    <!-- Footer -->
     <div id="footer">
         <div class="footer-container">
             <ul class="icons">
@@ -17,7 +15,7 @@
             </ul>
         </div>
     </div>
-<!-- End Footer -->
+    <!-- End Footer -->
 </template>
 
 <style scoped>
@@ -36,7 +34,7 @@
     justify-content: center;
 }
 #footer a {
-    color:#aaa;
+    color: #aaa;
     text-decoration: none;
 }
 
@@ -46,7 +44,7 @@
 
 ul.icons li {
     display: inline-block;
-    padding:0 1em 0 0;
+    padding: 0 1em 0 0;
 }
 
 #footer .copyright {
@@ -54,9 +52,9 @@ ul.icons li {
     padding: 0;
     text-align: center;
 }
-#footer .copyright li { 
+#footer .copyright li {
     display: inline-block;
-    border-left: solid 1px rgba(144,144,144,0.25);
+    border-left: solid 1px rgba(144, 144, 144, 0.25);
     list-style: none;
     margin-left: 1.5em;
     padding-left: 1.5em;
@@ -79,5 +77,4 @@ ul.icons li {
         margin: unset;
     }
 }
-
 </style>

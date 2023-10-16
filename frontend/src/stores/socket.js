@@ -13,7 +13,6 @@ export const socketStore = defineStore('socket', {
         listenForTicketLock() {
             socket.on('lock-ticket', (data) => {
                 this.data[data.ticket] = data.user
-                console.log(data)
             })
         },
         listenForTicketUnlock() {
@@ -28,17 +27,6 @@ export const socketStore = defineStore('socket', {
                 if (data.ticket in this.data) {
                     delete this.data[data.ticket]
                 }
-            })
-        },
-        notifyUpdate(data) {
-            socket.emit('updated', data)
-        },
-        listenForRefresh() {
-            socket.on("refresh-tickets", () => {
-                this.counter += 1
-            })
-            socket.on("unlock-ticket", () => {
-                this.counter += 1
             })
         }
     }

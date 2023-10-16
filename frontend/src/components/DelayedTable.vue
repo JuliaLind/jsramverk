@@ -69,7 +69,6 @@ th {
     margin-top: 2rem;
 }
 
-
 .delayed-container {
     width: 100%;
     position: relative;

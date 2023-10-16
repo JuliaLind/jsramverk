@@ -146,12 +146,11 @@ onMounted(async () => {
 }
 
 .leaflet-container { */
-    /* margin-left: 1rem; */
-    /* height: 75vh; */
-    /* min-width: 20vw;
+/* margin-left: 1rem; */
+/* height: 75vh; */
+/* min-width: 20vw;
     width: 50vw; */
 /* } */
-
 
 .map-container,
 .leaflet-container {
@@ -179,5 +178,4 @@ map {
         width: 45vw;
     }
 }
-
 </style>

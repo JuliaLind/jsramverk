@@ -75,7 +75,7 @@ const trains = {
         trainPositions[changedPosition.Train.OperationalTrainNumber] = trainObject;
 
         return trainObject;
-            // }
+        // }
         // } catch (e) {
         //     console.error(e.message);
         //     // e.code = "PARSE_POSITION_ERROR";

@@ -20,8 +20,7 @@ onMounted(async () => {
 
 let traindate = new Date().toJSON().slice(0, 10)
 
-
-// const emit = defineEmits(['form-submitted'])
+const emit = defineEmits(['form-submitted'])
 const store = useAuthStore()
 
 /**
@@ -41,7 +40,7 @@ async function submitForm(code, trainnumber, traindate) {
     /**
      * Sends signal to tickets-component to re-render
      */
-    // emit('form-submitted')
+    emit('form-submitted')
 }
 </script>
 
@@ -53,11 +52,21 @@ async function submitForm(code, trainnumber, traindate) {
                 <form v-on:submit.prevent="submitForm(code, trainnumber, traindate)">
                     <div class="form-group mb-3">
                         <label class="mb-1">Ärendenummer</label>
-                        <input type="text" class="form-control" disabled value="Tilldelas automatiskt" />
+                        <input
+                            type="text"
+                            class="form-control"
+                            disabled
+                            value="Tilldelas automatiskt"
+                        />
                     </div>
                     <div class="form-group mb-3">
                         <label class="mb-1">Tågnummer</label>
-                        <select name="trainnumber" class="form-control" required v-model="trainnumber">
+                        <select
+                            name="trainnumber"
+                            class="form-control"
+                            required
+                            v-model="trainnumber"
+                        >
                             <option :hidden="true" disabled :value="''">Välj tågnummer</option>
                             <option v-for="train in trainnumbers" :key="train" :value="train">
                                 {{ train }}
@@ -75,7 +84,13 @@ async function submitForm(code, trainnumber, traindate) {
                     </div>
                     <div class="form-group mb-3">
                         <label class="mb-1">Datum</label>
-                        <input type="date" disabled name="traindate" class="form-control" v-model="traindate" />
+                        <input
+                            type="date"
+                            disabled
+                            name="traindate"
+                            class="form-control"
+                            v-model="traindate"
+                        />
                     </div>
                     <input type="submit" class="btn btn-success" value="Skapa" />
                 </form>
@@ -99,6 +114,4 @@ select:disabled {
     position: sticky;
     top: 3rem;
 }
-
-
 </style>
