@@ -7,6 +7,7 @@ import { ticket } from './mockdata/ticket.js'
 vi.mock('@/stores/auth', () => ({
     useAuthStore: () => ({
         token: 'imavalidtoken',
+        reasonCodes: codes,
         getToken: () => {
             return this.token
         },
@@ -39,13 +40,13 @@ vi.mock('@/stores/socket', () => ({
     })
 }))
 
-vi.mock('../../services/api.service.js', () => {
-    return {
-        getCodes: vi.fn(() => {
-            return codes
-        })
-    }
-})
+// vi.mock('../../services/api.service.js', () => {
+//     return {
+//         getCodes: vi.fn(() => {
+//             return codes
+//         })
+//     }
+// })
 
 describe('SingleTicket', async () => {
     afterEach(() => {

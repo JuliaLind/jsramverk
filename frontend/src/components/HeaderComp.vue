@@ -1,7 +1,7 @@
 <script setup>
-import { RouterLink } from 'vue-router';
+import { RouterLink } from 'vue-router'
 import { useTrainsStore } from '@/stores/trains'
-import { ref, onMounted } from 'vue';
+import { ref, onMounted } from 'vue'
 
 const store = useTrainsStore()
 let current = ref('')
@@ -16,20 +16,20 @@ onMounted(() => {
 </script>
 
 <template>
-<!--Navbar-->
-<div id="header">
-    <nav id="nav">
-        <ul>
-            <li>
-                <RouterLink to="/" @click="store.current = ''"> Start </RouterLink>
-            </li>
-            <li>
-                <RouterLink to="/admin" @click="store.current = ''"> Admin </RouterLink>
-            </li>
-        </ul>
-    </nav>
-</div>
-<!-- End Header -->
+    <!--Navbar-->
+    <div id="header">
+        <nav id="nav">
+            <ul>
+                <li>
+                    <RouterLink to="/" @click="store.current = ''"> Start </RouterLink>
+                </li>
+                <li>
+                    <RouterLink to="/admin" @click="store.current = ''"> Admin </RouterLink>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <!-- End Header -->
 </template>
 
 <style scoped>
@@ -38,15 +38,15 @@ onMounted(() => {
     /* display: flex; */
     background-color: #f6f6f6;
     border-bottom: solid 1px rgba(144, 144, 144, 0.25);
-    box-shadow: 0px 0.0375em 0.125em 0px rgba(0,0,0,0.05);
-    color: #484848;  
-    width: 100%; 
+    box-shadow: 0px 0.0375em 0.125em 0px rgba(0, 0, 0, 0.05);
+    color: #484848;
+    width: 100%;
     text-transform: uppercase;
     height: 4.5em;
     font-size: 1.25em;
 }
 
-#header nav{
+#header nav {
     float: right;
     margin-right: 2em;
     margin-top: 1.5em;
@@ -90,6 +90,5 @@ onMounted(() => {
     #header nav ul li {
         border-radius: unset;
     }
-
 }
 </style>

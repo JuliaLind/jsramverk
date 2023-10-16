@@ -1,8 +1,11 @@
+import { loader } from './loader.service.js'
+
 /**
  * Returns an array with information about delayed trains
  * @returns {Promise<array>}
  */
 export const getDelayedTrains = async () => {
+    loader.show()
     const query = `{delayed {
         ActivityId
         AdvertisedTimeAtLocation
@@ -23,7 +26,7 @@ export const getDelayedTrains = async () => {
     })
 
     const result = await response.json()
-
+    loader.hide()
     return result.data.delayed
 }
 
@@ -73,6 +76,18 @@ export const getCodes = async () => {
     return result.data.codes
 }
 
+export const extractTrainNumbers = (delayed) => {
+    return [
+        ...new Set(
+            delayed
+                .map((item) => {
+                    return item.OperationalTrainNumber
+                })
+                .sort()
+        )
+    ]
+}
+
 export const getTrainNumbers = async () => {
     const query = `{delayed {
         OperationalTrainNumber
@@ -88,15 +103,18 @@ export const getTrainNumbers = async () => {
 
     const result = await response.json()
 
-    const trainnumbers = result.data.delayed
+    const delayed = result.data.delayed
 
-    return [
-        ...new Set(
-            trainnumbers
-                .map((item) => {
-                    return item.OperationalTrainNumber
-                })
-                .sort()
-        )
-    ]
+    return extractTrainNumbers(delayed)
+    // return [
+    //     ...new Set(
+    //         trainnumbers
+    //             .map((item) => {
+    //                 return item.OperationalTrainNumber
+    //             })
+    //             .sort()
+    //     )
+    // ]
+
+    // return trainnumbers
 }

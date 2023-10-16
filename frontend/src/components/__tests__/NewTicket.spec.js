@@ -7,6 +7,7 @@ import { trainnumbers } from './mockdata/trainnumbers.js'
 vi.mock('@/stores/auth', () => ({
     useAuthStore: () => ({
         token: 'imavalidtoken',
+        reasonCodes: codes,
         getToken: () => {
             return this.token
         }
@@ -15,9 +16,9 @@ vi.mock('@/stores/auth', () => ({
 
 vi.mock('../../services/api.service.js', () => {
     return {
-        getCodes: vi.fn(() => {
-            return codes
-        }),
+        // getCodes: vi.fn(() => {
+        //     return codes
+        // }),
         getTrainNumbers: vi.fn(() => {
             return trainnumbers
         })

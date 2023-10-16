@@ -3,3 +3,5 @@
 @import './ticket-table.css';
 @import './auth.css';
 @import './loader.css';
+@import './custom-alert.css';
+@import './toast.css';

@@ -11,24 +11,11 @@ html {
 body {
     line-height: 1.4;
     font-family: sans-serif;
+    position: relative;
 }
 
-/* h1 {
-    font-size: 1.8rem;
-}
-
-h2 {
-    font-size: 1.6rem;
-    margin-bottom: 1.4rem;
-}
-
-p {
-    margin-bottom: 1.4rem;
-    font-size: 1rem;
-} */
-
-/* .container {
-    height: 100vh;
-    width: 100vw;
-    display: flex;
+/* .main-nav {
+    position: sticky;
+    top: 0;
+    z-index: 9999;
 } */
