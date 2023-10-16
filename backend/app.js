@@ -179,6 +179,8 @@ io.on('connection', (socket) => {
         if (authModel.verifyToken(socket.token)) {
             socket.join("tickets");
             console.log("joined tickets", socket.token);
+
+            // below is for manual testing
             // io.to(socket.id).emit("logged-you-in");
         } else {
             io.to(socket.id).emit("unauthorized");

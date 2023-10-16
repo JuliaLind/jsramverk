@@ -34,6 +34,8 @@ export const useAuthStore = defineStore('store', {
             this.listenForExpired()
             router.push('/admin')
             socket.emit('logged-in', this.token)
+
+            // below is for manual testing
             // socket.emit('logged-in', "iamabadtoken")
             // socket.on('logged-you-in', () => {
             //     console.log("yeeeey logged in")
