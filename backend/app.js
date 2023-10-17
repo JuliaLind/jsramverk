@@ -158,8 +158,8 @@ async function checkTokens() {
 io.on('connection', (socket) => {
     socket.token = "";
     socket.on('logged-in', (token) => {
-        socket.token = token;
-        if (authModel.verifyToken(socket.token)) {
+        if (authModel.verifyToken(token)) {
+            socket.token = token;
             socket.join("tickets");
         } else {
             io.to(socket.id).emit("unauthorized");
