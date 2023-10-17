@@ -106,15 +106,4 @@ export const getTrainNumbers = async () => {
     const delayed = result.data.delayed
 
     return extractTrainNumbers(delayed)
-    // return [
-    //     ...new Set(
-    //         trainnumbers
-    //             .map((item) => {
-    //                 return item.OperationalTrainNumber
-    //             })
-    //             .sort()
-    //     )
-    // ]
-
-    // return trainnumbers
 }

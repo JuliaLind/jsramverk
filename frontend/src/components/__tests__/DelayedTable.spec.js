@@ -2,14 +2,10 @@ import { vi, describe, it, expect, afterEach } from 'vitest'
 import DelayedTable from '../DelayedTable.vue'
 import { mount, flushPromises } from '@vue/test-utils'
 import { delayed } from './mockdata/delayed.js'
+import { getDelayedTrains } from '../../services/api.service.js'
 
-vi.mock('../../services/api.service.js', () => {
-    return {
-        getDelayedTrains: vi.fn(() => {
-            return delayed
-        })
-    }
-})
+
+
 
 describe('DelayedTable', async () => {
     afterEach(() => {
@@ -17,6 +13,13 @@ describe('DelayedTable', async () => {
     })
 
     it('renders properly', async () => {
+        vi.mock('../../services/api.service.js', () => {
+            return {
+                getDelayedTrains: vi.fn(() => {
+                    return delayed
+                })
+            }
+        })
         vi.mock('@/stores/trains', () => ({
             useTrainsStore: () => ({
                 current: '',
@@ -25,10 +28,10 @@ describe('DelayedTable', async () => {
                 }
             })
         }))
-
         const wrapper = mount(DelayedTable)
 
         await flushPromises()
+        expect(getDelayedTrains).toBeCalledTimes(1)
         expect(wrapper.html()).toContain('8136')
 
         wrapper.unmount()

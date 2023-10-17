@@ -3,6 +3,7 @@ import DelayedItem from '../DelayedItem.vue'
 import { mount } from '@vue/test-utils'
 import { currentItem } from './mockdata/current-item.js'
 
+
 describe('DelayedItem', async () => {
     it('renders properly', () => {
         vi.mock('@/stores/trains', () => ({

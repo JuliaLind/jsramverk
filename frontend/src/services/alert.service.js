@@ -1,6 +1,4 @@
 export const customAlert = (message) => {
-    // const cAlert = document.getElementById("alert");
-    // const alertBody = cAlert.querySelector(".my-alert-body");
     const cAlert = document.createElement('div')
     const alertBody = document.createElement('div')
 
@@ -20,6 +18,7 @@ export const customAlert = (message) => {
     alertMsg.classList.add('my-alert-msg')
 
     const btn = document.createElement('div')
+
     btn.innerText = 'OK'
     btn.classList.add('my-alert-btn')
 

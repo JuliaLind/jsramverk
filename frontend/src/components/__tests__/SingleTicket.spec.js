@@ -4,42 +4,6 @@ import { flushPromises, mount } from '@vue/test-utils'
 import { codes } from './mockdata/codes-small.js'
 import { ticket } from './mockdata/ticket.js'
 
-vi.mock('@/stores/auth', () => ({
-    useAuthStore: () => ({
-        token: 'imavalidtoken',
-        reasonCodes: codes,
-        getToken: () => {
-            return this.token
-        },
-        updateTicket: () => {
-            return 'ok'
-        },
-        deleteTicket: () => {
-            return 'ok'
-        }
-    })
-}))
-
-vi.mock('@/stores/socket', () => ({
-    socketStore: () => ({
-        data: {
-            '6505d0b1a60773cde6d0704d': 'user@email.com'
-        },
-        notifyBackendEdit(data) {
-            console.log(data)
-        },
-        notifyBackendStopEdit(data) {
-            console.log(data)
-        },
-        listenForTicketLock() {
-            //do nothing
-        },
-        listenForTicketUnlock() {
-            //do nothing
-        }
-    })
-}))
-
 // vi.mock('../../services/api.service.js', () => {
 //     return {
 //         getCodes: vi.fn(() => {
@@ -49,6 +13,35 @@ vi.mock('@/stores/socket', () => ({
 // })
 
 describe('SingleTicket', async () => {
+    vi.mock('@/stores/socket', () => ({
+        socketStore: () => ({
+            data: {
+                '6505d0b1a60773cde6d0704d': 'user@email.com'
+            },
+            // notifyBackendEdit(data) {
+            //     console.log(data)
+            // },
+            notifyBackendEdit: vi.fn(),
+            notifyBackendStopEdit: vi.fn(),
+            listenForTicketLock: vi.fn(),
+            listenForTicketUnlock: vi.fn()
+        })
+    }))
+    vi.mock('@/stores/auth', () => ({
+        useAuthStore: () => ({
+            token: 'imavalidtoken',
+            reasonCodes: codes,
+            getToken: () => {
+                return this.token
+            },
+            updateTicket: () => {
+                return 'ok'
+            },
+            deleteTicket: () => {
+                return 'ok'
+            }
+        })
+    }))
     afterEach(() => {
         vi.restoreAllMocks()
     })
