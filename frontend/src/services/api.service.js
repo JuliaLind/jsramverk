@@ -15,7 +15,7 @@ export const getDelayedTrains = async () => {
         FromLocation
         ToLocation
         LocationSignature
-      }}`
+    }}`
     const response = await fetch(`${import.meta.env.VITE_URL}/graphql`, {
         method: 'POST',
         headers: {
@@ -38,7 +38,7 @@ export const getInitialPositions = async () => {
     const query = `{positions {
         trainnumber
         position
-      }}`
+    }}`
     const response = await fetch(`${import.meta.env.VITE_URL}/graphql`, {
         method: 'POST',
         headers: {
@@ -61,7 +61,7 @@ export const getCodes = async () => {
     const query = `{codes {
         Code
         Level3Description
-      }}`
+    }}`
     const response = await fetch(`${import.meta.env.VITE_URL}/graphql`, {
         method: 'POST',
         headers: {
@@ -91,7 +91,7 @@ export const extractTrainNumbers = (delayed) => {
 export const getTrainNumbers = async () => {
     const query = `{delayed {
         OperationalTrainNumber
-      }}`
+    }}`
     const response = await fetch(`${import.meta.env.VITE_URL}/graphql`, {
         method: 'POST',
         headers: {
