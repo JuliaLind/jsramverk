@@ -33,6 +33,7 @@ export const useAuthStore = defineStore('store', {
             if ('errors' in result) {
                 loader.hide()
                 customAlert(result.errors.detail)
+                return
             }
             this.token = result.data.token
             this.userEmail = result.data.user.email
@@ -83,6 +84,7 @@ export const useAuthStore = defineStore('store', {
                 }
                 loader.hide()
                 customAlert(message)
+                return
             }
             await this.login(username, password)
         },
