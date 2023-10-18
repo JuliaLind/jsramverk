@@ -51,7 +51,7 @@ async function submitForm(code) {
 const editing = ref(false)
 const sendToBackend = {
     ticket: ticket._id,
-    user: store.userId
+    user: store.userEmail
 }
 
 onMounted(() => {
@@ -60,7 +60,6 @@ onMounted(() => {
 })
 
 socketService.on('refresh-ticket', (data) => {
-    console.log('got refreshed data in SingleTicket', data)
     if (data._id === id) {
         code.value = data.code
     }
@@ -79,6 +78,7 @@ const toggleEditing = function () {
         editing.value = true
         innerText = 'Återgå'
         socket.notifyBackendEdit(sendToBackend)
+        console.log(sendToBackend)
     } else {
         editing.value = false
         innerText = 'Ändra'
