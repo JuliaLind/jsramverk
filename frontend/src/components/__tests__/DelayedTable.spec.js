@@ -42,11 +42,14 @@ describe('DelayedTable', async () => {
         expect(wrapper.html()).toContain('20096')
         expect(store.current).toBe('')
 
+        // click and now the delayed table should only show delays from train 8136
         await wrapper.find('.delay-item').trigger('click')
         expect(store.current).toBe('8136')
         expect(wrapper.html()).toContain('8136')
         expect(wrapper.html()).not.toContain('8739')
         expect(wrapper.html()).not.toContain('20096')
+
+        // click and now the delayed table should only show delays from all trains
         await wrapper.find('.delay-item').trigger('click')
         expect(store.current).toBe('')
         expect(wrapper.html()).toContain('8739')
