@@ -32,16 +32,19 @@ function toggleVisibility() {
                                     <label class="mb-2" for="userName">E-postadress</label>
                                     <input
                                         class="form-control"
+                                        id="userName"
                                         type="email"
                                         name="username"
                                         required="required"
                                         v-model="username"
+                                        autocomplete="off"
                                     />
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label class="mb-2" for="password">Lösenord</label>
+                                    <label class="mb-2" for="passWord">Lösenord</label>
                                     <div class="password-container">
                                         <input
+                                            id="passWord"
                                             class="form-control"
                                             v-bind:type="fieldType"
                                             required="required"
