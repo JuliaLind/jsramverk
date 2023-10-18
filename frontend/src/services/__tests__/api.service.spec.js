@@ -1,6 +1,6 @@
 import { extractTrainNumbers, getDelayedTrains, getInitialPositions, getCodes, getTrainNumbers } from '../api.service.js'
 import { delayed } from '../../components/__tests__/mockdata/delayed.js'
-import { describe, expect, it } from 'vitest'
+import { vi, afterEach, describe, expect, it } from 'vitest'
 import { loader } from '../../services/loader.service.js'
 import { codes } from '../../components/__tests__/mockdata/codes.js'
 import { positions } from '../../components/__tests__/mockdata/positions.js'
@@ -98,6 +98,28 @@ describe('extractTrainNumbers', async () => {
             body: JSON.stringify({ query: positionsQuery }),
         })
         expect(data).toBe(positions);
+    })
+
+    it('tests getCodes', async () => {
+        global.fetch = vi.fn()
+        fetch.mockResolvedValue(
+            createFetchResponse({
+                data: {
+                    codes: codes
+                }
+            })
+        )
+        const data = await getCodes()
+
+        expect(fetch).toHaveBeenCalledWith('https://jsramverk-marjul2023.azurewebsites.net/graphql', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+            },
+            body: JSON.stringify({ query: codesQuery }),
+        })
+        expect(data).toStrictEqual(codes);
     })
 
     it('tests getTrainNumbers', async () => {
