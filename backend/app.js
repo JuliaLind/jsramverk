@@ -131,14 +131,14 @@ let io = require("socket.io")(httpServer, {
     }
 });
 
-cron.schedule('5 * * * * *', async () => {
-    try {
-        const delayedTrains = await delayedModel.getFromTrafikverket();
+async function updateDelayedTrains(io) {
+    const delayedTrains = await delayedModel.getFromTrafikverket();
 
-        io.emit('delayedTrainsUpdate', delayedTrains);
-    } catch (error) {
-        console.error('Error in cron job:', error);
-    }
+    io.emit('delayedTrainsUpdate', delayedTrains);
+}
+
+cron.schedule('5 * * * * *', () => {
+    updateDelayedTrains(io);
 });
 
 // io.on('connection', (socket) => {
@@ -224,4 +224,8 @@ io.on('connection', (socket) => {
 trainsModel.fetchTrainPositions(io);
 
 // export to facilitate testing
-module.exports = server;
+module.exports = {
+    server,
+    updateDelayedTrains,
+    checkTokens
+};
