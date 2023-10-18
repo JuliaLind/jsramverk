@@ -145,7 +145,6 @@ async function checkTokens() {
     const clients = await io.in('tickets').fetchSockets();
 
     for (const client of clients) {
-        console.log("the client", client);
         if (!authModel.verifyToken(client.token)) {
             io.to(client.id).emit("unauthorized");
             client.leave("tickets");
