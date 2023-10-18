@@ -78,7 +78,6 @@ const toggleEditing = function () {
         editing.value = true
         innerText = 'Återgå'
         socket.notifyBackendEdit(sendToBackend)
-        console.log(sendToBackend)
     } else {
         editing.value = false
         innerText = 'Ändra'

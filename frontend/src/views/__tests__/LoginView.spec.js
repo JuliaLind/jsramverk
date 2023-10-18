@@ -3,6 +3,8 @@ import LoginView from '../LoginView.vue'
 import { mount, flushPromises } from '@vue/test-utils'
 import { createRouter, createWebHistory } from 'vue-router'
 import { routes } from '@/router'
+import { setActivePinia, createPinia } from 'pinia'
+import { useAuthStore } from '@/stores/auth'
 
 const router = createRouter({
     history: createWebHistory(),
@@ -20,35 +22,26 @@ describe('AdminView', async () => {
     }))
     router.push('/login')
     await router.isReady()
-
+    beforeEach(() => {
+        setActivePinia(createPinia())
+    })
     afterEach(() => {
         vi.restoreAllMocks()
     })
 
     it('renders properly', async () => {
-        vi.mock('@/stores/auth', () => ({
-            useAuthStore: () => ({
-                token: '',
-                getToken: vi.fn(() => {
-                    return ''
-                }),
-                register: vi.fn(() => {
-                    return 'imavalidtoken'
-                }),
-                login: vi.fn(() => {
-                    return 'imavalidtoken'
-                })
-            })
-        }))
-
+        const store = useAuthStore()
         const wrapper = mount(LoginView, {
             global: {
                 plugins: [router]
             }
         })
         await flushPromises()
-        expect(wrapper.text()).contains('Logga in')
-        expect(wrapper.text()).contains('Till registrering')
+        let btn = wrapper.find('button.toggle-link');
+        expect(btn.text()).contains('Till registrering')
+        await btn.trigger('click')
+        btn = wrapper.find('button.toggle-link');
+        expect(btn.text()).contains('Till inloggning')
 
         wrapper.unmount()
     })
