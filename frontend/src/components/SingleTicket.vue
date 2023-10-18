@@ -16,7 +16,6 @@ let reasoncodes = ref([])
 const ticket = props.ticket
 
 onMounted(async () => {
-    // reasoncodes.value = await getCodes()
     reasoncodes.value = store.reasonCodes
 })
 
@@ -130,11 +129,6 @@ const toggleEditing = function () {
             >
                 {{ innerText }}
             </button>
-            <!-- <button
-                class="btn btn-danger delete"
-                v-on:click.self="store.deleteTicket(deletedTicket), $emit('form-submitted')"
-                :disabled="id in socket.data"
-            > -->
             <button
                 class="btn btn-danger delete"
                 v-on:click.self="store.deleteTicket(deletedTicket)"

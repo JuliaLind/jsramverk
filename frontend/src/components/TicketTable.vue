@@ -17,7 +17,6 @@ onMounted(async () => {
 
 socket.on('refresh-tickets', (data) => {
     tickets.value = data
-    console.log('got data', data)
 })
 </script>
 
