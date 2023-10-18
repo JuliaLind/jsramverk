@@ -34,7 +34,7 @@ export const useAuthStore = defineStore('store', {
                 // window.alert(result.errors.detail)
                 loader.hide()
                 customAlert(result.errors.detail)
-                return result.errors.detail
+                // return result.errors.detail
             }
             this.token = result.data.token
             this.userEmail = result.data.user.email
@@ -44,7 +44,7 @@ export const useAuthStore = defineStore('store', {
             socket.emit('logged-in', this.token)
             loader.hide()
             toast(`Välkommen tillbaka ${result.data.user.name}!`)
-            return 'ok'
+            // return 'ok'
         },
         getToken() {
             return this.token
@@ -89,9 +89,10 @@ export const useAuthStore = defineStore('store', {
                 // window.alert(result.errors.detail)
                 // customAlert(result.errors.detail)
                 customAlert(message)
-                return result.errors.detail
+                // return result.errors.detail
             }
-            return await this.login(username, password)
+            await this.login(username, password)
+            // return await this.login(username, password)
         },
         /**
          * @param result - the returned object from
@@ -131,10 +132,9 @@ export const useAuthStore = defineStore('store', {
             if (this.isTokenValid(result)) {
                 socket.emit('refresh-tickets')
                 toast(`Du har skapat ett nytt ärende med id ${result.data.createTicket._id}!`)
-                return result.data.createTicket
+                // return result.data.createTicket
             }
-            customAlert('Oj, något gick fel! Försök igen om en stund')
-            return undefined
+            // return undefined
         },
 
         /**
@@ -160,10 +160,10 @@ export const useAuthStore = defineStore('store', {
             if (this.isTokenValid(result)) {
                 socket.emit('updated', result.data.updateTicket)
                 toast(`Du har uppdaterat ärende ${result.data.updateTicket._id}!`)
-                return result.data.updateTicket
+                // return result.data.updateTicket
             }
             customAlert('Oj, något gick fel! Försök igen om en stund')
-            return undefined
+            // return undefined
         },
 
         /**
@@ -187,10 +187,10 @@ export const useAuthStore = defineStore('store', {
             if (this.isTokenValid(result)) {
                 socket.emit('refresh-tickets')
                 toast(`Du har raderat ärende ${result.data.deleteTicket._id}`)
-                return result.data
+                // return result.data
             }
             customAlert('Oj, något gick fel! Försök igen om en stund')
-            return undefined
+            // return undefined
         },
 
         /**
