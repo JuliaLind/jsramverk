@@ -72,7 +72,7 @@ export const useAuthStore = defineStore('store', {
             const response = await fetch(`${import.meta.env.VITE_URL}/register`, {
                 body: JSON.stringify(user),
                 headers: {
-                    'content-type': 'application/json'
+                    'Content-Type': 'application/json'
                 },
                 method: 'POST'
             })
