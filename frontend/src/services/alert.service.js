@@ -39,13 +39,13 @@ export const customAlert = (message) => {
 export const toast = (message) => {
     const toast = document.createElement('div')
     const toastBody = document.createElement('div')
-    const messageContainer = document.createElement("p");
+    const messageContainer = document.createElement('p')
 
-    messageContainer.classList.add("my-toast-message");
+    messageContainer.classList.add('my-toast-message')
     toast.classList.add('my-toast')
     toastBody.classList.add('my-toast-body')
     toast.appendChild(toastBody)
-    toastBody.appendChild(messageContainer);
+    toastBody.appendChild(messageContainer)
     messageContainer.innerHTML = message
     document.body.appendChild(toast)
 

@@ -28,7 +28,6 @@
     padding: 1.5rem;
     /* padding: 3rem; */
 
-
     transform: translateX(-50%);
     background: rgba(255, 255, 255, 0.9);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -71,5 +70,4 @@
     .my-toast {
         font-size: 1.25rem;
     }
-
 }

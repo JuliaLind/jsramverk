@@ -24,7 +24,7 @@ socket.on('refresh-tickets', (data) => {
 <template>
     <div class="wrapper-container">
         <keep-alive>
-        <NewTicket @form-submitted="updateTickets()" />
+            <NewTicket @form-submitted="updateTickets()" />
         </keep-alive>
         <div class="container">
             <table class="old-tickets" id="old-tickets">

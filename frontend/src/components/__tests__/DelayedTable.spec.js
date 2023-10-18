@@ -4,9 +4,6 @@ import { mount, flushPromises } from '@vue/test-utils'
 import { delayed } from './mockdata/delayed.js'
 import { getDelayedTrains } from '../../services/api.service.js'
 
-
-
-
 describe('DelayedTable', async () => {
     afterEach(() => {
         vi.restoreAllMocks()
