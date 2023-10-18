@@ -9,6 +9,10 @@ import DelayedTable from '../components/DelayedTable.vue'
 import MapComp from '../components/MapComp.vue'
 import HeaderComp from '../components/HeaderComp.vue'
 import FooterComp from '../components/FooterComp.vue'
+import { ref } from 'vue'
+
+const map = ref(null)
+
 </script>
 
 <template>
@@ -18,7 +22,7 @@ import FooterComp from '../components/FooterComp.vue'
         </div>
         <div class="main-content">
             <keep-alive>
-                <DelayedTable ref="current" @refresh-map="map.updateLayers()" />
+                <DelayedTable @refresh-map="map.updateLayers()" />
             </keep-alive>
             <keep-alive>
                 <MapComp ref="map" @refresh-map="map.updateLayers()" />
