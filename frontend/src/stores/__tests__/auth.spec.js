@@ -5,6 +5,7 @@ import socket from '../../services/socket.service.js'
 import { loader } from '../../services/loader.service.js'
 import { customAlert, toast } from '../../services/alert.service.js'
 import { router } from '../../router/index.js'
+import { tickets } from '../../components/__tests__/mockdata/tickets.js'
 
 router.push = vi.fn()
 
@@ -516,6 +517,78 @@ describe('auth-store', async () => {
         expect(socket.emit).toBeCalledTimes(0)
         expect(store.isTokenValid).toBeCalledTimes(1)
         expect(toast).toBeCalledTimes(0)
+    })
+
+    it('tests get tickets ok', async () => {
+        global.fetch = vi.fn()
+
+        fetch.mockResolvedValue(
+            createFetchResponse({
+                data: {
+                    tickets: tickets
+                }
+            })
+        )
+        const store = useAuthStore()
+        store.token = "iamavalidtoken"
+        store.isTokenValid = vi.fn(() => {
+            return true
+        })
+
+        const gotTickets = await store.getTickets()
+
+        expect(fetch).toHaveBeenCalledWith('https://jsramverk-marjul2023.azurewebsites.net/graphql', {
+            method: 'POST',
+            body: JSON.stringify({query: `{tickets {
+                _id
+                code
+                trainnumber
+                traindate
+              }}`}),
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+                'x-access-token': "iamavalidtoken"
+            }
+        })
+        expect(gotTickets).toBe(tickets)
+    })
+
+    it('tests get tickets not ok', async () => {
+        global.fetch = vi.fn()
+        fetch.mockResolvedValue(
+            createFetchResponse({
+                errors: {
+                    detail: "Some error"
+                }
+            })
+        )
+        const store = useAuthStore()
+    
+        store.token = "iamnotavalidtoken"
+        store.isTokenValid = vi.fn(() => {
+            return false
+        })
+    
+        const gotTickets = await store.getTickets()
+    
+        expect(fetch).toHaveBeenCalledWith('https://jsramverk-marjul2023.azurewebsites.net/graphql', {
+            method: 'POST',
+            body: JSON.stringify({query: `{tickets {
+                _id
+                code
+                trainnumber
+                traindate
+              }}`
+            }),
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+                'x-access-token': "iamnotavalidtoken"
+            }
+        })
+        expect(gotTickets).toStrictEqual([])
+
     })
 })
 
