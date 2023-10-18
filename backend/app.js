@@ -133,6 +133,7 @@ let io = require("socket.io")(httpServer, {
 
 async function updateDelayedTrains(io) {
     const delayedTrains = await delayedModel.getFromTrafikverket();
+
     io.emit('delayedTrainsUpdate', delayedTrains);
 }
 
