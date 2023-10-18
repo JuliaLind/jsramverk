@@ -1,4 +1,4 @@
-import { vi, describe, it, expect } from 'vitest'
+import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest'
 import DelayedItem from '../DelayedItem.vue'
 import { mount } from '@vue/test-utils'
 import { currentItem } from './mockdata/current-item.js'
@@ -26,8 +26,8 @@ describe('DelayedItem', async () => {
         wrapper.unmount()
     })
     it('renders properly if store.current is this items trainnumber', () => {
-        const trains = useTrainsStore();
-        trains.setCurrent("8483");
+        const trains = useTrainsStore()
+        trains.setCurrent('8483')
         const wrapper = mount(DelayedItem, {
             props: {
                 item: currentItem
@@ -41,8 +41,8 @@ describe('DelayedItem', async () => {
         wrapper.unmount()
     })
     it('renders properly if store.current is not this items trainnumber', () => {
-        const trains = useTrainsStore();
-        trains.setCurrent("8485");
+        const trains = useTrainsStore()
+        trains.setCurrent('8485')
         const wrapper = mount(DelayedItem, {
             props: {
                 item: currentItem

@@ -28,7 +28,7 @@ describe('TicketsTable', async () => {
         store.getTickets = vi.fn(() => {
             return tickets
         })
-        store.codes = codes;
+        store.codes = codes
         const wrapper = mount(TicketTable)
         await flushPromises()
         expect(wrapper.text()).contains('Befintliga ärenden')

@@ -141,8 +141,7 @@ describe('SingleTicket', async () => {
         let editBtn = await wrapper.find('button.btn-dark')
         expect(deleteBtn.html()).not.contains('disabled')
         expect(editBtn.html()).not.contains('disabled')
-        socket.data['651da2e90e521f4638c82312']
-            = "someuser@email.com"
+        socket.data['651da2e90e521f4638c82312'] = 'someuser@email.com'
         deleteBtn = await wrapper.find('button.btn-danger')
         editBtn = await wrapper.find('button.btn-dark')
         expect(deleteBtn.html()).contains('disabled')
@@ -166,8 +165,7 @@ describe('SingleTicket', async () => {
         let editBtn = await wrapper.find('button.btn-dark')
         expect(deleteBtn.html()).not.toContain('disabled')
         expect(editBtn.html()).not.toContain('disabled')
-        socket.data['651da2e90e521f4658c82312']
-            = "someuser@email.com"
+        socket.data['651da2e90e521f4658c82312'] = 'someuser@email.com'
         deleteBtn = await wrapper.find('button.btn-danger')
         editBtn = await wrapper.find('button.btn-dark')
         expect(deleteBtn.html()).not.contains('disabled')

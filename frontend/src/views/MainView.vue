@@ -12,7 +12,6 @@ import FooterComp from '../components/FooterComp.vue'
 import { ref } from 'vue'
 
 const map = ref(null)
-
 </script>
 
 <template>
