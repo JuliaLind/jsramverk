@@ -11,8 +11,6 @@ const router = createRouter({
 })
 
 describe('LoginView', async () => {
-    router.push('/login')
-    await router.isReady()
     beforeEach(() => {
         setActivePinia(createPinia())
     })
