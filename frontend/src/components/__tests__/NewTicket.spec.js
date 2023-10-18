@@ -6,17 +6,6 @@ import { trainnumbers } from './mockdata/trainnumbers.js'
 import { useAuthStore } from '@/stores/auth'
 import { setActivePinia, createPinia } from 'pinia'
 
-
-// vi.mock('@/stores/auth', () => ({
-//     useAuthStore: () => ({
-//         token: 'imavalidtoken',
-//         reasonCodes: codes,
-//         getToken: () => {
-//             return this.token
-//         }
-//     })
-// }))
-
 vi.mock('../../services/api.service.js', () => {
     return {
         getTrainNumbers: vi.fn(() => {
@@ -57,7 +46,7 @@ describe('NewTicket', async () => {
         wrapper.unmount()
     })
 
-    it('test new ticket', async () => {
+    it('test submit new ticket', async () => {
         const auth = useAuthStore()
         auth.reasonCodes = codes
         auth.submitNewTicket = vi.fn()

@@ -61,17 +61,22 @@ describe('SingleTicket', async () => {
             }
         })
         await flushPromises()
+        expect(wrapper.html()).not.toContain('Spara')
         await wrapper.find('button.btn-dark').trigger('click')
         expect(socket.notifyBackendEdit).toHaveBeenCalledWith({
             ticket: '651da2e90e521f4638c82312',
             user: 'my@email.com'
         })
-        expect(wrapper.text()).contains('Återgå')
+        expect(wrapper.html()).contains('Spara')
+        expect(wrapper.html()).contains('Återgå')
+        expect(wrapper.html()).not.contains('Ändra')
         await wrapper.find('button.btn-dark').trigger('click')
         expect(socket.notifyBackendStopEdit).toHaveBeenCalledWith({
             ticket: '651da2e90e521f4638c82312'
         })
         expect(wrapper.text()).contains('Ändra')
+        expect(wrapper.html()).not.contains('Spara')
+        expect(wrapper.html()).not.contains('Återgå')
         wrapper.unmount()
     })
 
@@ -117,6 +122,56 @@ describe('SingleTicket', async () => {
         await wrapper.find('button.btn-danger').trigger('click')
         expect(socket.notifyBackendEdit).toHaveBeenCalledTimes(0)
         expect(auth.deleteTicket).toHaveBeenCalledWith(deletedTicket)
+        wrapper.unmount()
+    })
+
+    it('test disabled buttons', async () => {
+        const auth = useAuthStore()
+        auth.reasonCodes = codes
+        auth.deleteTicket = vi.fn()
+        const socket = socketStore()
+        socket.notifyBackendEdit = vi.fn()
+        const wrapper = mount(SingleTicket, {
+            props: {
+                ticket: ticket
+            }
+        })
+        await flushPromises()
+        let deleteBtn = await wrapper.find('button.btn-danger')
+        let editBtn = await wrapper.find('button.btn-dark')
+        expect(deleteBtn.html()).not.contains('disabled')
+        expect(editBtn.html()).not.contains('disabled')
+        socket.data['651da2e90e521f4638c82312']
+            = "someuser@email.com"
+        deleteBtn = await wrapper.find('button.btn-danger')
+        editBtn = await wrapper.find('button.btn-dark')
+        expect(deleteBtn.html()).contains('disabled')
+        expect(editBtn.html()).contains('disabled')
+        wrapper.unmount()
+    })
+
+    it('test not disabled buttons if different ticket nr in socket store', async () => {
+        const auth = useAuthStore()
+        auth.reasonCodes = codes
+        auth.deleteTicket = vi.fn()
+        const socket = socketStore()
+        socket.notifyBackendEdit = vi.fn()
+        const wrapper = mount(SingleTicket, {
+            props: {
+                ticket: ticket
+            }
+        })
+        await flushPromises()
+        let deleteBtn = await wrapper.find('button.btn-danger')
+        let editBtn = await wrapper.find('button.btn-dark')
+        expect(deleteBtn.html()).not.toContain('disabled')
+        expect(editBtn.html()).not.toContain('disabled')
+        socket.data['651da2e90e521f4658c82312']
+            = "someuser@email.com"
+        deleteBtn = await wrapper.find('button.btn-danger')
+        editBtn = await wrapper.find('button.btn-dark')
+        expect(deleteBtn.html()).not.contains('disabled')
+        expect(editBtn.html()).not.contains('disabled')
         wrapper.unmount()
     })
 })
