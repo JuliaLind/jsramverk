@@ -1,4 +1,4 @@
-import { vi, describe, it, expect, afterEach, beforeEach  } from 'vitest'
+import { vi, describe, it, expect, afterEach, beforeEach } from 'vitest'
 import RegisterForm from '../RegisterForm.vue'
 import { mount } from '@vue/test-utils'
 import { createRouter, createWebHistory } from 'vue-router'
@@ -37,12 +37,11 @@ describe('RegisterForm', async () => {
         expect(wrapper.text()).contains('E-postadress')
         expect(wrapper.text()).contains('Lösenord')
 
-        
         await wrapper.find('input[type=email]').setValue('my@mail.com')
         await wrapper.find('input[type=password]').setValue('pass')
         await wrapper.find('input[type=text]').setValue('My Name')
         await wrapper.find('form').trigger('submit')
-        expect(auth.register).toHaveBeenCalledWith('my@mail.com', 'pass', "My Name")
+        expect(auth.register).toHaveBeenCalledWith('my@mail.com', 'pass', 'My Name')
         wrapper.unmount()
     })
 })

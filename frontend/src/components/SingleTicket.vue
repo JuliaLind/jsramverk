@@ -71,7 +71,7 @@ const deletedTicket = `
             _id
         }
     }
-`
+    `
 
 const toggleEditing = function () {
     if (editing.value == false) {

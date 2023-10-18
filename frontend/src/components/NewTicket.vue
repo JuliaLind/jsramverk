@@ -11,7 +11,6 @@ let trainnumber = ''
 const store = useAuthStore()
 
 onMounted(async () => {
-    // reasoncodes.value = await getCodes()
     reasoncodes.value = store.reasonCodes
     trainnumbers.value = await getTrainNumbers()
 })

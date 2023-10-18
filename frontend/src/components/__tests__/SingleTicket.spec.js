@@ -7,7 +7,6 @@ import { socketStore } from '@/stores/socket'
 import { useAuthStore } from '@/stores/auth'
 import { setActivePinia, createPinia } from 'pinia'
 
-
 describe('SingleTicket', async () => {
     beforeEach(() => {
         setActivePinia(createPinia())
@@ -25,18 +24,24 @@ describe('SingleTicket', async () => {
         }
     }
     `
-
+    const deletedTicket = `
+    mutation {
+        deleteTicket(_id: "651da2e90e521f4638c82312") {
+            _id
+        }
+    }
+    `
     it('renders properly', async () => {
         const auth = useAuthStore()
         auth.reasonCodes = codes
-        auth.token = "imavalidtoken"
+        auth.token = 'imavalidtoken'
         const wrapper = mount(SingleTicket, {
             props: {
                 ticket: ticket
             }
         })
         await flushPromises()
-        expect(wrapper.text()).toContain("651da2e90e521f4638c82312")
+        expect(wrapper.text()).toContain('651da2e90e521f4638c82312')
         expect(wrapper.text()).toContain('ONA127')
         expect(wrapper.text()).toContain('10345')
         expect(wrapper.text()).contains('Ändra')
@@ -45,7 +50,7 @@ describe('SingleTicket', async () => {
     })
     it('test toggle edit', async () => {
         const auth = useAuthStore()
-        auth.userEmail = "my@email.com"
+        auth.userEmail = 'my@email.com'
         auth.reasonCodes = codes
         const socket = socketStore()
         socket.notifyBackendEdit = vi.fn()
@@ -58,13 +63,13 @@ describe('SingleTicket', async () => {
         await flushPromises()
         await wrapper.find('button.btn-dark').trigger('click')
         expect(socket.notifyBackendEdit).toHaveBeenCalledWith({
-            ticket: "651da2e90e521f4638c82312",
-            user: "my@email.com"
+            ticket: '651da2e90e521f4638c82312',
+            user: 'my@email.com'
         })
         expect(wrapper.text()).contains('Återgå')
         await wrapper.find('button.btn-dark').trigger('click')
         expect(socket.notifyBackendStopEdit).toHaveBeenCalledWith({
-            ticket: "651da2e90e521f4638c82312"
+            ticket: '651da2e90e521f4638c82312'
         })
         expect(wrapper.text()).contains('Ändra')
         wrapper.unmount()
@@ -72,7 +77,7 @@ describe('SingleTicket', async () => {
 
     it('test update', async () => {
         const auth = useAuthStore()
-        auth.userEmail = "my@email.com"
+        auth.userEmail = 'my@email.com'
         auth.reasonCodes = codes
         auth.updateTicket = vi.fn()
         const socket = socketStore()
@@ -86,14 +91,32 @@ describe('SingleTicket', async () => {
         await flushPromises()
         await wrapper.find('button.btn-dark').trigger('click')
         expect(socket.notifyBackendEdit).toHaveBeenCalledWith({
-            ticket: "651da2e90e521f4638c82312",
-            user: "my@email.com"
+            ticket: '651da2e90e521f4638c82312',
+            user: 'my@email.com'
         })
         await wrapper.find('select').setValue('ANA004')
         await wrapper.find('input.btn-success').trigger('click')
         expect(socket.notifyBackendStopEdit).toHaveBeenCalledTimes(0)
         expect(auth.updateTicket).toHaveBeenCalledWith(updatedTicket)
         expect(wrapper.text()).contains('Ändra')
+        wrapper.unmount()
+    })
+
+    it('test delete', async () => {
+        const auth = useAuthStore()
+        auth.reasonCodes = codes
+        auth.deleteTicket = vi.fn()
+        const socket = socketStore()
+        socket.notifyBackendEdit = vi.fn()
+        const wrapper = mount(SingleTicket, {
+            props: {
+                ticket: ticket
+            }
+        })
+        await flushPromises()
+        await wrapper.find('button.btn-danger').trigger('click')
+        expect(socket.notifyBackendEdit).toHaveBeenCalledTimes(0)
+        expect(auth.deleteTicket).toHaveBeenCalledWith(deletedTicket)
         wrapper.unmount()
     })
 })

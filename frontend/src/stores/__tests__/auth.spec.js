@@ -100,25 +100,26 @@ describe('auth-store', async () => {
     })
     it('tests register ok', async () => {
         global.fetch = vi.fn()
-        fetch.mockResolvedValue(
-            createFetchResponse({})
-        )
+        fetch.mockResolvedValue(createFetchResponse({}))
         const store = useAuthStore()
         store.login = vi.fn()
-        await store.register('myemail@email.com', 'mypassword', "My Name")
+        await store.register('myemail@email.com', 'mypassword', 'My Name')
 
-        expect(fetch).toHaveBeenCalledWith('https://jsramverk-marjul2023.azurewebsites.net/register', {
-            method: 'POST',
-            body: JSON.stringify({
-                name: "My Name",
-                email: 'myemail@email.com',
-                password: 'mypassword'
-            }),
-            headers: {
-                // Authorization: `Bearer ${token}`,
-                'Content-Type': 'application/json'
+        expect(fetch).toHaveBeenCalledWith(
+            'https://jsramverk-marjul2023.azurewebsites.net/register',
+            {
+                method: 'POST',
+                body: JSON.stringify({
+                    name: 'My Name',
+                    email: 'myemail@email.com',
+                    password: 'mypassword'
+                }),
+                headers: {
+                    // Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
             }
-        })
+        )
         expect(loader.show).toBeCalledTimes(1)
         expect(loader.hide).toBeCalledTimes(0)
         expect(store.login).toBeCalledTimes(1)
@@ -134,25 +135,30 @@ describe('auth-store', async () => {
         )
         const store = useAuthStore()
         store.login = vi.fn()
-        await store.register('myemail@email.com', 'mypassword', "My Name")
+        await store.register('myemail@email.com', 'mypassword', 'My Name')
 
-        expect(fetch).toHaveBeenCalledWith('https://jsramverk-marjul2023.azurewebsites.net/register', {
-            method: 'POST',
-            body: JSON.stringify({
-                name: "My Name",
-                email: 'myemail@email.com',
-                password: 'mypassword'
-            }),
-            headers: {
-                // Authorization: `Bearer ${token}`,
-                // Accept: 'application/json',
-                'Content-Type': 'application/json'
+        expect(fetch).toHaveBeenCalledWith(
+            'https://jsramverk-marjul2023.azurewebsites.net/register',
+            {
+                method: 'POST',
+                body: JSON.stringify({
+                    name: 'My Name',
+                    email: 'myemail@email.com',
+                    password: 'mypassword'
+                }),
+                headers: {
+                    // Authorization: `Bearer ${token}`,
+                    // Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                }
             }
-        })
+        )
         expect(loader.show).toBeCalledTimes(1)
         expect(loader.hide).toBeCalledTimes(1)
         expect(customAlert).toBeCalledTimes(1)
-        expect(customAlert).toHaveBeenCalledWith('Det finns redan en användare med användarnamn myemail@email.com')
+        expect(customAlert).toHaveBeenCalledWith(
+            'Det finns redan en användare med användarnamn myemail@email.com'
+        )
         expect(store.login).toBeCalledTimes(0)
     })
     it('tests register other error not ok', async () => {
@@ -166,19 +172,22 @@ describe('auth-store', async () => {
         )
         const store = useAuthStore()
         store.login = vi.fn()
-        await store.register('myemail@email.com', 'mypassword', "My Name")
+        await store.register('myemail@email.com', 'mypassword', 'My Name')
 
-        expect(fetch).toHaveBeenCalledWith('https://jsramverk-marjul2023.azurewebsites.net/register', {
-            method: 'POST',
-            body: JSON.stringify({
-                name: "My Name",
-                email: 'myemail@email.com',
-                password: 'mypassword'
-            }),
-            headers: {
-                'Content-Type': 'application/json'
+        expect(fetch).toHaveBeenCalledWith(
+            'https://jsramverk-marjul2023.azurewebsites.net/register',
+            {
+                method: 'POST',
+                body: JSON.stringify({
+                    name: 'My Name',
+                    email: 'myemail@email.com',
+                    password: 'mypassword'
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             }
-        })
+        )
         expect(loader.show).toBeCalledTimes(1)
         expect(loader.hide).toBeCalledTimes(1)
         expect(customAlert).toBeCalledTimes(1)
@@ -262,13 +271,13 @@ describe('auth-store', async () => {
             createFetchResponse({
                 data: {
                     createTicket: {
-                        _id: "thisisaticketid"
+                        _id: 'thisisaticketid'
                     }
                 }
             })
         )
         const store = useAuthStore()
-        store.token = "iamavalidtoken"
+        store.token = 'iamavalidtoken'
         store.isTokenValid = vi.fn(() => {
             return true
         })
@@ -283,16 +292,18 @@ describe('auth-store', async () => {
 
         await store.submitNewTicket(ticket)
 
-        expect(fetch).toHaveBeenCalledWith('https://jsramverk-marjul2023.azurewebsites.net/graphql', {
-            method: 'POST',
-            body: JSON.stringify({query: ticket
-            }),
-            headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json',
-                'x-access-token': "iamavalidtoken"
+        expect(fetch).toHaveBeenCalledWith(
+            'https://jsramverk-marjul2023.azurewebsites.net/graphql',
+            {
+                method: 'POST',
+                body: JSON.stringify({ query: ticket }),
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                    'x-access-token': 'iamavalidtoken'
+                }
             }
-        })
+        )
         expect(socket.emit).toBeCalledTimes(1)
         expect(socket.emit).toHaveBeenCalledWith('refresh-tickets')
         expect(store.isTokenValid).toBeCalledTimes(1)
@@ -304,12 +315,12 @@ describe('auth-store', async () => {
         fetch.mockResolvedValue(
             createFetchResponse({
                 errors: {
-                    detail: "Some error"
+                    detail: 'Some error'
                 }
             })
         )
         const store = useAuthStore()
-        store.token = "iamavalidtoken"
+        store.token = 'iamavalidtoken'
         store.isTokenValid = vi.fn(() => {
             return false
         })
@@ -324,16 +335,18 @@ describe('auth-store', async () => {
 
         await store.submitNewTicket(ticket)
 
-        expect(fetch).toHaveBeenCalledWith('https://jsramverk-marjul2023.azurewebsites.net/graphql', {
-            method: 'POST',
-            body: JSON.stringify({query: ticket
-            }),
-            headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json',
-                'x-access-token': "iamavalidtoken"
+        expect(fetch).toHaveBeenCalledWith(
+            'https://jsramverk-marjul2023.azurewebsites.net/graphql',
+            {
+                method: 'POST',
+                body: JSON.stringify({ query: ticket }),
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                    'x-access-token': 'iamavalidtoken'
+                }
             }
-        })
+        )
         expect(socket.emit).toBeCalledTimes(0)
         expect(store.isTokenValid).toBeCalledTimes(1)
         expect(toast).toBeCalledTimes(0)
@@ -346,16 +359,16 @@ describe('auth-store', async () => {
             createFetchResponse({
                 data: {
                     updateTicket: {
-                        _id: "iamaticketid",
-                        code: "ABC030",
-                        trainnumber: "99999",
-                        traindate: "2023-10-18"
+                        _id: 'iamaticketid',
+                        code: 'ABC030',
+                        trainnumber: '99999',
+                        traindate: '2023-10-18'
                     }
                 }
             })
         )
         const store = useAuthStore()
-        store.token = "iamavalidtoken"
+        store.token = 'iamavalidtoken'
         store.isTokenValid = vi.fn(() => {
             return true
         })
@@ -371,23 +384,25 @@ describe('auth-store', async () => {
 
         await store.updateTicket(ticket)
 
-        expect(fetch).toHaveBeenCalledWith('https://jsramverk-marjul2023.azurewebsites.net/graphql', {
-            method: 'POST',
-            body: JSON.stringify({query: ticket
-            }),
-            headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json',
-                'x-access-token': "iamavalidtoken"
+        expect(fetch).toHaveBeenCalledWith(
+            'https://jsramverk-marjul2023.azurewebsites.net/graphql',
+            {
+                method: 'POST',
+                body: JSON.stringify({ query: ticket }),
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                    'x-access-token': 'iamavalidtoken'
+                }
             }
-        })
+        )
         expect(socket.emit).toBeCalledTimes(1)
         expect(socket.emit).toHaveBeenCalledWith('updated', {
-                _id: "iamaticketid",
-                code: "ABC030",
-                trainnumber: "99999",
-                traindate: "2023-10-18"
-            })
+            _id: 'iamaticketid',
+            code: 'ABC030',
+            trainnumber: '99999',
+            traindate: '2023-10-18'
+        })
         expect(store.isTokenValid).toBeCalledTimes(1)
         expect(toast).toBeCalledTimes(1)
         expect(toast).toHaveBeenCalledWith('Du har uppdaterat ärende iamaticketid!')
@@ -398,13 +413,13 @@ describe('auth-store', async () => {
         fetch.mockResolvedValue(
             createFetchResponse({
                 errors: {
-                    detail: "Some error"
+                    detail: 'Some error'
                 }
             })
         )
         const store = useAuthStore()
-    
-        store.token = "iamavalidtoken"
+
+        store.token = 'iamavalidtoken'
         store.isTokenValid = vi.fn(() => {
             return false
         })
@@ -417,19 +432,21 @@ describe('auth-store', async () => {
                 }
             }
             `
-    
+
         await store.updateTicket(ticket)
-    
-        expect(fetch).toHaveBeenCalledWith('https://jsramverk-marjul2023.azurewebsites.net/graphql', {
-            method: 'POST',
-            body: JSON.stringify({query: ticket
-            }),
-            headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json',
-                'x-access-token': "iamavalidtoken"
+
+        expect(fetch).toHaveBeenCalledWith(
+            'https://jsramverk-marjul2023.azurewebsites.net/graphql',
+            {
+                method: 'POST',
+                body: JSON.stringify({ query: ticket }),
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                    'x-access-token': 'iamavalidtoken'
+                }
             }
-        })
+        )
         expect(socket.emit).toBeCalledTimes(0)
         expect(store.isTokenValid).toBeCalledTimes(1)
         expect(toast).toBeCalledTimes(0)
@@ -442,13 +459,13 @@ describe('auth-store', async () => {
             createFetchResponse({
                 data: {
                     deleteTicket: {
-                        _id: "iwasdeletedid",
+                        _id: 'iwasdeletedid'
                     }
                 }
             })
         )
         const store = useAuthStore()
-        store.token = "iamavalidtoken"
+        store.token = 'iamavalidtoken'
         store.isTokenValid = vi.fn(() => {
             return true
         })
@@ -462,16 +479,18 @@ describe('auth-store', async () => {
 
         await store.deleteTicket(ticket)
 
-        expect(fetch).toHaveBeenCalledWith('https://jsramverk-marjul2023.azurewebsites.net/graphql', {
-            method: 'POST',
-            body: JSON.stringify({query: ticket
-            }),
-            headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json',
-                'x-access-token': "iamavalidtoken"
+        expect(fetch).toHaveBeenCalledWith(
+            'https://jsramverk-marjul2023.azurewebsites.net/graphql',
+            {
+                method: 'POST',
+                body: JSON.stringify({ query: ticket }),
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                    'x-access-token': 'iamavalidtoken'
+                }
             }
-        })
+        )
         expect(socket.emit).toBeCalledTimes(1)
         expect(socket.emit).toHaveBeenCalledWith('refresh-tickets')
         expect(store.isTokenValid).toBeCalledTimes(1)
@@ -484,13 +503,13 @@ describe('auth-store', async () => {
         fetch.mockResolvedValue(
             createFetchResponse({
                 errors: {
-                    detail: "Some error"
+                    detail: 'Some error'
                 }
             })
         )
         const store = useAuthStore()
-    
-        store.token = "iamnotavalidtoken"
+
+        store.token = 'iamnotavalidtoken'
         store.isTokenValid = vi.fn(() => {
             return false
         })
@@ -501,19 +520,21 @@ describe('auth-store', async () => {
                 }
             }
             `
-    
+
         await store.deleteTicket(ticket)
-    
-        expect(fetch).toHaveBeenCalledWith('https://jsramverk-marjul2023.azurewebsites.net/graphql', {
-            method: 'POST',
-            body: JSON.stringify({query: ticket
-            }),
-            headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json',
-                'x-access-token': "iamnotavalidtoken"
+
+        expect(fetch).toHaveBeenCalledWith(
+            'https://jsramverk-marjul2023.azurewebsites.net/graphql',
+            {
+                method: 'POST',
+                body: JSON.stringify({ query: ticket }),
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                    'x-access-token': 'iamnotavalidtoken'
+                }
             }
-        })
+        )
         expect(socket.emit).toBeCalledTimes(0)
         expect(store.isTokenValid).toBeCalledTimes(1)
         expect(toast).toBeCalledTimes(0)
@@ -530,27 +551,32 @@ describe('auth-store', async () => {
             })
         )
         const store = useAuthStore()
-        store.token = "iamavalidtoken"
+        store.token = 'iamavalidtoken'
         store.isTokenValid = vi.fn(() => {
             return true
         })
 
         const gotTickets = await store.getTickets()
 
-        expect(fetch).toHaveBeenCalledWith('https://jsramverk-marjul2023.azurewebsites.net/graphql', {
-            method: 'POST',
-            body: JSON.stringify({query: `{tickets {
+        expect(fetch).toHaveBeenCalledWith(
+            'https://jsramverk-marjul2023.azurewebsites.net/graphql',
+            {
+                method: 'POST',
+                body: JSON.stringify({
+                    query: `{tickets {
                 _id
                 code
                 trainnumber
                 traindate
-              }}`}),
-            headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json',
-                'x-access-token': "iamavalidtoken"
+              }}`
+                }),
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                    'x-access-token': 'iamavalidtoken'
+                }
             }
-        })
+        )
         expect(gotTickets).toBe(tickets)
     })
 
@@ -559,39 +585,38 @@ describe('auth-store', async () => {
         fetch.mockResolvedValue(
             createFetchResponse({
                 errors: {
-                    detail: "Some error"
+                    detail: 'Some error'
                 }
             })
         )
         const store = useAuthStore()
-    
-        store.token = "iamnotavalidtoken"
+
+        store.token = 'iamnotavalidtoken'
         store.isTokenValid = vi.fn(() => {
             return false
         })
-    
+
         const gotTickets = await store.getTickets()
-    
-        expect(fetch).toHaveBeenCalledWith('https://jsramverk-marjul2023.azurewebsites.net/graphql', {
-            method: 'POST',
-            body: JSON.stringify({query: `{tickets {
+
+        expect(fetch).toHaveBeenCalledWith(
+            'https://jsramverk-marjul2023.azurewebsites.net/graphql',
+            {
+                method: 'POST',
+                body: JSON.stringify({
+                    query: `{tickets {
                 _id
                 code
                 trainnumber
                 traindate
               }}`
-            }),
-            headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json',
-                'x-access-token': "iamnotavalidtoken"
+                }),
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                    'x-access-token': 'iamnotavalidtoken'
+                }
             }
-        })
+        )
         expect(gotTickets).toStrictEqual([])
-
     })
 })
-
-
-
-
