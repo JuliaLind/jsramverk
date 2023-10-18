@@ -14,7 +14,8 @@ jobs:
       matrix:
         node-version: [18.x, 20.x]
 
-   env:
+
+    env:
       VITE_URL: ${{ secrets.VITE_URL }}
 
     steps:

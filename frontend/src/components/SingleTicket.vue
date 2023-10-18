@@ -16,7 +16,6 @@ let reasoncodes = ref([])
 const ticket = props.ticket
 
 onMounted(async () => {
-    // reasoncodes.value = await getCodes()
     reasoncodes.value = store.reasonCodes
 })
 
@@ -52,7 +51,7 @@ async function submitForm(code) {
 const editing = ref(false)
 const sendToBackend = {
     ticket: ticket._id,
-    user: store.userId
+    user: store.userEmail
 }
 
 onMounted(() => {
@@ -61,7 +60,6 @@ onMounted(() => {
 })
 
 socketService.on('refresh-ticket', (data) => {
-    console.log('got refreshed data in SingleTicket', data)
     if (data._id === id) {
         code.value = data.code
     }
@@ -73,7 +71,7 @@ const deletedTicket = `
             _id
         }
     }
-`
+    `
 
 const toggleEditing = function () {
     if (editing.value == false) {
@@ -130,11 +128,6 @@ const toggleEditing = function () {
             >
                 {{ innerText }}
             </button>
-            <!-- <button
-                class="btn btn-danger delete"
-                v-on:click.self="store.deleteTicket(deletedTicket), $emit('form-submitted')"
-                :disabled="id in socket.data"
-            > -->
             <button
                 class="btn btn-danger delete"
                 v-on:click.self="store.deleteTicket(deletedTicket)"

@@ -31,10 +31,9 @@ export const useAuthStore = defineStore('store', {
 
             const result = await response.json()
             if ('errors' in result) {
-                // window.alert(result.errors.detail)
                 loader.hide()
                 customAlert(result.errors.detail)
-                return result.errors.detail
+                return
             }
             this.token = result.data.token
             this.userEmail = result.data.user.email
@@ -42,14 +41,8 @@ export const useAuthStore = defineStore('store', {
             this.reasonCodes = await getCodes()
             router.push('/admin')
             socket.emit('logged-in', this.token)
-            // below is for manual testing
-            // socket.emit('logged-in', "iamabadtoken")
-            // socket.on('logged-you-in', () => {
-            //     console.log("yeeeey logged in")
-            // })
             loader.hide()
             toast(`Välkommen tillbaka ${result.data.user.name}!`)
-            return 'ok'
         },
         getToken() {
             return this.token
@@ -62,7 +55,6 @@ export const useAuthStore = defineStore('store', {
             socket.on('unauthorized', () => {
                 this.token = ''
                 router.push('/login')
-                // window.alert("Your token expired, please login again")
                 customAlert('Your token expired, please login again')
             })
         },
@@ -77,7 +69,7 @@ export const useAuthStore = defineStore('store', {
             const response = await fetch(`${import.meta.env.VITE_URL}/register`, {
                 body: JSON.stringify(user),
                 headers: {
-                    'content-type': 'application/json'
+                    'Content-Type': 'application/json'
                 },
                 method: 'POST'
             })
@@ -91,12 +83,10 @@ export const useAuthStore = defineStore('store', {
                     message = 'Något gick fel, försök igen om en stund'
                 }
                 loader.hide()
-                // window.alert(result.errors.detail)
-                // customAlert(result.errors.detail)
                 customAlert(message)
-                return result.errors.detail
+                return
             }
-            return await this.login(username, password)
+            await this.login(username, password)
         },
         /**
          * @param result - the returned object from
@@ -107,7 +97,6 @@ export const useAuthStore = defineStore('store', {
             if ('errors' in result) {
                 this.token = ''
                 router.push('/login')
-                // window.alert(result.errors[0].message)
                 customAlert(result.errors[0].message)
                 return false
             }
@@ -136,10 +125,7 @@ export const useAuthStore = defineStore('store', {
             if (this.isTokenValid(result)) {
                 socket.emit('refresh-tickets')
                 toast(`Du har skapat ett nytt ärende med id ${result.data.createTicket._id}!`)
-                return result.data.createTicket
             }
-            customAlert('Oj, något gick fel! Försök igen om en stund')
-            return undefined
         },
 
         /**
@@ -162,13 +148,11 @@ export const useAuthStore = defineStore('store', {
                 body: JSON.stringify({ query: updatedTicketObject })
             })
             const result = await response.json()
+
             if (this.isTokenValid(result)) {
                 socket.emit('updated', result.data.updateTicket)
                 toast(`Du har uppdaterat ärende ${result.data.updateTicket._id}!`)
-                return result.data.updateTicket
             }
-            customAlert('Oj, något gick fel! Försök igen om en stund')
-            return undefined
         },
 
         /**
@@ -192,10 +176,7 @@ export const useAuthStore = defineStore('store', {
             if (this.isTokenValid(result)) {
                 socket.emit('refresh-tickets')
                 toast(`Du har raderat ärende ${result.data.deleteTicket._id}`)
-                return result.data
             }
-            customAlert('Oj, något gick fel! Försök igen om en stund')
-            return undefined
         },
 
         /**
@@ -222,7 +203,7 @@ export const useAuthStore = defineStore('store', {
             if (this.isTokenValid(result)) {
                 return result.data.tickets
             }
-            return undefined
+            return []
         }
     }
 })

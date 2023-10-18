@@ -1,6 +1,4 @@
 export const customAlert = (message) => {
-    // const cAlert = document.getElementById("alert");
-    // const alertBody = cAlert.querySelector(".my-alert-body");
     const cAlert = document.createElement('div')
     const alertBody = document.createElement('div')
 
@@ -20,6 +18,7 @@ export const customAlert = (message) => {
     alertMsg.classList.add('my-alert-msg')
 
     const btn = document.createElement('div')
+
     btn.innerText = 'OK'
     btn.classList.add('my-alert-btn')
 
@@ -40,11 +39,14 @@ export const customAlert = (message) => {
 export const toast = (message) => {
     const toast = document.createElement('div')
     const toastBody = document.createElement('div')
+    const messageContainer = document.createElement('p')
 
+    messageContainer.classList.add('my-toast-message')
     toast.classList.add('my-toast')
     toastBody.classList.add('my-toast-body')
     toast.appendChild(toastBody)
-    toastBody.innerHTML = message
+    toastBody.appendChild(messageContainer)
+    messageContainer.innerHTML = message
     document.body.appendChild(toast)
 
     setTimeout(function () {

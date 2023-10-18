@@ -1,8 +1,10 @@
-import { vi, describe, it, expect, afterEach } from 'vitest'
+import { vi, describe, it, expect, afterEach, beforeEach } from 'vitest'
 import LoginForm from '../LoginForm.vue'
 import { mount, flushPromises } from '@vue/test-utils'
 import { createRouter, createWebHistory } from 'vue-router'
 import { routes } from '@/router'
+import { setActivePinia, createPinia } from 'pinia'
+import { useAuthStore } from '@/stores/auth'
 
 const router = createRouter({
     history: createWebHistory(),
@@ -13,26 +15,16 @@ describe('LoginForm', async () => {
     router.push('/login')
     await router.isReady()
 
+    beforeEach(() => {
+        setActivePinia(createPinia())
+    })
     afterEach(() => {
         vi.restoreAllMocks()
     })
+    it('renders properly and submit works as intended', async () => {
+        const auth = useAuthStore()
 
-    it('renders properly', async () => {
-        vi.mock('@/stores/auth', () => ({
-            useAuthStore: () => ({
-                token: '',
-                getToken: vi.fn(() => {
-                    return ''
-                }),
-                register: vi.fn(() => {
-                    return 'imavalidtoken'
-                }),
-                login: vi.fn(() => {
-                    return 'imavalidtoken'
-                })
-            })
-        }))
-
+        auth.login = vi.fn()
         const wrapper = mount(LoginForm, {
             global: {
                 plugins: [router]
@@ -43,8 +35,12 @@ describe('LoginForm', async () => {
         expect(wrapper.text()).contains('Logga in')
         expect(wrapper.text()).contains('E-postadress')
         expect(wrapper.text()).contains('Lösenord')
-        wrapper.unmount()
 
-        // note to self: add test for clicking on the submitbutton and checking that submitNewTickets function is salled. Also add test for checking codes in options dropdown
+        await wrapper.find('input[type=email]').setValue('my@mail.com')
+        await wrapper.find('input[type=password]').setValue('pass')
+        await wrapper.find('form').trigger('submit')
+        expect(auth.login).toHaveBeenCalledWith('my@mail.com', 'pass')
+
+        wrapper.unmount()
     })
 })

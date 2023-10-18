@@ -17,13 +17,14 @@ onMounted(async () => {
 
 socket.on('refresh-tickets', (data) => {
     tickets.value = data
-    console.log('got data', data)
 })
 </script>
 
 <template>
     <div class="wrapper-container">
-        <NewTicket @form-submitted="updateTickets()" />
+        <keep-alive>
+            <NewTicket @form-submitted="updateTickets()" />
+        </keep-alive>
         <div class="container">
             <table class="old-tickets" id="old-tickets">
                 <thead>

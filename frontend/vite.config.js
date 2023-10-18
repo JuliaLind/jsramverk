@@ -22,6 +22,6 @@ export default defineConfig({
         provider: 'istanbul',
         reporter: ['text', 'json', 'html', 'clover'],
         include: 'src/components/*.vue'
-    }
+    },
   }
 })

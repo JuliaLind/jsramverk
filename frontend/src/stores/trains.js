@@ -15,7 +15,6 @@ export const useTrainsStore = defineStore('trains', {
             } else {
                 this.current = ''
             }
-            console.log(this.current)
         }
     }
 })
