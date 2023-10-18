@@ -42,11 +42,6 @@ export const useAuthStore = defineStore('store', {
             this.reasonCodes = await getCodes()
             router.push('/admin')
             socket.emit('logged-in', this.token)
-            // below is for manual testing
-            // socket.emit('logged-in', "iamabadtoken")
-            // socket.on('logged-you-in', () => {
-            //     console.log("yeeeey logged in")
-            // })
             loader.hide()
             toast(`Välkommen tillbaka ${result.data.user.name}!`)
             return 'ok'
