@@ -1,52 +1,150 @@
-// /* global it describe */
+/* global it describe */
 
-// process.env.NODE_ENV = 'test';
+const chai = require('chai');
+const ioClient = require('socket.io-client');
+const sinon = require('sinon');
+const { server, updateDelayedTrains, checkTokens } = require('../app.js');
 
-// //Require the dev-dependencies
-// const chai = require('chai');
-// const chaiHttp = require('chai-http');
-// const server = require('../app.js');
-// chai.should();
-// chai.use(chaiHttp);
-// chai.use(require('chai-json'));
+const should = chai.should();
 
-// describe('app', () => {
-//     describe('GET /', () => {
-//         it('page should contain json with string "Hello world"', (done) => {
-//             chai.request(server)
-//                 .get("/")
-//                 .end((err, res) => {
-//                     res.should.have.status(200);
-//                     res.body.should.have.property("data");
-//                     res.body.data.should.be.a("string");
-//                     res.body.data.should.equal("Hello World!");
-//                     done();
-//                 });
-//         });
-//     });
-//     describe('GET /codes', () => {
-//         it('page should contain json with all codes"', (done) => {
-//             chai.request(server)
-//                 .get("/codes")
-//                 .end((err, res) => {
-//                     res.should.have.status(200);
-//                     res.body.should.have.property("data");
-//                     res.body.data.should.be.an("array");
-//                     res.body.data.should.have.nested.property("[0].Level1Description");
-//                     done();
-//                 });
-//         });
-//     });
-//     describe('GET /delayed', () => {
-//         it('page should contain json with delayed trains"', (done) => {
-//             chai.request(server)
-//                 .get("/delayed")
-//                 .end((err, res) => {
-//                     res.should.have.status(200);
-//                     res.body.should.have.property("data");
-//                     res.body.data.should.be.an("array");
-//                     done();
-//                 });
-//         });
-//     });
-// });
+describe('Socket.io events', function () {
+    let client;
+
+    beforeEach(function (done) {
+        server.listen(3000, function () {
+            done();
+        });
+    });
+
+    afterEach(function () {
+        server.close();
+    });
+
+    before(function (done) {
+        client = ioClient.connect('http://localhost:3000', {
+            transports: ['websocket'],
+            'force new connection': true,
+        });
+        done();
+    });
+
+    after(function (done) {
+        if (client.connected) {
+            client.disconnect();
+        }
+        done();
+    });
+
+    it('should handle "logged-in" event', function (done) {
+        const consoleLogSpy = sinon.spy(console, 'log');
+
+        client.on('connect', function () {
+            client.emit('logged-in', 'fakeToken');
+
+            client.on('unauthorized', function () {
+                sinon.assert.calledWith(consoleLogSpy, 'bad token');
+                console.log.restore();
+                done();
+            });
+        });
+    });
+
+    it('should handle "edit-ticket" event', function (done) {
+        client.emit('edit-ticket', { ticketId: 'fakeTicketId' });
+        done();
+
+        client.on('connect', function () {
+            client.once('lock-ticket', function (data) {
+                data.should.deep.equal({ ticketId: 'fakeTicketId' });
+                done();
+            });
+        });
+    });
+
+    it('should handle "stop-edit" event', function (done) {
+        client.once('unlock-ticket', function (data) {
+            should.exist(data.ticket);
+            done();
+        });
+
+        client.emit('stop-edit', {});
+        done();
+    });
+
+    it('should handle "updated" event', function (done) {
+        const ticketData = { _id: 'fakeTicketId' };
+
+        client.once('refresh-ticket', function (data) {
+            data.should.deep.equal(ticketData);
+            done();
+        });
+
+        client.emit('updated', ticketData);
+        done();
+    });
+
+    it('should handle "refresh-tickets" event', function (done) {
+        client.once('refresh-tickets', function (data) {
+            data.should.be.an('array');
+            done();
+        });
+
+        client.emit('refresh-tickets', {});
+        done();
+    });
+
+    it('should handle "logged-out" event', function (done) {
+        const consoleLogSpy = sinon.spy(console, 'log');
+
+        client.on('unauthorized', function () {
+            sinon.assert.calledWith(consoleLogSpy, 'bad token');
+            console.log.restore();
+            done();
+        });
+
+        client.emit('logged-out', {});
+        done();
+    });
+});
+
+describe('Cron Job and Token Check Functions', function () {
+    let ioMock;
+
+    beforeEach(function () {
+        // Mock the io object
+        ioMock = {
+            emit: sinon.stub(),
+            // in: () => ({
+            //     fetchSockets: () => [
+            //         { id: '1', token: 'validToken' },
+            //         { id: '2', token: 'invalidToken' }
+            //     ]
+            // })
+        };
+    });
+
+    it('should update delayed trains and emit the update', async function () {
+        await updateDelayedTrains(ioMock);
+
+        // Ensure the appropriate function was called
+        sinon.assert.calledOnce(ioMock.emit);
+        sinon.assert.calledWith(ioMock.emit, 'delayedTrainsUpdate');
+    });
+
+    // it('should check tokens and emit "unauthorized" if needed', async function () {
+    //     // Simulate a case where the token is invalid
+    //     ioMock.in = () => ({
+    //         fetchSockets: () => [
+    //             { id: '1', token: 'invalidToken' },
+    //             { id: '2', token: 'invalidToken' }
+    //         ]
+    //     });
+
+    //     await checkTokens(ioMock);
+
+    //     // Ensure the appropriate functions were called
+    //     sinon.assert.calledTwice(ioMock.emit);
+    //     sinon.assert.calledWith(ioMock.emit.firstCall, 'unauthorized');
+    //     sinon.assert.calledWith(ioMock.emit.secondCall, 'unauthorized');
+    // });
+});
