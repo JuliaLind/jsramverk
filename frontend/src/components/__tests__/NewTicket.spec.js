@@ -54,7 +54,7 @@ describe('NewTicket', async () => {
         const wrapper = mount(NewTicket)
         await flushPromises()
         await wrapper.find('select[name=trainnumber]').setValue('8468')
-        await wrapper.find('select[name=code]').setValue('PNA099')
+        await wrapper.find('select[name=reasoncode]').setValue('PNA099')
         await wrapper.find('form').trigger('submit')
         expect(auth.submitNewTicket).toHaveBeenCalledWith(newTicket)
         wrapper.unmount()
