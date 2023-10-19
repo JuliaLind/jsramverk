@@ -1,20 +1,10 @@
 import { vi, describe, it, expect, afterEach, beforeEach } from 'vitest'
 import LoginForm from '../LoginForm.vue'
 import { mount, flushPromises } from '@vue/test-utils'
-import { createRouter, createWebHistory } from 'vue-router'
-import { routes } from '@/router'
 import { setActivePinia, createPinia } from 'pinia'
 import { useAuthStore } from '@/stores/auth'
 
-const router = createRouter({
-    history: createWebHistory(),
-    routes: routes
-})
-
 describe('LoginForm', async () => {
-    router.push('/login')
-    await router.isReady()
-
     beforeEach(() => {
         setActivePinia(createPinia())
     })
@@ -25,11 +15,7 @@ describe('LoginForm', async () => {
         const auth = useAuthStore()
 
         auth.login = vi.fn()
-        const wrapper = mount(LoginForm, {
-            global: {
-                plugins: [router]
-            }
-        })
+        const wrapper = mount(LoginForm)
 
         await flushPromises()
         expect(wrapper.text()).contains('Logga in')
@@ -41,6 +27,22 @@ describe('LoginForm', async () => {
         await wrapper.find('form').trigger('submit')
         expect(auth.login).toHaveBeenCalledWith('my@mail.com', 'pass')
 
+        wrapper.unmount()
+    })
+    it('tests to toggle visibility of password button', async () => {
+        const wrapper = mount(LoginForm)
+
+        await flushPromises()
+        let password = wrapper.find('input[name=password]')
+        expect(password.html()).toContain('type="password"')
+        expect(password.html()).not.toContain('type="text"')
+        let btn = wrapper.find('.material-symbols-outlined')
+        expect(btn.text()).toBe("visibility")
+        await btn.trigger('click')
+        expect(btn.text()).toBe("visibility_off")
+        password = wrapper.find('input[name=password]')
+        expect(password.html()).not.toContain('type="password"')
+        expect(password.html()).toContain('type="text"')
         wrapper.unmount()
     })
 })
