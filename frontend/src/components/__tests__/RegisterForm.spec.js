@@ -1,19 +1,10 @@
 import { vi, describe, it, expect, afterEach, beforeEach } from 'vitest'
 import RegisterForm from '../RegisterForm.vue'
 import { mount } from '@vue/test-utils'
-import { createRouter, createWebHistory } from 'vue-router'
-import { routes } from '@/router'
 import { setActivePinia, createPinia } from 'pinia'
 import { useAuthStore } from '@/stores/auth'
 
-const router = createRouter({
-    history: createWebHistory(),
-    routes: routes
-})
-
 describe('RegisterForm', async () => {
-    router.push('/login')
-    await router.isReady()
     beforeEach(() => {
         setActivePinia(createPinia())
     })
@@ -26,11 +17,7 @@ describe('RegisterForm', async () => {
 
         auth.register = vi.fn()
 
-        const wrapper = mount(RegisterForm, {
-            global: {
-                plugins: [router]
-            }
-        })
+        const wrapper = mount(RegisterForm)
 
         expect(wrapper.text()).contains('Registrering')
         expect(wrapper.text()).contains('Namn')
@@ -42,6 +29,21 @@ describe('RegisterForm', async () => {
         await wrapper.find('input[type=text]').setValue('My Name')
         await wrapper.find('form').trigger('submit')
         expect(auth.register).toHaveBeenCalledWith('my@mail.com', 'pass', 'My Name')
+        wrapper.unmount()
+    })
+    it('tests to toggle visibility of password by toggling the visibility button', async () => {
+        const wrapper = mount(RegisterForm)
+
+        let password = wrapper.find('input[name=password]')
+        expect(password.html()).toContain('type="password"')
+        expect(password.html()).not.toContain('type="text"')
+        let btn = wrapper.find('.material-symbols-outlined')
+        expect(btn.text()).toBe("visibility")
+        await btn.trigger('click')
+        expect(btn.text()).toBe("visibility_off")
+        password = wrapper.find('input[name=password]')
+        expect(password.html()).not.toContain('type="password"')
+        expect(password.html()).toContain('type="text"')
         wrapper.unmount()
     })
 })
