@@ -3,7 +3,6 @@ import { RouterLink } from 'vue-router'
 import { useTrainsStore } from '@/stores/trains'
 
 const store = useTrainsStore()
-
 </script>
 
 <template>
@@ -12,10 +11,14 @@ const store = useTrainsStore()
         <nav id="nav">
             <ul>
                 <li>
-                    <RouterLink to="/" @click="store.setCurrent(''), $emit('refresh-map')"> Start </RouterLink>
+                    <RouterLink to="/" @click="store.setCurrent(''), $emit('refresh-map')">
+                        Start
+                    </RouterLink>
                 </li>
                 <li>
-                    <RouterLink to="/admin" @click="store.setCurrent(''), $emit('refresh-map')"> Admin </RouterLink>
+                    <RouterLink to="/admin" @click="store.setCurrent(''), $emit('refresh-map')">
+                        Admin
+                    </RouterLink>
                 </li>
             </ul>
         </nav>
