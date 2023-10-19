@@ -24,7 +24,6 @@ const toggleForm = () => {
     <div class="container">
         <LoginForm v-if="login" />
         <RegisterForm v-else />
-        <!-- Make this a button or a link later-->
         <div class="button-container">
             <button class="toggle-link btn btn-secondary mt-3" v-on:click="toggleForm()">
                 {{ innerText }}

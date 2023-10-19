@@ -4,7 +4,6 @@
  * trains and a map with their current
  * positions
  */
-// import { onMounted } from 'vue'
 import DelayedTable from '../components/DelayedTable.vue'
 import MapComp from '../components/MapComp.vue'
 import HeaderComp from '../components/HeaderComp.vue'
