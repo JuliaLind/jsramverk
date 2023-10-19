@@ -19,7 +19,7 @@ const toggleForm = () => {
 
 <template>
     <div class="main-nav">
-        <HeaderComp></HeaderComp>
+        <HeaderComp />
     </div>
     <div class="container">
         <LoginForm v-if="login" />
@@ -32,7 +32,7 @@ const toggleForm = () => {
         </div>
     </div>
     <div class="footer fixed-bottom">
-        <FooterComp></FooterComp>
+        <FooterComp />
     </div>
 </template>
 

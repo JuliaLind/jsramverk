@@ -10,7 +10,7 @@ const store = useAuthStore()
 
 <template>
     <div class="main-nav">
-        <HeaderComp></HeaderComp>
+        <HeaderComp />
     </div>
     <div class="logout">
         <RouterLink class="btn btn-warning" to="/" @click="store.logout()"> Logga ut </RouterLink>
@@ -21,7 +21,7 @@ const store = useAuthStore()
         </div>
     </div>
     <div class="footer fixed-bottom">
-        <FooterComp></FooterComp>
+        <FooterComp />
     </div>
 </template>
 

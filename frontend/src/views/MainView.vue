@@ -17,7 +17,7 @@ const map = ref(null)
 <template>
     <main>
         <div class="main-nav">
-            <HeaderComp></HeaderComp>
+            <HeaderComp @refresh-map="map.updateLayers()" />
         </div>
         <div class="main-content">
             <keep-alive>
@@ -28,7 +28,7 @@ const map = ref(null)
             </keep-alive>
         </div>
         <div class="main-footer">
-            <FooterComp></FooterComp>
+            <FooterComp />
         </div>
     </main>
 </template>
