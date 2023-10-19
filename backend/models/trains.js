@@ -33,11 +33,6 @@ const trains = {
         }
         return initialPositions;
     },
-    // getInitialPositions: async function getInitialPositions(req, res) {
-    //     return res.json({
-    //         data: await this.getFromTrafikverket()
-    //     });
-    // },
 
     // picked out from parsePositionData function to reuse in initial data request
     getCoords: function getCoords(positionDataObject) {
@@ -75,12 +70,6 @@ const trains = {
         trainPositions[changedPosition.Train.OperationalTrainNumber] = trainObject;
 
         return trainObject;
-        // }
-        // } catch (e) {
-        //     console.error(e.message);
-        //     // e.code = "PARSE_POSITION_ERROR";
-        //     throw e;
-        // }
     },
 
     /**
@@ -122,28 +111,7 @@ const trains = {
         const trainObject = this.parsePositionData(event.data, trainPositions, socket);
 
         return trainObject;
-        // } catch (error) {
-        //     const message = "Error handling SSE message: " + error;
-
-        //     console.error(message);
-        //     // error.code = "SSE_MESSAGE_ERROR";
-        //     error.message = message;
-        //     throw error;
-        // }
     },
-
-    // /**
-    // * Handles errors from the EventSource.
-    // * @param {Object} e - The error event from the EventSource.
-    // * @returns {Error} An error object representing the EventSource error.
-    // */
-    // handleEventSourceError: function handleEventSourceError(e) {
-    //     const error = new Error("EventSource failed");
-
-    //     error.eventSourceError = e;
-    //     // error.code = "EVENTSOURCE_FAILED_ERROR";
-    //     return error;
-    // },
 
     /**
     * Fetches train positions in real-time and sends updates to
@@ -183,30 +151,6 @@ const trains = {
             console.error("EventSource error:", e.eventSourceError);
         };
     }
-    // try {
-    //     const sseUrl = await this.fetchSSEUrl();
-
-    //     const trainPositions = {};
-
-    //     const eventSource = new EventSource(sseUrl);
-
-    //     eventSource.onopen = function() {
-    //         console.info("Connection to server opened.");
-    //     };
-
-    //     io.on('connection', (socket) => {
-    //         console.info('a user connected');
-
-    //         eventSource.onmessage = (e) => this.handleSSEMessage(e, trainPositions, socket);
-    //     });
-
-    //     eventSource.onerror = function (e) {
-    //         throw trains.handleEventSourceError(e);
-    //     };
-    // } catch (error) {
-    //     console.error(error.message);
-    //     console.error("EventSource error:", error.eventSourceError);
-    // }
 };
 
 module.exports = trains;
