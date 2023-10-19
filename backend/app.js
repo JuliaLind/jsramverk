@@ -82,13 +82,10 @@ app.use(
     })
 );
 
-// Mount routes
-// app.use("/delayed", delayed);
-// app.use("/tickets", tickets);
-// app.use("/codes", codes);
+
 app.use("/register", register);
 app.use("/login", login);
-// app.use("/trains", trains);
+
 
 // Middleware for handling 404 errors (Not Found)
 app.use((req, res, next) => {
@@ -141,6 +138,14 @@ cron.schedule('5 * * * * *', () => {
     updateDelayedTrains(io);
 });
 
+/**
+ * Checks the token of each connected client.
+ * I the token has expired the token attribute on socket is
+ * reset to empty string and the socket is removed from "tickets"
+ * room. Client is notified about this by emit of "unauthorized".
+ * This function is used before sending any sensitive data
+ * to members of "tickets" room
+ */
 async function checkTokens() {
     const clients = await io.in('tickets').fetchSockets();
 
@@ -156,6 +161,14 @@ async function checkTokens() {
 
 io.on('connection', (socket) => {
     socket.token = "";
+    /**
+     * If the token send by client
+     * together with "logged-in" emit is
+     * valid, the token is added as attribute to
+     * the socket and the socket is let into the
+     * "tickets" room, if the token is not valid the
+     * socket is informed by "unauthorized" emit
+     */
     socket.on('logged-in', (token) => {
         if (authModel.verifyToken(token)) {
             socket.token = token;
@@ -165,6 +178,11 @@ io.on('connection', (socket) => {
         }
     });
 
+    /**
+     * When client emits "logged-out" the socket
+     * is removed from "tickets" room and the token
+     * attribute is reset to empty string
+     */
     socket.on("logged-out", () => {
         socket.leave("tickets");
         socket.token = "";
@@ -181,7 +199,11 @@ io.on('connection', (socket) => {
     });
     socket.on('updated', async (data) => {
         await checkTokens();
+        // only authorized users get the data of updated ticket
         socket.to("tickets").emit('refresh-ticket', data);
+        // all users get informed to unlock the ticket,
+        // to avoid any missmatch if a ticket gets unlocked between
+        // that a user gets logged out and needs to login again
         socket.broadcast.emit('unlock-ticket', ({
             ticket: data._id
         }));
@@ -191,6 +213,8 @@ io.on('connection', (socket) => {
         let data = await ticketsModel.getTickets();
 
         socket.to("tickets").emit('refresh-tickets', data);
+        // emitting to own socket this way turned out to be more effective than
+        // sending an internal emit within the frontend application
         io.to(socket.id).emit('refresh-tickets', data);
     });
 });
