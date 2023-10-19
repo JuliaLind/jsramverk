@@ -10,6 +10,8 @@ import HeaderComp from '../components/HeaderComp.vue'
 import FooterComp from '../components/FooterComp.vue'
 import { ref } from 'vue'
 
+// this line is neccessary in order to be able to
+// call the updateLayers() function from map comp
 const map = ref(null)
 </script>
 

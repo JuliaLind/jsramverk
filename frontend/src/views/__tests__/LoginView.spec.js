@@ -30,6 +30,8 @@ describe('LoginView', async () => {
         await btn.trigger('click')
         btn = wrapper.find('button.toggle-link')
         expect(btn.text()).contains('Till inloggning')
+        await btn.trigger('click')
+        expect(btn.text()).contains('Till registrering')
 
         wrapper.unmount()
     })
