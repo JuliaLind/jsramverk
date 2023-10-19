@@ -1,18 +1,9 @@
 <script setup>
 import { RouterLink } from 'vue-router'
 import { useTrainsStore } from '@/stores/trains'
-import { ref, onMounted } from 'vue'
 
 const store = useTrainsStore()
-let current = ref('')
 
-function switchCurrent() {
-    current.value = store.current
-}
-
-onMounted(() => {
-    switchCurrent()
-})
 </script>
 
 <template>
