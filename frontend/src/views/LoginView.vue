@@ -6,6 +6,11 @@ import FooterComp from '../components/FooterComp.vue'
 import { ref } from 'vue'
 const login = ref(true)
 let innerText = ref('Till registrering')
+
+/**
+ * Toggles between displaying form for logging in
+ * and for for registering
+ */
 const toggleForm = () => {
     if (login.value == true) {
         login.value = false
@@ -19,12 +24,11 @@ const toggleForm = () => {
 
 <template>
     <div class="main-nav">
-        <HeaderComp></HeaderComp>
+        <HeaderComp />
     </div>
     <div class="container">
         <LoginForm v-if="login" />
         <RegisterForm v-else />
-        <!-- Make this a button or a link later-->
         <div class="button-container">
             <button class="toggle-link btn btn-secondary mt-3" v-on:click="toggleForm()">
                 {{ innerText }}
@@ -32,7 +36,7 @@ const toggleForm = () => {
         </div>
     </div>
     <div class="footer fixed-bottom">
-        <FooterComp></FooterComp>
+        <FooterComp />
     </div>
 </template>
 

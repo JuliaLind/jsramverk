@@ -7,12 +7,9 @@ import socket from '../services/socket.service.js'
 
 const store = useAuthStore()
 const tickets = ref([])
-const updateTickets = async () => {
-    tickets.value = await store.getTickets()
-}
 
 onMounted(async () => {
-    await updateTickets()
+    tickets.value = await store.getTickets()
 })
 
 socket.on('refresh-tickets', (data) => {
@@ -23,7 +20,7 @@ socket.on('refresh-tickets', (data) => {
 <template>
     <div class="wrapper-container">
         <keep-alive>
-            <NewTicket @form-submitted="updateTickets()" />
+            <NewTicket />
         </keep-alive>
         <div class="container">
             <table class="old-tickets" id="old-tickets">

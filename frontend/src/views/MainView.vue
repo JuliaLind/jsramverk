@@ -4,20 +4,21 @@
  * trains and a map with their current
  * positions
  */
-// import { onMounted } from 'vue'
 import DelayedTable from '../components/DelayedTable.vue'
 import MapComp from '../components/MapComp.vue'
 import HeaderComp from '../components/HeaderComp.vue'
 import FooterComp from '../components/FooterComp.vue'
 import { ref } from 'vue'
 
+// this line is neccessary in order to be able to
+// call the updateLayers() function from map comp
 const map = ref(null)
 </script>
 
 <template>
     <main>
         <div class="main-nav">
-            <HeaderComp></HeaderComp>
+            <HeaderComp @refresh-map="map.updateLayers()" />
         </div>
         <div class="main-content">
             <keep-alive>
@@ -28,7 +29,7 @@ const map = ref(null)
             </keep-alive>
         </div>
         <div class="main-footer">
-            <FooterComp></FooterComp>
+            <FooterComp />
         </div>
     </main>
 </template>

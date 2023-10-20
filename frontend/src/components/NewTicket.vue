@@ -77,7 +77,13 @@ async function submitForm(code, trainnumber, traindate) {
                     </div>
                     <div class="form-group mb-3">
                         <label for="reasonCode" class="mb-1">Orsakskod</label>
-                        <select name="reasoncode" id="reasonCode" required class="form-control" v-model="code">
+                        <select
+                            name="reasoncode"
+                            id="reasonCode"
+                            required
+                            class="form-control"
+                            v-model="code"
+                        >
                             <option disabled hidden :value="''">Välj orsakskod</option>
                             <option v-for="code in reasoncodes" :key="code.Code" :value="code.Code">
                                 {{ code.Code }} - {{ code.Level3Description }}
@@ -92,7 +98,7 @@ async function submitForm(code, trainnumber, traindate) {
                             disabled
                             name="traindate"
                             class="form-control"
-                            v-model="traindate"
+                            v-bind:value="traindate"
                         />
                     </div>
                     <input type="submit" class="btn btn-success" value="Skapa" />

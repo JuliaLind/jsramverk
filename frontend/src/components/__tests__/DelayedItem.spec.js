@@ -33,6 +33,7 @@ describe('DelayedItem', async () => {
                 item: currentItem
             }
         })
+        // make sure the delayed item is displayed if current is set to the item's trainnumber
         expect(wrapper.text()).toContain('8483')
         expect(wrapper.text()).toContain('Djurås')
         expect(wrapper.text()).toContain('Borlänge C')
@@ -48,6 +49,8 @@ describe('DelayedItem', async () => {
                 item: currentItem
             }
         })
+        // make sure that delayed item is not displayed if current train is
+        // set to different trainnumber
         expect(wrapper.text()).not.toContain('8483')
         expect(wrapper.text()).not.toContain('Djurås')
         expect(wrapper.text()).not.toContain('Borlänge C')

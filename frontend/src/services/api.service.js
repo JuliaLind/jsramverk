@@ -31,7 +31,8 @@ export const getDelayedTrains = async () => {
 }
 
 /**
- * Returns an array with information about delayed trains
+ * Returns an array with information about current positions
+ * of the trains
  * @returns {Promise<array>}
  */
 export const getInitialPositions = async () => {
@@ -76,6 +77,12 @@ export const getCodes = async () => {
     return result.data.codes
 }
 
+/**
+ * Extracts and returns a sorted array with unique trainnumbers
+ * from an array with delay objects
+ * @param {array} delayed
+ * @returns {array}
+ */
 export const extractTrainNumbers = (delayed) => {
     return [
         ...new Set(
@@ -88,6 +95,13 @@ export const extractTrainNumbers = (delayed) => {
     ]
 }
 
+/**
+ * fetches an array with trainnumbers of all delay objects
+ * and extracts and returns unique trainnumbers in
+ * a sorted array
+ * @returns {array} awway with trainnumbers to be used in
+ * the select menu of NewTicket component
+ */
 export const getTrainNumbers = async () => {
     const query = `{delayed {
         OperationalTrainNumber
@@ -100,9 +114,7 @@ export const getTrainNumbers = async () => {
         },
         body: JSON.stringify({ query: query })
     })
-
     const result = await response.json()
-
     const delayed = result.data.delayed
 
     return extractTrainNumbers(delayed)

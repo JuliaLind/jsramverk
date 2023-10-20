@@ -32,7 +32,21 @@ describe('NewTicket', async () => {
             }
         }
     `
+    it('test submit new ticket', async () => {
+        const auth = useAuthStore()
+        auth.reasonCodes = codes
+        auth.submitNewTicket = vi.fn()
 
+        const wrapper = mount(NewTicket)
+        await flushPromises()
+        // fill out the new ticket form and submit
+        await wrapper.find('select[name=trainnumber]').setValue('8468')
+        await wrapper.find('select[name=reasoncode]').setValue('PNA099')
+        await wrapper.find('form').trigger('submit')
+        // check that submitNewTicket was called with the set parameters
+        expect(auth.submitNewTicket).toHaveBeenCalledWith(newTicket)
+        wrapper.unmount()
+    })
     it('renders properly', async () => {
         const auth = useAuthStore()
         auth.reasonCodes = codes
@@ -43,20 +57,6 @@ describe('NewTicket', async () => {
         await flushPromises()
         expect(wrapper.html()).toContain('Skapa')
 
-        wrapper.unmount()
-    })
-
-    it('test submit new ticket', async () => {
-        const auth = useAuthStore()
-        auth.reasonCodes = codes
-        auth.submitNewTicket = vi.fn()
-
-        const wrapper = mount(NewTicket)
-        await flushPromises()
-        await wrapper.find('select[name=trainnumber]').setValue('8468')
-        await wrapper.find('select[name=reasoncode]').setValue('PNA099')
-        await wrapper.find('form').trigger('submit')
-        expect(auth.submitNewTicket).toHaveBeenCalledWith(newTicket)
         wrapper.unmount()
     })
 })

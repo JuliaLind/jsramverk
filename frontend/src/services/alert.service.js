@@ -1,3 +1,9 @@
+/**
+ * Creates and adds to document body a custom 'alert' with an ok buttom
+ * that needs to be clicked by the user in order to close
+ * (the message will also dissapear if page is reloaded)
+ * @param {string} message - message to be displayed in the alert
+ */
 export const customAlert = (message) => {
     const cAlert = document.createElement('div')
     const alertBody = document.createElement('div')
@@ -36,6 +42,11 @@ export const customAlert = (message) => {
     })
 }
 
+/**
+ * Creates and adds do document body a toast-message.
+ * The toast will automatically dissapear after 3.4 s
+ * @param {string} message - message to be displayed in the toast
+ */
 export const toast = (message) => {
     const toast = document.createElement('div')
     const toastBody = document.createElement('div')
