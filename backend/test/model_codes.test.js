@@ -14,20 +14,8 @@ const codes = require('../models/codes.js');
 describe('codes model', () => {
     describe('getCodes', () => {
         it('should send post request to api and return data array with objects', async () => {
-            //Mock res and req objects
-            const req = {};
-            const res = {
-                json: sinon.stub()
-            };
+            const data = await codes.getFromTrafikverket();
 
-            // Call the getCodes function
-            await codes.getCodes(req, res);
-
-            // Assert that the json method was called
-            expect(res.json.calledOnce).to.be.true;
-
-            // Assert that data is valid object
-            const data = res.json.args[0][0].data;
 
             expect(data).to.be.an('array');
             expect(data[0]).to.be.an('object');

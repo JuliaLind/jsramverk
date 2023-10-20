@@ -38,35 +38,8 @@ const codes = {
         const result = await response.json();
 
         // JSON result data
-        // return await response.json();
         return result.RESPONSE.RESULT[0].ReasonCode;
     },
-    /**
-     * @description Fetches reason codes from the Trafikverket API.
-     * @async
-     * @function
-     * @param {Object} req - Express.js request object.
-     * @param {Object} res - Express.js response object.
-     * @returns {Promise<Object>} A JSON response containing reason codes data.
-     */
-    getCodes: async function getCodes(req, res) {
-        try {
-            const result = await this.getFromTrafikverket();
-
-            return res.json({
-                data: result
-            });
-        } catch (e) {
-            return res.status(500).json({
-                errors: {
-                    status: 500,
-                    source: "/",
-                    title: "API fetch error",
-                    detail: e.message
-                }
-            });
-        }
-    }
 };
 
 module.exports = codes;

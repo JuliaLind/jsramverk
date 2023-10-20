@@ -18,13 +18,9 @@ const delayedModel = require('./models/delayed.js');
 const trainsModel = require('./models/trains.js');
 const authModel = require('./models/auth.js');
 const ticketsModel = require('./models/tickets.js');
-
-// const delayed = require('./routes/delayed.js');
-// const tickets = require('./routes/tickets.js');
-// const codes = require('./routes/codes.js');
 const register = require("./routes/register.js");
 const login = require("./routes/login.js");
-// const trains = require("./routes/trains.js");
+
 
 const { graphqlHTTP } = require('express-graphql');
 const {
