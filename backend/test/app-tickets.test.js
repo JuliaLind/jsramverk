@@ -57,7 +57,7 @@ describe('admin-related', () => {
 
         await db.client.close();
     });
-    it('should return contain json with old tickets', async () => {
+    it('should return json with old tickets', async () => {
         const query = `{
             tickets {
                 code
