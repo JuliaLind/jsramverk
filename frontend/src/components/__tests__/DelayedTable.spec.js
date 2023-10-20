@@ -41,7 +41,6 @@ describe('DelayedTable', async () => {
         expect(wrapper.html()).toContain('8136')
         expect(wrapper.html()).toContain('8739')
         expect(wrapper.html()).toContain('20096')
-
         expect(store.current).toBe('')
 
         // click and now the delayed table should only show delays from train 8136
