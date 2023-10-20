@@ -37,6 +37,7 @@ describe('DelayedTable', async () => {
 
         await flushPromises()
         expect(getDelayedTrains).toBeCalledTimes(1)
+        // as a starting value test the three specific delayed items are displayed
         expect(wrapper.html()).toContain('8136')
         expect(wrapper.html()).toContain('8739')
         expect(wrapper.html()).toContain('20096')

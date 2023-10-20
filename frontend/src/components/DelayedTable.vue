@@ -12,9 +12,13 @@ const store = useTrainsStore()
 const delayedTrains = ref([])
 
 onMounted(async () => {
+    // get the initial delayed trains list
     delayedTrains.value = await getDelayedTrains()
 })
 
+/**
+ * Updated list is received from backend every 5 s
+ */
 socket.on('delayedTrainsUpdate', (updatedTrains) => {
     delayedTrains.value = updatedTrains
 })

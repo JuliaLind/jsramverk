@@ -1,4 +1,11 @@
+/**
+ * A spinner to display while
+ * waiting for a fetch to resolve
+ */
 export const loader = {
+    /**
+     * Creates and a spinner to the document body
+     */
     show: function show() {
         const check = document.querySelector('.loader')
 
@@ -9,7 +16,9 @@ export const loader = {
             document.body.appendChild(myLoader)
         }
     },
-
+    /**
+     * Removes the spinner from document body
+     */
     hide: function hide() {
         const myLoader = document.querySelector('.loader')
 

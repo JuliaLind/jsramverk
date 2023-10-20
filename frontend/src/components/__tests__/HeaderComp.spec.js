@@ -34,16 +34,26 @@ describe('HeaderComp', async () => {
         expect(wrapper.text()).contains('Start')
         expect(wrapper.text()).contains('Admin')
 
+        // set current trainnumber
         trains.setCurrent('5136')
+        // doublecheck that it is actually set
         expect(trains.current).toBe('5136')
+        // click on the main link
         await wrapper.find('a[href="/"]').trigger('click')
+        // make sure that the previously set trainumber has been unset
         expect(trains.current).toBe('')
+        // make sure that the refresh-map event is emitted
         expect(wrapper.emitted('refresh-map')).toBeTruthy()
 
+        // set current trainnumber
         trains.setCurrent('3146')
+        // doublecheck that it is actually set
         expect(trains.current).toBe('3146')
+        // click on the admin link
         await wrapper.find('a[href="/admin"]').trigger('click')
+        // make sure that the previously set trainumber has been unset
         expect(trains.current).toBe('')
+        // make sure that the refresh-map event is emitted
         expect(wrapper.emitted('refresh-map')).toBeTruthy()
 
         wrapper.unmount()

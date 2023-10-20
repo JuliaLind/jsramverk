@@ -6,6 +6,11 @@ import FooterComp from '../components/FooterComp.vue'
 import { ref } from 'vue'
 const login = ref(true)
 let innerText = ref('Till registrering')
+
+/**
+ * Toggles between displaying form for logging in
+ * and for for registering
+ */
 const toggleForm = () => {
     if (login.value == true) {
         login.value = false
