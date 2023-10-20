@@ -24,8 +24,8 @@ const hash = bcrypt.hashSync(password, 10);
 const sinon = require('sinon');
 const { checkGQToken } = require('../models/auth.js');
 
-describe('tickets get and post routes', () => {
-    before(async () => {
+describe('admin-related', () => {
+    beforeEach(async () => {
         const db = await database.getDb();
         await db.collection.tickets.deleteMany();
         await db.collection.users.deleteMany();
@@ -54,7 +54,7 @@ describe('tickets get and post routes', () => {
 
         await db.client.close();
     });
-    it('page should contain json with old tickets', async () => {
+    it('should return contain json with old tickets', async () => {
         const query = `{
             tickets {
                 code
@@ -112,7 +112,7 @@ describe('tickets get and post routes', () => {
 
         expect(check).to.equal(true);
     });
-    it('should not access put route without token', async () => {
+    it('should not update ticket without token', async () => {
         const query = `
         mutation {
             updateTicket(_id: "000000013b7eef17104f27e5", code: "update_code") {
@@ -236,7 +236,7 @@ describe('tickets get and post routes', () => {
         await db.client.close();
 
     });
-    it('should create a new ticket via POST request', async () => {
+    it('should create a new ticket request', async () => {
         const ticketData = {
             code: 'test_code',
             trainnumber: '123456',
