@@ -116,30 +116,6 @@ const delayed = {
         const filteredResult = this.filterResult(result.RESPONSE.RESULT[1].TrainAnnouncement, result.RESPONSE.RESULT[2].TrainStation, result.RESPONSE.RESULT[0].TrainPosition);
 
         return filteredResult;
-    },
-    /**
-     * @description Fetches delayed trains from the Trafikverket API.
-     * @async
-     * @function
-     * @param {Object} req - Express.js request object.
-     * @param {Object} res - Express.js response object.
-     * @returns {Promise<Object>} A JSON response containing delayed trains data.
-     */
-    getDelayedTrains: async function getDelayedTrains(req, res) {
-        try {
-            return res.json({
-                data: await this.getFromTrafikverket()
-            });
-        } catch (e) {
-            return res.status(500).json({
-                errors: {
-                    status: 500,
-                    source: "/",
-                    title: "API fetch error",
-                    detail: e.message
-                }
-            });
-        }
     }
 };
 
