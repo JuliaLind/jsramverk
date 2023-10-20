@@ -101,6 +101,7 @@ describe('auth-store', async () => {
         store.token = 'iamatoken'
         expect(store.token).toBe('iamatoken')
         store.logout()
+        expect(socket.emit).toHaveBeenCalledWith('logged-out')
         expect(store.token).toBe('')
     })
     it('tests getToken', async () => {
