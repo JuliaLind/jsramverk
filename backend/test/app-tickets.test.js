@@ -27,8 +27,11 @@ const { checkGQToken } = require('../models/auth.js');
 describe('admin-related', () => {
     beforeEach(async () => {
         const db = await database.getDb();
-        await db.collection.tickets.deleteMany();
-        await db.collection.users.deleteMany();
+        // await db.collection.tickets.deleteMany();
+        // await db.collection.users.deleteMany();
+        await db.collection.tickets.drop()
+        await db.collection.users.drop()
+        db.collection.users.createIndex( { "email": 1 }, { unique: true } )
         const docs = [
             { 
                 _id: new ObjectId("000000013b7eef17104f27e5"),
