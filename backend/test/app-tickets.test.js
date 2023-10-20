@@ -24,11 +24,14 @@ const hash = bcrypt.hashSync(password, 10);
 const sinon = require('sinon');
 const { checkGQToken } = require('../models/auth.js');
 
-describe('tickets get and post routes', () => {
-    before(async () => {
+describe('admin-related', () => {
+    beforeEach(async () => {
         const db = await database.getDb();
-        await db.collection.tickets.deleteMany();
-        await db.collection.users.deleteMany();
+        // await db.collection.tickets.deleteMany();
+        // await db.collection.users.deleteMany();
+        await db.collection.tickets.drop()
+        await db.collection.users.drop()
+        db.collection.users.createIndex( { "email": 1 }, { unique: true } )
         const docs = [
             { 
                 _id: new ObjectId("000000013b7eef17104f27e5"),
@@ -50,11 +53,11 @@ describe('tickets get and post routes', () => {
             hash: hash,
         };
         await db.collection.users.insertOne(user);
-        const allUsers = await db.collection.users.find({}).toArray();
+        // const allUsers = await db.collection.users.find({}).toArray();
 
         await db.client.close();
     });
-    it('page should contain json with old tickets', async () => {
+    it('should return json with old tickets', async () => {
         const query = `{
             tickets {
                 code
@@ -112,7 +115,7 @@ describe('tickets get and post routes', () => {
 
         expect(check).to.equal(true);
     });
-    it('should not access put route without token', async () => {
+    it('should not update ticket without token', async () => {
         const query = `
         mutation {
             updateTicket(_id: "000000013b7eef17104f27e5", code: "update_code") {
@@ -236,7 +239,7 @@ describe('tickets get and post routes', () => {
         await db.client.close();
 
     });
-    it('should create a new ticket via POST request', async () => {
+    it('should create a new ticket request', async () => {
         const ticketData = {
             code: 'test_code',
             trainnumber: '123456',
@@ -384,14 +387,24 @@ describe('tickets get and post routes', () => {
             await db.client.close();
         }, 5000);
     });
-    it('cannot register duplicate user', async () => {
+    // it('cannot register duplicate user', async () => {
+    it('cannot register duplicate user', (done) => {
         const userData = {
             email: "test@test.com",
             password: password,
         };
-        const response = await chai.request(server).post('/register').send(userData);
-        expect(response).to.have.status(500);
-        expect(response.body.errors.detail).to.contain("duplicate key error collection")
+        // const response = await chai.request(server).post('/register').send(userData);
+        // expect(response).to.have.status(500);
+        // expect(response.body.errors.detail).to.contain("duplicate key error collection")
+
+        chai.request(server)
+        .post('/register')
+        .send(userData)
+        .end((err, res) => {
+            expect(res).to.have.status(500);
+            expect(res.body.errors.detail).to.contain("duplicate key error collection");
+            done();
+        });
     });
     it('should handle bcrypt error', (done) => {
         const reqBody = {
