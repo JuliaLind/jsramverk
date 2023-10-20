@@ -23,8 +23,8 @@ export const useAuthStore = defineStore('store', {
         /**
          * Logs in user to give access to admin route
          * and ticket administration
-         * @param {string} username 
-         * @param {string} password 
+         * @param {string} username
+         * @param {string} password
          * @returns {void}
          */
         async login(username, password) {
@@ -47,7 +47,6 @@ export const useAuthStore = defineStore('store', {
 
             // if logging in wasn't successful
             if ('errors' in result) {
-
                 // hide the spinner
                 loader.hide()
 
@@ -105,9 +104,9 @@ export const useAuthStore = defineStore('store', {
         },
         /**
          * Registers new user in backend database
-         * @param {string} username 
-         * @param {string} password 
-         * @param {string} name 
+         * @param {string} username
+         * @param {string} password
+         * @param {string} name
          * @returns { void }
          */
         async register(username, password, name) {
@@ -214,7 +213,7 @@ export const useAuthStore = defineStore('store', {
             if (this.isTokenValid(result)) {
                 // if everything went well with ticket update,
                 // send the updated ticket data to backend to be forwarded to
-                // all users (maybe not the best solution, a better way would be 
+                // all users (maybe not the best solution, a better way would be
                 // to send to all sockets in tickets room directly from ticketsModel
                 // update )
                 socket.emit('updated', result.data.updateTicket)

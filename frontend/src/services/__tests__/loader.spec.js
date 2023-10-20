@@ -1,3 +1,5 @@
+/** global: Event */
+
 import { loader } from '../loader.service.js'
 import { describe, expect, it } from 'vitest'
 

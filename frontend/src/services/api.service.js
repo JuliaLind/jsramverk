@@ -77,11 +77,10 @@ export const getCodes = async () => {
     return result.data.codes
 }
 
-
 /**
  * Extracts and returns a sorted array with unique trainnumbers
  * from an array with delay objects
- * @param {array} delayed 
+ * @param {array} delayed
  * @returns {array}
  */
 export const extractTrainNumbers = (delayed) => {

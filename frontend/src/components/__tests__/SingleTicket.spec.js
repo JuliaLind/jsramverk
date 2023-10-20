@@ -81,7 +81,6 @@ describe('SingleTicket', async () => {
         expect(wrapper.html()).contains('Återgå')
         expect(wrapper.html()).not.contains('Ändra')
 
-
         // click the return button and check that socket
         // emits message go backend so other users can unlock the ticket
         await wrapper.find('button.btn-dark').trigger('click')
@@ -194,7 +193,7 @@ describe('SingleTicket', async () => {
 
         // empty the array with locked tickets and make sure
         // the buttons are enabled again
-        socket.data = {};
+        socket.data = {}
         deleteBtn = await wrapper.find('button.btn-danger')
         editBtn = await wrapper.find('button.btn-dark')
         expect(deleteBtn.html()).not.contains('disabled')

@@ -13,7 +13,7 @@ export const useTrainsStore = defineStore('trains', {
     actions: {
         /**
          * For togglings between displaying specific train or all trains
-         * @param {string} trainnr 
+         * @param {string} trainnr
          */
         setCurrent(trainnr) {
             if (this.current === '') {
