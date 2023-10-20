@@ -53,7 +53,7 @@ describe('admin-related', () => {
             hash: hash,
         };
         await db.collection.users.insertOne(user);
-        const allUsers = await db.collection.users.find({}).toArray();
+        // const allUsers = await db.collection.users.find({}).toArray();
 
         await db.client.close();
     });
@@ -387,14 +387,24 @@ describe('admin-related', () => {
             await db.client.close();
         }, 5000);
     });
-    it('cannot register duplicate user', async () => {
+    // it('cannot register duplicate user', async () => {
+    it('cannot register duplicate user', (done) => {
         const userData = {
             email: "test@test.com",
             password: password,
         };
-        const response = await chai.request(server).post('/register').send(userData);
-        expect(response).to.have.status(500);
-        expect(response.body.errors.detail).to.contain("duplicate key error collection")
+        // const response = await chai.request(server).post('/register').send(userData);
+        // expect(response).to.have.status(500);
+        // expect(response.body.errors.detail).to.contain("duplicate key error collection")
+
+        chai.request(server)
+        .post('/register')
+        .send(userData)
+        .end((err, res) => {
+            expect(res).to.have.status(500);
+            expect(res.body.errors.detail).to.contain("duplicate key error collection");
+            done();
+        });
     });
     it('should handle bcrypt error', (done) => {
         const reqBody = {
