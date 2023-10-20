@@ -22,7 +22,6 @@ const bcrypt = require('bcryptjs');
 const password = "test";
 const hash = bcrypt.hashSync(password, 10);
 const sinon = require('sinon');
-// const { comparePasswords } = require('../models/auth.js');
 const { checkGQToken } = require('../models/auth.js');
 
 describe('tickets get and post routes', () => {
@@ -53,7 +52,6 @@ describe('tickets get and post routes', () => {
         await db.collection.users.insertOne(user);
         const allUsers = await db.collection.users.find({}).toArray();
 
-        // console.log(allUsers);
         await db.client.close();
     });
     it('page should contain json with old tickets', async () => {
@@ -88,8 +86,6 @@ describe('tickets get and post routes', () => {
             .post("/graphql")
             .set('Content-Type', 'application/json')
             .send({ query });
-
-        // console.log(response);
 
         const pattern = new RegExp('.*"errors":\\[{"message":"Token not provided"');
 
@@ -131,8 +127,6 @@ describe('tickets get and post routes', () => {
             .set('Content-Type', 'application/json')
             .send({ query });
 
-        // console.log(response);
-
         const pattern = new RegExp('.*"errors":\\[{"message":"Token not provided"');
 
         const check = pattern.test(response.res.text);
@@ -167,8 +161,6 @@ describe('tickets get and post routes', () => {
             .set('Content-Type', 'application/json')
             .send({ query: mutation });
 
-        // console.log(response)
-
         expect(response).to.have.status(200);
         const pattern = new RegExp('.*:\\{"code":"update_code","trainnumber":"9123"}}}');
 
@@ -197,8 +189,6 @@ describe('tickets get and post routes', () => {
             .post('/graphql')
             .set('Content-Type', 'application/json')
             .send({query : ticketData});
-
-        // console.log(response);
 
         expect(response).to.have.status(200);
         const pattern = new RegExp('.*:\\[{"message":"Token not provided"')
@@ -232,8 +222,6 @@ describe('tickets get and post routes', () => {
             .set("x-access-token", jwtToken)
             .set('Content-Type', 'application/json')
             .send({ query: mutation })
-
-        // console.log(response)
 
         expect(response).to.have.status(200);
         const pattern = new RegExp('.*:\\{"_id":"000000023b7eef17104f27e6"}}}')
@@ -273,13 +261,9 @@ describe('tickets get and post routes', () => {
             .set('Content-Type', 'application/json')
             .send({ query: mutation })
 
-        // console.log(response.res.text)
-
         const ticketReturnData = await JSON.parse(response.res.text).data.createTicket
 
         const id = ticketReturnData._id;
-
-        // console.log(id);
 
         expect(response).to.have.status(200);
         const pattern = new RegExp('.*"code":"test_code","trainnumber":"123456".*');

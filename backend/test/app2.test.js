@@ -35,20 +35,6 @@ describe('Socket.io events', function () {
         done();
     });
 
-    // it('should handle "logged-in" event', function (done) {
-        // const consoleLogSpy = sinon.spy(console, 'log');
-
-        // client.on('connect', function () {
-        //     client.emit('logged-in', 'fakeToken');
-
-            // client.on('unauthorized', function () {
-            //     sinon.assert.calledWith(consoleLogSpy, 'bad token');
-                // console.log.restore();
-            //     done();
-            // });
-    //     });
-    // });
-
     it('should handle "edit-ticket" event', function (done) {
         client.emit('edit-ticket', { ticketId: 'fakeTicketId' });
         done();
@@ -92,19 +78,6 @@ describe('Socket.io events', function () {
         client.emit('refresh-tickets', {});
         done();
     });
-
-    it('should handle "logged-out" event', function (done) {
-        // const consoleLogSpy = sinon.spy(console, 'log');
-
-        client.on('unauthorized', function () {
-            sinon.assert.calledWith(consoleLogSpy, 'bad token');
-            // console.log.restore();
-            done();
-        });
-
-        client.emit('logged-out', {});
-        done();
-    });
 });
 
 describe('Cron Job and Token Check Functions', function () {
@@ -114,12 +87,6 @@ describe('Cron Job and Token Check Functions', function () {
         // Mock the io object
         ioMock = {
             emit: sinon.stub(),
-            // in: () => ({
-            //     fetchSockets: () => [
-            //         { id: '1', token: 'validToken' },
-            //         { id: '2', token: 'invalidToken' }
-            //     ]
-            // })
         };
     });
 

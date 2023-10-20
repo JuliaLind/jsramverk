@@ -6,7 +6,6 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const expect = chai.expect;
 const { server } = require('../app.js');
-// const sinon = require('sinon');
 
 chai.use(chaiHttp);
 
@@ -51,8 +50,6 @@ describe('app.js', () => {
         
             expect(response).to.have.status(200);
 
-            // console.log(response);
-
             const returnData = await JSON.parse(response.res.text).data.delayed;
 
             expect(returnData).to.be.an('array');
@@ -90,8 +87,6 @@ describe('app.js', () => {
                 .send({ query: query });
         
             expect(response).to.have.status(200);
-
-            // console.log(response);
 
             const pattern = new RegExp('.*\\{"Code":"ANA002"}.*{"Code":"ONA027"}.*');
 

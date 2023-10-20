@@ -46,14 +46,15 @@ function updatePosition(positionObject) {
                 </div>
             </div>`
 
-            let icon = L.icon({
-                iconUrl: 'grey_train.jpg',
-                iconSize: [45, 45],
-                iconAnchor: [22, 22],
-                popupAnchor: [9, -3]
-            })
+            // let icon = L.icon({
+            //     iconUrl: 'grey_train.jpg',
+            //     iconSize: [45, 45],
+            //     iconAnchor: [22, 22],
+            //     popupAnchor: [9, -3]
+            // })
+
             let marker = L.marker(positionObject.position, {
-                icon: icon
+                // icon: icon
             })
                 .bindPopup(popupContent)
                 .on('click', function () {

@@ -1,8 +1,8 @@
-// /**
-//  * Test suite for trains model.
-//  */
+/**
+ * Test suite for trains model.
+ */
 
-// /* global it describe */
+/* global it describe */
 
 const chai = require('chai');
 const chaiHttp = require('chai-http');
@@ -41,10 +41,6 @@ describe('Trains Model', () => {
             expect(trainObject).to.deep.equal({
                 trainnumber: '12345',
                 position: [56.78, 12.34],
-                // timestamp: '2023-09-18T12:34:56Z',
-                // bearing: 120.5,
-                // status: true,
-                // speed: 80.2,
             });
 
             expect(socket.emit.calledOnce).to.be.true;
@@ -95,10 +91,6 @@ describe('Trains Model', () => {
             expect(trainObject).to.deep.equal({
                 trainnumber: '12345',
                 position: [56.78, 12.34],
-                // timestamp: '2023-09-18T12:34:56Z',
-                // bearing: 120.5,
-                // status: true,
-                // speed: 80.2,
             });
 
             expect(socket.emit.calledOnce).to.be.true;
@@ -124,17 +116,6 @@ describe('Trains Model', () => {
             expect(socket.emit.neverCalledWith('trainpositions')).to.be.true;
         });
     });
-
-    // describe('handleEventSourceError', () => {
-    //     it('should handle EventSource error correctly', () => {
-    //         const error = new Error('EventSource failed');
-
-    //         const result = trainsModel.handleEventSourceError(error);
-
-    //         expect(result).to.be.an('error');
-    //         expect(result.message).to.equal('EventSource failed');
-    //     });
-    // });
 
     describe('fetchTrainPositions', () => {
         it('should fetch train positions and set up event handling', async () => {
@@ -177,30 +158,4 @@ describe('Trains Model', () => {
             fetchSSEUrlStub.restore();
         });
     });
-
-    // describe('getInitialPositions', () => {
-    //     it('should fetch and return positions from trafikverket', async () => {
-    //         //Mock res and req objects
-    //         const req = {};
-    //         const res = {
-    //             json: sinon.stub()
-    //         };
-
-    //         // Call the getInitialPositions function
-    //         await trainsModel.getInitialPositions(req, res);
-
-    //         // Assert that the json method was called
-    //         expect(res.json.calledOnce).to.be.true;
-
-    //         // Assert that data is valid object
-    //         const data = res.json.args[0][0].data;
-
-    //         expect(data).to.be.an('array');
-    //         expect(data[0]).to.be.an('object');
-    //         expect(data[0]).to.have.any.keys(
-    //             "position",
-    //             "trainnumber"
-    //         );
-    //     });
-    // });
 });

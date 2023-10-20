@@ -89,7 +89,7 @@ export const useAuthStore = defineStore('store', {
          */
         logout() {
             this.token = ''
-            socket.emit('logged-out', this.token)
+            socket.emit('logged-out')
         },
         /**
          * When backend sends message that token has expired, removes saved token from state
@@ -151,7 +151,8 @@ export const useAuthStore = defineStore('store', {
          */
         isTokenValid(result) {
             if ('errors' in result) {
-                this.token = ''
+                // this.token = ''
+                this.logout()
                 router.push('/login')
                 customAlert(result.errors[0].message)
                 return false
