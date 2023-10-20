@@ -34,7 +34,7 @@ const trains = {
         return initialPositions;
     },
 
-    // picked out from parsePositionData function to reuse in initial data request
+    // picks out coordinates from position data and converts to correct form
     getCoords: function getCoords(positionDataObject) {
         const matchCoords = /(\d*\.\d+|\d+),?/g;
         const position = positionDataObject.Position.WGS84.match(matchCoords).map((t) => parseFloat(t)).reverse();
