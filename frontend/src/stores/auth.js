@@ -151,7 +151,8 @@ export const useAuthStore = defineStore('store', {
          */
         isTokenValid(result) {
             if ('errors' in result) {
-                this.token = ''
+                // this.token = ''
+                this.logout()
                 router.push('/login')
                 customAlert(result.errors[0].message)
                 return false
