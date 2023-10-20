@@ -41,14 +41,6 @@ const tickets = {
                     detail: e.message
                 }
             });
-            // return res.status(500).json({
-            //     errors: {
-            //         status: 500,
-            //         source: "/tickets",
-            //         title: "Database error",
-            //         detail: e.message
-            //     }
-            // });
         }
     },
     /**
@@ -78,19 +70,7 @@ const tickets = {
                 trainnumber: args.trainnumber,
                 traindate: args.traindate
             };
-
-            // return res.status(201).json({
-            //     data: result
-            // });
         } catch (e) {
-            // return res.status(500).json({
-            //     errors: {
-            //         status: 500,
-            //         source: "/tickets",
-            //         title: "Database error",
-            //         detail: e.message
-            //     }
-            // });
             throw new Error({
                 errors: {
                     status: 500,
@@ -114,21 +94,7 @@ const tickets = {
             return {
                 _id: ticketId
             };
-
-            // return res.status(201).json({
-            //     data: {
-            //         message: `Ticket ${ticketId} has been deleted`
-            //     }
-            // });
         } catch (e) {
-            // return res.status(500).json({
-            //     errors: {
-            //         status: 500,
-            //         source: "/tickets",
-            //         title: "Database error",
-            //         detail: e.message
-            //     }
-            // });
             throw new Error({
                 errors: {
                     status: 500,
@@ -167,13 +133,6 @@ const tickets = {
                 trainnumber: updatedTicket.trainnumber,
                 traindate: updatedTicket.traindate
             };
-
-            // return res.status(201).json({
-            //     data: {
-            //         message: `Ticket ${ticketId} has been updated`,
-            //         ticket: updatedTicket
-            //     }
-            // });
         } catch (e) {
             throw new Error({
                 errors: {
@@ -183,14 +142,6 @@ const tickets = {
                     detail: e.message
                 }
             });
-            // return res.status(500).json({
-            //     errors: {
-            //         status: 500,
-            //         source: "/tickets",
-            //         title: "Database error",
-            //         detail: e.message
-            //     }
-            // });
         }
     }
 };
