@@ -25,7 +25,8 @@ const sinon = require('sinon');
 const { checkGQToken } = require('../models/auth.js');
 
 describe('admin-related', () => {
-    beforeEach(async () => {
+    // beforeEach(async () => {
+    before(async () => {
         const db = await database.getDb();
         // await db.collection.tickets.deleteMany();
         // await db.collection.users.deleteMany();
