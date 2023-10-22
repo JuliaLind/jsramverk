@@ -62,6 +62,7 @@ describe('auth-store', async () => {
         })
         expect(socket.emit).toBeCalledTimes(1)
         expect(socket.emit).toHaveBeenCalledWith('logged-in', 'thisisavalidtoken')
+        expect(store.token).toBe('thisisavalidtoken')
         expect(loader.show).toBeCalledTimes(1)
         expect(loader.hide).toBeCalledTimes(1)
         expect(toast).toBeCalledTimes(1)
