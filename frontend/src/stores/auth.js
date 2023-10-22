@@ -16,7 +16,7 @@ export const useAuthStore = defineStore('store', {
             //username
             userEmail: '',
             // codes represent different reasons for a train delay
-            reasoncodes: []
+            reasonCodes: []
         }
     }),
     actions: {
