@@ -61,7 +61,7 @@ function updatePosition(positionObject) {
                     store.setCurrent(positionObject.trainnumber)
                     emit('refresh-map')
                 })
-            marker.addTo(map)
+
             if (store.current === '' || store.current === positionObject.trainnumber) {
                 marker.addTo(map)
             }
