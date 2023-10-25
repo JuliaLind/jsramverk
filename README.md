@@ -1,3 +1,5 @@
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/JuliaLind/jsramverk/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/JuliaLind/jsramverk/?branch=main)
+
 # Diverse instruktioner
 
 Efter att ha klonat repot behöver du köra ```npm install``` från roten av frontend- respektive backend-katalogen för att installera nödvändiga dependencies. Du behöver även lägga till följande filer:  
@@ -33,10 +35,6 @@ När du kör scripten för testning kan du eventuellt behöva komplettera med in
 * Frontend-vitest: flödet kör vitest-tester.
 * Frontend-playwright: flödet kör playwright-tester.
 * Linters: flödet kör repots alla linters.
-
-6. Vi har även implementerat Scrutinizer (för Javascript) i vårt repo för att fånga issues med vår kod som inte testerna eller linters fångar. Scrutinizer hjälper oss därmed att hålla vår kod ren så att den är lätt att förstå och lätt att underhålla.
-
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/JuliaLind/jsramverk/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/JuliaLind/jsramverk/?branch=main)
 
 
 # Steg vi fick gå igenom för att få applikationen att fungera  
