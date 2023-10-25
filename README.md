@@ -1,22 +1,27 @@
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/JuliaLind/jsramverk/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/JuliaLind/jsramverk/?branch=main)
+
 # Diverse instruktioner
 
-Efter att ha klonat report behöver du köra ```npm install``` från roten av frontend respektive backend katalogerna för att installera nödvändiga dependencies. Du behöver även lägga till följande filer:  
+Efter att ha klonat repot behöver du köra ```npm install``` från roten av frontend- respektive backend-katalogen för att installera nödvändiga dependencies. Du behöver även lägga till följande filer:  
 
-1. I backend katalogen lägger du till en ".env" fil du lägger till följande variabler: 
-TRAFIKVERKET_API_KEY (api nyckel som du genererar från trafikverkets webbplats)
-DSN (connection strängen till din databas, du kan använde lokal eller molnbaserad.)
-URL (url till front-end servern, t ex ```URL="https://www.student.bth.se"```).
-I din databas behöver du skapa databaserna "trains" respektive "test". I respektive databas kommer du behöva två collections "tickets" respektive "users". I users collection behöver du lägga till en unique constraint på 'email' fältet. Enklast gör du det via MongoDBCompass appen.
+1. I backend-katalogen skapar du en ".env" fil i vilken du lägger till följande variabler:
 
-2. I frontend katalogen lägger du till en ".env.development" fil med variabeln VITE_URL som innehåller url till backend servern lokalt (t ex ```VITE_URL="http://localhost:1337"```).
+- TRAFIKVERKET_API_KEY (api nyckel som du genererar från trafikverkets webbplats)
+- DSN (connection strängen till din databas, du kan använde lokal eller molnbaserad.)
+- URL (url till front-end servern, t ex ```URL="https://www.student.bth.se"```).
 
-3. I frontend katalogen lägger du även till en ".env.production" fil med motsvarande variabel för url till den backend server som ska användas i produktion, t ex ```VITE_URL="https://jsramverk-marjul2023.azurewebsites.net"```. Env variabler som används i frontend måste börja på VITE_".
+I MongoDB behöver du skapa databaserna "trains" respektive "test". I respektive databas kommer du behöva två collections "tickets" respektive "users". I users-collection behöver du lägga till en unique constraint på 'email' fältet. Enklast gör du det via MongoDBCompass-appen.
 
-I package.json filerna i roten av frontend respektive backend hittar du färdiga scripts som kan köras för att starta igång applikationen, testa mm. För att få igång applikationen lokalt behöver du tex först sätta igång backend genom att skriva ```npm run dev``` i terminalen när du står i roten av backend directoryn, och därefter göra motsvarande från roten av frontend directoryn (obs i annan terminal).
+2. I frontend-katalogen lägger du till en ".env.development" fil med variabeln VITE_URL som innehåller url till backend-servern lokalt (t.ex. ```VITE_URL="http://localhost:1337"```).
 
-Du kommer då åt frontend applikationen via http://localhost:5173 . Via sidorna http://localhost:1337/delayed , http://localhost:1337/tickets eller http://localhost:1337/codes kan du se underliggande datan som json objekt.
+3. I frontend-katalogen lägger du även till en ".env.production" fil med motsvarande variabel för url till den backend-server som ska användas i produktion, t ex ```VITE_URL="https://jsramverk-marjul2023.azurewebsites.net"```. Env-variabler som används i frontend måste börja på VITE_".
 
-När du kör scripter för testning i backend kan du eventuellt behöva komplettera installation av fler dependecies med npx. För testning i backend används Mocka/Chai tillsammans med Istanbul. I frontend används Playwrite för e2e testning och vitest för testning av komponenter, också tillsammans med Istanbul.
+I package.json filerna i roten av frontend respektive backend hittar du färdiga scripts som kan köras för att starta igång applikationen, testa mm. För att få igång applikationen lokalt behöver du tex först sätta igång backend genom att skriva ```npm run dev``` i terminalen när du står i roten av backend-katalogen, och därefter göra motsvarande från roten av frontend-katalogen (obs i ett annat terminalfönster).
+
+Du kommer då åt frontend-applikationen via http://localhost:5173 .  
+Du kan, direkt i webbläsaren, göra förfrågningar mot api-endpointen http://localhost:1337/graphql . För att det ska fungera, måste du i app.js (i backend-katalogen) sätta visual-variabelns värde till ```true```. Ändra tillbaka till false i produktion.
+
+När du kör scripten för testning kan du eventuellt behöva komplettera med installation av fler dependecies med npx. För testning i backend används Mocka/Chai tillsammans med Istanbul. I frontend används Playwrite för e2e testning och Vitest för testning av komponenter, också tillsammans med Istanbul.
 
 
 4. Länkar till våra applikationer:
@@ -26,12 +31,10 @@ När du kör scripter för testning i backend kan du eventuellt behöva komplett
 
 5. Vi använder GitHub Actions för att automatisera ett antal arbetsflöden vid push och pull requests mot vårt GitHub-repo. Dessa flöden är tänkta att underlätta utvecklingsprocessen för oss samt säkerställa att den kod vi vill merge:a är stabil. Följande flöden för vårt repo:
 
-* Backend: flödet kör linters och tester.
+* Backend: flödet kör tester.
 * Frontend-vitest: flödet kör vitest-tester.
 * Frontend-playwright: flödet kör playwright-tester.
 * Linters: flödet kör repots alla linters.
-
-6. Vi har även implementerat Scrutinizer (för Javascript) i vårt repo för att fånga issues med vår kod som inte testerna eller linters fångar. Scrutinizer hjälper oss därmed att hålla vår kod ren så att den är lätt att förstå och lätt att underhålla.
 
 
 # Steg vi fick gå igenom för att få applikationen att fungera  

@@ -68,7 +68,7 @@ app.get('/', (req, res) => {
     });
 });
 
-const visual = true;
+const visual = false;
 
 app.use(
     "/graphql",
