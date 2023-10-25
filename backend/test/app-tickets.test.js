@@ -25,11 +25,8 @@ const sinon = require('sinon');
 const { checkGQToken } = require('../models/auth.js');
 
 describe('admin-related', () => {
-    // beforeEach(async () => {
     before(async () => {
         const db = await database.getDb();
-        // await db.collection.tickets.deleteMany();
-        // await db.collection.users.deleteMany();
         await db.collection.tickets.drop()
         await db.collection.users.drop()
         db.collection.users.createIndex( { "email": 1 }, { unique: true } )
@@ -180,7 +177,7 @@ describe('admin-related', () => {
         chai.assert.equal(updated.code, "update_code");
         await db.client.close();
     });
-    it('should not access deleteTicket query without token', async () => {
+    it('should not access deleteTicket query without valid token', async () => {
         const ticketData = `
         mutation {
             deleteTicket(_id: "000000023b7eef17104f27e6") {
@@ -192,10 +189,10 @@ describe('admin-related', () => {
         const response = await chai.request(server)
             .post('/graphql')
             .set('Content-Type', 'application/json')
+            .set("x-access-token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5zZSIsIm5hbWUiOiJUZXN0IFRlc3Rzc29uIiwiaWF0IjoxNjk3NjY2ODQ3LCJleHAiOjE2OTc3NTMyNDd9.nXfqPJXLSFUxna-l8hxgRbUNctfZ1XD70L6NWbA6EZQ")
             .send({query : ticketData});
 
-        expect(response).to.have.status(200);
-        const pattern = new RegExp('.*:\\[{"message":"Token not provided"')
+        const pattern = new RegExp('.*:\\[{"message":"Failed authentication: jwt expired"')
 
         const check = pattern.test(response.res.text)
 
@@ -388,15 +385,13 @@ describe('admin-related', () => {
             await db.client.close();
         }, 5000);
     });
-    // it('cannot register duplicate user', async () => {
+
     it('cannot register duplicate user', (done) => {
         const userData = {
             email: "test@test.com",
             password: password,
         };
-        // const response = await chai.request(server).post('/register').send(userData);
-        // expect(response).to.have.status(500);
-        // expect(response.body.errors.detail).to.contain("duplicate key error collection")
+
 
         chai.request(server)
         .post('/register')
