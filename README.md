@@ -19,7 +19,7 @@ I package.json filerna i roten av frontend respektive backend hittar du färdiga
 Du kommer då åt frontend-applikationen via http://localhost:5173 .  
 Du kan, direkt i webbläsaren, göra förfrågningar mot api-endpointen http://localhost:1337/graphql . För att det ska fungera, måste du i app.js (i backend-katalogen) sätta visual-variabelns värde till ```true```. Ändra tillbaka till false i produktion.
 
-När du kör scriptet för testning i backend kan du eventuellt behöva komplettera med installation av fler dependecies med npx. För testning i backend används Mocka/Chai tillsammans med Istanbul. I frontend används Playwrite för e2e testning och Vitest för testning av komponenter, också tillsammans med Istanbul.
+När du kör scripten för testning kan du eventuellt behöva komplettera med installation av fler dependecies med npx. För testning i backend används Mocka/Chai tillsammans med Istanbul. I frontend används Playwrite för e2e testning och Vitest för testning av komponenter, också tillsammans med Istanbul.
 
 
 4. Länkar till våra applikationer:
